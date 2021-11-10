@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>±×·¡¼­ ¹¹ ¾îÂ¼¶ó°í ¤©³»¤Ã¤±´ô¤À¤Ã¤À¤Ã¤À·¯ ¤Á¤§·¯¤À
-±êÇãºê ¹¹¾ß Á¹·¡¾î·Æ³×</h1>
+<h1>Can I Join the Corporatiosn..? </h1>
 </body>
 </html>

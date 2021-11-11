@@ -1,7 +1,6 @@
 <!-- 
 	Github 테스트
-	박상혁
-	
+	sanghyeok
  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

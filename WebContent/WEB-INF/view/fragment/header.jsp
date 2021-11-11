@@ -7,7 +7,7 @@
     	<i data-feather="menu"></i>
     </button>
 
-    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">WITH DOG</a>
+    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/">WITH DOG</a>
 
     <!-- Navbar Items-->
     <ul class="navbar-nav align-items-center ms-auto">

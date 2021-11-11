@@ -20,7 +20,9 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				
+				<main>
+					test1(bdm)
+				</main>
 				<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 

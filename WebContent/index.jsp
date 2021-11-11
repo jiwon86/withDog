@@ -31,7 +31,7 @@
 				<!-- ** 주요 내용 **  -->
 				
 				<!-- ** /주요 내용 ** -->
-				
+				wefawew
 				<!-- 바닥글 -->
 				<%@ include file="/WEB-INF/view/fragment/footer.jsp" %>
                 <!-- /바닥글 -->

@@ -1,3 +1,7 @@
+<!-- 
+	Github 테스트
+	sanghyeok
+ -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,7 +28,11 @@
 				<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 
+<<<<<<< HEAD
 					TEST
+=======
+					
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
 					===================================
 				--> 

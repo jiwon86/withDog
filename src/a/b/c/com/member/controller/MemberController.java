@@ -40,4 +40,30 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
+	@RequestMapping("/admin")
+	public String admin() {
+		return "member/admin";
+	}
+	
+	@RequestMapping("/head")
+	public String head() {
+		
+		return "fragment/head";
+	}
+	
+	@RequestMapping("/header")
+	public String header() {
+		return "fragment/header";		
+	}
+	
+	@RequestMapping("/sidebar")
+	public String sidebar() {
+		return "fragment/sidebar";
+	}
+	
+	@RequestMapping("/footer")
+	public String footer() {
+		return "fragment/footer";
+	}
+	
 }

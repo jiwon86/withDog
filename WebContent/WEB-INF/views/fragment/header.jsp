@@ -91,8 +91,8 @@
                 </a>
 
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a class="dropdown-item" href="#!">
-	                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
+					<a class="dropdown-item" href="/admin.wd">
+	                    <div class="dropdown-item-icon"><i data-feather="lock"></i></div>
 	                                     관리자 모드
 	                </a>
                 </sec:authorize>

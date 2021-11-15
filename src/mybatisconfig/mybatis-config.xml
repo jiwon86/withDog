@@ -4,6 +4,7 @@
 		  
 <configuration>
 	<typeAliases>
-	
+		<typeAlias type="a.b.c.com.member.vo.Member" alias="Member" />
+		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />	
 	</typeAliases>
 </configuration>

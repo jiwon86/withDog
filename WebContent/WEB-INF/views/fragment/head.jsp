@@ -14,4 +14,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/template/js/scripts.js"></script>
+    
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Gothic+A1&family=Hahmlet:wght@300&family=IBM+Plex+Sans+KR&family=Nanum+Gothic&family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+	
+	<style type="text/css">
+		<!-- 폰트 -->
+		.ibm-font {
+			font-family: 'IBM Plex Sans KR', sans-serif;
+		}
+		.dongle {
+			font-family: 'Dongle', sans-serif;
+		}
+		.gothic {
+			font-family: 'Gothic A1', sans-serif;
+		}
+		.nanum {
+			font-family: 'Nanum Gothic', sans-serif;
+		}
+		.noto {
+			font-family: 'Noto Sans KR', sans-serif;
+		}
+		.hahmlet {
+			font-family: 'Hahmlet', serif;
+		}
+	</style>
 </head>

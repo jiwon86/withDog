@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.member.dao.MemberDAO">
+
+	<resultMap type="Member" id="memberMap">
+		<id property="mno" column="MNO" />
+		
+		<result property="mno" column="MNO" />
+		<result property="mid" column="MID" />
+		<result property="mpw" column="MPW" />
+		<result property="memail" column="MEMAIL" />
+		<result property="mname" column="MNAME" />
+		<result property="mbirth" column="MBIRTH" />
+		<result property="mphoto" column="MPHOTO" />
+		<result property="mzonecode" column="MZONECODE" />
+		<result property="mroadaddress" column="MROADADDRESS" />
+		<result property="mjibunaddress" column="MJIBUNADDRESS" />
+		<result property="deleteyn" column="DELETEYN" />
+		<result property="insertdate" column="INSERTDATE" />
+		<result property="updatedate" column="UPDATEDATE" />
+		
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	
+	<resultMap type="MemberAuth" id="authMap">
+		<result property="mno" column="mno" />
+		<result property="mauth" column="mauth" />
+	</resultMap>
+	
+	<select id="read" resultMap="memberMap">
+		SELECT 
+			M.MNO            MNO,
+			M.MID            MID,
+			M.MPW            MPW,
+			M.MEMAIL         MEMAIL,
+			M.MNAME          MNAME,
+			M.MBIRTH         MBIRTH,
+			M.MPHOTO         MPHOTO,
+			M.MZONECODE      MZONECODE,
+			M.MROADADDRESS   MROADADDRESS,
+			M.MJIBUNADDRESS  MJIBUNADDRESS,
+			M.DELETEYN       DELETEYN,
+			TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
+			TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
+			A.MAUTH          MAUTH
+		FROM  MEMBER M 
+			  LEFT OUTER JOIN 
+			  MEMBER_AUTH A 
+			  ON M.MNO = A.MNO
+		WHERE M.MID = #{mid}
+	</select>
+	
+</mapper>

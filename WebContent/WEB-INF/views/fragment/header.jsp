@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
     <!-- Sidenav Toggle Button-->
     <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle">
     	<i data-feather="menu"></i>
     </button>
 
-    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">WITH DOG</a>
+    <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/">WITH DOG</a>
 
     <!-- Navbar Items-->
     <ul class="navbar-nav align-items-center ms-auto">
 
         <!-- Alerts Dropdown-->
+        <sec:authorize access="isAuthenticated()">
         <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             	<i data-feather="bell"></i>
@@ -57,12 +59,23 @@
                 <a class="dropdown-item dropdown-notifications-footer" href="#!">View All Alerts</a>
             </div>
         </li>
+        </sec:authorize>
 
         <!-- User Dropdown-->
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            	<img class="img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png" />
-            </a>
+        	
+        	<!-- 로그인 -->
+        	<sec:authorize access="isAuthenticated()">
+	            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	            	<img class="img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png" />
+	            </a>
+	        </sec:authorize>
+            
+            <!-- 비로그인 -->
+            <sec:authorize access="isAnonymous()">
+            	<a href="/login.wd" class="btn btn-primary">로그인</button>
+            </sec:authorize>
+            
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
                     <img class="dropdown-user-img" src="/template/assets/img/illustrations/profiles/profile-1.png" />
@@ -74,13 +87,27 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#!">
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                    Account
+                                     내정보
                 </a>
-                <a class="dropdown-item" href="#!">
-                    <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                    Logout
-                </a>
+
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<a class="dropdown-item" href="#!">
+	                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
+	                                     관리자 모드
+	                </a>
+                </sec:authorize>
+
+				<sec:authorize access="isAuthenticated()">
+					<form action="/logout.wd" method="post">
+		                <button class="dropdown-item">
+		                    <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
+		                                     로그아웃              
+		                </button>
+		                <sec:csrfInput/>
+		         	</form>
+				</sec:authorize>
             </div>
+            
         </li>
     </ul>
 </nav>

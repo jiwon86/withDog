@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+	jsp:include : 내 서버내의 jsp파일만 가능
+	c:import : 외부 jsp 파일 접근 가능
+--%>
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
@@ -30,22 +34,7 @@
 					===================================
 				--> 
 				<!-- ** 주요 내용 **  -->
-                <main>
-                    <div class="container-xl px-4">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-6">
-                                <div class="text-center mt-4">
-                                    <img class="img-fluid p-4" src="/template/assets/img/illustrations/403-error-forbidden.svg" alt="" />
-                                    <p class="lead">당신은 이페이지에 접근할 권한을 가지고 있지 않습니다.</p>
-                                    <a class="text-arrow-icon" href="/">
-                                        <i class="ms-0 me-1" data-feather="arrow-left"></i>
-                                                                          메인으로 이동
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>		
+				
 				<!-- ** /주요 내용 ** -->
 				
 				<!-- 바닥글 -->

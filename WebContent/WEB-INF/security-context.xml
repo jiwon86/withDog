@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:s="http://www.springframework.org/schema/security"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+							http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context 
+							http://www.springframework.org/schema/context/spring-context.xsd
+							http://www.springframework.org/schema/security 
+							http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<bean id="customLoginSuccess" class="a.b.c.com.member.security.CustomLoginSuccessHandler" />
+	<bean id="customUserDetailsService" class="a.b.c.com.member.security.CustomUserDetailsService" />
+	
+	<s:http>
+		<s:intercept-url pattern="/all.wd" access="permitAll" />
+		<s:intercept-url pattern="/login.wd" access="isAnonymous()" />
+		<s:intercept-url pattern="/member.wd" access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')" />
+		<s:intercept-url pattern="/admin.wd" access="hasRole('ROLE_ADMIN')" />
+		
+		<s:form-login login-page="/login.wd" authentication-success-handler-ref="customLoginSuccess"/>
+		<s:access-denied-handler error-page="/accessError.wd"/>
+		<s:logout logout-url="/logout.wd" logout-success-url="/" invalidate-session="true" />		
+	</s:http>
+	
+	<s:authentication-manager>
+		<s:authentication-provider user-service-ref="customUserDetailsService">
+		</s:authentication-provider>
+	</s:authentication-manager>
+	
+</beans>

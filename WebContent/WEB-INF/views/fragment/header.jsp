@@ -73,6 +73,7 @@
             
             <!-- 비로그인 -->
             <sec:authorize access="isAnonymous()">
+            	<a href="/regist.wd" class="btn btn-regist">회원가입</a>
             	<a href="/login.wd" class="btn btn-primary">로그인</button>
             </sec:authorize>
             

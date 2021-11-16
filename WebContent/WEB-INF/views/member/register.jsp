@@ -120,6 +120,10 @@ width: 300px !important;
                 <label class="text-gray-600 small" for="emailExample">Date of Birth</label>
                 <input class="form-control form-control-solid" type="text" placeholder="Ex)1993.05.08" aria-label="Birth Address" aria-describedby="birthExample" required/>
             </div>
+            <div class="mb-3">
+                <label class="text-gray-600 small" for="emailExample">우편번호</label>
+                <input class="form-control form-control-solid" type="text" placeholder="Ex)10052" aria-label="Address" aria-describedby="addressExample" required/>
+            </div>
             <button class="btn btn-primary" type="button">Upload new image</button>
             <!-- Form Group (form submission)-->
                                         <div class="d-flex align-items-center justify-content-between">

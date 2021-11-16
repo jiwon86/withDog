@@ -4,19 +4,19 @@ public abstract class CommonUtils {
 
 	// 이미지 업로드
 	public static final String BOARD_IMG_UPLOAD_PATH 
-		= "C:\\00.KOSMO93\\30.Web\\el_spring_psh_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\springPsh\\fileupload\\board";
+		= "C:\\00.KOSMO93\\30.Web\\withdog_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\board";
 	public static final int BOARD_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String BOARD_EN_CODE = "UTF-8";
 	
 	// 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH 
-		= "C:\\00.KOSMO93\\30.Web\\el_spring_psh_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\springPsh\\fileupload\\member";
+		= "C:\\00.KOSMO93\\30.Web\\withdog_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\member";
 	public static final int MEMBER_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String MEMBER_EN_CODE = "UTF-8";
 	
 	// 이미지 업로드
 	public static final String NOTICE_IMG_UPLOAD_PATH 
-		= "C:\\00.KOSMO93\\30.Web\\el_spring_psh_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\springPsh\\fileupload\\notice";
+		= "C:\\00.KOSMO93\\30.Web\\withdog_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\notice";
 	public static final int NOTICE_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String NOTICE_EN_CODE = "UTF-8";
 	

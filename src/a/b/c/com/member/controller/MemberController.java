@@ -40,6 +40,12 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
+	@RequestMapping("register")
+	public String register() {
+		
+		return "member/register";
+	}
+	
 	@RequestMapping("/admin")
 	public String admin() {
 		return "member/admin";

@@ -8,19 +8,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
-	<%@ include file="/WEB-INF/views/fragment/head.jsp" %>
+	<jsp:include page="/head.wd" />
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
-
 		<!-- 헤더 -->
-		<%@ include file="/WEB-INF/views/fragment/header.jsp" %>
+		<jsp:include page="/header.wd" />
 		<!-- /헤더 -->
 
 		
         <div id="layoutSidenav">
 			<!-- 사이드바 -->
-			<%@ include file="/WEB-INF/views/fragment/sidebar.jsp" %>
+			<jsp:include page="/sidebar.wd" />
 			<!-- /사이드바 -->
 
 			<!-- 콘텐츠 -->
@@ -37,51 +36,63 @@
                 <main>
                     <div class="container-xl px-4">
                         <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <!-- Basic login form-->
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header justify-content-center"><h3 class="fw-light my-4">Login</h3></div>
-                                    <div class="card-body">
+                            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
+                                <!-- Social login form-->
+                                <div class="card my-5">
+                                    <div class="card-body p-5 text-center">
+                                        <div class="h3 fw-light mb-3">Sign In</div>
+                                        <!-- Social login links-->
+                                        <a class="btn btn-icon btn-facebook mx-1" href="#!"><i class="fab fa-facebook-f fa-fw fa-sm"></i></a>
+                                        <a class="btn btn-icon btn-github mx-1" href="#!"><i class="fab fa-github fa-fw fa-sm"></i></a>
+                                        <a class="btn btn-icon btn-google mx-1" href="#!"><i class="fab fa-google fa-fw fa-sm"></i></a>
+                                        <a class="btn btn-icon btn-twitter mx-1" href="#!"><i class="fab fa-twitter fa-fw fa-sm text-white"></i></a>
+                                    </div>
+                                    <hr class="my-0" />
+                                    <div class="card-body p-5">
                                         <!-- Login form-->
                                         <form method="post" action="/login">
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputEmailAddress">Email</label>
-                                                <input class="form-control" id="inputEmailAddress" type="text" name="username" placeholder="아이디 입력" />
+                                                <label class="text-gray-600 small" for="usernameExample">아이디</label>
+                                                <input class="form-control form-control-solid" type="text" name="username" 
+                                                	   placeholder="아이디 입력" aria-label="username" aria-describedby="usernameExample" />
                                             </div>
                                             <!-- Form Group (password)-->
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputPassword">Password</label>
-                                                <input class="form-control" id="inputPassword" type="password" name="password" placeholder="비밀번호 입력" />
+                                                <label class="text-gray-600 small" for="passwordExample">비밀번호</label>
+                                                <input class="form-control form-control-solid" type="password" name="password" 
+                                                       placeholder="비밀번호 입력" aria-label="Password" aria-describedby="passwordExample" />
                                             </div>
-                                            <!-- Form Group (remember password checkbox)-->
-                                            <div class="mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" id="rememberPasswordCheck" type="checkbox" value="" />
-                                                    <label class="form-check-label" for="rememberPasswordCheck">Remember password</label>
-                                                </div>
-                                            </div>
+                                            <!-- Form Group (forgot password link)-->
+                                            <div class="mb-3"><a class="small" href="auth-password-social.html">Forgot your password?</a></div>
                                             <!-- Form Group (login box)-->
-                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="auth-password-basic.html">Forgot Password?</a>
+                                            <div class="d-flex align-items-center justify-content-between mb-0">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" id="checkRememberPassword" type="checkbox" value="" />
+                                                    <label class="form-check-label" for="checkRememberPassword">Remember password</label>
+                                                </div>
                                                 <input type="submit" class="btn btn-primary" value="로그인">
                                             </div>
                                             
                                             <sec:csrfInput/>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center">
-                                        <div class="small"><a href="auth-register-basic.html">Need an account? Sign up!</a></div>
+                                    <hr class="my-0" />
+                                    <div class="card-body px-5 py-4">
+                                        <div class="small text-center">
+                                            New user?
+                                            <a href="auth-register-social.html">Create an account!</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </main>				
+                </main>		
 				<!-- ** /주요 내용 ** -->
 				
 				<!-- 바닥글 -->
-				<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
+				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->
                 
             </div>

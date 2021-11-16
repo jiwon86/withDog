@@ -52,4 +52,42 @@
 		WHERE M.MID = #{mid}
 	</select>
 	
+	<select id="memberSelect" resultMap="memberMap">
+		SELECT 
+			M.MNO            MNO,
+			M.MID            MID,
+			M.MPW            MPW,
+			M.MEMAIL         MEMAIL,
+			M.MNAME          MNAME,
+			M.MBIRTH         MBIRTH,
+			M.MPHOTO         MPHOTO,
+			M.MZONECODE      MZONECODE,
+			M.MROADADDRESS   MROADADDRESS,
+			M.MJIBUNADDRESS  MJIBUNADDRESS,
+			M.DELETEYN       DELETEYN,
+			TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
+			TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
+			A.MAUTH          MAUTH
+		FROM  MEMBER M 
+			  LEFT OUTER JOIN 
+			  MEMBER_AUTH A 
+			  ON M.MNO = A.MNO
+		WHERE M.MID = #{mid}
+	</select>
+	
+	<update id="memberUpdate" parameterType="Member">
+		UPDATE MEMBER
+		SET
+			  MNAME      = #{mname, jdbcType=VARCHAR}
+			, MEMAIL     = #{memail, jdbcType=VARCHAR}
+			, MBIRTH     = #{mbirth, jdbcType=VARCHAR}
+			, MZONECODE  = #{mzonecode, jdbcType=VARCHAR}
+			, MROADADDRESS = #{mroadaddress, jdbcType=VARCHAR}
+			, MJIBUNADDRESS = #{mjibunaddress, jdbcType=VARCHAR}
+			, MPHOTO     = #{mphoto, jdbcType=VARCHAR}
+			, UPDATEDATE = SYSDATE
+		WHERE DELETEYN='Y'
+		AND   MNO = #{mno, jdbcType=VARCHAR}
+	</update>
+	
 </mapper>

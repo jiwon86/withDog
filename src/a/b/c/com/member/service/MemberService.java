@@ -1,5 +1,8 @@
 package a.b.c.com.member.service;
 
-public interface MemberService {
+import a.b.c.com.member.vo.Member;
 
+public interface MemberService {
+	public Member memberSelect(String mid);
+	public int memberUpdate(Member mvo);
 }

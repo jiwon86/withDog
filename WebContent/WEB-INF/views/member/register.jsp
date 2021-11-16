@@ -33,7 +33,7 @@ width: 300px !important;
 
 #idcheck.btn.btn.btn-primary{
 	position:absolute !important;
-	top:46% !important;
+	top:24.3% !important;
 	left:38% !important;
 }
 #passcheck.form-control.form-control-solid{
@@ -41,9 +41,31 @@ width: 300px !important;
 }
 #pwcheck.btn.btn.btn-primary{
 	position: absolute !important;
-	top:57.5% !important;
+	top:38.7% !important;
 	left:71.5% !important;
 }
+#addfinde.btn.btn-primary{
+	position: absolute !important;
+	top: 54.7% !important;
+	left:38% !important;
+}
+#cityroad.form-control.form-control-solid{
+/* margin-bottom:100px !important; */
+	position: absolute !important;
+	top:68% !important;
+	width:500px !important;
+}
+#detailroad.form-control.form-control-solid{
+	position:absolute !important;
+	top:72.35% !important;
+	width:500px !important;
+}
+#oldadd.form-control.form-control-solid{
+	position: absolute !important;
+	top:76.70% !important;
+	width:500px !important;
+}
+
 </style>
 
 <!-- 콘텐츠 -->
@@ -58,8 +80,8 @@ width: 300px !important;
 
 
 
-			<div class="card my-5" width="500px">
-                    <div class="card-body p-5 text-center">
+			<div class="card my-5">
+                    <div class="card-body p-5 text-center" id="account">
                         <div class="h3 fw-light mb-3">Create an Account</div>
                         <div class="small text-muted mb-2">Sign in using...</div>
                         <!-- Social registration links-->
@@ -76,12 +98,18 @@ width: 300px !important;
             <div class="row gx-3">
                 <div class="col-md-6">
                     <!-- Form Group (first name)-->
+                    
+                    
                     <div class="mb-3">
                         <label class="text-gray-600 small" for="firstNameExample">Your Name</label>
-                        <input class="form-control form-control-solid" type="text" placeholder="이름을 입력해 주세요" aria-label="First Name" aria-describedby="firstNameExample" required />
+                        <input class="form-control form-control-solid" type="text" placeholder="이름을 입력해 주세요" 
+                        aria-label="First Name" aria-describedby="firstNameExample" required />
                     <!-- Form Group (last name)-->
                          <label class="text-gray-600 small" for="lastNameExample">Your Id</label>
-                        <input class="form-control form-control-solid" type="text" placeholder="Id를 입력해 주세요" aria-label="Last Name" aria-describedby="lastNameExample" required>
+                        <input class="form-control form-control-solid" type="text" placeholder="Id를 입력해 주세요" 
+                        aria-label="Last Name" aria-describedby="lastNameExample" required>
+                        
+                        
                     <!-- 중복확인 버튼 -->
                     </div>
                 </div>
@@ -100,30 +128,57 @@ width: 300px !important;
                     <!-- Form Group (choose password)-->
                     <div class="mb-3">
                         <label class="text-gray-600 small" for="passwordExample">Password</label>
-                        <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" aria-label="Password" aria-describedby="passwordExample" required />
+                        <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
+                        aria-label="Password" aria-describedby="passwordExample" required />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <!-- Form Group (confirm password)-->
                     <div class="mb-3">
                         <label class="text-gray-600 small" for="confirmPasswordExample">Confirm Password</label>
-  <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" aria-label="Confirm Password" aria-describedby="confirmPasswordExample" id="passcheck" required />
+  <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
+  aria-label="Confirm Password" aria-describedby="confirmPasswordExample" id="passcheck" required />
+  
    <a class="btn btn-primary" href="auth-login-social.html" id="pwcheck" name="pwcheck">Pw Check</a>
                     </div>
                 </div>
                 <div class="mb-3">
                 <label class="text-gray-600 small" for="emailExample">Email Address</label>
-                <input class="form-control form-control-solid" type="text" placeholder="Email을 입력해 주세요" aria-label="Email Address" aria-describedby="emailExample" required/>
+                <input class="form-control form-control-solid" type="text" placeholder="Email을 입력해 주세요" 
+                aria-label="Email Address" aria-describedby="emailExample" required/>
             </div>
             </div>
              <div class="mb-3">
                 <label class="text-gray-600 small" for="emailExample">Date of Birth</label>
-                <input class="form-control form-control-solid" type="text" placeholder="Ex)1993.05.08" aria-label="Birth Address" aria-describedby="birthExample" required/>
+                <input class="form-control form-control-solid" type="text" placeholder="Ex)1993.05.08" 
+                aria-label="Birth Address" aria-describedby="birthExample" required/>
             </div>
             <div class="mb-3">
                 <label class="text-gray-600 small" for="emailExample">우편번호</label>
-                <input class="form-control form-control-solid" type="text" placeholder="Ex)10052" aria-label="Address" aria-describedby="addressExample" required/>
+                <input class="form-control form-control-solid" type="text" placeholder="Ex)10052" aria-label="Address" 
+                aria-describedby="addressExample" required"/>
             </div>
+            <!--  우편번호 찾기 버튼 -->
+            <button class="btn btn-primary" type="button" id="addfinde" name="addfind">우편번호 찾기</button>
+            
+            <div class="mb-3">
+                <label class="text-gray-600 small" for="emailExample"></label>
+                <input class="form-control form-control-solid" type="text" placeholder="도로명주소" 
+                aria-label="Address" aria-describedby="addressExample" id="cityroad" required/>
+            </div>
+            
+             <div class="mb-3">
+                <label class="text-gray-600 small" for="emailExample"></label>
+                <input class="form-control form-control-solid" type="text" placeholder="도로명 상세주소" 
+                aria-label="Address" aria-describedby="addressExample" id="detailroad" required/>
+            </div>
+        <div class="mb-3">
+                <label class="text-gray-600 small" for="emailExample"></label>
+                <input class="form-control form-control-solid" type="text" placeholder="지번 주소" 
+                aria-label="Address" aria-describedby="addressExample" id="oldadd" required/>
+            </div>
+            <br>
+            
             <button class="btn btn-primary" type="button">Upload new image</button>
             <!-- Form Group (form submission)-->
                                         <div class="d-flex align-items-center justify-content-between">

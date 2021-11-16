@@ -24,4 +24,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("read", userId);
 	}
 
+	@Override
+	public Member memberSelect(String mid) {
+		logger.info("MemberDAOImpl.memberSelect() 함수 실행");
+		
+		return sqlSession.selectOne("memberSelect", mid);
+	}
+
+	@Override
+	public int memberUpdate(Member mvo) {
+		logger.info("MemberDAOImpl.memberUpdate() 함수 실행");
+		
+		return sqlSession.update("memberUpdate", mvo);
+	}
+
 }

@@ -80,14 +80,20 @@
                 <h6 class="dropdown-header d-flex align-items-center">
                     <img class="dropdown-user-img" src="/template/assets/img/illustrations/profiles/profile-1.png" />
                     <div class="dropdown-user-details">
-                        <div class="dropdown-user-details-name">Valerie Luna</div>
-                        <div class="dropdown-user-details-email">vluna@aol.com</div>
+                    	<sec:authorize access="isAuthenticated()">
+	                        <div class="dropdown-user-details-name">
+	                        	<sec:authentication property="principal.member.mname"/>
+	                        </div>
+	                        <div class="dropdown-user-details-email">
+	                        	<sec:authentication property="principal.member.memail"/>
+	                        </div>
+                        </sec:authorize>
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" href="/profile.wd">
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                                     내정보
+                                     내 프로필
                 </a>
 
 				<sec:authorize access="hasRole('ROLE_ADMIN')">

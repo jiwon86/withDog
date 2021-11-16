@@ -14,7 +14,7 @@
 	<bean id="customUserDetailsService" class="a.b.c.com.member.security.CustomUserDetailsService" />
 	
 	<s:http>
-		<s:intercept-url pattern="/all.wd" access="permitAll" />
+		<s:intercept-url pattern="/**" access="permitAll" />
 		<s:intercept-url pattern="/login.wd" access="isAnonymous()" />
 		<s:intercept-url pattern="/member.wd" access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')" />
 		<s:intercept-url pattern="/admin.wd" access="hasRole('ROLE_ADMIN')" />

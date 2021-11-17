@@ -25,6 +25,16 @@ public class Member implements Serializable{
 	private String updatedate;
 	
 	private List<MemberAuth> authList;
+	
+	
+
+	@Override
+	public String toString() {
+		return "Member [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", mname=" + mname
+				+ ", mbirth=" + mbirth + ", mphoto=" + mphoto + ", mzonecode=" + mzonecode + ", mroadaddress="
+				+ mroadaddress + ", mjibunaddress=" + mjibunaddress + ", deleteyn=" + deleteyn + ", insertdate="
+				+ insertdate + ", updatedate=" + updatedate + ", authList=" + authList + "]";
+	}
 
 	public Member() {
 		

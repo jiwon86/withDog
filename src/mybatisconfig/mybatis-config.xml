@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias type="a.b.c.com.member.vo.Member" alias="Member" />
 		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />	
+		<typeAlias type="a.b.c.com.qna.vo.QnaVO" alias="QnaVO" />	
 	</typeAliases>
 </configuration>

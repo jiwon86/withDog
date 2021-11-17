@@ -1,10 +1,16 @@
 package a.b.c.com.common;
 
 public abstract class ChabunUtil {
+	
+	public static final String BIZ_GUBUN_Q = "Q"; //Q&A
+	
+	
 	public static final String BIZ_GUBUN_M = "M"; // 회원
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
+	
+	
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
 	public static String numpad(String t, String c) {
@@ -16,6 +22,14 @@ public abstract class ChabunUtil {
 		
 		return ymd.concat(c);
 	}
+	
+	//Q&A
+	public static String getQnaChabun(String type, String mno) {
+		
+		return BIZ_GUBUN_Q.concat(ChabunUtil.numpad(type, mno));
+	}
+	
+	
 	
 	// 회원 번호
 	public static String getMemChabun(String type, String memNum) {

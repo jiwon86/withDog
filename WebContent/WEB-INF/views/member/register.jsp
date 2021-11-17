@@ -123,6 +123,37 @@ $(document).ready(function(){
 		}
 	});
 	
+	$(document).on("click", "#idcheck", function(){
+		alert("checkbtn >>> : ");
+
+		let idCheckURL = "memIdCheck.wd";
+		/* let reqType = "POST"; */
+		let dataParam = { mid: $("#mid").val(), };
+		
+		$.ajax({
+			url: idCheckURL,
+			/* type: reqType,	 */							
+			data: dataParam,	            
+			success: whenSuccess,
+			error: whenError
+		});
+		
+		function whenSuccess(resData){	
+			if ("ID_YES" == resData){
+				alert("사용 가능한 아이디 입니다");													
+				$("#mid").attr("readonly", true);
+				$("#mpw").focus();	
+			}else if ("ID_NO" == resData){
+				alert("이미 아이디 사용중 인 아이디 입니다.");
+				$("#mid").val('');
+				$("#mid").focus();
+			};				
+		}
+		function whenError(e){
+			alert("e >>> : " + e.responseText);
+		}
+	});
+	
 	$("#btnMphoto").click(function() {
 		$("#inputImage").click();
 	})
@@ -174,10 +205,9 @@ $(document).ready(function(){
                 </div>
                   <div class="col-md-6">
                     <div class="mb-3">
-                          <a class="btn btn-primary" href="auth-login-social.html" id="idcheck" name="idcheck">Id Check</a>
+                          <a class="btn btn-primary" id="idcheck" name="idcheck">Id Check</a>
                     </div>
                 </div>
-                
             </div>
             <!-- Form Group (email address)-->
             
@@ -198,10 +228,9 @@ $(document).ready(function(){
                         <label class="text-gray-600 small" for="confirmPasswordExample">Confirm Password</label>
  					 <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
  					 aria-label="Confirm Password" aria-describedby="confirmPasswordExample" id="passcheck" 
- 					 v-model="num02" required /><b><h3 id="sumid">{{sum()}}</h3></b>
-  					
+ 					 v-model="num02" required /><b id="sumid">{{sum()}}</b>
+ 					 
    					<!-- <a class="btn btn-primary" href="auth-login-social.html" id="pwcheck" name="pwcheck">Pw Check</a> -->
-   					
                     </div>
                 </div>
                 <div class="mb-3">
@@ -222,13 +251,11 @@ $(document).ready(function(){
             </div>
             <!--  우편번호 찾기 버튼 -->
             <button class="btn btn-primary" type="button" id="addfinde" name="addfind">우편번호 찾기</button>
-            
             <div class="mb-3">
                 <label class="text-gray-600 small" for="emailExample"></label>
                 <input class="form-control form-control-solid" type="text" placeholder="도로명주소" 
                 aria-label="Address" aria-describedby="addressExample" id="mroadaddress" name="mroadaddress" required/>
             </div>
-            
              <div class="mb-3">
                 <label class="text-gray-600 small" for="emailExample"></label>
                 <input class="form-control form-control-solid" type="text" placeholder="도로명 상세주소" 

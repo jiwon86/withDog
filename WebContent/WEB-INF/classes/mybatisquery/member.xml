@@ -29,7 +29,7 @@
 		<result property="mauth" column="mauth" />
 	</resultMap>
 	
-	<insert id="memberInsert" parameterType="Member">
+<insert id="memberInsert" parameterType="Member">
 
 	INSERT INTO MEMBER( 	 
 								 MNO      		<!-- COLUMN 1 -->
@@ -125,5 +125,12 @@
 		WHERE DELETEYN='Y'
 		AND   MNO = #{mno, jdbcType=VARCHAR}
 	</update>
+	
+<select id="memberIdCheck" parameterType="Member" resultType="Member">
+	SELECT 	A.MID MID
+	FROM 	MEMBER A 
+	WHERE 	DELETEYN = 'Y'
+	AND     A.MID = #{mid, jdbcType=VARCHAR}
+</select>
 	
 </mapper>

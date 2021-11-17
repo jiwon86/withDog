@@ -2,6 +2,7 @@ package a.b.c.com.member.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -228,6 +229,25 @@ public class MemberController {
 			return "member/register";
 			
 			}
+		}
+		// 회원 아이디 체크 하는 방법
+		@RequestMapping("memIdCheck")
+		@ResponseBody
+		public Object memIdCheck(Member member) {
+			logger.info("회원 아이디 중복 확인 컨트롤러 >>>> ");
+			logger.info("id check .getid() >>> : " + member.getMid());
+			
+			List<Member> list = memberService.memberIdCheck(member);
+			logger.info("list.size() >>> : " + list.size());
+			
+			String msg="";
+			if(list.size() == 0) {
+				msg = "ID_YES";
+			}else {
+				msg = "ID_NO";
+			}
+			return msg;
+			
 		}
 	
 }

@@ -38,8 +38,13 @@ public class MapController {
 	@RequestMapping("/withmap")
 	public String withmap(Principal principal) {
 		logger.info("MapController ------ withmap() ");
-		String mid = principal.getName();
-		logger.info("member 아이디 >>> : " + mid);
+		try {
+			String mid = principal.getName();
+		}catch (Exception e) {
+			return "member/loginForm";
+		}
+		
+		//logger.info("member 아이디 >>> : " + mid);
 		return "map/withmap";
 	}
 	

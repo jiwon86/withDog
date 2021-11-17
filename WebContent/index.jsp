@@ -25,7 +25,9 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				
+				<main>
+					
+				</main>
 				<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 

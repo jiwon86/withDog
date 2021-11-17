@@ -238,9 +238,7 @@ const pbutt_cancel = document.getElementById("cancle");
 pbutt_cancel.addEventListener("click" ,hidePopup);
 
 				
-//------------------------------------------------------------------------------------
-
-				
+//------------------------------------------------------------------------------------		
 function markersLoad() {
 	const url = "mapdata.json";
 		$.ajax({			

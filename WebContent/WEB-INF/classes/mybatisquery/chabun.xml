@@ -18,4 +18,8 @@
 	</select>
 	-->
 	
+	<select id="getMapChabun" resultType="MapTradeVO">
+		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
+	</select>
+	
 </mapper>

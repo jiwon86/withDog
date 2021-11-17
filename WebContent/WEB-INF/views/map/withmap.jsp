@@ -176,6 +176,7 @@ let markcount =  markers.length - 1;
 setpopMarkers(map);
 wmark.setMap(null);
 
+$('#popup')[0].reset();
 pop = false;
 }
 
@@ -224,6 +225,8 @@ const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
 	let title = document.getElementById("title").value;
 	
 	markerInfoSet (title,marker);
+
+	$('#popup')[0].reset();
 
 }
 

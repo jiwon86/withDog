@@ -124,7 +124,7 @@ public class MapController {
 		mvo.setTPRICE(fu.getParameter("price"));
 		mvo.setTLAT(fu.getParameter("lat"));
 		mvo.setTLNG(fu.getParameter("lng"));
-		mvo.setMNO("1");
+		mvo.setMNO("2");
 		String tphoto = fu.getParameter("photo");
 		if(tphoto != null) {
 			mvo.setTPHOTO(tphoto);

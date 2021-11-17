@@ -1,7 +1,5 @@
 package a.b.c.com.member.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -12,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
+import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.service.MemberService;
 import a.b.c.com.member.vo.Member;
 
@@ -27,10 +29,12 @@ public class MemberController {
 	private Logger logger = Logger.getLogger(MemberController.class);
 	
 	private MemberService memberService;
+	private ChabunService chabunService;
 	
 	@Autowired(required=false)
-	public MemberController(MemberService memberService) {
+	public MemberController(MemberService memberService, ChabunService chabunService) {
 		this.memberService = memberService;
+		this.chabunService = chabunService;
 	}
 	
 	// 권한제한에 접근할 때
@@ -53,12 +57,6 @@ public class MemberController {
 		}
 		
 		return "member/loginForm";
-	}
-	
-	@RequestMapping("register")
-	public String register() {
-		
-		return "member/register";
 	}
 	
 	@RequestMapping("/admin")
@@ -138,5 +136,98 @@ public class MemberController {
 		
 		return "실패";
 	}
+	//----------------------------------------------------------------태준-------------------------------------------------------------------//
+	
+	// 회원가입 폼으로 이동
+		@RequestMapping("register")
+		public String register() {
+			logger.info("회원가입 폼으로 넘기는 곳 >>> :");
+			return "member/register";
+		}
+//		@RequestMapping(value="login1")
+//		public String login1(@ModelAttribute Member member, Model model) {
+//			logger.info("MemberInsert 함수 진입 >>> ");
+//			logger.info("member.tostring() >>> : " + member.toString());
+//			
+//			String mno = ChabunUtil.getMemChabun("D", chabunService.getMemChabun().getMno());
+//			logger.info("mno ::: "+mno);
+//			member.setMno(mno);
+//			logger.info("");
+//				
+//			
+//			return "member/loginForm";
+//		}
+	// 회원가입 완료 후 로그인 화면으로 이동
+		@RequestMapping(value="login1" ,method=RequestMethod.POST)
+		public String login1(HttpServletRequest req) {
+			logger.info("MemberInsert 함수 진입 >>>> ");
+			
+			// 채번 구하기
+			String mno = ChabunUtil.getMemChabun("D",chabunService.getMemChabun().getMno());
+			logger.info("MemberController memInsert() 함수 진입");
+			
+			FileUploadUtil fu = new FileUploadUtil( CommonUtils.MEMBER_IMG_UPLOAD_PATH1
+												   ,CommonUtils.MEMBER_IMG_FILE_SIZE1
+												   ,CommonUtils.MEMBER_EN_CODE1);
+			
+			boolean bool = fu.imgfileUploadSize(req);
+			
+			logger.info("여기>>>>>>>>>>>>>>>>>>>>>>.");
+			
+			System.out.println("mno >>> : " + mno);
+			System.out.println("mid >>> : " + fu.getParameter("mid"));
+			System.out.println("mpw >>> : " + fu.getParameter("mpw"));
+			System.out.println("memail >>> : " + fu.getParameter("memail"));
+			System.out.println("mname >>> : " + fu.getParameter("mname"));
+			System.out.println("mbirth >>> : " + fu.getParameter("mbirth"));
+			System.out.println("mzonecode >>> : " + fu.getParameter("mzonecode"));
+			//System.out.println("mroadaddress >>> : " + mroadaddress);
+			System.out.println("mjibunaddress >>> : " + fu.getParameter("mjibunaddress"));
+			
+			ArrayList<String> aFileName = fu.getFileNames();
+			String mphoto = aFileName.get(0);
+			
+			String mroadaddress = fu.getParameter("mroadaddress");
+			String detailroad = fu.getParameter("detailroad");
+			mroadaddress = mroadaddress.concat("@").concat(detailroad);
+			
+			Member member = null;
+			member = new Member();
+			
+			// 넘버
+			member.setMno(mno);
+			// 아이디
+			member.setMid(fu.getParameter("mid"));
+			// 비번
+			member.setMpw(fu.getParameter("mpw"));
+			// 이메일
+			member.setMemail(fu.getParameter("memail"));
+			// 이름
+			member.setMname(fu.getParameter("mname"));
+			// 생일
+			member.setMbirth(fu.getParameter("mbirth"));
+			//포토
+			member.setMphoto(mphoto);
+			
+			// 우편번호 
+			member.setMzonecode(fu.getParameter("mzonecode"));
+			// 도로명주소 + 상세주소 = mroadaddress
+
+			member.setMroadaddress(mroadaddress);
+			
+		 	//지번주소
+			member.setMjibunaddress(fu.getParameter("mjibunaddress"));
+			logger.info("다음 >>>>>>>>>>>>>>>>>>>>>>>>..");
+			
+			int nCnt = memberService.memberInsert(member);
+			
+			if(nCnt > 0 ) {return "member/loginForm";}
+			
+			else {
+				
+			return "member/register";
+			
+			}
+		}
 	
 }

@@ -26,7 +26,7 @@
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
 				<main>
-					test1(bdm)
+					
 				</main>
 				<!--  
 					===================================

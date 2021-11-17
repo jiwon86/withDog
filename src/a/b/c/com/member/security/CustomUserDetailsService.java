@@ -13,6 +13,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	private MemberDAO memberDAO;
 	
+	public CustomUserDetailsService() {
+		
+	}
+	
 	@Autowired(required = false)
 	public CustomUserDetailsService(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;

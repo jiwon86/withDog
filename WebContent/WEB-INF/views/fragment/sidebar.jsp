@@ -6,7 +6,7 @@
             <div class="nav accordion" id="accordionSidenav">
             	
             	<div class="sidenav-menu-heading nanum">메인기능</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="withmap.wd">
                     <div class="nav-link-icon"><i data-feather="map-pin"></i></div>
                     <span class="hahmlet">돌봄찾기</span>
                 </a>

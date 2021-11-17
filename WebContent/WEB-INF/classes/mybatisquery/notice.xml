@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "a.b.c.com.notice.dao.NoticDAO">
+
+<resultMap type = "a.b.c.com.notice.vo.NoticeVO" id="nvo">
+	<result property="nnum"						column="NNUM" />
+	<result property="nsubject"					column="NSUBJECT" />
+	<result property="nwriter"					column="NWRITER" />
+	<result property="ncontents"				column="NCONTENTS" />
+</resultMap>
+
+<insert id = "noticeInsert" parameterType="noticeVO">
+
+	INSERT INTO NOTICE (NNUM,
+						NSUBJECT,
+						NWRITER,
+						NCONTENTS,
+						DELETEYN,
+						INSERTDATE,
+						UPDATEDATE,)
+				VALUES( #{nnum, jdbcType=VARCHAR},
+						#{nsubject, jdbcType=VARCHAR},
+						#{nwriter, jdbcType=VARCHAR},
+						#{ncontents, jdbcType=VARCHAR},
+						'Y',
+						SYSDATE,
+						SYSDATE)
+</insert>
+
+<select id ="noticeSelectAll" parameterType="noticeVO" resultType="noticeVO">
+	SELECT A.NNUM		NNUM
+		  ,A.NSUBJECT	NSUBJECT
+		  ,A.NWRITER	NWRITER
+		  ,A.NCONTENTS	NCONTENTS
+		  ,A.DELETEYN	DELETEYN
+		  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+	FROM	NOTICE A
+	WHERE A.DELETEYN = 'Y'
+</select>
+
+<select id="noticeSelect" parameterType="noticeVO" resultType="noticeVO">
+	SELECT A.NNUM		NNUM
+		  ,A.NSUBJECT	NSUBJECT
+		  ,A.NWRITER	NWRITER
+		  ,A.NCONTENTS	NCONTENTS
+		  ,A.DELETEYN	DELETEYN
+		  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+FROM NOTICE A WHERE A.DELETEYN='Y' AND A.NNUM = #{nnum, jdbcType=VARCHAR}
+</select>
+
+<update id ="noticeUpdate" parameterType="noticeVO">
+	UPDATE NOTICE SET NCONTENTS=#{ncontents, jdbcType=VARCHAR}, UPDATEDATE = SYSDATE
+	WHERE DELETEYN = 'Y' AND NNUM = #{nnum, jdbcType=VARCHAR}
+</update>
+
+<update id="noticeDelete" parameterType="noticeVO">
+	UPDATE NOTICE SET DELETEYN = 'N', UPDATEDATE = SYSDATE
+	WHERE DELETEYN = 'Y' AND NNUM = #{nnum, jdbcType=VARCHAR}
+</update>
+</mapper>

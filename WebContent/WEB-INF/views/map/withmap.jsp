@@ -35,8 +35,9 @@
 				<!--MAP API SET-->
 				const container = document.getElementById('map');
 				const options = {
-					center: new kakao.maps.LatLng(37.3971709, 126.8007997),
-					level: 3
+					center: new kakao.maps.LatLng(37.3971709, 126.8007997)
+					,level: 3
+					,disableDoubleClick : true
 				};
 				const	map = new kakao.maps.Map(container, options);
 //-----------------------------------------------------------------------------------				
@@ -157,14 +158,14 @@ $(document).ready(function(){
 		    },
 		    error: function (error){
 		        alert("에러");
-		        submitPopup();
+		        hidePopup();
 		    }
 		}); // end of ajax()
 	});
 });
 
 //취소 시 팝업을 하이드 시킴
-function hidePopup(event) {
+function hidePopup() {
 overlaybox.classList.add("hidden");
 
 moveable = true;

@@ -27,4 +27,11 @@ public abstract class CommonUtils {
 	public static final int BOARD_CUR_PAGE = 1;
 	public static final int BOARD_TOTAL_COUNT = 0;
 	
+	// 맵관련
+	public static final String JSON_FILE_PATH = "C:\\00.KOSMO93\\30.Web\\pr_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\";
+	public static final String MAPTRADE_IMG_UPLOAD_PATH 
+	= "C:\\00.KOSMO93\\30.Web\\pr_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\map";
+	public static final int MAPTRADE_IMG_FILE_SIZE = 2*1024*1024;
+	public static final String MAPTRADE_EN_CODE = "UTF-8";
+	
 }

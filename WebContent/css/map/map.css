@@ -1,0 +1,60 @@
+body {
+	margin : 0 auto;
+}
+
+ul { 
+    font-size: 15px; line-height: 30px;
+}
+
+.map {
+	  width:  1600px;
+      height: 800px;
+      margin : 50px;
+      border : solid 3px grey;
+}
+
+
+
+.overlaybox {
+	position: relative;
+	width: 460px;
+	height: 760px;
+	background: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	top: 10px;
+	left : 100px;
+	border-radius: 5%;
+	padding: 15px 10px;
+}
+
+.overlaybox.hidden {
+	display : none;
+}
+
+.title {
+	border-radius: 10%;
+	background-color: rgba( 20, 200, 205, 0.1 );
+}
+
+
+.cancle {
+	position :relative;
+	top : 50px;
+	left : 0px;
+}
+
+.submit {
+	position :relative;
+	top : 50px;
+	left : 250px;
+}
+
+.butt {
+	font-size : 25px;
+	border-radius : 20%;
+	background-color: rgba( 100, 255, 255, 0.2 );
+}
+
+.inputtext {
+	width : 93%
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.map.dao.MapDAO">
+
+<select id="setMarkers" parameterType="MapTradeVO" resultType="MapTradeVO">	
+	SELECT
+	    A.TNO       TNO
+	    ,A.TTITLE   TTITLE   
+	    ,A.TCONTENT TCONTENT
+	    ,A.TWRITER  TWRITER
+	    ,A.TPRICE   TPRICE 
+	    ,A.TPHOTO   TPHOTO 
+	    ,A.TLAT     TLAT 
+	    ,A.TLNG     TLNG 
+	    ,A.MNO      MNO 
+	    ,A.DELETEYN DELETEYN
+	    ,A.INSERTDATE INSERTDATE
+	    ,A.UPDATEDATE UPDATEDATE
+	    
+	FROM TRADEMAP A
+	
+	WHERE 	A.DELETEYN = 'Y' 	
+	ORDER BY 1 DESC  
+</select>
+
+<insert id="mapTradeInsert" parameterType="MapTradeVO">
+
+	INSERT INTO TRADEMAP(
+		TNO
+		,TTITLE
+		,TCONTENT
+		,TWRITER
+		,TPRICE
+		,TPHOTO
+		,TLAT
+		,TLNG
+		,MNO
+		, DELETEYN
+		, INSERTDATE
+		, UPDATEDATE
+	)
+	VALUES(
+	
+		#{TNO, jdbcType=VARCHAR} 				<!-- placeholer 1 -->
+		,#{TTITLE, jdbcType=VARCHAR} 			<!-- placeholer 2 -->
+		,#{TCONTENT, jdbcType=VARCHAR} 			<!-- placeholer 3 -->
+		,#{TWRITER, jdbcType=VARCHAR}  			<!-- placeholer 4 -->
+		,#{TPRICE, jdbcType=VARCHAR} 			<!-- placeholer 5 -->
+		,#{TPHOTO, jdbcType=VARCHAR}  			<!-- placeholer 6 -->
+		,#{TLAT, jdbcType=VARCHAR} 				<!-- placeholer 7 -->
+		,#{TLNG, jdbcType=VARCHAR} 				<!-- placeholer 8 -->
+		,#{MNO, jdbcType=VARCHAR}  				<!-- placeholer 9 -->
+		,'Y'  									<!-- placeholer 10 -->
+		,SYSDATE  								<!-- placeholer 11 -->
+		,SYSDATE 								<!-- placeholer 12 -->
+	        ) 
+</insert>
+
+</mapper>

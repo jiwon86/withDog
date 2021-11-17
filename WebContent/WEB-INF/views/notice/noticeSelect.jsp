@@ -39,7 +39,7 @@
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="file-text"></i></div>
-                                            	공지사항 작성
+                                            	공지사항
                                         </h1>
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
@@ -47,6 +47,10 @@
                                             <i class="me-1" data-feather="arrow-left"></i>
                                           	  공지사항 전체목록
                                         </a>
+                                        <a  class="btn btn-sm btn-light text-primary"  href="noticeInsert.wd">
+                                        	<i class="me-1" data-feather="arrow-left"></i>
+                                      		공지사항 작성하기
+                                      </a>
                                     </div>
                                 </div>
                             </div>
@@ -56,20 +60,14 @@
                     <div class="container-fluid px-4">
                         <div class="row gx-4">
                             <div class="col-lg-8">
-                               <div class="card mb-4">
-                                    <div class="card-header" style="height:40px;line-height:15px;">공지사항 제목</div>
-                                    <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="" value=""  style="height:10px;"/></div>
+                                <div class="card mb-4">
+                                    <div class="card-header">공지사항 제목</div>
+                                    <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="" value="" /></div>
                                 </div>
-                                
-                               <div class="card mb-4">
-                                    <div class="card-header" style="height:40px;line-height:15px;">작성자</div>
-                                    <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="" value=""  style="height:10px;"/></div>
-                                </div>
-                                
                                 <div class="card card-header-actions mb-4">
                                     <div class="card-header">
-                                     	   공지사항 내용
-                                        
+                                        공지사항 내용
+                                        <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="해당 공지사항을 잘 읽어주시고, 서비스 이용에 불편함이 없도록 주의 부탁드립니다!"></i>
                                     </div>
                                     <div class="card-body"><textarea class="lh-base form-control" type="text" placeholder="" rows="4" style="height:500px;"></textarea></div>
                                 </div>

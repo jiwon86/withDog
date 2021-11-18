@@ -20,7 +20,7 @@
 		<s:form-login login-page="/login.wd" authentication-success-handler-ref="customLoginSuccess"/>
 		<s:access-denied-handler error-page="/accessError.wd"/>
 		<s:logout logout-url="/logout.wd" logout-success-url="/" invalidate-session="true" />	
-		<s:csrf disabled="true" />	
+		<s:csrf disabled="true"/>	
 	</s:http>
 	
 	<s:authentication-manager>

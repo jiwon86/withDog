@@ -25,45 +25,51 @@
 	</resultMap>
 	
 	<resultMap type="MemberAuth" id="authMap">
-		<result property="mno" column="mno" />
-		<result property="mauth" column="mauth" />
+		<result property="mno" column="MNO" />
+		<result property="mauth" column="MAUTH" />
 	</resultMap>
 	
-<insert id="memberInsert" parameterType="Member">
+	<insert id="memberInsert" parameterType="Member">
+		 INSERT INTO MEMBER( 	 
+		     MNO      		<!-- COLUMN 1 -->
+			,MID 			<!-- COLUMN 2 -->
+			,MPW 			<!-- COLUMN 3 -->
+			,MEMAIL 		<!-- COLUMN 4 -->
+	      	,MNAME   		<!-- COLUMN 5 --> 
+	      	,MBIRTH 		<!-- COLUMN 6 -->
+	      	,MPHOTO 		<!-- COLUMN 7 -->
+	      	,MZONECODE  	<!-- COLUMN 10 -->
+	      	,MROADADDRESS 	<!-- COLUMN 11 -->
+	      	,MJIBUNADDRESS 	<!-- COLUMN 12 -->
+	      	,DELETEYN		<!-- COLUMN 17 -->
+	      	,INSERTDATE	 	<!-- COLUMN 18 -->
+	      	,UPDATEDATE		<!-- COLUMN 19 -->
+	     ) VALUES ( 	 
+			 #{mno, jdbcType=VARCHAR} 				<!-- placeholer 1 -->
+			,#{mid, jdbcType=VARCHAR} 				<!-- placeholer 3 -->
+	       	,#{mpw, jdbcType=VARCHAR}  				<!-- placeholer 4 -->
+	       	,#{memail, jdbcType=VARCHAR}  			<!-- placeholer 9 -->
+			,#{mname, jdbcType=VARCHAR} 			<!-- placeholer 2 --> 
+	       	,#{mbirth, jdbcType=VARCHAR}  			<!-- placeholer 6 -->
+			,#{mphoto, jdbcType=VARCHAR} 			<!-- placeholer 7 -->
+	       	,#{mzonecode, jdbcType=VARCHAR} 		<!-- placeholer 10 -->
+	       	,#{mroadaddress, jdbcType=VARCHAR}  	<!-- placeholer 11 -->
+			,#{mjibunaddress, jdbcType=VARCHAR} 	<!-- placeholer 12 -->
+	       	,'Y'  									<!-- placeholer 17 -->
+	       	,SYSDATE  								<!-- placeholer 18 -->
+	       	,SYSDATE 								<!-- placeholer 19 -->
+	      ) 
+	</insert>
 
-	INSERT INTO MEMBER( 	 
-								 MNO      		<!-- COLUMN 1 -->
-								,MID 			<!-- COLUMN 2 -->
-								,MPW 			<!-- COLUMN 3 -->
-								,MEMAIL 			<!-- COLUMN 4 -->
-	                          	,MNAME   		<!-- COLUMN 5 --> 
-	                          	,MBIRTH 		<!-- COLUMN 6 -->
-	                          	,MPHOTO 			<!-- COLUMN 7 -->
-	                          	,MZONECODE  	<!-- COLUMN 10 -->
-	                          	,MROADADDRESS 	<!-- COLUMN 11 -->
-	                          	,MJIBUNADDRESS 	<!-- COLUMN 12 -->
-	                          	,DELETEYN		<!-- COLUMN 17 -->
-	                          	,INSERTDATE	 	<!-- COLUMN 18 -->
-	                          	,UPDATEDATE		<!-- COLUMN 19 -->
-	                         ) 
-	                  VALUES
-	                  		( 	 
-	                  			 #{mno, jdbcType=VARCHAR} 				<!-- placeholer 1 -->
-	                  			,#{mid, jdbcType=VARCHAR} 				<!-- placeholer 3 -->
-	                          	,#{mpw, jdbcType=VARCHAR}  				<!-- placeholer 4 -->
-	                          	,#{memail, jdbcType=VARCHAR}  			<!-- placeholer 9 -->
-	                  			,#{mname, jdbcType=VARCHAR} 			<!-- placeholer 2 --> 
-	                          	,#{mbirth, jdbcType=VARCHAR}  			<!-- placeholer 6 -->
-	                  			,#{mphoto, jdbcType=VARCHAR} 				<!-- placeholer 7 -->
-	                          	,#{mzonecode, jdbcType=VARCHAR} 		<!-- placeholer 10 -->
-	                          	,#{mroadaddress, jdbcType=VARCHAR}  	<!-- placeholer 11 -->
-	                  			,#{mjibunaddress, jdbcType=VARCHAR} 	<!-- placeholer 12 -->
-	                          	,'Y'  									<!-- placeholer 17 -->
-	                          	,SYSDATE  								<!-- placeholer 18 -->
-	                          	,SYSDATE 								<!-- placeholer 19 -->
-	                         ) 
-</insert>
-	
+	<insert id="memberAuthInsert" parameterType="MemberAuth">
+		 INSERT INTO MEMBER_AUTH( 	 
+		      MNO      	
+			, MAUTH
+	     ) VALUES ( 	 
+			  #{mno, jdbcType=VARCHAR} 
+			, 'ROLE_MEMBER'
+	      ) 
+	</insert>
 	
 	<select id="read" resultMap="memberMap">
 		SELECT 

@@ -18,7 +18,7 @@
 	</select>
 	-->
 	<select id="getMemChabun" resultType="Member">
-	SELECT NVL(MAX(SUBSTR(A.MNO, -4)),0) + 1 MNO FROM MEMBER A 
-</select>
+		SELECT NVL(MAX(SUBSTR(A.MNO, -4)),0) + 1 MNO FROM MEMBER A 
+	</select>
 	
 </mapper>

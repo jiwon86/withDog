@@ -25,9 +25,51 @@
 	</resultMap>
 	
 	<resultMap type="MemberAuth" id="authMap">
-		<result property="mno" column="mno" />
-		<result property="mauth" column="mauth" />
+		<result property="mno" column="MNO" />
+		<result property="mauth" column="MAUTH" />
 	</resultMap>
+	
+	<insert id="memberInsert" parameterType="Member">
+		 INSERT INTO MEMBER( 	 
+		     MNO      		<!-- COLUMN 1 -->
+			,MID 			<!-- COLUMN 2 -->
+			,MPW 			<!-- COLUMN 3 -->
+			,MEMAIL 		<!-- COLUMN 4 -->
+	      	,MNAME   		<!-- COLUMN 5 --> 
+	      	,MBIRTH 		<!-- COLUMN 6 -->
+	      	,MPHOTO 		<!-- COLUMN 7 -->
+	      	,MZONECODE  	<!-- COLUMN 10 -->
+	      	,MROADADDRESS 	<!-- COLUMN 11 -->
+	      	,MJIBUNADDRESS 	<!-- COLUMN 12 -->
+	      	,DELETEYN		<!-- COLUMN 17 -->
+	      	,INSERTDATE	 	<!-- COLUMN 18 -->
+	      	,UPDATEDATE		<!-- COLUMN 19 -->
+	     ) VALUES ( 	 
+			 #{mno, jdbcType=VARCHAR} 				<!-- placeholer 1 -->
+			,#{mid, jdbcType=VARCHAR} 				<!-- placeholer 3 -->
+	       	,#{mpw, jdbcType=VARCHAR}  				<!-- placeholer 4 -->
+	       	,#{memail, jdbcType=VARCHAR}  			<!-- placeholer 9 -->
+			,#{mname, jdbcType=VARCHAR} 			<!-- placeholer 2 --> 
+	       	,#{mbirth, jdbcType=VARCHAR}  			<!-- placeholer 6 -->
+			,#{mphoto, jdbcType=VARCHAR} 			<!-- placeholer 7 -->
+	       	,#{mzonecode, jdbcType=VARCHAR} 		<!-- placeholer 10 -->
+	       	,#{mroadaddress, jdbcType=VARCHAR}  	<!-- placeholer 11 -->
+			,#{mjibunaddress, jdbcType=VARCHAR} 	<!-- placeholer 12 -->
+	       	,'Y'  									<!-- placeholer 17 -->
+	       	,SYSDATE  								<!-- placeholer 18 -->
+	       	,SYSDATE 								<!-- placeholer 19 -->
+	      ) 
+	</insert>
+
+	<insert id="memberAuthInsert" parameterType="MemberAuth">
+		 INSERT INTO MEMBER_AUTH( 	 
+		      MNO      	
+			, MAUTH
+	     ) VALUES ( 	 
+			  #{mno, jdbcType=VARCHAR} 
+			, 'ROLE_MEMBER'
+	      ) 
+	</insert>
 	
 	<select id="read" resultMap="memberMap">
 		SELECT 
@@ -51,5 +93,50 @@
 			  ON M.MNO = A.MNO
 		WHERE M.MID = #{mid}
 	</select>
+	
+	<select id="memberSelect" resultMap="memberMap">
+		SELECT 
+			M.MNO            MNO,
+			M.MID            MID,
+			M.MPW            MPW,
+			M.MEMAIL         MEMAIL,
+			M.MNAME          MNAME,
+			M.MBIRTH         MBIRTH,
+			M.MPHOTO         MPHOTO,
+			M.MZONECODE      MZONECODE,
+			M.MROADADDRESS   MROADADDRESS,
+			M.MJIBUNADDRESS  MJIBUNADDRESS,
+			M.DELETEYN       DELETEYN,
+			TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
+			TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
+			A.MAUTH          MAUTH
+		FROM  MEMBER M 
+			  LEFT OUTER JOIN 
+			  MEMBER_AUTH A 
+			  ON M.MNO = A.MNO
+		WHERE M.MID = #{mid}
+	</select>
+	
+	<update id="memberUpdate" parameterType="Member">
+		UPDATE MEMBER
+		SET
+			  MNAME      = #{mname, jdbcType=VARCHAR}
+			, MEMAIL     = #{memail, jdbcType=VARCHAR}
+			, MBIRTH     = #{mbirth, jdbcType=VARCHAR}
+			, MZONECODE  = #{mzonecode, jdbcType=VARCHAR}
+			, MROADADDRESS = #{mroadaddress, jdbcType=VARCHAR}
+			, MJIBUNADDRESS = #{mjibunaddress, jdbcType=VARCHAR}
+			, MPHOTO     = #{mphoto, jdbcType=VARCHAR}
+			, UPDATEDATE = SYSDATE
+		WHERE DELETEYN='Y'
+		AND   MNO = #{mno, jdbcType=VARCHAR}
+	</update>
+	
+<select id="memberIdCheck" parameterType="Member" resultType="Member">
+	SELECT 	A.MID MID
+	FROM 	MEMBER A 
+	WHERE 	DELETEYN = 'Y'
+	AND     A.MID = #{mid, jdbcType=VARCHAR}
+</select>
 	
 </mapper>

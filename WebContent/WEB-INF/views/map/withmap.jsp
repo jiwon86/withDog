@@ -292,6 +292,8 @@ function markersLoad() {
    
 					    for (i=0; size > i; i++ ){
 					    	const title = jsonData[i].title;
+					    	const photo = jsonData[i].photo;
+					    	const price = jsonData[i].price;
 							const markLocation = new kakao.maps.LatLng(jsonData[i].lat, jsonData[i].lng);
 							// Set Marker
 							const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
@@ -307,8 +309,9 @@ function markersLoad() {
 							// Marker를 배열에 추가
 							markers.push(marker);
 							//
-							markerInfoSet(title,marker);
+							markerInfoSet(title,marker,photo,markLocation,price);
 					        }
+					
 
 					    },
 					    error: function (error){
@@ -317,24 +320,39 @@ function markersLoad() {
 				});
 	}
 
-function markerInfoSet (s,marker) {
-					
+function markerInfoSet (title,marker,photo,markLocation,price) {
+	
+	let makerInfo;
+	
 	kakao.maps.event.addListener(marker, 'mouseover', function() {
-		var iwContent = '<div style="padding:5px;">'+ s +'</div>'; 
-		var infowindow = new kakao.maps.InfoWindow({
-				content : iwContent
+		var iwContent = '<div class="tradeinfo" style="padding:5px;">'
+						+ '<img class="dogimg" src=/img/map/' + photo +'>'
+						+ '<div class="tradeinfo_2">'
+						+ '<ul><li>'+ title + '</li>'
+						+'<li>' + price + '</li></ul></div>'
+						+'</div>'; 
+
+	
+	makerInfo = new kakao.maps.CustomOverlay({
+		    position: markLocation,
+		    content: iwContent,
+		    xAnchor: 0.45,
+		    yAnchor : 1.35
+	});	
+
+	makerInfo.setMap(map);	
+	//makerInfo.open(map, marker);
+				    
 	});
 	
-	infowindow.open(map, marker);
-				    
 	// 마커에 마우스아웃 이벤트를 등록합니다
 	kakao.maps.event.addListener(marker, 'mouseout', function() {
 		// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-		 infowindow.close();
+		console.log("out");
+		makerInfo.setMap(null);
 		});
-	});
 }
-				
+
 // ------------------------------------------------------------------------------------
 
 

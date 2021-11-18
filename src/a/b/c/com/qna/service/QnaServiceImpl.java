@@ -1,4 +1,4 @@
-package a.b.c.com.qa.service;
+package a.b.c.com.qna.service;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import a.b.c.com.qa.dao.QnaDAO;
-import a.b.c.com.qa.vo.QnaVO;
+import a.b.c.com.qna.dao.QnaDAO;
+import a.b.c.com.qna.vo.QnaVO;
 
 @Service
 @Transactional

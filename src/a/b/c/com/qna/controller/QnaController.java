@@ -1,4 +1,4 @@
-package a.b.c.com.qa.controller;
+package a.b.c.com.qna.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import a.b.c.com.qa.service.QnaService;
+import a.b.c.com.qna.service.QnaService;
 import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
-import a.b.c.com.qa.vo.QnaVO;
+import a.b.c.com.qna.vo.QnaVO;
 
 @Controller
 public class QnaController {

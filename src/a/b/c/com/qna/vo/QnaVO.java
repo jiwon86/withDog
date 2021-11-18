@@ -1,4 +1,4 @@
-package a.b.c.com.qa.vo;
+package a.b.c.com.qna.vo;
 
 import org.apache.log4j.Logger;
 

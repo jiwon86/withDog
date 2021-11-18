@@ -1,6 +1,6 @@
 package a.b.c.com.common.dao;
 
-import a.b.c.com.qa.vo.QnaVO;
+import a.b.c.com.qna.vo.QnaVO;
 
 public interface ChabunDAO {
 	

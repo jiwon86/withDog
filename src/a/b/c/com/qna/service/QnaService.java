@@ -1,10 +1,10 @@
-package a.b.c.com.qa.dao;
+package a.b.c.com.qna.service;
 
 import java.util.List;
 
-import a.b.c.com.qa.vo.QnaVO;
+import a.b.c.com.qna.vo.QnaVO;
 
-public interface QnaDAO {
+public interface QnaService {
 
 	public List<QnaVO> qnaselect(QnaVO qvo);
 	public List<QnaVO> qnaselectAll(QnaVO qvo);

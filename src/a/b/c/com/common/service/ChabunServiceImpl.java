@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.common.dao.ChabunDAO;
-import a.b.c.com.qa.vo.QnaVO;
+import a.b.c.com.qna.vo.QnaVO;
 
 @Service
 @Transactional

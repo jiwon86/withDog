@@ -3,7 +3,7 @@ package a.b.c.com.common;
 public abstract class CommonUtils {
 
 	//Q&A 이미지 업로드
-	public static final String QnA_IMG_UPLOAD_PATH = "C:\\00.KOSMO93\\00.final_project\\finalproject_kmj_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\fileupload\\qna";
+	public static final String QnA_IMG_UPLOAD_PATH = "C:\\00.KOSMO93\\00.WithDog\\WithDog_kmj_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\fileupload\\qna";
 	public static final int QnA_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String QnA_EN_CODE = "UTF-8"; 
 	

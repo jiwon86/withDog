@@ -1,4 +1,4 @@
-package a.b.c.com.qa.dao;
+package a.b.c.com.qna.dao;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import a.b.c.com.qa.vo.QnaVO;
+import a.b.c.com.qna.vo.QnaVO;
 
 @Repository
 public class QnaDAOImpl implements QnaDAO {

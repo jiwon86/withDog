@@ -79,6 +79,8 @@ width: 300px !important;
 
 $(document).ready(function(){
 	
+	let idCheck = false;
+	
 	/* $(document).ready(function(){
 		$("#submitbtn").click(function(){
 			"action":"login1.wd"
@@ -143,6 +145,7 @@ $(document).ready(function(){
 				alert("사용 가능한 아이디 입니다");													
 				$("#mid").attr("readonly", true);
 				$("#mpw").focus();	
+				idCheck = true;
 			}else if ("ID_NO" == resData){
 				alert("이미 아이디 사용중 인 아이디 입니다.");
 				$("#mid").val('');
@@ -157,6 +160,14 @@ $(document).ready(function(){
 	$("#btnMphoto").click(function() {
 		$("#inputImage").click();
 	})
+	
+	
+	if(idCheck == true) {
+		// submit
+	} else {
+		// 안된다고 얼럿창
+	
+	}
 });
 
 

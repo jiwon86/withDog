@@ -243,6 +243,7 @@ public class MemberController {
 			String msg="";
 			if(list.size() == 0) {
 				msg = "ID_YES";
+				
 			}else {
 				msg = "ID_NO";
 			}

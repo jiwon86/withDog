@@ -65,6 +65,7 @@
 </insert>
 	
 	
+	
 	<select id="read" resultMap="memberMap">
 		SELECT 
 			M.MNO            MNO,

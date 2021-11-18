@@ -35,8 +35,9 @@
 				<!--MAP API SET-->
 				const container = document.getElementById('map');
 				const options = {
-					center: new kakao.maps.LatLng(37.3971709, 126.8007997),
-					level: 3
+					center: new kakao.maps.LatLng(37.3971709, 126.8007997)
+					,level: 3
+					,disableDoubleClick : true
 				};
 				const	map = new kakao.maps.Map(container, options);
 //-----------------------------------------------------------------------------------				
@@ -157,14 +158,14 @@ $(document).ready(function(){
 		    },
 		    error: function (error){
 		        alert("에러");
-		        submitPopup();
+		        hidePopup();
 		    }
 		}); // end of ajax()
 	});
 });
 
 //취소 시 팝업을 하이드 시킴
-function hidePopup(event) {
+function hidePopup() {
 overlaybox.classList.add("hidden");
 
 moveable = true;
@@ -176,6 +177,7 @@ let markcount =  markers.length - 1;
 setpopMarkers(map);
 wmark.setMap(null);
 
+$('#popup')[0].reset();
 pop = false;
 }
 
@@ -225,6 +227,8 @@ const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
 	
 	markerInfoSet (title,marker);
 
+	$('#popup')[0].reset();
+
 }
 
 //오버레이 박스 이벤트 세팅
@@ -234,9 +238,7 @@ const pbutt_cancel = document.getElementById("cancle");
 pbutt_cancel.addEventListener("click" ,hidePopup);
 
 				
-//------------------------------------------------------------------------------------
-
-				
+//------------------------------------------------------------------------------------		
 function markersLoad() {
 	const url = "mapdata.json";
 		$.ajax({			

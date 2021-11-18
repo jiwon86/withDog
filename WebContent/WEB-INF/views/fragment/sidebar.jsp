@@ -6,7 +6,7 @@
             <div class="nav accordion" id="accordionSidenav">
             	
             	<div class="sidenav-menu-heading nanum">메인기능</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="withmap.wd">
                     <div class="nav-link-icon"><i data-feather="map-pin"></i></div>
                     <span class="hahmlet">돌봄찾기</span>
                 </a>
@@ -25,7 +25,7 @@
                 <div class="collapse" id="collapseCareService" data-bs-parent="#accordionSidenavCareService">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCareServicePages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
-                        <a class="nav-link hahmlet" href="dashboard-2.html">내돌봄현황</a>
+                        <a class="nav-link hahmlet" href="takerequest.wd">내돌봄현황</a>
                     </nav>
                 </div>       
                 

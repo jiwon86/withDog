@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberAuth;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -43,18 +44,31 @@ public class MemberDAOImpl implements MemberDAO {
 	// 가입하기
 	@Override
 	public int memberInsert(Member mvo) {
+		logger.info("MemberDAOImpl.memberInsert() 함수 실행");
+		
 		return (Integer)sqlSession.insert("memberInsert",mvo);
 	}
 	//로그인 체크
 	@Override
 	public List<Member> loginCheck(Member mvo){
+		logger.info("MemberDAOImpl.loginCheck() 함수 실행");
+		
 		return sqlSession.selectList("loginCheck",mvo);
 	}
 
 	// 중복 체크하기
 	@Override
 	public List<Member> memberIdCheck(Member mvo){
+		logger.info("MemberDAOImpl.memberIdCheck() 함수 실행");
+		
 		return sqlSession.selectList("memberIdCheck",mvo);
+	}
+
+	@Override
+	public int memberAuthInsert(MemberAuth memberAuth) {
+		logger.info("MemberDAOImpl.memberAuthInsert() 함수 실행");
+		
+		return (Integer)sqlSession.insert("memberAuthInsert", memberAuth);
 	}
 
 }

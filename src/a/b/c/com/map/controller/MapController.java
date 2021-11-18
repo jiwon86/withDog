@@ -115,13 +115,18 @@ public class MapController {
 				   , CommonUtils.MAPTRADE_EN_CODE);
 		
 		boolean bool = fu.imgfileUploadSize(req);
-		
+		ArrayList<String> aFileName = fu.getFileNames();
+		String tphoto = aFileName.get(0);
 		
 		String writer = principal.getName();
 
 		MapTradeVO mvo = new MapTradeVO();
 		String tno = chabunService.getMapChabun().getTNO();
-		System.out.println(tno);
+		System.out.println("사진  : "+tphoto + bool );
+		
+		boolean isfile = !tphoto.isEmpty();
+		System.out.println("파일이 존재 :: "+ isfile);
+		
 		mvo.setTNO(tno);
 		mvo.setTTITLE(fu.getParameter("title"));
 		mvo.setTCONTENT(fu.getParameter("content"));
@@ -130,8 +135,8 @@ public class MapController {
 		mvo.setTLAT(fu.getParameter("lat"));
 		mvo.setTLNG(fu.getParameter("lng"));
 		mvo.setMNO("2");
-		String tphoto = fu.getParameter("photo");
-		if(tphoto != null) {
+		
+		if(isfile) {
 			mvo.setTPHOTO(tphoto);
 		} else {
 			mvo.setTPHOTO("default.jpg");

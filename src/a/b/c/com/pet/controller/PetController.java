@@ -68,9 +68,7 @@ public class PetController {
 		logger.info("PetController.petInsert 시작 >>>>>");
 		
 		//채번 구하기
-		//String pno = "P202111170002";
-		
-		String pno = ChabunUtil.getBoardChabun("P", chabunService.getPetChabun().getPnum());
+		String pno = ChabunUtil.getBoardChabun("P", chabunService.getPetChabun().getPno());
 		
 		//이미지 업로드
 		FileUploadUtil fu = new FileUploadUtil(CommonUtils.MEMBER_IMG_UPLOAD_PATH, CommonUtils.MEMBER_IMG_FILE_SIZE, CommonUtils.NOTICE_EN_CODE);
@@ -80,6 +78,28 @@ public class PetController {
 		PetVO pvo =null;
 		pvo = new PetVO();
 		
+		//반려동물번호
+		pvo.setPno(pno);
+		//반려동물이름
+		pvo.setPname(fu.getParameter("pname"));
+		//반려동물종
+		pvo.setPtype(fu.getParameter("ptype"));
+		//반려동물성별
+		pvo.setPgender(fu.getParameter("pgender"));
+		//반려동물중성화여부
+		pvo.setPneutral(fu.getParameter("pneutral"));
+		//반려동물사진
+		pvo.setPphoto(fu.getParameter("pphoto"));
+		//반려동물몸무게
+		pvo.setPweight(fu.getParameter("pweight"));
+		//반려동물병원
+		pvo.setPhospital(fu.getParameter("phospital"));
+		//반려동물특이사항
+		pvo.setPmemo(fu.getParameter("pmemo"));
+		//반려동물나이
+		pvo.setPages(fu.getParameter("pages"));
+		//회원번호
+		pvo.setMno(fu.getParameter("mno"));
 		
 		int nCnt = petService.petInsert(pvo);
 		

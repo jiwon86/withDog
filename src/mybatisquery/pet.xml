@@ -24,4 +24,38 @@ WHERE A.DELETEYN = 'Y'
 AND A.MNO='M202111140003'
 ORDER BY -2
 </select>
+
+<insert id='petInsert' parameterType="Pet">
+INSERT INTO PET(
+	 PNO
+	,PNAME
+	,PTYPE
+	,PGENDER
+	,PNEUTRAL
+	,PPHOTO
+	,PWEIGHT
+	,PHOSPITAL
+	,PMEMO
+	,PAGES
+	,MNO
+	,DELETEYN
+	,INSERTDATE
+	,UPDATEDATE
+	)VALUES(
+	 #{pno,jdbcType=VARCHAR}
+	,#{pname,jdbcType=VARCHAR}
+	,#{ptype,jdbcType=VARCHAR}
+	,#{pgender,jdbcType=VARCHAR}
+	,#{pneutral,jdbcType=VARCHAR}
+	,#{pphoto,jdbcType=VARCHAR}
+	,#{pweight,jdbcType=VARCHAR}
+	,#{phospital,jdbcType=VARCHAR}
+	,#{pmemo,jdbcType=VARCHAR}
+	,#{pages,jdbcType=VARCHAR}
+	,#{mno,jdbcType=VARCHAR}
+	,'Y'
+	,SYSDATE
+	,SYSDATE
+	)
+</insert>
 </mapper>

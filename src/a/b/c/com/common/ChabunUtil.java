@@ -5,6 +5,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
+	public static final String BIZ_GUBUN_P = "P"; //반려동물
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
 	public static String numpad(String t, String c) {
@@ -35,6 +36,11 @@ public abstract class ChabunUtil {
 	// 공지사항 번호
 	public static String getNoticeChabun(String type, String memNum) {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
+	}
+	
+	//반려동물 번호
+	public static String getPetChabun(String type, String memNum) {
+		return BIZ_GUBUN_P.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
 	public static void main(String[] args) {

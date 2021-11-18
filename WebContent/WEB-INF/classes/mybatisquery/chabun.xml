@@ -17,5 +17,7 @@
 		SELECT NVL(MAX(SUBSTR(A.MNUM, -4)), 0) + 1 MNUM FROM SPRING_MEMBER A
 	</select>
 	-->
-	
+	<select id="getPetChabun" resultType="Pet">
+		SELECT NVL(MAX(SUBSTR(A.PNO, -4)), 0) + 1 PNO FROM PET A
+	</select>
 </mapper>

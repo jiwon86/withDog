@@ -6,9 +6,15 @@
             <div class="nav accordion" id="accordionSidenav">
             	
             	<div class="sidenav-menu-heading nanum">메인기능</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="withmap.wd">
                     <div class="nav-link-icon"><i data-feather="map-pin"></i></div>
                     <span class="hahmlet">돌봄찾기</span>
+                </a>
+                
+                <!-- 권한 테스트 -->
+                <a class="nav-link" href="/admin.wd">
+                    <div class="nav-link-icon"><i data-feather="lock"></i></div>
+                    <span class="hahmlet">관리자 페이지</span>
                 </a>
        
                 <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCareService" aria-expanded="false" aria-controls="collapseCareService">

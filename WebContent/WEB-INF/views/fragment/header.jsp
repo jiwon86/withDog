@@ -73,6 +73,7 @@
             
             <!-- 비로그인 -->
             <sec:authorize access="isAnonymous()">
+            	<a href="/register.wd" class="btn btn-primary">회원가입</a>
             	<a href="/login.wd" class="btn btn-primary">로그인</button>
             </sec:authorize>
             
@@ -80,19 +81,25 @@
                 <h6 class="dropdown-header d-flex align-items-center">
                     <img class="dropdown-user-img" src="/template/assets/img/illustrations/profiles/profile-1.png" />
                     <div class="dropdown-user-details">
-                        <div class="dropdown-user-details-name">Valerie Luna</div>
-                        <div class="dropdown-user-details-email">vluna@aol.com</div>
+                    	<sec:authorize access="isAuthenticated()">
+	                        <div class="dropdown-user-details-name">
+	                        	<sec:authentication property="principal.member.mname"/>
+	                        </div>
+	                        <div class="dropdown-user-details-email">
+	                        	<sec:authentication property="principal.member.memail"/>
+	                        </div>
+                        </sec:authorize>
                     </div>
                 </h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#!">
+                <a class="dropdown-item" href="/profile.wd">
                     <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                                     내정보
+                                     내 프로필
                 </a>
 
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<a class="dropdown-item" href="#!">
-	                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
+					<a class="dropdown-item" href="/admin.wd">
+	                    <div class="dropdown-item-icon"><i data-feather="lock"></i></div>
 	                                     관리자 모드
 	                </a>
                 </sec:authorize>

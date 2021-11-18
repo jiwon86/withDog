@@ -5,7 +5,15 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="a.b.c.com.member.vo.Member" alias="Member" />
+
 		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />	
+
 		<typeAlias type="a.b.c.com.review.vo.ReviewVO" alias="ReviewVO"></typeAlias>
+
+		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
+
+		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />
+
+		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
 	</typeAliases>
 </configuration>

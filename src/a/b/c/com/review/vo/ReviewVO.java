@@ -1,7 +1,13 @@
 package a.b.c.com.review.vo;
 
+import org.apache.log4j.Logger;
+
+import a.b.c.com.member.controller.MemberController;
+
 public class ReviewVO {
 
+	private static Logger logger = Logger.getLogger(ReviewVO.class);
+	
 	private String crnum;
 	private String cnum;
 	private String nnum;
@@ -116,16 +122,16 @@ public class ReviewVO {
 	// 프린트 printReviewVO 함수
 	public static void printReviewVO(ReviewVO rvo) {
 		
-		System.out.print("rvo.getCrnum() >>> : " + rvo.getCrnum());
-		System.out.print("rvo.getCnum() >>> : " + rvo.getCnum());
-		System.out.print("rvo.getNnum() >>> : " + rvo.getNnum());
-		System.out.print("rvo.getCrscore() >>> : " + rvo.getCrscore());
-		System.out.print("rvo.getCrmemo() >>> : " + rvo.getCrmemo());
-		System.out.print("rvo.getCphoto() >>> : " + rvo.getCphoto());
-		System.out.print("rvo.getCrreport() >>> : " + rvo.getCrreport());
-		System.out.print("rvo.getInsertdate() >>> : " + rvo.getInsertdate());
-		System.out.print("rvo.getUpdatedate() >>> : " + rvo.getUpdatedate());
-		System.out.print("rvo.getDelyn() >>> : " + rvo.getDelyn());
+		logger.info("rvo.getCrnum() >>> : " + rvo.getCrnum());
+		logger.info("rvo.getCnum() >>> : " + rvo.getCnum());
+		logger.info("rvo.getNnum() >>> : " + rvo.getNnum());
+		logger.info("rvo.getCrscore() >>> : " + rvo.getCrscore());
+		logger.info("rvo.getCrmemo() >>> : " + rvo.getCrmemo());
+		logger.info("rvo.getCphoto() >>> : " + rvo.getCphoto());
+		logger.info("rvo.getCrreport() >>> : " + rvo.getCrreport());
+		logger.info("rvo.getInsertdate() >>> : " + rvo.getInsertdate());
+		logger.info("rvo.getUpdatedate() >>> : " + rvo.getUpdatedate());
+		logger.info("rvo.getDelyn() >>> : " + rvo.getDelyn());
 		
 	}
 }

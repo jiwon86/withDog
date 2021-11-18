@@ -65,7 +65,6 @@
 				}).then((result) => {
 					if(result.value) {
 						// 수정 버튼을 눌렀을 때 작업할 내용을 작성
-						console.log("업데이트 성공");
 						updateMemberAjax();
 					}
 				})
@@ -83,14 +82,17 @@
 					data: data,
 					processData: false,
 					contentType: false,
+					/*
 					beforeSend: function(xhr) {
 						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 					},
+					*/
 					success: function(data) {
 						$("#liveToast1").toast("show");
 					},
 					error: function(request, error) {
 						$("#liveToast2").toast("show");
+						console.log(error);
 					}
 				});
 				

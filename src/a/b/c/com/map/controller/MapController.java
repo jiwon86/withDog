@@ -115,6 +115,7 @@ public class MapController {
 				   , CommonUtils.MAPTRADE_EN_CODE);
 		
 		boolean bool = fu.imgfileUploadSize(req);
+		boolean isfile = false;
 		ArrayList<String> aFileName = fu.getFileNames();
 		String tphoto = aFileName.get(0);
 		
@@ -124,7 +125,12 @@ public class MapController {
 		String tno = chabunService.getMapChabun().getTNO();
 		System.out.println("사진  : "+tphoto + bool );
 		
-		boolean isfile = !tphoto.isEmpty();
+		try {
+			isfile = !tphoto.isEmpty();
+		}catch(Exception e) {
+			isfile = false;
+		}
+		
 		System.out.println("파일이 존재 :: "+ isfile);
 		
 		mvo.setTNO(tno);

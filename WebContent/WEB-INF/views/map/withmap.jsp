@@ -130,9 +130,10 @@ $(document).ready(function(){
 			}); // end of ajax()	
 	
 	$('#submit').click(function(){
-	 
+	
+	// Create an FormData object 
     const form = $('#popup')[0];  	    
-    // Create an FormData object          
+             
    
 
     let Lat = latlng.getLat();
@@ -259,6 +260,7 @@ const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
     }); 
 
 	marker.setMap(map);
+	markers.push(marker);
 	let title = document.getElementById("title").value;
 	
 	markerInfoSet (title,marker);

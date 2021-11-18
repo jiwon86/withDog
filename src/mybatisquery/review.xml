@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.review.dao.ReviewDAO">
+
+	<resultMap type="a.b.c.com.review.vo.ReviewVO" id="rvo">
+	
+		<result property="crnum" column="CRNUM"></result>
+		<result property="cnum" column="CNUM"></result>
+		<result property="nnum" column="NNUM"></result>
+		<result property="crscore" column="CRSCORE"></result>
+		<result property="crmemo" column="CRMEMO"></result>
+		<result property="cphoto" column="CPHOTO"></result>
+		<result property="crreport" column="CRREPORT"></result>
+	
+	</resultMap>
+
+	<insert id="insertReview" parameterType="ReviewVO">
+	
+	INSERT INTO WITH_REVIEW( 	CRNUM, 
+								CNUM, 
+								NNUM,
+	                          	CRSCORE, 
+	                          	CRMEMO, 
+	                          	CPHOTO,
+	                          	CRREPORT, 
+	                          	INSERTDATE, 
+	                          	UPDATEDATE,
+	                          	DELYN) 
+	                          	
+	                  VALUES( 	#{crnum, jdbcType=VARCHAR}, 
+	                  			#{cnum, jdbcType=VARCHAR}, 
+	                  			#{nnum, jdbcType=VARCHAR},
+	                          	#{crscore, jdbcType=VARCHAR}, 
+	                          	#{crmemo, jdbcType=VARCHAR}, 
+	                          	#{cphoto, jdbcType=VARCHAR},
+	                          	#{crreport, jdbcType=VARCHAR}, 
+	                          	SYSDATE, 
+	                          	SYSDATE,
+	                          	'Y')
+	                          	
+	</insert>
+	
+	<select id="selectAllReview" parameterType="ReviewVO" resultType="reviewVO">
+		SELECT A.CRNUM		CRNUM
+			  ,A.CNUM		CNUM
+			  ,A.NNUM		NNUM
+			  ,A.CRSCORE	CRSCORE
+			  ,A.CRMEMO		CRMEMO
+			  ,A.CPHOTO		CPHOTO
+			  ,A.CRREPORT	CRREPORT
+			  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+	       	  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE	
+	    FROM 	WITH_REVIEW A
+		WHERE 	A.DELYN = 'Y'    
+	</select>
+
+</mapper>

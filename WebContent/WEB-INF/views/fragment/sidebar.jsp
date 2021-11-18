@@ -21,7 +21,12 @@
                         <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">내돌봄현황</a>
                     </nav>
-                </div>       
+                </div>   
+                
+                 <a class="nav-link" href="reviewInsertForm.wd">
+                    <div class="nav-link-icon"><i data-feather="map-pin"></i></div>
+                    <span class="hahmlet">돌봄후기</span>
+                </a>    
                 
                 <div class="sidenav-menu-heading nanum">보조기능</div>
                 <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCustomerCenter" aria-expanded="false" aria-controls="collapseCustomerCenter">

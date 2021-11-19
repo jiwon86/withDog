@@ -108,6 +108,19 @@ public class MemberController {
 		return "member/profile";
 	}
 	
+	// 관리자페이지에서 상세보기로 넘기는곳
+	@RequestMapping("/adminpro")
+	public String profile2(HttpServletRequest req, Model model) {
+		logger.info("MemberController.profile2() 함수 진입");
+		String mid = req.getParameter("mid");
+		logger.info("member 아이디 >>> : " + mid);
+		
+		Member member = memberService.memberSelect(mid);
+		model.addAttribute("member", member);
+
+		return "member/profile";
+	}
+	
 	@PostMapping("/memberUpdate")
 	@ResponseBody
 	public String memberUpdate(HttpServletRequest req) {
@@ -258,6 +271,7 @@ public class MemberController {
 			String msg="";
 			if(list.size() == 0) {
 				msg = "ID_YES";
+				
 			}else {
 				msg = "ID_NO";
 			}

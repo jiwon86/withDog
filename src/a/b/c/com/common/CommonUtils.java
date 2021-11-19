@@ -1,11 +1,9 @@
 package a.b.c.com.common;
 
 public abstract class CommonUtils {
+
+	public static final String WorkSpace = "el_withdog_work";
 	// 박상혁 : withdog_work
-	
-	
-	public static final String WorkSpace = "withdog_work";
-	
 	
 	// 이미지 업로드
 	public static final String BOARD_IMG_UPLOAD_PATH 
@@ -27,7 +25,7 @@ public abstract class CommonUtils {
 	
 	// 한태준 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH1
-	= "C:\\00.KOSMO93\\30.Web\\el_withdog_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
+	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\member";
 	public static final int MEMBER_IMG_FILE_SIZE1 = 2*1024*1024;
 	public static final String MEMBER_EN_CODE1="UTF-8";
 

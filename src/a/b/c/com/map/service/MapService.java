@@ -8,4 +8,5 @@ public interface MapService {
 
 	public List<MapTradeVO> setMarkers (MapTradeVO mvo);
 	public int mapTradeInsert(MapTradeVO mvo);
+	public MapTradeVO selectMarker(String tno);
 }

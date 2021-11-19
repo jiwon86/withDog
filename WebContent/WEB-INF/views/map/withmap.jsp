@@ -24,7 +24,7 @@
 		<div id="layoutSidenav_content">
 
 			<!-- ** 주요 내용 **  -->
-			
+			<main>
 				<div id="map" class="map"></div>
 
 				<script type="text/javascript"
@@ -116,18 +116,10 @@ overlaybox.classList.add("hidden");
 //----------------------------------------------------------------------------------
 $(document).ready(function(){
 	
-	//MARKER DB -> JSON 최신화
-	$.ajax({			
-				url : 'setmarkers.wd',		
-				type : 'get',			
-				data : {},
-				success: function (data){
-					console.log("json data 동기화 ");
-					setTimeout(function() {markersLoad();}, 500); // 0.5초 뒤에 함수를 실행 시킴
-					getlocation();
-				}
-				,error: function (error){ alert("에러"); }
-			}); // end of ajax()	
+	// json 최신화
+	markersjson(1);
+	// 위치 불러오기
+	getlocation();
 	
 	$('#submit').click(function(){
 	
@@ -164,6 +156,24 @@ $(document).ready(function(){
 		}); // end of ajax()
 	});
 });
+
+
+function markersjson (x) {
+	//MARKER DB -> JSON 최신화
+	// x = 1 처음 실행
+	// x = 2 인서트 후 실행
+	$.ajax({			
+				url : 'setmarkers.wd',		
+				type : 'get',			
+				data : {},
+				success: function (data){
+					console.log("json data 동기화 ");
+					setTimeout(function() {markersLoad(x);}, 500); // 0.5초 뒤에 함수를 실행 시킴
+				}
+				,error: function (error){ alert("에러"); }
+			}); // end of ajax()	
+}
+
 
 function getlocation () {
 //HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -246,24 +256,7 @@ setpopMarkers(map);
 let markcount =  markers.length - 1;
 wmark.setMap(null);
 
-let Lat = latlng.getLat();
-let Lng = latlng.getLng();
-
-const markLocation = new kakao.maps.LatLng(Lat, Lng);
-// Set Marker
-const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-    
- // 지도를 클릭한 위치에 표출할 마커입니다
-	let marker = new kakao.maps.Marker({ 
-    	position : markLocation,
-    	image : markerImage
-    }); 
-
-	marker.setMap(map);
-	markers.push(marker);
-	let title = document.getElementById("title").value;
-	
-	markerInfoSet (title,marker);
+markersjson(2);
 
 	$('#popup')[0].reset();
 
@@ -277,7 +270,7 @@ pbutt_cancel.addEventListener("click" ,hidePopup);
 
 				
 //------------------------------------------------------------------------------------		
-function markersLoad() {
+function markersLoad(x) {
 	const url = "mapdata.json";
 		$.ajax({			
 					url : url		
@@ -286,14 +279,22 @@ function markersLoad() {
 					,success: function (data){
 					    	
 					   	const jsonData = data;
+					   	let i;
 					    let size = jsonData.length;
-					    let i;
+					    if (x == 1){
+					    	i = 0;
+					    } else {
+					    	i = size-1;
+					    }
+					    
 					    console.log(jsonData);
    
-					    for (i=0; size > i; i++ ){
+					    for (i; size > i; i++ ){
+					    	const tno = jsonData[i].tno;
 					    	const title = jsonData[i].title;
 					    	const photo = jsonData[i].photo;
 					    	const price = jsonData[i].price;
+					    	const writer = jsonData[i].writer;
 							const markLocation = new kakao.maps.LatLng(jsonData[i].lat, jsonData[i].lng);
 							// Set Marker
 							const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
@@ -309,7 +310,7 @@ function markersLoad() {
 							// Marker를 배열에 추가
 							markers.push(marker);
 							//
-							markerInfoSet(title,marker,photo,markLocation,price);
+							markerInfoSet(title,marker,photo,markLocation,price,tno,writer);
 					        }
 					
 
@@ -320,15 +321,17 @@ function markersLoad() {
 				});
 	}
 
-function markerInfoSet (title,marker,photo,markLocation,price) {
+function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 	
 	let makerInfo;
 	
+	// 마커에 마우스 오버 이벤트 추가
 	kakao.maps.event.addListener(marker, 'mouseover', function() {
 		var iwContent = '<div class="tradeinfo" style="padding:5px;">'
 						+ '<img class="dogimg" src=/img/map/' + photo +'>'
 						+ '<div class="tradeinfo_2">'
 						+ '<ul><li>'+ title + '</li>'
+						+ '<li>작성자 : '+ writer + '</li>'
 						+'<li>' + price + '</li></ul></div>'
 						+'</div>'; 
 
@@ -338,7 +341,7 @@ function markerInfoSet (title,marker,photo,markLocation,price) {
 		    content: iwContent,
 		    xAnchor: 0.45,
 		    yAnchor : 1.35
-	});	
+	});	// end of event : mouseover
 
 	makerInfo.setMap(map);	
 	//makerInfo.open(map, marker);
@@ -347,10 +350,20 @@ function markerInfoSet (title,marker,photo,markLocation,price) {
 	
 	// 마커에 마우스아웃 이벤트를 등록합니다
 	kakao.maps.event.addListener(marker, 'mouseout', function() {
-		// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+		// 마커에 마우스아웃 이벤트가 발생하면 커스텀 오버레이 제거
 		console.log("out");
 		makerInfo.setMap(null);
-		});
+		}); // end of event : mouseout
+		
+	
+	// 마커에 클릭 이벤트를 등록합니다
+	kakao.maps.event.addListener(marker, 'click', function() {
+		// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+		console.log(tno);
+		location.href="/selectmarker.wd?tno=" + tno;
+	}); // end of event : click
+		
+	
 }
 
 // ------------------------------------------------------------------------------------
@@ -418,9 +431,8 @@ function markerInfoSet (title,marker,photo,markLocation,price) {
 
 
 				
-				</script>
-			
-
+				</script>			
+		</main>
 
 		<!-- 바닥글 -->
 		<jsp:include page="/footer.wd" />

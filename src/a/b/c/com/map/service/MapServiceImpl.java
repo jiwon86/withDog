@@ -38,4 +38,13 @@ public class MapServiceImpl implements MapService{
 		return mapDAO.mapTradeInsert(mvo);
 	}
 
+	@Override
+	public MapTradeVO selectMarker(String tno) {
+		// TODO Auto-generated method stub
+		logger.info("MapServiceImpl selectMarker()");
+		return mapDAO.selectMarker(tno);
+	}
+	
+	
+
 }

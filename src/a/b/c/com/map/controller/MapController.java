@@ -14,9 +14,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
@@ -49,6 +51,25 @@ public class MapController {
 		
 		//logger.info("member 아이디 >>> : " + mid);
 		return "map/withmap";
+	}
+	
+	@RequestMapping("/selectmarker")
+	public String selectmarker(MapTradeVO mvo,Principal principal, HttpServletRequest req, Model model) {
+		logger.info("MapController.selectmarker() ");
+		
+		String tno = req.getParameter("tno");
+		mvo = mapService.selectMarker(tno);
+		
+		System.out.println(mvo.getTTITLE());
+		model.addAttribute("mvo" ,mvo);
+		
+		
+		try {
+			String mid = principal.getName();
+		}catch (Exception e) {
+			return "member/loginForm";
+		}
+		return "map/selectmarker";
 	}
 	
 	@RequestMapping("/setmarkers")
@@ -122,7 +143,8 @@ public class MapController {
 		String writer = principal.getName();
 
 		MapTradeVO mvo = new MapTradeVO();
-		String tno = chabunService.getMapChabun().getTNO();
+		String tno = ChabunUtil.getMapTradeChabun("a", chabunService.getMapChabun().getTNO());
+		
 		System.out.println("사진  : "+tphoto + bool );
 		
 		try {

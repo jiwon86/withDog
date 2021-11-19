@@ -22,7 +22,29 @@
 	FROM TRADEMAP A
 	
 	WHERE 	A.DELETEYN = 'Y' 	
-	ORDER BY 1 DESC  
+	ORDER BY 1 ASC  
+</select>
+
+
+<select id="selectMarker" parameterType="MapTradeVO" resultType="MapTradeVO">	
+	SELECT
+	    A.TNO       TNO
+	    ,A.TTITLE   TTITLE   
+	    ,A.TCONTENT TCONTENT
+	    ,A.TWRITER  TWRITER
+	    ,A.TPRICE   TPRICE 
+	    ,A.TPHOTO   TPHOTO 
+	    ,A.TLAT     TLAT 
+	    ,A.TLNG     TLNG 
+	    ,A.MNO      MNO 
+	    ,A.DELETEYN DELETEYN
+	    ,A.INSERTDATE INSERTDATE
+	    ,A.UPDATEDATE UPDATEDATE
+	    
+	FROM TRADEMAP A
+	
+	WHERE 	A.DELETEYN = 'Y'
+	AND A.TNO = #{TNO, jdbcType=VARCHAR} 
 </select>
 
 <insert id="mapTradeInsert" parameterType="MapTradeVO">

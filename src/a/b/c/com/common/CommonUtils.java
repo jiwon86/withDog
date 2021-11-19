@@ -1,8 +1,10 @@
 package a.b.c.com.common;
 
 public abstract class CommonUtils {
-
-	public static final String WorkSpace = "pr_work";
+	// 박상혁 : withdog_work
+	
+	
+	public static final String WorkSpace = "withdog_work";
 	
 	
 	// 이미지 업로드

@@ -51,7 +51,8 @@
                                 </div>
                             </div>
                         </div>
-                       <a href="noticeUpdate.wd"><button class="btn btn-primary me-2 my-1" type="button" style="float:right">공지사항 수정</button></a>
+                        <a href="noticeSelectAll.wd"><button class="btn btn-danger me-2 my-1" type="button" style="float:right" >공지사항 삭제</button></a>
+                        <a href="noticeUpdate.wd"><button class="btn btn-primary me-2 my-1" type="button" style="float:right">공지사항 수정</button></a>
                     </header>
                     <!-- Main page content-->
                     <div class="container-fluid px-4">

@@ -51,37 +51,29 @@
                                 </div>
                             </div>
                         </div>
+                       <a href="noticeSelectAll.wd"><button class="btn btn-primary me-2 my-1" type="button" style="float:right">공지사항 작성완료</button></a>
                     </header>
                     <!-- Main page content-->
                     <div class="container-fluid px-4">
                         <div class="row gx-4">
                             <div class="col-lg-8">
-                               <div class="card mb-4">
-                                    <div class="card-header" style="height:40px;line-height:15px;">공지사항 제목</div>
+                               <div class="card mb-4" style="width:900px;">
+                                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">공지사항 제목</div>
+                                    <div class="card-body" style="width:900px;"><input class="form-control" id="postTitleInput" type="text" placeholder="" value=""  style="height:10px;"/></div>
+                                </div>
+                                                         
+                               <div class="card mb-4" style="width:900px;">
+                                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">작성자</div>
                                     <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="" value=""  style="height:10px;"/></div>
                                 </div>
                                 
-                               <div class="card mb-4">
-                                    <div class="card-header" style="height:40px;line-height:15px;">작성자</div>
-                                    <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="" value=""  style="height:10px;"/></div>
-                                </div>
-                                
-                                <div class="card card-header-actions mb-4">
-                                    <div class="card-header">
-                                     	   공지사항 내용
-                                        
-                                    </div>
+                                <div class="card card-header-actions mb-4" style="width:900px;">
+                                    <div class="card-header">공지사항 내용</div>
                                     <div class="card-body"><textarea class="lh-base form-control" type="text" placeholder="" rows="4" style="height:500px;"></textarea></div>
                                 </div>
-                                
                             </div>
                             <div class="col-lg-4">
-                               
-                                    <div class="card-body">
-                                      
-                                     </div>
-                                    
-                               
+                                    <div class="card-body"></div>
                             </div>
                         </div>
                     </div>

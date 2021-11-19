@@ -1,3 +1,4 @@
+
 package a.b.c.com.pet.controller;
 
 import java.util.List;
@@ -70,7 +71,7 @@ public class PetController {
 		//채번 구하기
 		//String pno = "P202111170002";
 		
-		String pno = ChabunUtil.getBoardChabun("P", chabunService.getPetChabun().getPnum());
+		//String pno = ChabunUtil.getBoardChabun("P", chabunService.getPetChabun().getPnum());
 		
 		//이미지 업로드
 		FileUploadUtil fu = new FileUploadUtil(CommonUtils.MEMBER_IMG_UPLOAD_PATH, CommonUtils.MEMBER_IMG_FILE_SIZE, CommonUtils.NOTICE_EN_CODE);

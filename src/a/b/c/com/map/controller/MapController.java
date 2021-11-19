@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
+import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.map.service.MapService;
 import a.b.c.com.map.vo.MapTradeVO;
 
@@ -29,10 +30,12 @@ public class MapController {
 	// Log Set
 	private Logger logger = Logger.getLogger(MapController.class);
 	private MapService mapService;
+	private ChabunService chabunService;
 	
 	@Autowired(required=false)	
-	public MapController (MapService mapService) {
+	public MapController (MapService mapService ,ChabunService chabunService) {
 		this.mapService = mapService;
+		this.chabunService = chabunService;
 	}
 	
 	@RequestMapping("/withmap")
@@ -117,7 +120,9 @@ public class MapController {
 		String writer = principal.getName();
 
 		MapTradeVO mvo = new MapTradeVO();
-		mvo.setTNO("4");
+		String tno = chabunService.getMapChabun().getTNO();
+		System.out.println(tno);
+		mvo.setTNO(tno);
 		mvo.setTTITLE(fu.getParameter("title"));
 		mvo.setTCONTENT(fu.getParameter("content"));
 		mvo.setTWRITER(writer);

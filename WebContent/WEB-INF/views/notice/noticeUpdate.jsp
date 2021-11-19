@@ -39,7 +39,7 @@
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="file-text"></i></div>
-                                            	공지사항 작성
+                                            	공지사항 수정
                                         </h1>
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
@@ -77,9 +77,10 @@
                             </div>
                             <div class="col-lg-4">
                                
-                                    <div class="card-body">
-                                      
-                                     </div>
+                                   <div class="card-body">
+                                        <a href="noticeSelectAll.wd"><div class="d-grid mb-3"><button class="fw-500 btn btn-primary-soft text-primary">취소</button></div></a>
+                                        <a href="noticeSelectAll.wd"><div class="d-grid"><button class="fw-500 btn btn-primary">수정 완료</button></div></a>
+                                    </div>
                                     
                                
                             </div>

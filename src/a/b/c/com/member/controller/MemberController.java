@@ -74,7 +74,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/header")
-	public String header() {
+	public String header(Principal principal, Model model) {
+		
+		if(principal != null) {
+			String mid = principal.getName();
+			
+			Member member = memberService.memberSelect(mid);
+			model.addAttribute("member", member);
+		}
+		
 		return "fragment/header";		
 	}
 	

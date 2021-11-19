@@ -5,7 +5,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
+
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
@@ -13,6 +16,13 @@ public class ChabunDAOImpl implements ChabunDAO {
 
 	@Autowired(required=false)
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public MapTradeVO getMapChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunDAOImpl.getMapChabun()");
+		return sqlSession.selectOne("getMapChabun");
+	}
 	
 	
 //	@Override

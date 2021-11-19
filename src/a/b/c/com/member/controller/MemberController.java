@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.service.MemberService;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberAuth;
 
 @Controller
 public class MemberController {
@@ -98,6 +100,19 @@ public class MemberController {
 		return "member/profile";
 	}
 	
+	// 관리자페이지에서 상세보기로 넘기는곳
+	@RequestMapping("/profile2")
+	public String profile(HttpServletRequest req, Model model) {
+		logger.info("MemberController.profile() 함수 진입");
+		String mid = req.getParameter("mid");
+		logger.info("member 아이디 >>> : " + mid);
+		
+		Member member = memberService.memberSelect(mid);
+		model.addAttribute("member", member);
+
+		return "member/profile";
+	}
+	
 	@PostMapping("/memberUpdate")
 	@ResponseBody
 	public String memberUpdate(HttpServletRequest req) {
@@ -137,6 +152,7 @@ public class MemberController {
 		
 		return "실패";
 	}
+
 	//----------------------------------------------------------------태준-------------------------------------------------------------------//
 	
 	// 회원가입 폼으로 이동
@@ -167,9 +183,9 @@ public class MemberController {
 			String mno = ChabunUtil.getMemChabun("D",chabunService.getMemChabun().getMno());
 			logger.info("MemberController memInsert() 함수 진입");
 			
-			FileUploadUtil fu = new FileUploadUtil( CommonUtils.MEMBER_IMG_UPLOAD_PATH1
-												   ,CommonUtils.MEMBER_IMG_FILE_SIZE1
-												   ,CommonUtils.MEMBER_EN_CODE1);
+			FileUploadUtil fu = new FileUploadUtil( CommonUtils.MEMBER_IMG_UPLOAD_PATH
+												   ,CommonUtils.MEMBER_IMG_FILE_SIZE
+												   ,CommonUtils.MEMBER_EN_CODE);
 			
 			boolean bool = fu.imgfileUploadSize(req);
 			
@@ -190,7 +206,7 @@ public class MemberController {
 			
 			String mroadaddress = fu.getParameter("mroadaddress");
 			String detailroad = fu.getParameter("detailroad");
-			mroadaddress = mroadaddress.concat("@").concat(detailroad);
+			mroadaddress = mroadaddress.concat("-").concat(detailroad);
 			
 			Member member = null;
 			member = new Member();
@@ -222,12 +238,16 @@ public class MemberController {
 			
 			int nCnt = memberService.memberInsert(member);
 			
-			if(nCnt > 0 ) {return "member/loginForm";}
-			
-			else {
+			if(nCnt > 0 ) {
+				MemberAuth memberAuth = new MemberAuth();
 				
-			return "member/register";
-			
+				memberAuth.setMno(mno);
+				
+				int result = memberService.memberAuthInsert(memberAuth);
+				
+				return "member/loginForm";
+			} else {
+				return "member/register";
 			}
 		}
 		// 회원 아이디 체크 하는 방법

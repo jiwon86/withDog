@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.member.dao.MemberDAO;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberAuth;
 
 @Service
 @Transactional
@@ -42,18 +43,17 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberServiceImpl.memberInsert() 함수 진입");
 		return (Integer)memberDAO.memberInsert(mvo);
 	}
-	//로그인 체크
-	@Override
-	public List<Member> loginCheck(Member mvo){
-		logger.info("MemberServiceImpl.log9inCheck() 함수 진입");
-		return memberDAO.loginCheck(mvo);
-	}
-
 	// 중복 체크하기
 	@Override
 	public List<Member> memberIdCheck(Member mvo){
-		logger.info("MemberServiceImpl memberIdCheck() 함수 진입");
+		logger.info("MemberServiceImpl.memberIdCheck() 함수 진입");
 		return memberDAO.memberIdCheck(mvo);
+	}
+
+	@Override
+	public int memberAuthInsert(MemberAuth memberAuth) {
+		logger.info("MemberServiceImpl.memberAuthInsert() 함수 진입");
+		return memberDAO.memberAuthInsert(memberAuth);
 	}
 
 }

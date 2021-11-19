@@ -77,6 +77,8 @@
                                             <sec:csrfInput/>
                                         </form>
                                     </div>
+                                    <div class="card-footer text-center">
+                                        <div class="small"><a href="register.wd">Need an account? Sign up!</a></div>
                                     <hr class="my-0" />
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">

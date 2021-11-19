@@ -2,132 +2,154 @@
 <%@page import="a.b.c.com.pet.vo.PetVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+	jsp:include : 내 서버내의 jsp파일만 가능
+	c:import : 외부 jsp 파일 접근 가능
+--%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	 
-	
-	
-	$(document).ready(function(){	
+<html lang="ko">
+	<!-- 헤드 -->
+	<jsp:include page="/head.wd" />
+	<head>
+		<!-- 제이쿼리  -->
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		
-		// pnoCheck 체크박스 체크 확인하기
-		$(document).on("click", "#pno", function(){
-			//alert("chkInSbnum >>> : ");		
-			if($(this).prop('checked')){			 
-				//$('input[type="checkbox"][name="sbnum"]').prop('checked',false);
-				$('.pno').prop('checked',false);
-				$(this).prop('checked',true);
-			}
-		});
-		
-		//  I
-		$(document).on("click", "#I", function(){
-			location.href="smemForm.bdm";
-		});
-		
-		// SALL
-		$(document).on("click", "#SALL", function(){
-			console.log("눌러짐 테스트 >>>>");
-			$("#petSelectAllForm").attr({"method":"GET", "action":"petSelectAll.bdm"}).submit();		
-		});
+		<!-- 자바스크립트 -->
+		<script type="text/javascript">
+		$(document).ready(function(){	
+			
+			$(document).on("click", "#pno", function(){
 				
-		//  U
-		$(document).on("click", "#U", function(){	
-			if ($('.pno:checked').length == 0){
-				alert("수정할 글번호 하나를 선택하세요!!");
-				return;
-			}
-			$("#petSelectAllForm").attr({ "method":"GET","action":"smemSelect.bdm"}).submit();
+				if($(this).prop('click')){			 
+					$('.pno').prop('click',false);
+					$(this).prop('click',true);
+				}
+			});
+			
+			$(document).on("click", "#select", function(){	
+				alert('댕댕이 번호 >>> '+pno)
+				$("#petSelectAllForm").attr({ "method":"GET","action":"petSelect.wd"}).submit();
+			});
+			
+			$(document).on("click", "#insert", function(){	
+				
+				$("#petSelectAllForm").attr({ "method":"GET","action":"petInsertForm.wd"}).submit();
+			});
 		});
-		//  D
-		$(document).on("click", "#D", function(){	
-			if ($('.pno:checked').length == 0){
-				alert("삭제할 글번호 하나를 선택하세요!!");
-				return;
-			}
-			$("#petSelectAllForm").attr({ "method":"GET", "action":"smemSelect.bdm"}).submit();
-		});
-	});
+		</script>
+	</head>
+	<!-- /헤드 -->
 
-</script>	
+    <body class="nav-fixed">
+		
+		<!-- 헤더 -->
+		<jsp:include page="/header.wd" />
+		<!-- /헤더 -->
 
-</head>
-<body>
-<h3>TEST PAGE</h3>
-<h3>나의 댕댕이 입장 성공</h3>
-<h3>나의 댕댕이 리스트 조회</h3>
-<input type="button" value="등록" id="I">
-<input type="button" value="조회" id="SALL">
-<input type="button" value="수정" id="U">
-<input type="button" value="삭제" id="D">
-<%
-request.setCharacterEncoding("UTF-8");
+		
+        <div id="layoutSidenav">
+			<!-- 사이드바 -->
+			<jsp:include page="/sidebar.wd" />
+			<!-- /사이드바 -->
 
-Object obj = request.getAttribute("listAll");
-if (obj == null) return;
-
-ArrayList<PetVO> aList =(ArrayList<PetVO>)obj;
-int nCnt = aList.size();
-out.println(":::: 전체 조회 건수  " + nCnt + " 건");	
-%>
-
-
-<form name ="petSelectAllForm" id="petSelectAllForm">
-<table border = "1">
-<thead>
-<tr>
-	<td class="tt"><input type="checkbox" name="chkAll" id="chkAll"></td>
-	<td class="tt">순번</td>
-	<td class="tt">반려견번호</td>
-	<td class="tt">이름</td>
-	<td class="tt">종</td>
-	<td class="tt">성별</td>
-	<td class="tt">중성화여부</td>
-	<td class="tt">몸무게</td>
-	<td class="tt">병원</td>
-	<td class="tt">참조사항</td>
-	<td class="tt">생년월일</td>
-	<td class="tt">회원번호</td>	
-</tr>
-</thead>
-<%
-for(int i=0; i<nCnt; i++){
-	PetVO pvo = aList.get(i);
-
-%>
-<tbody>
-	<tr>
-		<td class="tt">
-		<input type="checkbox" id="pnum" name="pnum" class="pnum" value=<%= pvo.getPno() %> >
-	</td>		
-	<td class="tt"><%=i+1%></td>
-	<td class="tt"><%=pvo.getPno()%></td>
-	<td class="tt"><%=pvo.getPname()%></td>
-	<td class="tt"><%=pvo.getPtype()%></td>
-	<td class="tt"><%=pvo.getPneutral()%></td>
-	<td class="tt"><%=pvo.getPgender()%></td>
-	<td class="tt"><%=pvo.getPweight()%></td>
-	<td class="tt"><%=pvo.getPhospital()%></td>
-	<td class="tt"><%=pvo.getPmemo()%></td>
-	<td class="tt"><%=pvo.getPages()%></td>
-	<td class="tt"><%=pvo.getPphoto()%></td>
-	<td class="tt"><%=pvo.getMno()%></td>
-	</tr>
-	<% } %>
-	<tr>
-	<td colspan="20" align="right">				
-		<input type="button" value="등록" id="I">
-		<input type="button" value="조회" id="SALL">
-		<input type="button" value="수정" id="U">
-		<input type="button" value="삭제" id="D">									
-	</td>
-</tr>
-</tbody>
-</table>
-</form>
-</body>
+			<!-- 콘텐츠 -->
+            <div id="layoutSidenav_content">
+            	 <main>
+                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                        <div class="container-xl px-4">
+                            <div class="page-header-content">
+                                <div class="row align-items-center justify-content-between pt-3">
+                                    <div class="col-auto mb-3">
+                                        <h1 class="page-header-title">
+                                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                                                                                  내 프로필
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Main page content-->
+                    <div class="container-xl px-4 mt-4">
+                        <!-- Account page navigation-->
+                        <nav class="nav nav-borders">
+                            <a class="nav-link" href="account-profile.html">Profile</a>
+                            <a class="nav-link active ms-0" href="myPetList.wd">MyPet</a>
+                            <a class="nav-link" href="account-security.html">Security</a>
+                            <a class="nav-link" href="account-notifications.html">Notifications</a>
+                        </nav>
+                        <hr class="mt-0 mb-4" />
+            	<%
+						Object obj = request.getAttribute("listAll");
+						System.out.println("obj >>>>>" + obj);
+						if (obj == null) return;
+						
+						ArrayList<PetVO> aList = (ArrayList<PetVO>)obj;
+						
+						int nCnt = aList.size();
+						out.println("등록된 반려동물 수 :  "+nCnt);
+					%>
+					
+					<form name="petSelectAllForm" id="petSelectAllForm">
+					<button class="btn btn-primary" type="button" name="insert" id ="insert">추가하기</button>
+					<table>
+						<%
+						for(int i=0; i<nCnt; i++){
+							PetVO pvo = aList.get(i);
+						%>
+						 
+						<tr>
+							<div class="card">
+								<input type="hidden" id = "pno" name="pno" class="pno" value=<%=pvo.getPno() %>>
+								<img id="select" name="select" class="card-img-top" src="<%=pvo.getPphoto() %>" alt="사진준비중">
+								<div class="card-body">
+									<h5 class="card-title"><%=pvo.getPname() %></h5>
+									<p class="card-text">
+										<%=pvo.getPages() %>살<br>
+										<%=pvo.getPtype() %><br>
+										<%=pvo.getPweight() %>kg
+										
+									</p>
+								</div>
+							</div>
+							</td>
+						</tr>
+						
+						
+						<% } %>
+					</table>
+				</form> 
+				</main>
+				
+				<!--  
+					===================================
+					<main> 내용 </main> 부분을 복사해서 
+					TEST
+					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
+					===================================
+				--> 
+				<!-- ** 주요 내용 **  -->
+				<!-- 
+				<div class="card">
+					<img class="card-img-top" src="" alt="사진준비중">
+					<div class="card-body">
+						<h5 class="card-title">Test card</h5>
+						<p class="card-text">
+						</p>
+					</div>
+				</div>
+				 -->
+				
+				<!-- ** /주요 내용 ** -->
+				
+				<!-- 바닥글 -->
+				<jsp:include page="/footer.wd" />
+                <!-- /바닥글 -->
+                
+            </div>
+			<!-- /콘텐츠 -->
+        </div>
+		
+    </body>
 </html>

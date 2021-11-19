@@ -1,3 +1,4 @@
+<%@page import="a.b.c.com.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -64,10 +65,21 @@
         <!-- User Dropdown-->
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
         	
+        	<%
+        		Member member = (Member)request.getAttribute("member");
+        	%>
+        	
         	<!-- 로그인 -->
         	<sec:authorize access="isAuthenticated()">
-	            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	            	<img class="img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png" />
+	            <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" 
+	               role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	            	<sec:authorize access="isAuthenticated()">
+		            	<% if(member.getMphoto() != null) { %>
+		            		<img class="img-fluid" style="width:100%; height:100%;" src="/img/member/<%=member.getMphoto()%>" />
+		            	<% } else { %>
+		            		<img class="img-fluid" style="width:100%; height:100%;" src="/img/member/default.jpg" />
+		            	<% } %>
+	            	</sec:authorize>
 	            </a>
 	        </sec:authorize>
             
@@ -79,14 +91,26 @@
             
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
-                    <img class="dropdown-user-img" src="/template/assets/img/illustrations/profiles/profile-1.png" />
+                
+                	<sec:authorize access="isAuthenticated()">
+	                	<% if(member.getMphoto() != null) { %>
+	                    	<img class="dropdown-user-img" src="/img/member/<%=member.getMphoto()%>" />
+	                    <% } else { %>
+	                    	<img class="dropdown-user-img" src="/img/member/default.jpg" />
+	                    <% } %>
+                    </sec:authorize>
+                    
                     <div class="dropdown-user-details">
                     	<sec:authorize access="isAuthenticated()">
 	                        <div class="dropdown-user-details-name">
-	                        	<sec:authentication property="principal.member.mname"/>
+	                        	<sec:authorize access="isAuthenticated()">
+	                        		<%=member.getMname()%>
+	                        	</sec:authorize>
 	                        </div>
 	                        <div class="dropdown-user-details-email">
-	                        	<sec:authentication property="principal.member.memail"/>
+	                        	<sec:authorize access="isAuthenticated()">
+	                        		<%=member.getMid()%>
+	                        	</sec:authorize>
 	                        </div>
                         </sec:authorize>
                     </div>

@@ -109,9 +109,9 @@ public class MemberController {
 	}
 	
 	// 관리자페이지에서 상세보기로 넘기는곳
-	@RequestMapping("/profile2")
-	public String profile(HttpServletRequest req, Model model) {
-		logger.info("MemberController.profile() 함수 진입");
+	@RequestMapping("/adminpro")
+	public String profile2(HttpServletRequest req, Model model) {
+		logger.info("MemberController.profile2() 함수 진입");
 		String mid = req.getParameter("mid");
 		logger.info("member 아이디 >>> : " + mid);
 		
@@ -214,7 +214,7 @@ public class MemberController {
 			
 			String mroadaddress = fu.getParameter("mroadaddress");
 			String detailroad = fu.getParameter("detailroad");
-			mroadaddress = mroadaddress.concat("-").concat(detailroad);
+			mroadaddress = mroadaddress.concat("@").concat(detailroad);
 			
 			Member member = null;
 			member = new Member();

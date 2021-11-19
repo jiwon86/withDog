@@ -49,6 +49,7 @@ public class AdminMemberController {
 		
 		
 	}
+	/*
 	@RequestMapping("AdminProfile")
 	public String AdminProfile(@ModelAttribute Member member, Model model, HttpServletRequest req) {
 		String mno = req.getParameter("mno");
@@ -72,21 +73,19 @@ public class AdminMemberController {
 		return "admin/AdminProfile";
 		}
 	}
+	*/
 	
 	@RequestMapping("AdminDelete")
 	public String AdminDelete(Member member, Model model) {
 		logger.info("AdminDelete 컨트롤러 함수 진입 >>> : ");
 		int nCnt = adminMemberService.AdminMemberDelete(member);
 		
-		if(nCnt >= 0) {
+		if(nCnt == 0) {
 			logger.info("AdminMemberDelete의 Delete 값 nCnt >>> : " + nCnt);
-			
-			return "admin/AdminMemberSelectAll";
+			return "admin/Delete";
 		}
-		else {
-			
-			return "admin/AdminMemberSelectAll";
-		}
+		logger.info("딜리트구문 if문 끝나는곳 >>> ");
+			return "admin/Delete";
 		
 	}
 	//"AdminProfile.wd"

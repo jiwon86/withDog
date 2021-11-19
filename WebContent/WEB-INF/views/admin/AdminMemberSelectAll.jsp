@@ -58,6 +58,7 @@
                     				
                 			int nCnt = listall.size();
                     		System.out.println("list.size() >>> :" + listall.size());
+                    		System.out.println();
                    		%>
                    
                     <script type="text/javascript">
@@ -111,11 +112,11 @@
                                             </td>
                                             <td><%=updatedate %></td>
                                             <td>
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="profile2.wd?mid=<%=mid %>"> <i data-feather="edit"></i></a>
+                                                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="adminpro.wd?mid=<%=mid %>"> <i data-feather="edit"></i></a>
                                                 
                                           
                                                 
-                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="AdminDelete.wd"><i data-feather="trash-2"></i></a>
+                                                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="AdminDelete.wd?mno=<%=mno %>"><i data-feather="trash-2"></i></a>
                                             </td>
                                         </tr>
                                         <%

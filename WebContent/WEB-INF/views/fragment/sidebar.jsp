@@ -28,12 +28,7 @@
                         <a class="nav-link hahmlet" href="dashboard-2.html">내돌봄현황</a>
                     </nav>
                 </div>   
-                
-                 <a class="nav-link" href="reviewInsertForm.wd">
-                    <div class="nav-link-icon"><i data-feather="map-pin"></i></div>
-                    <span class="hahmlet">돌봄후기</span>
-                </a>    
-                
+                 
                 <div class="sidenav-menu-heading nanum">보조기능</div>
                 <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCustomerCenter" aria-expanded="false" aria-controls="collapseCustomerCenter">
                     <div class="nav-link-icon"><i data-feather="headphones"></i></div>
@@ -42,7 +37,7 @@
                 </a>
                 <div class="collapse" id="collapseCustomerCenter" data-bs-parent="#accordionSidenavCustomerCenter">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
-                        <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
+                        <a class="nav-link hahmlet" href="reviewInsertForm.wd">돌봄후기</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
                     </nav>
                 </div>                     

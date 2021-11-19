@@ -1,5 +1,7 @@
 package a.b.c.com.review.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -9,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import a.b.c.com.common.ChabunUtil;
+import a.b.c.com.common.CommonUtils;
+import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.controller.MemberController;
 import a.b.c.com.review.service.ReviewService;
@@ -37,7 +42,16 @@ public class ReviewController {
 		
 		logger.info("reviewSelectAll() 함수진입 >>> : ");
 		
-		return "review/reviewSelectAll";
+		List<ReviewVO> listAll = reviewService.selectAllReview(rvo);
+		logger.info("ReviewController() listAll.size() >>> : " + listAll.size());
+		
+		if (listAll.size() > 0) {
+			
+			model.addAttribute("listAll", listAll);
+			return "review/reviewSelectAll";
+		}
+		
+		return "review/reviewInsertForm";
 	}
 	
 	// 게시판 글 입력 폼
@@ -46,17 +60,42 @@ public class ReviewController {
 		
 		logger.info("reviewInsertForm() 함수 진입 ");
 		
+		
 		return "review/reviewInsertForm";
 	}
 	
-	// 글쓰기
+	// 후기입력하기
 	@RequestMapping(value="reviewInsert", method=RequestMethod.POST)
 	public String reviewInsert (HttpServletRequest req) {
 		 
+		logger.info("reviewInsert() 함수 진입 >>> : ");
+		
+		// 후기번호 채번구하기
+		// String crnum = ChabunUtil.getBoardChabun("R", chabunService.getReviewChabun().get.Crnum)
+
+		// 돌봄신청번호 채번구하기
+		// String cnum = ChabunUtil.getBoardChabun("W", chabunService.getReviewChabun().get.Cnum)
+		
+		// 돌봄신청번호 채번구하기
+		// String nnum = ChabunUtil.getBoardChabun("C", chabunService.getReviewChabun().get.Nnum)
+		
+		// 이미지 업로드
+		/*
+		 * FileUploadUtil fu = new FileUploadUtil(CommonUtils.REVIEW_IMG_UPLOAD_PATH,
+		 * 										  CommonUtils.REVIEW_IMG_FILE_SIZE, 
+		 * 										  CommonUtils.REVIEW_EN_CODE);
+		 */
+		
+		// 이미지 파일 원본 사이즈
+		// 이미지 파일 원본 사이즈 크기 조절하기
+		/*
+		 * boolean bool = fu.imgfileUploadSize(req);
+		 * logger.info("ReviewController reviewInsert bool >>> " + _bool);
+		 */
+		
+		// 채번, 이미리 업로드 성공하면 VO세팅하기
 		ReviewVO _rvo = null;
 		_rvo = new ReviewVO();
-		
-		
 		
 		_rvo.setCrnum("crnum");
 		_rvo.setCnum("cnum");

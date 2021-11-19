@@ -32,16 +32,37 @@
 		  color:#fc0;
 		}
 		
-		.col-lg-8{width:100%;}
+		.col-lg-8{width:50%;}
 		
-		.btncontainer{margin:0 auto;border:1px solid red;}
+		
 		
 	</style>
+	
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+				$("#subbtn").click(function(){
+					
+					console.log("subbtn >>> : ");
+					
+					$("#ReviewInsertForm").attr({
+						"action":"reviewInsert.wd",
+						"method":"POST",
+						"enctype":"multipart/form-data"
+					}).submit();
+					
+				})
+		});
+		
+	</script>
 	<!-- 헤드 -->
 	<%@ include file="/WEB-INF/views/fragment/head.jsp" %>
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
+
+	
 
 		<!-- 헤더 -->
 		<%@ include file="/WEB-INF/views/fragment/header.jsp" %>
@@ -91,10 +112,10 @@
                         </div>
                     </header>
                     <!-- Main page content-->
-                    <form>
+                    <form id="ReviewInsertForm" name="ReviewInsertForm">
 	                    <div class="container-fluid px-4" >
 	                        <div class="row gx-4">
-	                            <div class="col-lg-8"  style="margin:0 auto;">
+	                            <div class="col-lg-8" >
 	                                <div class="card mb-4">
 	                                    <div class="card-header">평점</div>
 	                                    <div class="card-body">
@@ -113,11 +134,12 @@
 	                                    </div>
 	                                    <div class="card-header">후기내용</div>
 	                                    <div class="card-body">
-	                                    	<textarea class="lh-base form-control" type="text" placeholder="Enter your post preview text..." rows="4" ></textarea>
+	                                    	<textarea class="lh-base form-control" type="text" placeholder="Enter your post preview text..." rows="10" ></textarea>
 	                                    </div>
 	                                </div>
-	                                <div class="btncontainer">
-	                                	<button class="btn btn-primary me-2 my-1 col-lg-8" type="button" >작성완료</button>
+	                                <div>
+	                                	<button class="btn btn-primary" type="button" id="subbtn" name="subbtn" style="width:100%;">작성완료</button>
+                                		<a href="reviewSelectAll.wd"><button class="btn btn-primary mt-2" type="button" style="width:100%;">목록보기</button></a>
 	                                </div>
 	                            </div>
 	                        </div>

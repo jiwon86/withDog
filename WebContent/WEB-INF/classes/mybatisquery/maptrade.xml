@@ -14,7 +14,7 @@
 	    ,A.TPHOTO   TPHOTO 
 	    ,A.TLAT     TLAT 
 	    ,A.TLNG     TLNG 
-	    ,A.MNO      MNO 
+	    ,A.PROPOSE      PROPOSE 
 	    ,A.DELETEYN DELETEYN
 	    ,A.INSERTDATE INSERTDATE
 	    ,A.UPDATEDATE UPDATEDATE
@@ -36,7 +36,7 @@
 	    ,A.TPHOTO   TPHOTO 
 	    ,A.TLAT     TLAT 
 	    ,A.TLNG     TLNG 
-	    ,A.MNO      MNO 
+	    ,A.PROPOSE      PROPOSE 
 	    ,A.DELETEYN DELETEYN
 	    ,A.INSERTDATE INSERTDATE
 	    ,A.UPDATEDATE UPDATEDATE
@@ -45,6 +45,28 @@
 	
 	WHERE 	A.DELETEYN = 'Y'
 	AND A.TNO = #{TNO, jdbcType=VARCHAR} 
+</select>
+
+<select id="selectTrade" parameterType="MapTradeVO" resultType="MapTradeVO">	
+	SELECT
+	    A.TNO       TNO
+	    ,A.TTITLE   TTITLE   
+	    ,A.TCONTENT TCONTENT
+	    ,A.TWRITER  TWRITER
+	    ,A.TPRICE   TPRICE 
+	    ,A.TPHOTO   TPHOTO 
+	    ,A.TLAT     TLAT 
+	    ,A.TLNG     TLNG 
+	    ,A.PROPOSE      PROPOSE 
+	    ,A.DELETEYN DELETEYN
+	    ,A.INSERTDATE INSERTDATE
+	    ,A.UPDATEDATE UPDATEDATE
+	    
+	FROM TRADEMAP A
+	
+	WHERE 	A.DELETEYN = 'Y'
+	AND A.TWRITER = #{TWRITER, jdbcType=VARCHAR} 
+	OR  A.PROPOSE = #{TWRITER, jdbcType=VARCHAR} 
 </select>
 
 <insert id="mapTradeInsert" parameterType="MapTradeVO">
@@ -58,7 +80,7 @@
 		,TPHOTO
 		,TLAT
 		,TLNG
-		,MNO
+		,PROPOSE
 		, DELETEYN
 		, INSERTDATE
 		, UPDATEDATE
@@ -73,11 +95,19 @@
 		,#{TPHOTO, jdbcType=VARCHAR}  			<!-- placeholer 6 -->
 		,#{TLAT, jdbcType=VARCHAR} 				<!-- placeholer 7 -->
 		,#{TLNG, jdbcType=VARCHAR} 				<!-- placeholer 8 -->
-		,#{MNO, jdbcType=VARCHAR}  				<!-- placeholer 9 -->
+		,#{PROPOSE, jdbcType=VARCHAR}  				<!-- placeholer 9 -->
 		,'Y'  									<!-- placeholer 10 -->
 		,SYSDATE  								<!-- placeholer 11 -->
 		,SYSDATE 								<!-- placeholer 12 -->
 	        ) 
 </insert>
+
+<update id="mapTradeUpdate" parameterType="MapTradeVO">
+    UPDATE TRADEMAP
+	    SET
+	        PROPOSE = #{PROPOSE, jdbcType=VARCHAR} 
+	    WHERE DELETEYN = 'Y'
+   		AND TNO = #{TNO, jdbcType=VARCHAR} 
+</update>
 
 </mapper>

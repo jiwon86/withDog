@@ -11,19 +11,36 @@
 <html lang="ko">
 	<!-- 헤드 -->
 <head>
+<link rel="stylesheet" href="css/map/trade.css">
 <%
 	Object obj = request.getAttribute("mvo");
+	String loginid = (String)request.getAttribute("loginid");
 	if (obj == null) return;
-	
+	boolean myContent = false;
 	MapTradeVO mvo = (MapTradeVO)obj;
+	String writer = mvo.getTWRITER();
+	System.out.println("writer : " + writer + "id : " + loginid);
+	if (loginid.equals(writer)) {
+		myContent = true;
+	}
 	
 %>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 $(document).ready(function(){
 	$('#submit').click(function(){
-		
+		console.log("신청");
+		$("#aaa").attr({
+			"action":"/mapTradeUpdate.wd",
+			"method":"POST",
+			"enctype":"application/x-www-form-urlencoded"
+		}).submit();
 	});
+	
+	$('#waiting').click(function(){
+		alert("아직 신청 대기중 입니다!");
+	});
+	
 }); // end ready
 </script>
 </head>
@@ -54,7 +71,7 @@ $(document).ready(function(){
                                             <div class="page-header-icon"><i data-feather="github"></i></div>
                                             	돌봄 신청하기
                                         </h1>
-                                        <div class="page-header-subtitle">Use this blank page as a starting point for creating new pages inside your project!</div>
+                                        <div class="page-header-subtitle">ID : <%= mvo.getTWRITER() %></div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">WITH DOG</div>
                                 </div>
@@ -66,8 +83,27 @@ $(document).ready(function(){
                     <div class="container-xl px-4 mt-n10">
                         <div class="card">
                             <div class="card-header"><%= mvo.getTTITLE()%></div>
-                            <div class="card-body"><%= mvo.getTCONTENT() %><br>
-                            <button class="btn btn-success" id="submit" type="button">신청하기</button>
+                            <div class="card-body">
+	                            
+	                            	<img src="/img/map/<%=mvo.getTPHOTO() %>" class="dogimg">
+	                            
+	                            	<ul class="list">돌봄 상세 사항
+	                            		<li class="textcon"><textarea class="form-control" rows="3" disabled><%= mvo.getTCONTENT() %></textarea></li>
+	                            		<li>돌봄 기간  : </li>
+	                            		<li><img src="/image/map/coin.png" class="icons"> <%= mvo.getTPRICE() %></li>
+	                            		<li><img src="/image/map/doghouse.png" class="icons"> 주소</li>
+	                            	</ul>
+	                            	
+	                            
+	                        	<% if(myContent == false) { %>
+	                           		<button class="btn btn-success" id="submit" type="button">신청하기</button>
+                           		<% }else { %>
+                           			<button class="btn btn-warning" id="waiting" type="button">돌봄이<br>구하는 중...</button>
+                           		<% } %>
+                           		
+                            <form id="aaa">
+                            	<input type="hidden" value=<%=mvo.getTNO() %> name="TNO">
+                            </form>
                             
                             </div>
                         </div>

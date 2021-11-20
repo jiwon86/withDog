@@ -7,6 +7,8 @@ import a.b.c.com.map.vo.MapTradeVO;
 public interface MapService {
 
 	public List<MapTradeVO> setMarkers (MapTradeVO mvo);
+	public List<MapTradeVO> selectTrade (MapTradeVO mvo);
 	public int mapTradeInsert(MapTradeVO mvo);
+	public int mapTradeUpdate(MapTradeVO mvo);
 	public MapTradeVO selectMarker(String tno);
 }

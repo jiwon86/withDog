@@ -37,12 +37,26 @@ public class MapServiceImpl implements MapService{
 		logger.info("MapServiceImpl mapTradeInsert()");
 		return mapDAO.mapTradeInsert(mvo);
 	}
+	
+	@Override
+	public int mapTradeUpdate(MapTradeVO mvo) {
+		// TODO Auto-generated method stub
+		logger.info("MapServiceImpl.mapTradeUpdate()");
+		return mapDAO.mapTradeUpdate(mvo);
+	}
 
 	@Override
 	public MapTradeVO selectMarker(String tno) {
 		// TODO Auto-generated method stub
 		logger.info("MapServiceImpl selectMarker()");
 		return mapDAO.selectMarker(tno);
+	}
+
+	@Override
+	public List<MapTradeVO> selectTrade(MapTradeVO mvo) {
+		// TODO Auto-generated method stub
+		logger.info("MapServiceImpl.selectTrade");
+		return mapDAO.selectTrade(mvo);
 	}
 	
 	

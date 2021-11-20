@@ -59,13 +59,12 @@ public class MapController {
 		
 		String tno = req.getParameter("tno");
 		mvo = mapService.selectMarker(tno);
-		
-		System.out.println(mvo.getTTITLE());
 		model.addAttribute("mvo" ,mvo);
 		
 		
 		try {
 			String mid = principal.getName();
+			model.addAttribute("loginid" ,mid);
 		}catch (Exception e) {
 			return "member/loginForm";
 		}
@@ -95,7 +94,7 @@ public class MapController {
 				jObj.put("photo", mvo_.getTPHOTO());
 				jObj.put("lat", mvo_.getTLAT());
 				jObj.put("lng", mvo_.getTLNG());
-				jObj.put("mno", mvo_.getMNO());
+				jObj.put("mno", mvo_.getPROPOSE());
 				jObj.put("deleteyn", mvo_.getDELETEYN());
 				jObj.put("insertdate", mvo_.getINSERTDATE());
 				jObj.put("updatedate", mvo_.getUPDATEDATE());
@@ -114,8 +113,7 @@ public class MapController {
 			bw.close(); //
 			
 			File f = new File(CommonUtils.JSON_FILE_PATH +"/" + "mapdata" + ".json");
-			
-			
+
 			logger.info("a " + josnStr);
 		}
 		catch(Exception e) {
@@ -129,6 +127,7 @@ public class MapController {
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/mapTradeInsert", method=RequestMethod.POST)
 	public String mapTradeInsert (HttpServletRequest req, Principal principal) {
+
 		logger.info("MapController ------ mapTradeInsert() ");
 		
 		FileUploadUtil fu = new FileUploadUtil(  CommonUtils.MAPTRADE_IMG_UPLOAD_PATH
@@ -162,7 +161,7 @@ public class MapController {
 		mvo.setTPRICE(fu.getParameter("price"));
 		mvo.setTLAT(fu.getParameter("lat"));
 		mvo.setTLNG(fu.getParameter("lng"));
-		mvo.setMNO("2");
+		mvo.setPROPOSE("wait");
 		
 		if(isfile) {
 			mvo.setTPHOTO(tphoto);
@@ -175,5 +174,33 @@ public class MapController {
 		
 		return "map/withmap";
 	}
+	
+	@RequestMapping(value="/mapTradeUpdate", method=RequestMethod.POST)
+	public String mapTradeUpdate (HttpServletRequest req,Principal principal, MapTradeVO mvo) {
+		logger.info("MapController.mapTradeUpdate() ");
+		String propose = principal.getName();
+		String tno = req.getParameter("tno");
+		
+		mvo.setPROPOSE(propose);
+		System.out.println(propose + tno );
+		
+		int nCnt = mapService.mapTradeUpdate(mvo);
+		return "map/updateTrade";
+	}
+	
+	@RequestMapping("/selectTrade")
+	public String selectTrade(MapTradeVO mvo,Principal principal,Model model) {
+		logger.info("MapController.selectTrade() ");
+		String mid = principal.getName();
+		mvo.setTWRITER(mid);
+		
+		List<MapTradeVO> listall = mapService.selectTrade(mvo);
+		model.addAttribute("listall", listall);
+		model.addAttribute("loginid" ,mid);
+		
+		return "map/selectTrade";
+	}
+	
+	
 	
 }

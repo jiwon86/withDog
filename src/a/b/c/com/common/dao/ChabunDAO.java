@@ -3,6 +3,7 @@ package a.b.c.com.common.dao;
 
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.notice.vo.NoticeVO;
 
 
 public interface ChabunDAO {
@@ -17,5 +18,10 @@ public interface ChabunDAO {
 //	public Member getBoardChabun();
 //	public Member getRboardChabun();
 	public Member getMemChabun();
+	
+//	public NoticeVO getNoitceChabun();
+//	public NoticeVO getRnoticeChabun();
+	public NoticeVO getNoticeChabun();	
+	
 
 }

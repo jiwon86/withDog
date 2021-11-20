@@ -50,4 +50,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return (Integer)noticeDAO.noticeDelete(nvo);
 	}
 
+	@Override
+	public List<NoticeVO> noticeSelectPaging(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		return noticeDAO.noticeSelectPaging(nvo);
+	}
+
 }

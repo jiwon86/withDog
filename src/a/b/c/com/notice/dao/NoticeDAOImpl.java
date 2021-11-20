@@ -44,4 +44,10 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return (Integer)sqlSession.delete("noticeDelete", nvo);
 	}
 
+	@Override
+	public List<NoticeVO> noticeSelectPaging(NoticeVO nvo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("noticeSelectPaging", nvo);
+	}
+
 }

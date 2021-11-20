@@ -11,4 +11,7 @@ public interface NoticeDAO {
 	public int noticeInsert(NoticeVO nvo);
 	public int noticeUpdate(NoticeVO nvo);
 	public int noticeDelete(NoticeVO nvo);
+	
+	// 페이징
+	public List<NoticeVO> noticeSelectPaging(NoticeVO nvo);
 }

@@ -4,15 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NOTICE INSERT</title>
+<title>Insert title here</title>
 </head>
 <body>
-NOTICE INSERT 중~
-<hr>
-<% String nnum = (String)request.getAttribute("nnum"); %>
 <script>
-	location.href="/noticeSelect.wd?nnum=<%=nnum%>";
+alert("삭제가 완료 되었습니다");
+location.href="AdminMemberSelectAll.wd"
 </script>
-
 </body>
 </html>

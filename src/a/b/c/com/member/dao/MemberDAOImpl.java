@@ -48,14 +48,6 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return (Integer)sqlSession.insert("memberInsert",mvo);
 	}
-	//로그인 체크
-	@Override
-	public List<Member> loginCheck(Member mvo){
-		logger.info("MemberDAOImpl.loginCheck() 함수 실행");
-		
-		return sqlSession.selectList("loginCheck",mvo);
-	}
-
 	// 중복 체크하기
 	@Override
 	public List<Member> memberIdCheck(Member mvo){

@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NOTICE INSERT</title>
+<title>NOTICE UPDATE</title>
 </head>
 <body>
-NOTICE INSERT 중~
+NOTICE UPDATE 중~
 <hr>
-<% String nnum = (String)request.getAttribute("nnum"); %>
+<%
+	String nnum = (String)request.getAttribute("nnum");
+%>
 <script>
 	location.href="/noticeSelect.wd?nnum=<%=nnum%>";
 </script>

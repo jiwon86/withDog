@@ -36,7 +36,7 @@ width: 300px !important;
 
 #idcheck.btn.btn.btn-primary{
 	position:absolute !important;
-	top:24.3% !important;
+	top:30% !important;
 	left:38% !important;
 }
 #passcheck.form-control.form-control-solid{
@@ -49,7 +49,7 @@ width: 300px !important;
 }
 #addfinde.btn.btn-primary{
 	position: absolute !important;
-	top: 62% !important;
+	top: 62.8% !important;
 	left:38% !important;
 }
 #mroadaddress.form-control.form-control-solid{
@@ -78,6 +78,8 @@ width: 300px !important;
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
+	let idCheck = false;
 	
 	/* $(document).ready(function(){
 		$("#submitbtn").click(function(){
@@ -143,6 +145,7 @@ $(document).ready(function(){
 				alert("사용 가능한 아이디 입니다");													
 				$("#mid").attr("readonly", true);
 				$("#mpw").focus();	
+				idCheck = true;
 			}else if ("ID_NO" == resData){
 				alert("이미 아이디 사용중 인 아이디 입니다.");
 				$("#mid").val('');
@@ -157,6 +160,14 @@ $(document).ready(function(){
 	$("#btnMphoto").click(function() {
 		$("#inputImage").click();
 	})
+	
+	
+	if(idCheck == true) {
+		// submit
+	} else {
+		// 안된다고 얼럿창
+	
+	}
 });
 
 
@@ -195,11 +206,11 @@ $(document).ready(function(){
                     <div class="mb-3">
                         <label class="text-gray-600 small" for="firstNameExample">Your Name</label>
                         <input class="form-control form-control-solid" type="text" placeholder="이름을 입력해 주세요" 
-                        aria-label="First Name" aria-describedby="firstNameExample" name="mname" value="123" required />
+                        aria-label="First Name" aria-describedby="firstNameExample" name="mname" required />
                     <!-- Form Group (last name)-->
                          <label class="text-gray-600 small" for="lastNameExample">Your Id</label>
                         <input class="form-control form-control-solid" type="text" placeholder="Id를 입력해 주세요" 
-                        aria-label="Last Name" aria-describedby="lastNameExample" name="mid" id="mid" value="123" required>
+                        aria-label="Last Name" aria-describedby="lastNameExample" name="mid" id="mid" required>
                     <!-- 중복확인 버튼 -->
                     </div>
                 </div>

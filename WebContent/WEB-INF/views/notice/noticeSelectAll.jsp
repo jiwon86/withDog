@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
@@ -28,7 +29,7 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-<main>
+<main style="width:960px; margin:0 auto;">
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
         <div class="container-xl px-4">
             <div class="page-header-content pt-4">
@@ -85,10 +86,10 @@ for(int i=0; i<nCnt; i++){
                        <tbody>
 							<tr>
                                <td><%= nvo.getNnum() %></td>
-                               <td><%= nvo.getNcontents() %></td>
+                               <td><%= nvo.getNsubject() %></td>
                                <td><%= nvo.getNwriter() %></td>
                                <td>
-                               	<a href="noticeSelect.wd"><div class="badge bg-primary text-white rounded-pill">상세조회</div></a>
+                               	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-primary text-white rounded-pill">상세조회</div></a>
                                </td>
                                <td>
                                    <a href="noticeDelete.wd"><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button></a>
@@ -96,7 +97,7 @@ for(int i=0; i<nCnt; i++){
                            </tr>
 					  </tbody>
 <%
-} // end of for
+						}
 %>
                    </table>
                    </div>
@@ -115,7 +116,11 @@ for(int i=0; i<nCnt; i++){
                       </nav>
                      </div>
                     </div>
-                    <a href="noticeInsertForm.wd"><button class="btn btn-primary me-2 my-1 float-end" type="button">작성하기</button></a>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+	                    <a href="noticeInsertForm.wd">
+	                    	<button class="btn btn-primary me-2 my-1 float-end" type="button">작성하기</button>
+	                    </a>
+                    </sec:authorize>
                    </div>
                </div>
            </div>

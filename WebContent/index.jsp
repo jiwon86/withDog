@@ -12,6 +12,7 @@
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
+    
 
 		<!-- 헤더 -->
 		<jsp:include page="/header.wd" />

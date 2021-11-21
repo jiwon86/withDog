@@ -85,8 +85,8 @@
             
             <!-- 비로그인 -->
             <sec:authorize access="isAnonymous()">
-            	<a href="/register.wd" class="btn btn-primary">회원가입</a>
-            	<a href="/login.wd" class="btn btn-primary">로그인</button>
+            	<a href="/register.wd" class="btn btn-green btn-sm">회원가입</a>
+            	<a href="/login.wd" class="btn btn-indigo btn-sm">로그인</button>
             </sec:authorize>
             
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">

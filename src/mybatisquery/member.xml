@@ -94,6 +94,13 @@
 		WHERE M.MID = #{mid}
 	</select>
 	
+	<!-- 
+		  FROM  MEMBER M, MEMBER_AUTH A
+		  WHERE M.DELETEYN = 'Y' 
+		  AND M.MNO = A.MNO(+)
+		  AND   M.MID = #{mid}
+	-->
+	
 	<select id="memberSelect" resultMap="memberMap">
 		SELECT 
 			M.MNO            MNO,
@@ -116,6 +123,13 @@
 			  ON M.MNO = A.MNO
 		WHERE M.MID = #{mid}
 	</select>
+	<!-- 
+		  FROM  MEMBER M, MEMBER_AUTH A
+		  WHERE M.DELETEYN = 'Y' 
+		  AND M.MNO = A.MNO(+)
+		  AND M.MID = #{mid}
+	-->
+	
 	
 	<update id="memberUpdate" parameterType="Member">
 		UPDATE MEMBER

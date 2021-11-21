@@ -25,7 +25,8 @@
                 <div class="collapse" id="collapseCareService" data-bs-parent="#accordionSidenavCareService">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCareServicePages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
-                        <a class="nav-link hahmlet" href="dashboard-2.html">내돌봄현황</a>
+                        <a class="nav-link hahmlet" href="/offerSelectAll.wd">내돌봄현황</a>
+                        <a class="nav-link hahmlet" href="/offerSelectAll.wd">돌봄현황(박상혁)</a>
                     </nav>
                 </div>       
                 

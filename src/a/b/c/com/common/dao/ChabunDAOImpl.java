@@ -24,8 +24,7 @@ public class ChabunDAOImpl implements ChabunDAO {
 		
 		return sqlSession.selectOne("getBoardChabun");
 	}
-=======
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 
 	@Override
 	public MapTradeVO getMapChabun() {
@@ -59,6 +58,7 @@ public class ChabunDAOImpl implements ChabunDAO {
 	@Override
 	public QnaVO getQnaChabun() {
 		logger.info("ChabunDAOImpl.getQnaChabun() 함수 진입");
+		System.out.println("ChabunDAOImpl.getQnaChabun() 함수 진입");
 		
 		return sqlSession.selectOne("getQnaChabun");
 	}

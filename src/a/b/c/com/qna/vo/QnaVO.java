@@ -11,22 +11,30 @@ public class QnaVO {
 	private String qnacon;
 	private String qnawriter;
 	private String qnapw;
-	private String qnaemail;
+	private String qnaanswer;
 	private String qnafile;
 	private String qnainsertdate;
 	private String qnaupdatedate;
 	private String delyn;
 	
-	//검색 구분자 및 검색어
+	//검색 구분자 및 검색어 
+	private String keyfilter;
+	private String keyword;
+	private String startdate;
+	private String enddate;
 	
 	//페이징 이동 필드
+	private String pageSize;
+	private String groupSize;
+	private String curPage;
+	private String totalCount;
 	
 	public QnaVO() {
 		
 	}
 
 	public QnaVO(String qnanum, String qnatitle, String qnacon, 
-				 String qnawriter, String qnapw, String qnaemail,
+				 String qnawriter, String qnapw, String qnaanswer,
 				 String qnafile, String qnainsertdate, String qnaupdatedate, 
 				 String delyn) {
 		
@@ -35,15 +43,40 @@ public class QnaVO {
 		this.qnacon = qnacon;
 		this.qnawriter = qnawriter;
 		this.qnapw = qnapw;
-		this.qnaemail = qnaemail;
+		this.qnaanswer = qnaanswer;
 		this.qnafile = qnafile;
 		this.qnainsertdate = qnainsertdate;
 		this.qnaupdatedate = qnaupdatedate;
 		this.delyn = delyn;
 	}
+	
+	
 
-	public static Logger getLogger() {
-		return logger;
+	public QnaVO(String qnanum, String qnatitle, String qnacon, 
+				String qnawriter, String qnapw, String qnaanswer,
+				String qnafile, String qnainsertdate, String qnaupdatedate, 
+				String delyn, String keyfilter, String keyword,
+				String startdate, String enddate, String pageSize, 
+				String groupSize, String curPage, String totalCount) {
+		
+		this.qnanum = qnanum;
+		this.qnatitle = qnatitle;
+		this.qnacon = qnacon;
+		this.qnawriter = qnawriter;
+		this.qnapw = qnapw;
+		this.qnaanswer = qnaanswer;
+		this.qnafile = qnafile;
+		this.qnainsertdate = qnainsertdate;
+		this.qnaupdatedate = qnaupdatedate;
+		this.delyn = delyn;
+		this.keyfilter = keyfilter;
+		this.keyword = keyword;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;
 	}
 
 	public String getQnanum() {
@@ -66,8 +99,8 @@ public class QnaVO {
 		return qnapw;
 	}
 
-	public String getQnaemail() {
-		return qnaemail;
+	public String getQnaanswer() {
+		return qnaanswer;
 	}
 
 	public String getQnafile() {
@@ -86,9 +119,6 @@ public class QnaVO {
 		return delyn;
 	}
 
-	public static void setLogger(Logger logger) {
-		QnaVO.logger = logger;
-	}
 
 	public void setQnanum(String qnanum) {
 		this.qnanum = qnanum;
@@ -110,8 +140,8 @@ public class QnaVO {
 		this.qnapw = qnapw;
 	}
 
-	public void setQnaemail(String qnaemail) {
-		this.qnaemail = qnaemail;
+	public void setQnaanswer(String qnaanswer) {
+		this.qnaanswer = qnaanswer;
 	}
 
 	public void setQnafile(String qnafile) {
@@ -130,8 +160,77 @@ public class QnaVO {
 		this.delyn = delyn;
 	}
 	
+	// 검색 구분자 및 검색어 
+	public String getKeyfilter() {
+		return keyfilter;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public String getStartdate() {
+		return startdate;
+	}
+
+	public String getEnddate() {
+		return enddate;
+	}
+
+	public void setKeyfilter(String keyfilter) {
+		this.keyfilter = keyfilter;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+
 	
 	
+	
+	// 페이징 이동 필드
+	
+	public String getPageSize() {
+		return pageSize;
+	}
+
+	public String getGroupSize() {
+		return groupSize;
+	}
+
+	public String getCurPage() {
+		return curPage;
+	}
+
+	public String getTotalCount() {
+		return totalCount;
+	}
+	
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	public void setGroupSize(String groupSize) {
+		this.groupSize = groupSize;
+	}
+
+	public void setCurPage(String curPage) {
+		this.curPage = curPage;
+	}
+
+	public void setTotalCount(String totalCount) {
+		this.totalCount = totalCount;
+	}
+
+
 	//매개변수 확인
 	public static void printVO(QnaVO qvo) {
 		logger.info("QnaVO 데이터 확인 시작 >>> : ");
@@ -141,7 +240,7 @@ public class QnaVO {
 		logger.info("QnA 내용 >>> : " + qvo.getQnacon());
 		logger.info("QnA 작성자 >>> : " + qvo.getQnawriter());
 		logger.info("QnA 비밀번호 >>> : " + qvo.getQnapw());
-		logger.info("QnA 이메일 >>> : " + qvo.getQnaemail());
+		logger.info("QnA 답변유무 >>> : " + qvo.getQnaanswer());
 		logger.info("QnA 파일 >>> : " + qvo.getQnafile());
 		logger.info("QnA 입력일 >>> : " + qvo.getQnainsertdate());
 		logger.info("QnA 수정일 >>> : " + qvo.getQnaupdatedate());

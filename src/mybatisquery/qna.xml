@@ -9,7 +9,7 @@
 		<result property="qnacon"		column="QNACON"/>
 		<result property="qnawriter"	column="QNAWRITER"/>
 		<result property="qnapw"		column="QNAPW"/>
-		<result property="qnaemail"		column="QNAEMAIL"/>
+		<result property="qnaanswer"	column="QNAANSWER"/>
 		<result property="qnafile"		column="QNAFILE"/>
 		
 	</resultMap>
@@ -17,17 +17,36 @@
 	<insert id="qnaInsert" parameterType="QnaVO">
 		
 		INSERT INTO QNA(QNANUM, QNATITLE, QNACON,
-						QNAWRITER, QNAPW, QNAEMAIL, QNAFILE,
+						QNAWRITER, QNAPW, QNAANSWER, QNAFILE,
 						QNAINSERTDATE, QNAUPDATEDATE, DELYN)
 		VALUES(#{qnanum, jdbcType=VARCHAR},
 			   #{qnatitle, jdbcType=VARCHAR},
 			   #{qnacon, jdbcType=VARCHAR},
 			   #{qnawriter, jdbcType=VARCHAR},
 			   #{qnapw, jdbcType=VARCHAR},
-			   #{qnaemail, jdbcType=VARCHAR},
+			   #{qnaanswer, jdbcType=VARCHAR},
 			   #{qnafile, jdbcType=VARCHAR},
 			   SYSDATE, SYSDATE, 'Y')
 		
 	</insert>
 
+	<select id="qnaSelectAll" parameterType="QnaVO" resultType="QnaVO">
+	SELECT 	   A.QNANUM			QNANUM
+			  ,A.QNATITLE		QNATITLE
+			  ,A.QNACON			QNACON
+			  ,A.QNAWRITER		QNAWRITER
+			  ,A.QNAPW			QNAPW
+			  ,A.QNAANSWER		QNAANSWER
+			  ,A.QNAFILE		QNAFILE
+			  ,TO_CHAR(A.QNAINSERTDATE, 'YYYY-MM-DD')	QNAINSERTDATE
+			  ,TO_CHAR(A.QNAUPDATEDATE, 'YYYY-MM-DD')	QNAUPDATEDATE
+			  ,A.DELYN			DELYN
+	FROM 	QNA A
+	WHERE 	A.DELYN = 'Y' 
+
+	ORDER BY 1
+</select>
+
+
 </mapper>
+

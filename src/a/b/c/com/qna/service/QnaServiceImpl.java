@@ -23,15 +23,15 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public List<QnaVO> qnaselect(QnaVO qvo) {
+	public List<QnaVO> qnaSelect(QnaVO qvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.qnaselect(qvo);
+		return qnaDAO.qnaSelect(qvo);
 	}
 
 	@Override
-	public List<QnaVO> qnaselectAll(QnaVO qvo) {
+	public List<QnaVO> qnaSelectAll(QnaVO qvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.qnaselectAll(qvo);
+		return qnaDAO.qnaSelectAll(qvo);
 	}
 
 	@Override
@@ -51,5 +51,11 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 		return qnaDAO.qnaDelete(qvo);
 	}
-
+	
+	//페이징
+	@Override
+	public List<QnaVO> qnaSelectPaging(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return qnaDAO.qnaSelectPaging(qvo);
+	}
 }

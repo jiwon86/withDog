@@ -1,10 +1,13 @@
 package a.b.c.com.qna.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,12 +40,13 @@ public class QnaController {
 		return "qna/qnaForm";
 	}
 	
-	//글쓰기
+	//글쓰기(qnaInsert-qnaSelectAll-qnaForm)
 	@RequestMapping(value="qnaInsert", method=RequestMethod.POST)
 	public String qnaInsert(HttpServletRequest req) {
 		logger.info("QnaController.qnaInsert 함수 진입 >>> : ");
 		
-		//채번 구하기
+		//채번 구하기 
+	//#####################################"N"은 머지????????????????????????????????######################################################
 		String qnanum = ChabunUtil.getQnaChabun("N", chabunService.getQnaChabun().getQnanum());
 		logger.info("QnaController.qnaInsert qnanum >>> : " + qnanum);
 		
@@ -65,7 +69,7 @@ public class QnaController {
 		_qvo.setQnacon(fu.getParameter("qnacon"));
 		_qvo.setQnawriter(fu.getParameter("qnawriter"));
 		_qvo.setQnapw(fu.getParameter("qnapw"));
-		_qvo.setQnaemail(fu.getParameter("qnaemail"));
+		_qvo.setQnaanswer(fu.getParameter("qnaanswer"));
 		_qvo.setQnafile(fu.getParameter("qnafile"));
 		
 		logger.info("QnaController.qnaInsert _qvo.getqnanum() >>> : " + _qvo.getQnanum());
@@ -75,12 +79,64 @@ public class QnaController {
 		int nCnt = qnaService.qnaInsert(_qvo);
 		logger.info("QnaController.qnaInsert nCnt >>> : " + nCnt);
 		
-		if(nCnt > 0) {return "qna/qnaInsert";}
+		if(nCnt > 0) {return "qna/qnaSelectAll";}
 		return "qna/qnaForm";
 		
 	}
 	
-	//글 목록 페이징 조회
 	
+	
+	// 글 목록 조회
+	@RequestMapping(value="qnaSelectAll", method=RequestMethod.GET)
+	public String qnaSelectAll(QnaVO qvo, Model model) {
+		logger.info("QnaController qnaSelectAll 함수 진입 >>> :");	
+		
+		logger.info("QnaController qnaSelectAll 검색 관련 로그  >>> : ===================================");
+		logger.info("QnaController qnaSelectAll qvo.getKeyfilter() >>> : " + qvo.getKeyfilter());
+		logger.info("QnaController qnaSelectAll  qvo.getKeyword() >>> : " + qvo.getKeyword());
+		logger.info("QnaController qnaSelectAll qvo.getStartdate() >>> : " + qvo.getStartdate());
+		logger.info("QnaController qnaSelectAll  qvo.getEnddate() >>> : " + qvo.getEnddate());
+		
+		List<QnaVO> listAll = qnaService.qnaSelectAll(qvo);
+		logger.info("QnaController qnaSelectAll listAll.size() >>> : " + listAll.size());
+		
+		if (listAll.size() > 0) { 
+						
+			model.addAttribute("listAll", listAll);
+			return "qna/qnaSelectAll";
+		}
+		
+		return "qna/qnaForm";
+		}
+	
+	
+	//글 수정하기
+	@RequestMapping(value="qnaUpdate", method=RequestMethod.POST)
+	public String boardUpdate(QnaVO qvo, Model model) {
+		logger.info("QnaController qnaUpdate 함수 진입 >>> : ");
+
+		logger.info("QnaController qnaUpdate qvo.getSbnum() >>> : " + qvo.getQnanum());
+		logger.info("QnaController qnaUpdate qvo.getSbcontent() >>> : " + qvo.getQnacon());
+		int nCnt = qnaService.qnaUpdate(qvo);
+		logger.info("QnaController qnaUpdate nCnt >>> : " + nCnt);
+		
+		if(nCnt > 0) {return "qna/qnaUpdate";}
+		return "qna/qnaForm";
+	
+	}
+	
+	//글 삭제하기
+	@RequestMapping(value="qnaDelete", method=RequestMethod.POST)
+	public String boadrDelete(QnaVO qvo, Model model) {
+		logger.info("QnaController qnaDelete 함수 진입 >>> :");
+		
+		logger.info("QnaController qnaDelete qvo.getSbnum() >>> : " + qvo.getQnanum());		
+		int nCnt = qnaService.qnaDelete(qvo);
+		logger.info("QnaController qnaDelete nCnt >>> : " + nCnt);
+		
+		if(nCnt > 0) {return "qna/qnaDelete";}
+		return "qna/boardForm";
+	}
+
 
 }

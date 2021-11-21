@@ -31,15 +31,7 @@
 				<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 
-<<<<<<< HEAD
-<<<<<<< HEAD
-					asdfTEST111
-=======
-					
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
-=======
-					TEST
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
 					===================================
 				--> 

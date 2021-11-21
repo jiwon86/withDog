@@ -22,7 +22,7 @@ public class ChabunServiceImpl implements ChabunService {
 	public ChabunServiceImpl(ChabunDAO chabunDAO) {
 		this.chabunDAO = chabunDAO;
 	}
-
+	
 	@Override
 	public MapTradeVO getMapChabun() {
 		// TODO Auto-generated method stub

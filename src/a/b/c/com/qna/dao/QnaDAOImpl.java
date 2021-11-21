@@ -17,13 +17,13 @@ public class QnaDAOImpl implements QnaDAO {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<QnaVO> qnaselect(QnaVO qvo) {
+	public List<QnaVO> qnaSelect(QnaVO qvo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("qnaSelect", qvo);
 	}
 
 	@Override
-	public List<QnaVO> qnaselectAll(QnaVO qvo) {
+	public List<QnaVO> qnaSelectAll(QnaVO qvo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("qnaSelectAll", qvo);
 	}
@@ -47,4 +47,9 @@ public class QnaDAOImpl implements QnaDAO {
 	}
 
 	//페이징
+	@Override
+	public List<QnaVO> qnaSelectPaging(QnaVO qvo){
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("qnaSelectPaging", qvo);
+	}
 }

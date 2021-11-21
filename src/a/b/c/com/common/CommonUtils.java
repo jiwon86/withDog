@@ -49,4 +49,10 @@ public abstract class CommonUtils {
 	public static final int QnA_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String QnA_EN_CODE = "UTF-8"; 
 	
+	//Q&a 게시판 페이징 사이즈 초기화
+	public static final int QnA_PAGE_SIZE = 3;
+	public static final int QnA_GROUP_SIZE = 5;
+	public static final int QnA_CUR_PAGE = 1;
+	public static final int QnA_TOTAL_COUNT = 0;
+	
 }

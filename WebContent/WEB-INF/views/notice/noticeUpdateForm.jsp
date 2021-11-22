@@ -84,8 +84,8 @@
 	%>          	
 				   <input type="hidden" id="nnum" name="nnum" value="<%=nvo.getNnum()%>">
 	               <div class="card mb-4" style="width:900px;">
-	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">공지사항 제목</div>
-	                    <div class="card-body" style="width:900px;"><input class="form-control" id="nsubject" name="nsubject" type="text" placeholder="" value="<%= nvo.getNsubject() %>"  style="height:10px;"/></div>
+	                    <div class="card-header" style="width:900px;" style="height:40px; line-height:15px;">공지사항 제목</div>
+	                    <div class="card-body" style="width:900px;"><textarea class="form-control" id="nsubject" name="nsubject" type="text" placeholder="" style="height:10px;"><%= nvo.getNsubject() %></textarea></div>
 	                </div>
 	                
 	               <div class="card mb-4" style="width:900px;">

@@ -25,7 +25,7 @@
 						SYSDATE)
 </insert>
 
-<select id="noticeSelectPaging" parameterType="noticeVO" resultType="noticeVO">
+<select id="noticeSelectPaging" parameterType="NoticeVO" resultType="NoticeVO">
 	SELECT * FROM (
 		SELECT A.NNUM			NNUM
 			  ,A.NSUBJECT		NSUBJECT
@@ -92,8 +92,13 @@ FROM NOTICE A WHERE A.DELETEYN='Y' AND A.NNUM = #{nnum, jdbcType=VARCHAR}
 </select>
 
 <update id ="noticeUpdate" parameterType="NoticeVO">
-	UPDATE NOTICE SET NCONTENTS=#{ncontents, jdbcType=VARCHAR}, UPDATEDATE = SYSDATE
-	WHERE DELETEYN = 'Y' AND NNUM = #{nnum, jdbcType=VARCHAR}
+	UPDATE NOTICE
+			SET 	NCONTENTS=#{ncontents, jdbcType=VARCHAR}
+				   ,NSUBJECT=#{nsubject, jdbcType=VARCHAR}	
+				   ,NFILE=#{nfile, jdbcType=VARCHAR}			
+			 	   ,UPDATEDATE = SYSDATE
+	WHERE DELETEYN = 'Y' 
+	AND 		   NNUM = #{nnum, jdbcType=VARCHAR}
 </update>
 
 <update id="noticeDelete" parameterType="NoticeVO">

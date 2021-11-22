@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
@@ -106,7 +107,7 @@ public class NoticeController {
 		_nvo.setNnum(nnum);
 		_nvo.setNsubject(fu.getParameter("nsubject"));
 		_nvo.setNwriter(principal.getName());
-		_nvo.setNcontents(fu.getParameter("ncontents").replace("\r\n","<br>"));
+		_nvo.setNcontents(fu.getParameter("ncontents"));
 		_nvo.setNfile(fu.getFileName("nfile"));
 		logger.info("fu.getParameter(\"nfile\") >>> : " + fu.getParameter("nfile"));
 		
@@ -147,13 +148,78 @@ public class NoticeController {
 		int nCnt = noticeService.noticeUpdate(nvo);
 		model.addAttribute("nnum", nvo.getNnum());
 		
+		logger.info("----------------------------------------------------------------------------------------------------------------------------------------------" + nCnt);
+		logger.info("----------------------------------------------------------------------------------------------------------------------------------------------" + nvo.getNsubject());
+		logger.info("----------------------------------------------------------------------------------------------------------------------------------------------" + nvo.getNcontents());
+		
 		return "notice/noticeUpdate";
 	}
 	
 	
-	@RequestMapping("noticeDelete")
-	public String noticeDelete() {
-		return "notice/noticeDelete";
+	@GetMapping("noticeDelete")
+	public String noticeDeleteForm(NoticeVO nvo, Model model) {
+		logger.info("NoticeController noticeDelete 함수 진입 >>> : ");
+		
+		logger.info("NoticeController noticeDelete nvo.getNbnum() >>> : " + nvo.getNnum());
+		logger.info("NoticeController noticeDelete nvo.getNcontents() >>> : " + nvo.getNcontents());
+		
+		
+		List<NoticeVO> listS = noticeService.noticeSelect(nvo);
+		
+		model.addAttribute("listS", listS);
+		return "notice/noticeDeleteForm";
 	}
 	
+	@PostMapping("noticeDelete")
+	public String noticeDelete(NoticeVO nvo , Model model) {
+		logger.info("noticeDelete ----------------------------");
+
+		
+		int nCnt = noticeService.noticeDelete(nvo);
+		model.addAttribute("nnum", nvo.getNnum());
+		
+		return "notice/noticeDelete";
+	}
+	/*
+	@RequestMapping(value="noticeSelectPaging", method=RequestMethod.GET)
+	public String noticeSelectPaging(NoticeVO nvo, Model model) {
+		logger.info("NoticeController noticePaging 함수 진입 >>> : ");
+		
+		logger.info("NoticeController noticePaging 함수 진입 >>> : 페이징 관련 로그 ==============================");
+		
+		// 페이징 변수 세팅
+		int pageSize = CommonUtils.NOTICE_PAGE_SIZE;
+		int groupSize = CommonUtils.NOTICE_GROUP_SIZE;
+		int curPage = CommonUtils.NOTICE_CUR_PAGE;
+		int totalCount = CommonUtils.NOTICE_TOTAL_COUNT;
+		
+		if (nvo.getCurPage() != null) {
+			curPage = Integer.parseInt(nvo.getCurPage());
+		}
+		
+		nvo.setPageSize(String.valueOf(pageSize));
+		nvo.setGroupSize(String.valueOf(groupSize));
+		nvo.setCurPage(String.valueOf(curPage));
+		nvo.setTotalCount(String.valueOf(totalCount));
+		
+		logger.info("SpringNoticeController noticeSelectPaging nvo.getPageSize() >>> : " + nvo.getPageSize());
+		logger.info("SpringNoticeController noticeSelectPaging nvo.getGroupSize() >>> : " + nvo.getGroupSize());
+		logger.info("SpringNoticeController noticeSelectPaging nvo.getCurPage() >>> : " + nvo.getCurPage());
+		logger.info("SpringNoticeController noticeSelectPaging nvo.getTotalCount() >>> : " + nvo.getTotalCount());
+		
+		NoticeVO.printVO(nvo);
+		
+		List<NoticeVO> listAll = noticeService.noticeSelectPaging(nvo);
+		logger.info("NoticeController noticeSelectPaging listAll.size() >>> : " + listAll.size());
+		
+		if(listAll.size() > 0) {
+			model.addAttribute("pagingVO", nvo);
+			model.addAttribute("listAll", listAll);
+			return "notice/noticeSelectPaging";
+		}
+		
+		return "notice/noticeInsertForm";
+	}
+	
+	*/
 }

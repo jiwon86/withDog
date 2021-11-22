@@ -1,6 +1,9 @@
 package a.b.c.com.notice.vo;
 
+import org.apache.log4j.Logger;
+
 public class NoticeVO {
+	private static Logger logger = Logger.getLogger(NoticeVO.class);
 	
 	private String nnum;
 	private String nsubject;
@@ -146,6 +149,28 @@ public class NoticeVO {
 	public void setTotalCount(String totalCount) {
 		this.totalCount = totalCount;
 	}	
+	
+	// 매개변수 확인
+	public static void printVO(NoticeVO nvo) {
+		logger.info("SpringBoardVO 데이터 확인 시작  >>> : ");
+		
+		logger.info("공지사항 번호 >>> : " + nvo.getNnum());
+		logger.info("공지사항 제목>>> : " + nvo.getNsubject());
+		logger.info("작성자 >>> : " + nvo.getNwriter());
+		logger.info("공지사항 내용 >>> : " + nvo.getNcontents());
+		logger.info("파일 >>> : " + nvo.getNfile());
+		logger.info("삭제여부 >>> : " + nvo.getNdeleteyn());
+		logger.info("입력일>>> : " + nvo.getInsertdate());
+		logger.info("수정일 >>> : " + nvo.getUpdatedate());
+		logger.info("페이징 데이터 확인 >>> ===================================================");
+		logger.info("페이지 >>> : " + nvo.getPageSize());
+		logger.info("그룹사이즈 >>> : " + nvo.getGroupSize());
+		logger.info("현재페이지>>> : " + nvo.getCurPage());
+		logger.info("전체건수 >>> : " + nvo.getTotalCount());
+		
+		logger.info("NoticeVO 데이터 확인 끝 >>> : ");
+		
+	}
 	
 }
 

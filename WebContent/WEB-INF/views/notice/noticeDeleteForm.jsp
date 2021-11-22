@@ -1,3 +1,5 @@
+<%@page import="a.b.c.com.notice.vo.NoticeVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,9 +18,8 @@
 		$(document).on("click", "#nbtn", function(){
 			console.log("nbtn >>> : ");
 			$('#noticeForm').attr({
-				'action':'noticeInsert.wd',
-				'method':'POST',
-				'enctype':'multipart/form-data'
+				'action':'noticeDelete.wd',
+				'method':'POST'
 			}).submit();
 		});
 	});
@@ -43,7 +44,7 @@
             
             
 <main style="width:960px; margin:0 auto;">
-	<form name="noticeForm" id="noticeForm">
+<form name="noticeForm" id="noticeForm">
 	<table border="1" align="center">
 	    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
 	        <div class="container-fluid px-4">
@@ -74,45 +75,51 @@
 	            <div class="col-lg-8">
 	            	
 	          	</div>
-	          	
+	<%
+	List<NoticeVO> listS = (List<NoticeVO>)request.getAttribute("listS");
+	int nCnt = listS.size();
+	
+	for(int i=0; i<nCnt; i++){
+		NoticeVO nvo = listS.get(i);
+	%>          	
+				   <input type="hidden" id="nnum" name="nnum" value="<%=nvo.getNnum()%>">
 	               <div class="card mb-4" style="width:900px;">
 	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">공지사항 제목</div>
-	                    <div class="card-body" style="width:900px;"><input class="form-control" id="nsubject" name="nsubject" type="text" placeholder="" value=""  style="height:10px;"/></div>
+	                    <div class="card-body" style="width:900px;"><input class="form-control" id="nsubject" name="nsubject" type="text" placeholder="" value="<%= nvo.getNsubject() %>"  style="height:10px;" readonly/></div>
 	                </div>
-	               
-	               <%
-	               	String mid = (String)request.getAttribute("mid");
-	               %>
+	                
 	               <div class="card mb-4" style="width:900px;">
 	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">작성자</div>
-	                    <div class="card-body"><%=mid%></div>
+	                    <div class="card-body">
+	                    	<p><%= nvo.getNwriter() %></p>
+	                    </div>
+	                	
 	                </div>
 	                
 	                <div class="card card-header-actions mb-4" style="width:900px;">
 	                    <div class="card-header">공지사항 내용</div>
-	                    <div class="card-body"><textarea wrap="hard" class="lh-base form-control" type="text" id="ncontents" name="ncontents" placeholder="" rows="4" style="height:200px;"></textarea></div>
+	                    <div class="card-body"><textarea class="lh-base form-control" type="text" id="ncontents" name="ncontents" placeholder="" rows="4" style="height:200px;" readonly><%= nvo.getNcontents() %></textarea></div>
 	                </div>
 	                
 	                <div class="card mb-4" style="width:900px;">
-	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">파일 업로드</div>
+	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;" >파일 업로드</div>
 	                    <div class="card-body">
 		                     <div class="mb-3">
 							  <label for="formFile" class="form-label">Default file input example</label>
-							  <input class="form-control" type="file" id="nfile" name="nfile">
+							  <input class="form-control" type="file" id="nfile" name="nfile" readonly>
 							</div>
 	                    </div>
 	                </div>
-	                
-	                <input class="btn btn-primary me-2 my-1" type="button" value="공지사항 작성완료" id="nbtn">
-	                
+			<%
+					}
+			%>             
+	            <input class="btn btn-danger me-2 my-1" type="button" value="공지사항 삭제하기" id="nbtn">
 	            </div>
-	            <div class="col-lg-4">
-	                    <div class="card-body"></div>
-	            </div>
+	            
 	        </div>
 	
 	</table>
-	</form>
+</form>
 </main>
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />

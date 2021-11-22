@@ -18,6 +18,7 @@
 #abcd.btn.btn-sm.btn-light.text-primary{}
 		
 	</style>
+
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
@@ -54,7 +55,9 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </header>
+
 <%
 List<NoticeVO> listS = (List<NoticeVO>)request.getAttribute("listS");
 int nCnt = listS.size();
@@ -62,6 +65,7 @@ int nCnt = listS.size();
 for(int i=0; i<nCnt; i++){
 	NoticeVO nvo = listS.get(i);
 %>
+                 
                     
                     <!-- Main page content-->
                     <div class="container-fluid px-4">
@@ -76,11 +80,12 @@ for(int i=0; i<nCnt; i++){
                                     	<a href="/img/notice/<%= nvo.getNfile() %>" download><i data-feather="file"></i> <%= nvo.getNfile() %> 다운로드</a>
                                     	<hr>
                                     	<br>
-                                    	<div><%= nvo.getNcontents() %></div>
+                                    	<div><pre><%= nvo.getNcontents() %></pre></div>
                                     	<br>
                                     	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	                                    	<a class="btn btn-warning" href="noticeUpdate.wd?nnum=<%= nvo.getNnum() %>">수정</a>
-	                                    	<button class="btn btn-danger" type="button">삭제</button>
+											<a class="btn btn-danger" href="noticeDelete.wd?nnum=<%= nvo.getNnum() %>">삭제</a>
+	                                    	<!--<a href="noticeDelete.wd?nnum=<%=nvo.getNnum()%>"><button class="btn btn-danger" type="button" id="D">삭제</button></a>   -->
                                     	</sec:authorize>
                                     </div>
                                 </div>
@@ -105,6 +110,5 @@ for(int i=0; i<nCnt; i++){
             </div>
 			<!-- /콘텐츠 -->
         </div>
-		
     </body>
 </html>

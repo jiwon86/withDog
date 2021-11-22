@@ -14,6 +14,18 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<!-- /헤드 -->
+	
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script type="text/javascript">
+
+		// 검색버튼
+		$(document).on("click", "#searchBtn", function(){
+			// alert("searchBtn >>> : ");
+			$("#noticeList").attr({ "method":"GET"
+		        					,"action":"noticeSelectAll.wd"}).submit();
+		});
+</script>
 
     <body class="nav-fixed">
 
@@ -28,6 +40,8 @@
 			<!-- /사이드바 -->
 
 			<!-- 콘텐츠 -->
+<form name="boardList" id="boardList">
+			
             <div id="layoutSidenav_content">
 <main style="width:960px; margin:0 auto;">
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
@@ -36,7 +50,7 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
-                            <div class="page-header-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></div>
+                            <div class="page-header-icon"></div>
                             	공지사항
                         </h1>
                         <div class="page-header-subtitle">신규회원 및 기존회원 가족분들은 서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다!</div>
@@ -52,9 +66,30 @@
             <div class="card-body">
                 <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                 <div class="dataTable-top">
-                 <div class="dataTable-search">
-                 <input class="dataTable-input" placeholder="Search..." type="text"></div>
+                                  
+                 	<!-- 
+                 	<tr>
+						<td colspan="10" align="left">
+						<button class="btn btn-primary me-2 my-1 float-end" type="button" id="searchBtn" >검색</button>
+						<input class="dataTable-search float-end" style="width:300px; height:48px; border-radius: 15px;" type="text" id="keyword" name="keyword" placeholder="검색어 입력"  align="right" >   
+						<select class="dataTable-search float-end" id="keyfilter" name="keyfilter" style="height:48px; border-radius: 15px;">
+							<option value="key1">제목</option>
+							<option value="key2">작성자</option>
+						</select>
+						</td>
+					</tr> 
                 </div>
+                 -->
+                 <form action="/notice/search" method="GET">
+                 		<button class="btn btn-primary" style="float:right">검색하기</button>
+				    <div style="float:right">
+				        <input name="keyword" type="text" placeholder="검색어를 입력해주세요" style="border-radius: 15px; height:40px;">
+				    </div>
+				   
+				    <br><br>
+				</form>
+                 <br>
+               
                 <div class="dataTable-container">
                 <table id="datatablesSimple" class="dataTable-table">
                     <thead>
@@ -91,11 +126,14 @@ for(int i=0; i<nCnt; i++){
                                <td>
                                	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-primary text-white rounded-pill">상세조회</div></a>
                                </td>
+                               <sec:authorize access="hasRole('ROLE_ADMIN')">
                                <td>
-                                   <a href="noticeDelete.wd"><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button></a>
+                               <!-- <a href="noticeDelete.wd?nnum=<%= nvo.getNnum() %>"><button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button></a> -->
+                               <a href="noticeDelete.wd?nnum=<%= nvo.getNnum() %>" button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button></a>
                                </td>
-                           </tr>
-					  </tbody>
+                               </sec:authorize>
+                           </tr>                          
+					  </tbody>				  
 <%
 						}
 %>
@@ -127,11 +165,11 @@ for(int i=0; i<nCnt; i++){
            <div class="card card-icon mb-4">
                <div class="row g-0">
                    <div class="col-auto card-icon-aside bg-primary">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle me-1 text-white-50">
+                  
                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                    <line x1="12" y1="9" x2="12" y2="13"></line>
                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                   </svg>
+                   
                    </div>
                    <div class="col">
                        <div class="card-body py-5">
@@ -150,6 +188,6 @@ for(int i=0; i<nCnt; i++){
             </div>
 			<!-- /콘텐츠 -->
         </div>
-		
+		</form>
     </body>
 </html>

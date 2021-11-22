@@ -4,16 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>NOTICE UPDATE</title>
+<title>NOTICE DELETE</title>
 </head>
 <body>
-NOTICE UPDATE 중~
+NOTICE DELETE 중~
 <hr>
 <%
 	String nnum = (String)request.getAttribute("nnum");
 %>
 <script>
-	location.href="/noticeSelect.wd?nnum=<%=nnum %>";
+	location.href="/noticeSelectAll.wd?nnum=<%=nnum%>";
 </script>
 
 </body>

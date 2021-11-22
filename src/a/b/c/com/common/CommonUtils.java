@@ -47,4 +47,10 @@ public abstract class CommonUtils {
 	public static final int MAPTRADE_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String MAPTRADE_EN_CODE = "UTF-8";
 	
+	// 공지사항 페이징 사이즈 초기화
+		public static final int NOTICE_PAGE_SIZE = 3;
+		public static final int NOTICE_GROUP_SIZE = 5;
+		public static final int NOTICE_CUR_PAGE = 1;
+		public static final int NOTICE_TOTAL_COUNT = 0;
+	
 }

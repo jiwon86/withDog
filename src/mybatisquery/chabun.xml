@@ -25,4 +25,15 @@
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
 	</select>
 	
+	<!-- Review 채번 시작-->
+	<select id="getReviewCrnumChabun" resultType="ReviewVO">
+		SELECT NVL(MAX(SUBSTR(A.CRNUM, -4)),0) + 1 CRNUM FROM WITH_REVIEW A
+	</select>
+	
+	<select id="getReviewCnumChabun" resultType="ReviewVO">
+		SELECT NVL(MAX(SUBSTR(A.CNUM, -4)),0) + 1 CNUM FROM WITH_REVIEW A
+	</select>
+	
+	<!-- Review 채번 끝-->
+	
 </mapper>

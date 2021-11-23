@@ -1,6 +1,5 @@
 package a.b.c.com.review.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -29,10 +28,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public ArrayList selectReview(ReviewVO rvo) {
+	public List selectReview(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewDAOImpl selectReview() 함수진입 >>> ");
-		return null;
+		return sqlSession.selectList("selectReview", rvo);
 	}
 
 	@Override
@@ -46,7 +45,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int updateReview(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewDAOImpl updateReview() 함수진입 >>> ");
-		return 0;
+		return (Integer)sqlSession.insert("updateReview", rvo);
 	}
 
 	@Override

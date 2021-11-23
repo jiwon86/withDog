@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.review.vo.ReviewVO;
 
 
 @Repository
@@ -46,5 +47,19 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getMemChabun");
 	}
 	
+	// review
+	@Override
+	public ReviewVO getReviewCrnumChabun() {
+		logger.info("ChabunDAOImpl.getReviewCrnumChabun() 함수 진입");
+		
+		return sqlSession.selectOne("getReviewCrnumChabun");
+	}
+	
+	@Override
+	public ReviewVO getReviewCnumChabun() {
+		logger.info("ChabunDAOImpl.getReviewCnumChabun() 함수 진입");
+		
+		return sqlSession.selectOne("getReviewCnumChabun");
+	}
 	
 }

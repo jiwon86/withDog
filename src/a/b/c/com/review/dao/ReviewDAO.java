@@ -1,6 +1,5 @@
 package a.b.c.com.review.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import a.b.c.com.review.vo.ReviewVO;

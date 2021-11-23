@@ -1,6 +1,5 @@
 package a.b.c.com.review.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -40,7 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public List selectReview(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewServiceImpl selectReview() 함수진입 >>> ");
-		return null;
+		return reviewDAO.selectReview(rvo);
 	}
 
 	@Override
@@ -54,7 +53,7 @@ public class ReviewServiceImpl implements ReviewService {
 	public int updateReview(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewServiceImpl updateReview() 함수진입 >>> ");
-		return 0;
+		return reviewDAO.updateReview(rvo);
 	}
 
 	@Override

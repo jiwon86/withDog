@@ -5,9 +5,12 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
+	public static final String BIZ_GUBUN_R = "R"; // 후기게시판 R 후기번호
+	public static final String BIZ_GUBUN_C = "C"; // 후기게시판 C 돌봄신청번호
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
 	public static String numpad(String t, String c) {
+		
 		for(int i=c.length(); i<4; i++) {
 			c = "0" + c;
 		}
@@ -37,6 +40,17 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
+	// 후기게시판 후기번호
+	public static String getReviewCrnumChabun(String type, String memNum) {
+		return BIZ_GUBUN_R.concat(ChabunUtil.numpad(type, memNum));
+	}
+
+	
+	 // 후기게시판 돌봄번호
+	public static String getReviewCnumChabun(String type, String memNum) { 
+		return BIZ_GUBUN_C.concat(ChabunUtil.numpad(type, memNum)); 
+	}
+	 
 	public static void main(String[] args) {
 		String c = "1";
 		System.out.println("getMemChabun(\"m\", c) >>> : " + ChabunUtil.getMemChabun("m", c));

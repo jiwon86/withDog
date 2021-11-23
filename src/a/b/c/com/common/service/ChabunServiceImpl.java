@@ -9,6 +9,7 @@ import a.b.c.com.common.dao.ChabunDAO;
 
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.review.vo.ReviewVO;
 
 @Service
 @Transactional
@@ -57,7 +58,19 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getMemChabun();
 	}
 	
-
+	// review
+	@Override
+	public ReviewVO getReviewCrnumChabun() {
+		logger.info("ChabunServiceImpl.getReviewCrnumChabun() 함수 진입");
+		return chabunDAO.getReviewCrnumChabun();
+	}
+	
+	@Override
+	public ReviewVO getReviewCnumChabun() {
+		logger.info("ChabunServiceImpl.getReviewCnumChabun() 함수 진입");
+		return chabunDAO.getReviewCnumChabun();
+	}
+	
 	
 
 }

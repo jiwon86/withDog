@@ -1,11 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="a.b.c.com.review.vo.ReviewVO" %>
+
 <!DOCTYPE html>
 <html lang="ko">
+	<!-- 헤드 -->
+	<%@ include file="/WEB-INF/views/fragment/head.jsp" %>
+	
+	<% request.setCharacterEncoding("UTF-8"); %>
+	<%
+		Object obj = request.getAttribute("listS");
+		List<ReviewVO> list = (List)obj;
+		ReviewVO rvo = null;
+		if (list.size() == 1) {
+			rvo = list.get(0);
+		};
+	%>
 	
 	<style>
 	
-		/*.str{background:url('/image/review/star.png');width:500px;height:500px;}*/
+	/*.str{background:url('/image/review/star.png');width:500px;height:500px;}*/
 		
 		.strcon {
 					  margin:0 auto;
@@ -47,50 +62,47 @@
 				  padding:10px;
 				}
 	
+	.brs{border-bottom:1px solid #d3d3d3;}
+	.brsr{border-right:1px solid #d3d3d3;}
+	
+	.star1{color:#fc0;line-height:5px}
+	
 	</style>
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script type="text/javascript">
 	
-	$(document).ready(function(){
-		
-		$("#subbtn").click(function(){
+		$(document).ready(function(){
 			
-		 
-		 var ccrmemo = $("#crmemo").val();
-		 
-		 ccrscore = $.trim( ccrscore );
-
-		 	if($("#crscore").val() == ""){
-				alert('평점을 입력해주세요.');
-				return false;
-			}
-            if ( ccrmemo == "" ) {
-                alert("후기를 입력하세요.");
-               
-            }else{
-            	return;
-            }
+		// U 업데이트 부분
+		$(document).on("click", "#U", function(){
+			
+			alert("U");
+			
+			$("#RevieList").attr({
+									"method":"GET",
+									"action":"reviewUpdateForm.wd"
+			}).submit();
 			
 		});
-		
-	});
-	
-	
+			
+		});
 	
 	</script>
-	<%
-		
-		
-	
-	%>
-	<!-- 헤드 -->
-	<%@ include file="/WEB-INF/views/fragment/head.jsp" %>
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
-
+	<%-- <% request.setCharacterEncoding("UTF-8"); %>
+	<%
 	
-
+		Object obj = request.getAttribute("listAll");
+		List<ReviewVO> list = (List)obj;
+		
+		int nCnt = list.size();
+		System.out.println("nCnt >>> : " + nCnt);
+	
+	%> --%>
+	
 		<!-- 헤더 -->
 		<%@ include file="/WEB-INF/views/fragment/header.jsp" %>
 		<!-- /헤더 -->
@@ -105,29 +117,28 @@
             <div id="layoutSidenav_content">
 				
 				<main>
+				
                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
                         <div class="container-xl px-4">
                             <div class="page-header-content pt-4">
                                 <div class="row align-items-center justify-content-between">
-                                    <div class="col-auto mt-4" >
-                                        <h1 class="page-header-title" >
-                                            <div class="page-header-icon"><i data-feather="layout"></i></div> 돌봄후기 작성
-                                        </h1>
-                                        <div class="page-header-subtitle ms-5" >소중한 반려동물을 위해 돌봄의 후기를 작성해보세요</div>
+                                    <div class="col-auto mt-4">
+                                        <h1 class="page-header-title"><div class="page-header-icon"><i data-feather="filter"></i></div>후기 게시판</h1>
+                                        <div class="page-header-subtitle">소중한 반려동물을 위해 후기를 작성해보세요</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </header>
                     <!-- Main page content-->
-                   <main>
+                    <main>
                     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                         <div class="container-fluid px-4">
                             <div class="page-header-content">
                                 <div class="row align-items-center justify-content-between pt-3">
                                     <div class="col-auto mb-3">
                                         <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="file-text"></i></div>후기작성
+                                            <div class="page-header-icon"><i data-feather="file-text"></i>후기내용</div>
                                         </h1>
                                     </div>
                                 </div>
@@ -139,45 +150,46 @@
                     <div class="container-fluid px-4" >
                         <div class="row gx-4">
                             <div class="col-lg-8" style="margin:0 auto;">
-                            <form action="reviewInsert.wd" method="POST" id="ReviewInsertForm" name="ReviewInsertForm">
+                            <form name="RevieList" id="RevieList">
                                 <div class="card mb-4" >
-                                	<input type="hidden" id="crnum" name="crnum" />
+                                	<input type="hidden" id="crnum" name="crnum" value=<%=rvo.getCrnum() %> />
                                 	<input type="hidden" id="cnum" name="cnum" />
                                     <div class="card-header">제목</div>
                                     <div class="card-body">
-                             			<input type="text" id="crsubject" name="crsubject" class="lh-base form-control" placeholder="제목을 입력하세요" style="width:100%"/>
+                             			<div class="lh-base form-control"><%=rvo.getCrsubject() %></div>
                                     </div>
                                     <div class="card-header">작성자</div>
                                     <div class="card-body">
-                             			<input type="text" id="crwriter" name="crwriter" class="lh-base form-control" placeholder="작성자" style="width:100%"/>
+                             			<div class="lh-base form-control"><%=rvo.getCrwriter() %></div>
                                     </div>
                                     <div class="card-header">평점</div>
-                                    <div class="strcon">
-                                    <!-- <span class="str"></span> -->
-									  <input type="radio" id="5-stars" name="crscore" id="crscore" value="5" />
-									  <label for="5-stars" class="star">&#9733;</label>
-									  <input type="radio" id="4-stars" name="crscore" id="crscore" value="4" />
-									  <label for="4-stars" class="star">&#9733;</label>
-									  <input type="radio" id="3-stars" name="crscore" id="crscore" value="3" />
-									  <label for="3-stars" class="star">&#9733;</label>
-									  <input type="radio" id="2-stars" name="crscore" id="crscore" value="2" />
-									  <label for="2-stars" class="star">&#9733;</label>
-									  <input type="radio" id="1-star" name="crscore" id="crscore" value="1" />
-									  <label for="1-star" class="star">&#9733;</label>
-									</div>
+                                    <span class="strcon">
+                                    <%
+                                    	int starCount = Integer.parseInt(rvo.getCrscore());
+                                    
+                                    	for(int i=0; i<starCount; i++) {
+                                    %>
+	                                    
+											<span name="crscore" id="crscore" ><span class="star1">&#9733;</span></span>
+										
+									<% } %>
+									</span>
                                     <div class="card-header">후기내용</div>
                                     <div class="card-body">
-                                    	<textarea class="lh-base form-control" type="text" name="crmemo" id="crmemo" placeholder="후기를 입력해주세요" rows="10" ></textarea>
+                                    	<div class="lh-base form-control" name="crmemo" id="crmemo" style="height:100%;" ><%=rvo.getCrmemo() %></div>
                                     </div>
+                                    <!-- 
                                     <div class="card-body">
                                     	<div style="margin-top:-25px;">
                                     		<span style="float:right;">신고하기</span>
                                     		<input type="checkbox" value="신고하기" name="crreport" id="crreport" style="float:right;margin-top:3px;margin-right:5px;width:15px;height:15px;">
                                     	</div>
                                     </div>
+                                     -->
                                 </div>
                                 <div>
-                                	<button class="btn btn-primary" type="submit" id="subbtn" name="subbtn" style="width:100%;">작성완료</button>
+                                	<button class="btn btn-primary" type="submit" id="U" style="width:49.6%;float:left;margin-right:5px;">수정하기</button>
+                                	<button class="btn btn-primary" type="submit" id="D" style="width:49.6%;float:left;">삭제하기</button>
                                 </div>
                                 </form>
                                 <a href="reviewSelectAll.wd"><button class="btn btn-primary mt-2" type="button" style="width:100%;">목록보기</button></a>
@@ -197,6 +209,6 @@
             </div>
 			<!-- /콘텐츠 -->
         </div>
-
+		
     </body>
 </html>

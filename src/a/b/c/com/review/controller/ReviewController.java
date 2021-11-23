@@ -8,8 +8,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
@@ -22,7 +27,7 @@ import a.b.c.com.review.vo.ReviewVO;
 @Controller
 public class ReviewController {
 	
-	private Logger logger = Logger.getLogger(MemberController.class);
+	private Logger logger = Logger.getLogger(ReviewController.class);
 
 	// 서비스 연결
 	private ReviewService reviewService;
@@ -36,24 +41,6 @@ public class ReviewController {
 		this.chabunService = chabunService;
 	}
 	
-	//전제 조회
-	@RequestMapping(value="reviewSelectAll", method=RequestMethod.GET)
-	public String reviewSelectAll(ReviewVO rvo, Model model) {
-		
-		logger.info("reviewSelectAll() 함수진입 >>> : ");
-		
-		List<ReviewVO> listAll = reviewService.selectAllReview(rvo);
-		logger.info("ReviewController() listAll.size() >>> : " + listAll.size());
-		
-		if (listAll.size() > 0) {
-			
-			model.addAttribute("listAll", listAll);
-			return "review/reviewSelectAll";
-		}
-		
-		return "review/reviewInsertForm";
-	}
-	
 	// 게시판 글 입력 폼
 	@RequestMapping(value="reviewInsertForm", method=RequestMethod.GET)
 	public String reviewInsertForm() {		
@@ -64,56 +51,114 @@ public class ReviewController {
 		return "review/reviewInsertForm";
 	}
 	
-	// 후기입력하기
+	// 후기입력하기 버튼을 눌렀을 때
 	@RequestMapping(value="reviewInsert", method=RequestMethod.POST)
-	public String reviewInsert (HttpServletRequest req) {
-		 
-		logger.info("reviewInsert() 함수 진입 >>> : ");
+	public String reviewInsert(ReviewVO rvo, Model model) {
 		
-		// 후기번호 채번구하기
-		// String crnum = ChabunUtil.getBoardChabun("R", chabunService.getReviewChabun().get.Crnum)
-
-		// 돌봄신청번호 채번구하기
-		// String cnum = ChabunUtil.getBoardChabun("W", chabunService.getReviewChabun().get.Cnum)
+		logger.info("ReviewInsert() 함수 진입 >>> : ");
+		logger.info("crsubject : " + rvo.getCrsubject());
+		logger.info("crwriter : "  + rvo.getCrwriter());
+		logger.info("crscore : " + rvo.getCrscore());
+		logger.info("crmemo : " + rvo.getCrmemo());
+		logger.info("crreport : " + rvo.getCrreport());
 		
-		// 돌봄신청번호 채번구하기
-		// String nnum = ChabunUtil.getBoardChabun("C", chabunService.getReviewChabun().get.Nnum)
+		String crnum = ChabunUtil.getReviewCrnumChabun("R", chabunService.getReviewCrnumChabun().getCrnum());
+		logger.info("ReviewController reviewInsert crnum >>> : " + crnum);
 		
-		// 이미지 업로드
 		/*
-		 * FileUploadUtil fu = new FileUploadUtil(CommonUtils.REVIEW_IMG_UPLOAD_PATH,
-		 * 										  CommonUtils.REVIEW_IMG_FILE_SIZE, 
-		 * 										  CommonUtils.REVIEW_EN_CODE);
+		 * String cnum = ChabunUtil.getReviewCnumChabun("C",
+		 * chabunService.getReviewCnumChabun().getCnum());
+		 * logger.info("ReviewController reviewInsert cnum >>> : " + cnum);
 		 */
 		
-		// 이미지 파일 원본 사이즈
-		// 이미지 파일 원본 사이즈 크기 조절하기
-		/*
-		 * boolean bool = fu.imgfileUploadSize(req);
-		 * logger.info("ReviewController reviewInsert bool >>> " + _bool);
-		 */
+		rvo.setCrnum(crnum);
+		rvo.setCnum("1");
+		rvo.setCrsubject(rvo.getCrsubject());
+		rvo.setCrwriter(rvo.getCrwriter());
+		rvo.setCrmemo(rvo.getCrmemo());
+		rvo.setCrreport(rvo.getCrreport());
 		
-		// 채번, 이미리 업로드 성공하면 VO세팅하기
-		ReviewVO _rvo = null;
-		_rvo = new ReviewVO();
+		logger.info("crsubject : " + rvo.getCrsubject());
+		logger.info("crwriter : "  + rvo.getCrwriter());
+		logger.info("crscore : " + rvo.getCrscore());
+		logger.info("crmemo : " + rvo.getCrmemo());
+		logger.info("crreport : " + rvo.getCrreport());
 		
-		_rvo.setCrnum("crnum");
-		_rvo.setCnum("cnum");
-		_rvo.setNnum("nnum");
-		_rvo.setCrscore("crscore");
-		_rvo.setCrmemo("crmemo");
-		_rvo.setCphoto("cphoto");
-		_rvo.setCrreport("crreport");
+		int nCnt = reviewService.insertReview(rvo);
 		
-		logger.info("reviewInsert() 함수 진입 _rvo.getCrnum" + _rvo.getCrnum());
-		logger.info("reviewInsert() 함수 진입 _rvo.getCnum" + _rvo.getCnum());
-		logger.info("reviewInsert() 함수 진입 _rvo.getNnum" + _rvo.getNnum());
-		logger.info("reviewInsert() 함수 진입 _rvo.getCrscore" + _rvo.getCrscore());
-		logger.info("reviewInsert() 함수 진입 _rvo.getCrmemo" + _rvo.getCrmemo());
-		logger.info("reviewInsert() 함수 진입 _rvo.getCphoto" + _rvo.getCphoto());
-		logger.info("reviewInsert() 함수 진입 _rvo.getCrreport" + _rvo.getCrreport());
+		if (nCnt > 0) {return "review/reviewInsert";}
+		
+		return "review/reviewInsertForm";
+		
+	}
+	
+	//전제 조회
+	@RequestMapping(value="reviewSelectAll", method=RequestMethod.GET)
+	public String reviewSelectAll(ReviewVO rvo, Model model) {
+		
+		logger.info("ReviewController reviewSelectAll() 함수진입 >>> : ");
+		logger.info("ReviewController reviewSelectAll rvo.getCrnum() : " + rvo.getCrnum());
+		logger.info("ReviewController reviewSelectAll rvo.getCnum() : " + rvo.getCnum());
+		logger.info("ReviewController reviewSelectAll rvo.getCrsubject() : " + rvo.getCrsubject());
+		logger.info("ReviewController reviewSelectAll rvo.getCrwriter() : " + rvo.getCrwriter());
+		logger.info("ReviewController reviewSelectAll rvo.getCrscore() : " + rvo.getCrscore());
+		logger.info("ReviewController reviewSelectAll rvo.getCrmemo() : " + rvo.getCrmemo());
+		logger.info("ReviewController reviewSelectAll rvo.getCrreport() : " + rvo.getCrreport());
+		
+		List<ReviewVO> listAll = reviewService.selectAllReview(rvo);
+		logger.info("ReviewController selectAllReview listAll.size() >>> : " + listAll.size());
+		
+		if(listAll.size() > 0) {
+			
+			model.addAttribute("listAll", listAll);
+			return "review/reviewSelectAll";
+			
+		}
+		
+		
+		return "review/reviewInsertForm";
+	}
+	
+	// 조건조회
+	@RequestMapping(value="reviewSelect", method=RequestMethod.GET)
+	public String reviewSelect(ReviewVO rvo, Model model) {
+		
+		logger.info("ReviewController reviewSelect() 함수진입 >>> : ");
+		logger.info("ReviewController reviewSelect rvo.getCnum() >>> : " + rvo.getCnum());
+		
+		List<ReviewVO> listS = reviewService.selectReview(rvo);
+		logger.info("ReviewController reviewSelect listS.size() >>> : " + listS.size());
+		
+		if (listS.size() == 1) {
+			model.addAttribute("listS", listS);
+			return "review/reviewSelect";
+		}
 		
 		return "review/reviewSelectAll";
+		
 	}
-
+	
+	// 수정하기 폼으로가기
+	@RequestMapping(value="reviewUpdateForm", method=RequestMethod.GET)
+	public String reviewUpdate(ReviewVO rvo, Model model) {
+		
+		logger.info("ReviewController reviewUpdate() 함수진입 >>> : ");
+		
+		logger.info("ReviewController reviewUpdate rvo.getCrnum() >>> : " + rvo.getCrnum());
+		logger.info("ReviewController reviewUpdate rvo.getCrscore() >>> : " + rvo.getCrscore());
+		logger.info("ReviewController reviewUpdate rvo.getCrmemo() >>> : " + rvo.getCrmemo());
+		
+		String crnum = rvo.getCrnum();
+		System.out.println("crnum >>> : " + crnum);
+		rvo.setCrnum(rvo.getCrnum());
+		
+		List<ReviewVO> listS = reviewService.selectReview(rvo);
+		
+		if (listS.size() == 1) {
+			model.addAttribute("listS", listS);
+			return "review/reviewUpdateForm";
+		}
+		
+		return "review/reviewSelect";
+	}
 }

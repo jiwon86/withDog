@@ -16,45 +16,73 @@
 	
 	</resultMap>
 
- -->	
+ -->
+ 	<!-- 후기게시판 인서트 쿼리 -->	
  	<insert id="insertReview" parameterType="ReviewVO">
 	
-	INSERT INTO WITH_REVIEW( 	CRNUM, 
-								CNUM, 
-								NNUM,
-	                          	CRSCORE, 
-	                          	CRMEMO, 
-	                          	CPHOTO,
-	                          	CRREPORT, 
-	                          	INSERTDATE, 
-	                          	UPDATEDATE,
-	                          	DELYN) 
+	INSERT INTO WITH_REVIEW( 	CRNUM, 					<!-- COlUMN 1 --> 
+								CNUM,					<!-- COlUMN 2 -->
+								CRSUBJECT,				<!-- COlUMN 3 -->
+								CRWRITER, 				<!-- COlUMN 4 -->
+	                          	CRSCORE, 				<!-- COlUMN 5 -->
+	                          	CRMEMO, 				<!-- COlUMN 6 -->
+	                          	CRREPORT, 				<!-- COlUMN 7 -->
+	                          	INSERTDATE, 			<!-- COlUMN 8 -->
+	                          	UPDATEDATE,				<!-- COlUMN 9 -->
+	                          	DELYN) 					<!-- COlUMN 10 -->
 	                          	
-	                  VALUES( 	#{crnum, jdbcType=VARCHAR}, 
-	                  			#{cnum, jdbcType=VARCHAR}, 
-	                  			#{nnum, jdbcType=VARCHAR},
-	                          	#{crscore, jdbcType=VARCHAR}, 
-	                          	#{crmemo, jdbcType=VARCHAR}, 
-	                          	#{cphoto, jdbcType=VARCHAR},
-	                          	#{crreport, jdbcType=VARCHAR}, 
-	                          	SYSDATE, 
-	                          	SYSDATE,
-	                          	'Y')
+	                  VALUES( 	#{crnum, jdbcType=VARCHAR},			<!-- PLACEHOLDER 1 -->
+	                  			#{cnum, jdbcType=VARCHAR},			<!-- PLACEHOLDER 2 -->
+	                  			#{crsubject, jdbcType=VARCHAR}, 	<!-- PLACEHOLDER 3 -->
+	                  			#{crwriter, jdbcType=VARCHAR},  	<!-- PLACEHOLDER 4 -->
+	                          	#{crscore, jdbcType=VARCHAR}, 		<!-- PLACEHOLDER 5 -->
+	                          	#{crmemo, jdbcType=VARCHAR}, 		<!-- PLACEHOLDER 6 -->
+	                          	#{crreport, jdbcType=VARCHAR}, 		<!-- PLACEHOLDER 7 -->
+	                          	SYSDATE, 							<!-- PLACEHOLDER 8 -->
+	                          	SYSDATE,							<!-- PLACEHOLDER 9 -->
+	                          	'Y')								<!-- PLACEHOLDER 10 -->
 	                          	
 	</insert>
 	
+	<!-- 후기게시판 셀렉올 쿼리 -->
 	<select id="selectAllReview" parameterType="ReviewVO" resultType="reviewVO">
 		SELECT A.CRNUM		CRNUM
 			  ,A.CNUM		CNUM
-			  ,A.NNUM		NNUM
+			  ,A.CRSUBJECT	CRSUBJECT
+			  ,A.CRWRITER	CRWRITER
 			  ,A.CRSCORE	CRSCORE
 			  ,A.CRMEMO		CRMEMO
-			  ,A.CPHOTO		CPHOTO
 			  ,A.CRREPORT	CRREPORT
 			  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
 	       	  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE	
 	    FROM 	WITH_REVIEW A
-		WHERE 	A.DELYN = 'Y'    
+		WHERE 	A.DELYN = 'Y' ORDER BY 1 DESC  
 	</select>
+	
+	<!-- 후기게시판 셀렉 쿼리 -->
+	<select id="selectReview" parameterType="ReviewVO" resultType="reviewVO">
+		SELECT A.CRNUM		CRNUM
+			  ,A.CNUM		CNUM
+			  ,A.CRSUBJECT	CRSUBJECT
+			  ,A.CRWRITER	CRWRITER
+			  ,A.CRSCORE	CRSCORE
+			  ,A.CRMEMO		CRMEMO
+			  ,A.CRREPORT	CRREPORT
+			  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+	       	  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE	
+	    FROM 	WITH_REVIEW A
+		WHERE 	A.DELYN = 'Y'
+		AND		A.CRNUM = #{crnum, jdbcType=VARCHAR}    
+	</select>
+	
+	<!-- 후기게시판 수정 쿼리 -->
+	<update id="updateReview" parameterType="ReviewVO">
+		UPDATE 	WITH_REVIEW
+		SET		CRSCORE=#{crscore, jdbcType=VARCHAR}, 
+		 		CRMEMO=#{crmemo, jdbcType=VARCHAR},
+			   	UPDATEDATE = SYSDATE
+		WHERE  	DELYN = 'Y' 
+		AND 	CRNUM = #{crnum, jdbcType=VARCHAR}
+	</update>
 
 </mapper>

@@ -71,6 +71,7 @@
 	      ) 
 	</insert>
 	
+	
 	<select id="read" resultMap="memberMap">
 		SELECT 
 			M.MNO            MNO,
@@ -138,5 +139,5 @@
 	WHERE 	DELETEYN = 'Y'
 	AND     A.MID = #{mid, jdbcType=VARCHAR}
 </select>
-	
+
 </mapper>

@@ -13,7 +13,12 @@
 		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
 
 		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />
+<<<<<<< HEAD
 
 		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
+=======
+		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
+		
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	</typeAliases>
 </configuration>

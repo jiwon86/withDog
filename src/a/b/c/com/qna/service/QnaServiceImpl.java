@@ -22,11 +22,17 @@ public class QnaServiceImpl implements QnaService {
 		this.qnaDAO = qnaDAO;
 	}
 
+//	@Override
+//	public List<QnaVO> qnaSelect(QnaVO qvo) {
+//		// TODO Auto-generated method stub
+//		return qnaDAO.qnaSelect(qvo);
+//	}
+	
 	@Override
-	public List<QnaVO> qnaSelect(QnaVO qvo) {
-		// TODO Auto-generated method stub
-		return qnaDAO.qnaSelect(qvo);
+	public List<QnaVO> qnaSelect(String qnanum) {
+		return qnaDAO.qnaSelect(qnanum);
 	}
+
 
 	@Override
 	public List<QnaVO> qnaSelectAll(QnaVO qvo) {
@@ -57,5 +63,19 @@ public class QnaServiceImpl implements QnaService {
 	public List<QnaVO> qnaSelectPaging(QnaVO qvo) {
 		// TODO Auto-generated method stub
 		return qnaDAO.qnaSelectPaging(qvo);
+	}
+	
+	//selectAll에서 수정
+	@Override
+	public int qnaMyUpdate(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return qnaDAO.qnaMyUpdate(qvo);
+	}
+	
+	//selectAll에서 삭제
+	@Override
+	public int qnaMyDelete(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return qnaDAO.qnaMyDelete(qvo);
 	}
 }

@@ -3,6 +3,7 @@ package a.b.c.com.common;
 public abstract class ChabunUtil {
 	
 	public static final String BIZ_GUBUN_Q = "Q"; //Q&A
+	public static final String BIZ_GUBUN_RQ = "RQ"; //R : Q&A
 	public static final String BIZ_GUBUN_M = "M"; // 회원
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
@@ -30,9 +31,14 @@ public abstract class ChabunUtil {
 	
 	//Q&A
 	public static String getQnaChabun(String type, String memNum) {
-		
 		return BIZ_GUBUN_Q.concat(ChabunUtil.numpad(type, memNum));
+		
 	}	
+	
+	//R : Q&A
+	public static String getRqnaChabun(String type, String memNum) {
+		return BIZ_GUBUN_RQ.concat(ChabunUtil.numpad(type, memNum));
+	}
 	
 	// 회원 번호
 	public static String getMemChabun(String type, String memNum) {
@@ -61,6 +67,7 @@ public abstract class ChabunUtil {
 		System.out.println("getRboardChabun(\"N\", c) >>> : " + ChabunUtil.getRboardChabun("N", c));
 		System.out.println(".getNoticeChabun(\"N\", c) >>> : " + ChabunUtil.getNoticeChabun("N", c));
 		System.out.println(".getQnaChabun(\"N\", c) >>> : " + ChabunUtil.getQnaChabun("N", c));
+		
 	}
 	
 }

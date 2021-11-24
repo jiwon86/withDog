@@ -4,13 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BOARD UPDATE</title>
+<title>Q&A DELETE</title>
 </head>
 <body>
-BOARD UPDATE
+Q&A DELETE
 <hr>
 <script>
-	location.href="/WithDog/qnaSelectAll.wd";
+	alert("삭제되었습니다.");
+	console.log("삭제되었습니다.");
+	location.href="qnaSelectAll.wd";
 </script>
 
 </body>

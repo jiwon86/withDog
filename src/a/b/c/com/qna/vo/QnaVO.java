@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 public class QnaVO {
 	private static Logger logger = Logger.getLogger(QnaVO.class);
-	
 	//기본 필드
 	private String qnanum;
 	private String qnatitle;
@@ -16,6 +15,7 @@ public class QnaVO {
 	private String qnainsertdate;
 	private String qnaupdatedate;
 	private String delyn;
+	
 	
 	//검색 구분자 및 검색어 
 	private String keyfilter;
@@ -29,6 +29,15 @@ public class QnaVO {
 	private String curPage;
 	private String totalCount;
 	
+	@Override
+	public String toString() {
+		return "QnaVO [qnanum=" + qnanum + ", qnatitle=" + qnatitle + ", qnacon=" + qnacon + ", qnawriter=" + qnawriter
+				+ ", qnapw=" + qnapw + ", qnaanswer=" + qnaanswer + ", qnafile=" + qnafile + ", qnainsertdate="
+				+ qnainsertdate + ", qnaupdatedate=" + qnaupdatedate + ", delyn=" + delyn + ", keyfilter=" + keyfilter
+				+ ", keyword=" + keyword + ", startdate=" + startdate + ", enddate=" + enddate + ", pageSize="
+				+ pageSize + ", groupSize=" + groupSize + ", curPage=" + curPage + ", totalCount=" + totalCount + "]";
+	}
+
 	public QnaVO() {
 		
 	}

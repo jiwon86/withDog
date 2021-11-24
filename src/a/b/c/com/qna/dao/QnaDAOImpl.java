@@ -16,10 +16,14 @@ public class QnaDAOImpl implements QnaDAO {
 	@Autowired(required=false)
 	private SqlSessionTemplate sqlSession;
 
+//	@Override
+//	public List<QnaVO> qnaSelect(QnaVO qnanum) {
+//		// TODO Auto-generated method stub
+//		return sqlSession.selectList("qnaSelect", qnanum);
+//	}
 	@Override
-	public List<QnaVO> qnaSelect(QnaVO qvo) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelect", qvo);
+	public List<QnaVO> qnaSelect(String qnanum) {
+		return sqlSession.selectList("qnaSelect", qnanum);
 	}
 
 	@Override
@@ -51,5 +55,19 @@ public class QnaDAOImpl implements QnaDAO {
 	public List<QnaVO> qnaSelectPaging(QnaVO qvo){
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("qnaSelectPaging", qvo);
+	}
+	
+	//selectAll에서 수정
+	@Override
+	public int qnaMyUpdate(QnaVO qvo) {
+		// TODO Auto-generated method stub
+		return (Integer)sqlSession.update("qnaMyUpdate", qvo);
+	}
+
+	//selectAll에서  삭제
+	@Override
+	public  int qnaMyDelete(QnaVO qvo){
+		// TODO Auto-generated method stub
+		return (Integer)sqlSession.update("qnaMyDelete", qvo);
 	}
 }

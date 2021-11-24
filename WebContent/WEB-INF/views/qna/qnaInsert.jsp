@@ -10,7 +10,7 @@
 Q&A INSERT
 <hr>
 <script>
-	location.href="/WithDog/qnaSelectAll.wd";
+	location.href="qnaSelectAll.wd";
 </script>
 </body>
 </html>

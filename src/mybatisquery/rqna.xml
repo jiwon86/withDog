@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<mapper namespace = "a.b.c.com.qna.dao.RqnaDAO">
+
+<insert id="rqnaInsert" parameterType="rqnaVO">
+	
+	INSERT INTO RQNA (RQNANUM,
+					  QNANUM,
+					  RQNATITLE,
+					  RQNACON,
+					  RQNAWRITER,
+					  RQNAPW,
+					  RQNADELYN,
+					  RQNAINSERTDATE,
+					  RQNAUPDATEDATE)
+					  
+		  VALUES ( #{rqnanum, jdbcType=VARCHAR},
+		  		   #{qnanum, jdbcType=VARCHAR},
+		  		   #{rqnatitle, jdbcType=VARCHAR},
+		  		   #{rqnacon, jdbcType=VARCHAR},
+		  		   #{rqnawriter, jdbcType=VARCHAR},
+		  		   #{rqnapw, jdbcType=VARCHAR},
+		  		   'Y', SYSDATE, SYSDATE)
+</insert>
+
+<select id="rqnaSelect" parameterType="rqnaVO" resultType="rqnaVO">
+	SELECT * FROM RQNA WHERE RQNADELYN = 'Y'
+	AND RQNANUM = #{rqnanum, jdbcType=VARCHAR}
+</select>
+
+<select id="rqnaSelectAll" parameterType="rqnaVO" resultType="rqnaVO">
+	SELECT * FROM RQNA WHERE RQNADELYN = 'Y'
+	AND QNANUM = #{qnanum, jdbcType=VARCHAR}
+</select>
+
+<update id="rqnaUpdate" parameterType="rqnaVO">
+	UPDATE RQNA SET RQNACON = #{rqnacon, jdbcType=VARCHAR},
+					RQNAUPDATEDATE = SYSDATE
+	WHERE RQNADELYN = 'Y' AND RQNANUM = #{rqnanum, jdbcType=VARCHAR}
+</update>
+
+<update id="rqnaDelete" parameterType="rqnaVO">
+	UPDATE QNA SET RQNADELYN = 'N', 
+				   RQNAUPDATEDATE = SYSDATE
+	WHERE RQNAUPDATEDATE = 'Y' AND RQNANUM = #{rqnanum, jdbcType=VARCHAR}
+</update>
+</mapper>

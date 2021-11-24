@@ -3,10 +3,15 @@
 		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		  
 <mapper namespace="a.b.c.com.common.dao.ChabunDAO">
-	
+
 	<select id="getQnaChabun" resultType="QnaVO">
 		SELECT NVL(MAX(SUBSTR(A.QNANUM, -4)), 0) + 1 QNANUM FROM QNA A
 	</select>
+	
+	<select id="getRqnaChabun" resultType="RqnaVO">
+		SELECT NVL(MAX(SUBSTR(A.RQNANUM, -4)), 0) + 1 RQNANUM FROM RQNA A
+	</select>
+	
 
 	<!--  
 	<select id="getBoardChabun" resultType="boardVO">

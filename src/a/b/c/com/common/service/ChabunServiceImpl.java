@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.common.dao.ChabunDAO;
 import a.b.c.com.qna.vo.QnaVO;
+import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
 
@@ -56,11 +57,14 @@ public class ChabunServiceImpl implements ChabunService {
 	@Override
 	public QnaVO getQnaChabun() {
 		logger.info("ChabunServiceImpl.getQnaChabun() 함수 진입");
-		
 		return chabunDAO.getQnaChabun();
 	}
 	
-
+	@Override
+	public RqnaVO getRqnaChabun() {
+		logger.info("ChabunServiceImpl.getRqnaChabun() 함수 진입");
+		return chabunDAO.getRqnaChabun();
+	}
 	
 
 }

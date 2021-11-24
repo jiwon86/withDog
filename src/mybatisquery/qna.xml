@@ -13,7 +13,7 @@
 		<result property="qnafile"		column="QNAFILE"/>
 		
 	</resultMap>
-
+<!--getQnaChabun  -->
 	<insert id="qnaInsert" parameterType="QnaVO">
 		
 		INSERT INTO QNA(QNANUM, QNATITLE, QNACON,
@@ -47,6 +47,34 @@
 	ORDER BY 1
 </select>
 
+<select id="qnaSelect" parameterType="QnaVO" resultType="QnaVO">
+	SELECT     A.QNANUM			QNANUM
+			  ,A.QNATITLE		QNATITLE
+			  ,A.QNACON			QNACON
+			  ,A.QNAWRITER		QNAWRITER
+			  ,A.QNAPW			QNAPW
+			  ,A.QNAANSWER		QNAANSWER
+			  ,A.QNAFILE		QNAFILE
+			  ,TO_CHAR(A.QNAINSERTDATE, 'YYYY-MM-DD')	QNAINSERTDATE
+			  ,TO_CHAR(A.QNAUPDATEDATE, 'YYYY-MM-DD')	QNAUPDATEDATE
+			  ,A.DELYN			DELYN
+	FROM QNA A
+	WHERE A.DELYN = 'Y' AND A.QNANUM = #{qnanum, jdbcType=VARCHAR}
+</select>
 
+<!-- selectAll에서 수정 -->
+<update id="qnaMyUpdate" parameterType="QnaVO">
+	UPDATE QNA SET QNATITLE = #{qnatitle, jdbcType=VARCHAR},
+				   QNACON = #{qnacon, jdbcType=VARCHAR},
+				   QNAFILE = #{qnafile, jdbcType=VARCHAR},
+	QNAUPDATEDATE = SYSDATE
+	WHERE DELYN = 'Y' AND QNANUM = #{qnanum, jdbcType=VARCHAR}
+</update>
+
+<!-- selectAll에서 삭제 -->
+<update id="qnaMyDelete" parameterType="QnaVO">
+	UPDATE QNA SET DELYN = 'N', QNAUPDATEDATE = SYSDATE
+	WHERE DELYN = 'Y' AND QNANUM = #{qnanum, jdbcType=VARCHAR}
+</update>
 </mapper>
 

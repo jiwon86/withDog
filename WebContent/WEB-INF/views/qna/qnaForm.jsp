@@ -84,31 +84,31 @@
          <!-- Form Group (qnanum)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnanum">글 번호</label>
-             <input class="form-control" id="qnanum" type="text" readonly />
+             <input class="form-control" id="qnanum" name="qnanum" type="text" readonly/>
          </div>
          <!-- Form Group (qnatitle)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnatitle">글 제목</label>
-             <input class="form-control" id="qnatitle" type="text" placeholder="Please enter title" />
+             <input class="form-control" id="qnatitle" name="qnatitle" type="text" placeholder="Please enter title" />
          </div>
          <!-- Form Group (qnawriter)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnawriter">작성자</label>
-             <input class="form-control" id="qnawriter" type="text" placeholder="Please enter your name" />
+             <input class="form-control" id="qnawriter" name="qnawriter"type="text" placeholder="Please enter your name" />
          </div>
          <!-- Form Group (qnacon)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnacon">글 내용</label>
-             <textarea class="form-control" id="qnacon" rows="10" cols="65" style="height:200px" placeholder="Please enter your question"></textarea>
+             <textarea class="form-control" id="qnacon" name="qnacon" rows="10" cols="65" style="height:200px" placeholder="Please enter your question"></textarea>
          </div>
          <div class="mb-3">
          	 <label class="small mb-1" for="qnapw">첨부파일</label>
-         	 <input class="form-control" id="qnafile" type="file">
+         	 <input class="form-control" id="qnafile" name="qnafile" type="file">
          </div>
             <!-- Form Group (qnapw)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnapw">비밀번호(숫자 4개)</label>
-             <input class="form-control" id="qnapw" style="width: 300px;line-height:20px;" type="password" placeholder="Please enter the password in 4 digits." />
+             <input class="form-control" id="qnapw" name="qnapw" style="width: 300px;line-height:20px;" type="password" placeholder="Please enter the password in 4 digits." />
          </div>
          <br> 
          

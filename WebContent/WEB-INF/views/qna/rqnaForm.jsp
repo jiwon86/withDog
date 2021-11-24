@@ -87,16 +87,16 @@
 		
 		//댓글 삭제
 		$(document).on("click", ".deleteBtn", function(){
-			//alert("D >>> : ");
+			alert("D >>> : ");
 			
-			var rsbnum = $(this).parents("li").attr("dataNum");
+			var rqnanum = $(this).parents("li").attr("dataNum");
 			var target = $(this).parents(".rbmemoItem");
 			console.log("target >>> : " + target);
 			
-			let selectURL = "rqnaDelete.kmj";
+			let selectURL = "rqnaDelete.wd";
 			let method="POST";
 			let dataParam = {
-					rsbnum : rsbnum,
+					rqnanum : rqnanum,
 			};
 			
 			//dataParam = $("#jsonTestForm").serialize();
@@ -119,7 +119,7 @@
 				}
 			}
 			function whenError(e){
-				//alert("e >>> : " + e.responseText);
+				alert("e >>> : " + e.responseText);
 			}
 		});
 	});

@@ -42,8 +42,8 @@
 </update>
 
 <update id="rqnaDelete" parameterType="rqnaVO">
-	UPDATE QNA SET RQNADELYN = 'N', 
-				   RQNAUPDATEDATE = SYSDATE
-	WHERE RQNAUPDATEDATE = 'Y' AND RQNANUM = #{rqnanum, jdbcType=VARCHAR}
+	UPDATE RQNA SET RQNADELYN = 'N', 
+				   RQNAINSERTDATE = SYSDATE
+	WHERE RQNADELYN = 'Y' AND RQNANUM = #{rqnanum, jdbcType=VARCHAR}
 </update>
 </mapper>

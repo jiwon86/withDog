@@ -17,11 +17,16 @@
 	String loginid = (String)request.getAttribute("loginid");
 	if (obj == null) return;
 	boolean myContent = false;
+	boolean waitPropose = false;
 	MapTradeVO mvo = (MapTradeVO)obj;
 	String writer = mvo.getTWRITER();
+	String propose = mvo.getPROPOSE();
 	System.out.println("writer : " + writer + "id : " + loginid);
 	if (loginid.equals(writer)) {
 		myContent = true;
+	}
+	if (loginid.equals(propose)) {
+		waitPropose = true;
 	}
 	
 %>
@@ -39,6 +44,15 @@ $(document).ready(function(){
 	
 	$('#waiting').click(function(){
 		alert("아직 신청 대기중 입니다!");
+	});
+	
+	$('#waitingPu').click(function(){
+		 if (confirm("승인 대기중 입니다. 취소 하시겠습니까?") == true){    //확인
+
+		 }else{   //취소
+
+		     return false;
+		 }
 	});
 	
 }); // end ready
@@ -95,12 +109,13 @@ $(document).ready(function(){
 	                            	</ul>
 	                            	
 	                            
-	                        	<% if(myContent == false) { %>
-	                           		<button class="btn btn-success" id="submit" type="button">신청하기</button>
-                           		<% }else { %>
-                           			<button class="btn btn-warning" id="waiting" type="button">돌봄이<br>구하는 중...</button>
+	                        	<% if(myContent == true) { %>
+	                        		<button class="btn btn-warning" id="waiting" type="button">돌봄이<br>구하는 중...</button>
+                           		<% }else if (waitPropose == true){ %>
+                           			<button class="btn btn-warning" id="waitingPu" type="button">승인 <br>대기중...</button>
+                           		<% } else { %>
+                           			<button class="btn btn-success" id="submit" type="button">신청하기</button>
                            		<% } %>
-                           		
                             <form id="aaa">
                             	<input type="hidden" value=<%=mvo.getTNO() %> name="TNO">
                             </form>

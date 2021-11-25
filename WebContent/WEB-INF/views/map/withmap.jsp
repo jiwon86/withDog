@@ -28,7 +28,7 @@
 				<div id="map" class="map"></div>
 
 				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f59b335fdce7811c29ddb73572e2a37b"></script>
+					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f59b335fdce7811c29ddb73572e2a37b&libraries=services"></script>
 				<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 								
 				<script>
@@ -58,6 +58,7 @@
 	let		markers = [];
 	let		wmark;
 	let 	jsonData;
+	let		load = 0;
 	//구글 키
 	const API_KEY = "AIzaSyAFETg9_IkmdP19ZbH4jCFyK1Ms-I4KoXE";
 				
@@ -66,43 +67,52 @@
 
 //지도 중심 좌표 얻어오기
 let center = map.getCenter();
+// 커스텀 오버레이드 Html tag
+let content ='<form id="popup" class="popup">'
++'<div class="overlaybox" id="overlaybox">'
++'<div class="title-header">'
+	+'<header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">'
+	+	'<div class="container-xl px-4">'
+	+       '<div class="page-header-content pt-4">'
+	+            '<div class="row align-items-center justify-content-between">'
+	+                '<div class="col-auto mt-4">'
+	+                   '<h1 class="page-header-title">'
+	+                        '<div class="page-header-icon"><i data-feather="edit-3"></i></div>'
+	+                       	'돌봄 신청 작성하기'
+	+							'<button class="btn btn-red btn-icon cancle" type="button" id="cancle">'
+	+					    	'<i class="fas fa-times-circle fa-3x"></i>'
+	+					'</button>'
+	+                   '</h1>'
+	+                  '<div class="page-header-subtitle">돌봄 시 필요한 사항들을 적어주세요.</div>'
+	+                '</div>'
+	+            '</div>'
+	+        '</div>'
+	+   '</div>'
+	+'</header>'
++'</div>'
++'<div class="area_1">'
++	'<ul class="list">'	
++		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
++		'<li><label for="dogs"><i class="fas fa-dog"></i></i>&nbsp;돌 볼 반려동물</label><select class="form-control" id="dogs">'
++			'<option>등록된 반려동물 표시</option></select></li>'
++		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><input type="text" class="form-control" id="when" name="when" placeholder="맡기실 기간을 입력해주세요."></li>'
++		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
++		'<li><label for="content"><i class="fas fa-envelope-open-text"></i>&nbsp;상세 사항</label><textarea class="form-control" id="content" name="content" rows="3" placeholder="돌봄 시 필요한 사항을 적어주세요."></textarea></li>'
++		'<li><label for="photo"><i class="fas fa-images"></i>&nbsp;반려동물 사진</label><input type="file" class="form-control" id="photo" name="photo"></li>'
++		'<li><label for="addr_2"><i class="fas fa-map-marked-alt"></i>&nbsp;주소 정보</label><div class="addr"><input type="text" class="form-control addr" id="addr_1" name="addr_1" readonly>'
++		'<input type="text" class="form-control addr" id="addr_2" name="addr_2">'
++			'</div></li>'
++		'<li><button class="btn btn-primary smit" type="button" id="submit">신청 하기</button></li>'
++'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
++'			<input type="hidden" id="lng" name="lng" value=""></input>'	
 
-// 커스텀 오버레이에 표시할 HTML 태그
-var content = '<form id="popup" name="popup"><div class="overlaybox" id="overlaybox">' +
-'    <div class="title">돌봄 구인 글 작성</div>' +
-'    <div class="first">' +
-'    <ul>' +
-'        <li class="up">' +
-'            <span class="title">제목</span><br>' +
-'            <span class="number"><input type="text" id="title" name="title" class="inputtext" placeholder="제목을 입력 하세요."></input></span>' +
-'        </li>' +
-'        <li>' +
-'            <span class="title">돌봄이 에게 바라는 사항</span><br>' +
-'            <span class="number"><textarea class="text" id="content" name="content" cols="40" rows="10" placeholder="돌봄이에게 바라는 사항을 입력해주세요."></textarea></span>' +
-'        </li>' +
-'		<li>' +
-'            <span class="title">강아지 사진을 올려주세요!</span><br>' +
-'            <span class="imgfile"><input type="file" name="photo" id="photo"></span>' +
-'        </li>' +
-'		<li>' +
-'            <span class="title">돌봄 비용</span><br>' +
-'            <span class="number"><input type="text" id="price" name="price" class="inputtext" placeholder="돌봄이에게 지급 할 금액 입니다."></span>' +
-'        </li>' +
-'		<li>' +
-'            <span class="title">돌봄 기간</span><br>' +
-'            <span class="number"><input type="text" name="when" id="when" class="inputtext" placeholder="기간을 입력해주세요."></span>' +
-'        </li>' +
-'            <span class="cancle"><input class="butt" id="cancle" type="button" value="취소"></span>' +
-'            <span class="submit"><input class="butt" id="submit" type="button" value="확인"></span>' +
-'    </ul>' +
-'			<input type="hidden" id="lat" name="lat" value=""></input>	' +
-'			<input type="hidden" id="lng" name="lng" value=""></input>'	
-'</div></form>';
++'</ul></div>'
++'</div></form>';
 
 
 const customOverlay = new kakao.maps.CustomOverlay({
     position: center,
-    content: content   
+    content: content  
 });
 
 // 커스텀 오버레이를 생성 한다.
@@ -193,23 +203,6 @@ function getlocation () {
 	}else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 	    alert("브라우저가 최신 버전이 아닙니다!");
 	}
-}
-
-function get() {
-    
-    const url = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + API_KEY;
-	$.ajax({			
-		url : url,		
-		type : 'post',
-	    success: function (data){
-	        alert(data);
-	        
-	    },
-	    error: function (error){
-	        alert("에러");
-	    }
-	}); // end of ajax()
- 
 }
 //취소 시 팝업을 하이드 시킴
 function hidePopup() {
@@ -311,6 +304,7 @@ function markersLoad(x) {
 							markers.push(marker);
 							//
 							markerInfoSet(title,marker,photo,markLocation,price,tno,writer);
+							load = 1;
 					        }
 					
 
@@ -332,8 +326,10 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 						+ '<div class="tradeinfo_2">'
 						+ '<ul><li>'+ title + '</li>'
 						+ '<li>작성자 : '+ writer + '</li>'
-						+'<li>' + price + '</li></ul></div>'
-						+'</div>'; 
+						+ '<li><i class="far fa-clock"></i>&nbsp;기간 : </li>'
+						+ '<li><i class="fas fa-coins"></i>&nbsp;돌봄 비용 : ' + price + '</li>'
+						+ '<li><i class="fas fa-map-marked-alt"></i>&nbsp;주소 : </li>'
+						+'</ul></div></div>'; 
 
 	
 	makerInfo = new kakao.maps.CustomOverlay({
@@ -368,11 +364,29 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 
 // ------------------------------------------------------------------------------------
 
+let geocoder = new kakao.maps.services.Geocoder();
+
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+}
 
 				//click Event
 				kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 
-				    if (pop == false) {
+				    if (pop == false && load == 1) {
+				    	
+				    	// 주소-좌표 변환 객체를 생성합니다
+				    	searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+				    		let roadaddr = document.getElementById('addr_1');
+				    		roadaddr.value = result[0].address.address_name;
+				    	});
+				    	
 				    	
 				        // 클릭한 위도, 경도 정보를 가져옵니다 
 				        sethideMarkers(map);
@@ -428,6 +442,7 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 				    }
 				      
 				});
+				
 
 
 				

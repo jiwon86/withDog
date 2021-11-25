@@ -4,12 +4,11 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-
+import a.b.c.com.qna.vo.QnaVO;
+import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
 import a.b.c.com.notice.vo.NoticeVO;
-
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
@@ -17,6 +16,15 @@ public class ChabunDAOImpl implements ChabunDAO {
 
 	@Autowired(required=false)
 	private SqlSessionTemplate sqlSession;
+	
+	
+//	@Override
+//	public SpringBoardVO getBoardChabun() {
+//		logger.info("ChabunDAOImpl.getBoardChabun() 함수 진입");
+//		
+//		return sqlSession.selectOne("getBoardChabun");
+//	}
+
 
 	@Override
 	public MapTradeVO getMapChabun() {
@@ -43,7 +51,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 	@Override
 	public Member getMemChabun() {
 		logger.info("ChabunDAOImpl.getMemChabun() 함수 진입");
-		
 		return sqlSession.selectOne("getMemChabun");
 	}
 
@@ -56,5 +63,15 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getNoticeChabun");
 	}
 	
+	@Override
+	public QnaVO getQnaChabun() {
+		logger.info("ChabunDAOImpl.getQnaChabun() 함수 진입");
+		return sqlSession.selectOne("getQnaChabun");
+	}
 	
+	@Override
+	public RqnaVO getRqnaChabun() {
+		logger.info("ChabunDAOImpl.getRqnaChabun() 함수 진입");
+		return sqlSession.selectOne("getRqnaChabun");
+	}
 }

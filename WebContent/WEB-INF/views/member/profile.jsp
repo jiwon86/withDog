@@ -14,6 +14,11 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				
+				$("#Mypet").click(function(){
+					//alert("mno >>>" + memberUpdateForm.mno.value);
+					$("#memberUpdateForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				});
+				
 				$("#zonecode").click(function() {
 					new daum.Postcode({
 						oncomplete: function(data) {
@@ -65,7 +70,6 @@
 				}).then((result) => {
 					if(result.value) {
 						// 수정 버튼을 눌렀을 때 작업할 내용을 작성
-						console.log("업데이트 성공");
 						updateMemberAjax();
 					}
 				})
@@ -83,14 +87,17 @@
 					data: data,
 					processData: false,
 					contentType: false,
+					/*
 					beforeSend: function(xhr) {
 						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
 					},
+					*/
 					success: function(data) {
 						$("#liveToast1").toast("show");
 					},
 					error: function(request, error) {
 						$("#liveToast2").toast("show");
+						console.log(error);
 					}
 				});
 				
@@ -99,15 +106,20 @@
 			
 			function readURL(input) {
 				if(input.value == "") {
-					$("#mphoto").attr("src", "/template/assets/img/illustrations/profiles/profile-1.png");
+					console.log("input.value == '' ");
+					$("#mphoto").attr("src", "/image/member/default.jpg");
 				} else {
+					console.log("else");
 					var reader = new FileReader();
 					reader.onload = function(e) {
 						$("#mphoto").attr("src", e.target.result);
 					}
 				}
-
-				reader.readAsDataURL(input.files[0]);
+				
+				if(input.files[0] != null) {
+					console.log("input.files[0] : OK");
+					reader.readAsDataURL(input.files[0]);
+				}
 			}
 	</script>
 	</head>
@@ -142,6 +154,7 @@
 				
 					String mroadaddress = member.getMroadaddress();
 					String[] mroadaddressArr = mroadaddress.split("@");
+					String mphoto = member.getMphoto();
 				%>
                 <main>
                     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
@@ -163,7 +176,7 @@
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
                             <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
-                            <a class="nav-link" href="petSelectAll.wd">MyPet</a>
+                            <a class="nav-link" href="#" id="Mypet">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                         </nav>
@@ -176,8 +189,17 @@
 	                                <div class="card mb-4 mb-xl-0">
 	                                    <div class="card-header">프로필 사진</div>
 	                                    <div class="card-body text-center">
-	                                        <img id="mphoto" class="img-account-profile mb-2" 
-	                                        	 src="/image/member/<%=member.getMphoto()%>" alt="프로필 사진" style="border-radius:50%; max-width:150px; max-height:150px;" />
+	                                    	
+	                                    	<% if(mphoto != null) { %>
+		                                        <img id="mphoto" class="img-account-profile mb-2" 
+		                                        	 src="/img/member/<%=member.getMphoto()%>" alt="프로필 사진" 
+		                                        	 style="border-radius:50%; max-width:150px; max-height:150px;" />
+                                        	<% } else { %>
+                                        		<img id="mphoto" class="img-account-profile mb-2" 
+		                                        	 src="/img/member/default.jpg" alt="프로필 사진" 
+		                                        	 style="border-radius:50%; max-width:150px; max-height:150px;" />
+                                        	<% } %>
+                                        	
 	                                        <div class="small font-italic text-muted mb-4">이미지 용량의 제한이 있습니다.</div>
 	                                          
 	                                        <input class="btn btn-primary" id="btnMphoto" type="button" value="프로필 사진 선택">

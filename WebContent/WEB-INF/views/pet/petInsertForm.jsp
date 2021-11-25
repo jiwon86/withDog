@@ -1,6 +1,8 @@
+<%@page import="a.b.c.com.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.oreilly.servlet.*" %>
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
 	c:import : 외부 jsp 파일 접근 가능
@@ -13,9 +15,20 @@
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 		$(document).ready(function(){
+			alert("mno >>>> " + document.petInsertForm.mno.value);
+			
+			$("#Mypet").click(function(){
+				alert("mno >>>" + petInsertForm.mno.value);
+				$("#petInsertForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+			});
+			
+			$("#Prev").click(function(){
+				alert("mno >>>" + petInsertForm.mno.value);
+				$("#petInsertForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+			});
 			
 			$("#Insert").click(function(){
-				alert("pname >>> : " + document.petInsertForm.pname.value);
+				alert("mno >>> : " + document.petInsertForm.mno.value);
 				$("#petInsertForm")
 				.attr({
 						"action":"petInsert.wd",
@@ -24,6 +37,7 @@
 				       }).submit();
 			});
 		});
+		
 		
 		</script>
 	</head>
@@ -59,16 +73,22 @@
                         </div>
                     </header>
                     <!-- Main page content-->
+                   
+                   
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link" href="account-profile.html">Profile</a>
-                            <a class="nav-link active ms-0" href="myPetList.wd">MyPet</a>
+                            <a class="nav-link" href="/profile.wd">Profile</a>
+                           	<a class="nav-link active ms-0" id="Mypet" href="#myPetList.wd">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                         </nav>
                         <hr class="mt-0 mb-4" />
 						  <form id="petInsertForm" name= "petInsertForm" action="petInsert.wd" method="POST" enctype="multipart/form-data">
+                                                   <%
+                                                   	Member member = (Member)request.getAttribute("member");
+                                                   %>
+                    								<input type="hidden" id="mno" name="mno" value="<%=member.getMno() %>">
                                                     <!-- 이름 -->
                                                    <div class="mb-3">
                                                        <label class="small mb-1" for="inputUsername">반려견 이름(최대 50자)</label>
@@ -132,7 +152,7 @@
                                                    
                                                   <br>
                                                    <div class="mb-3">
-						                              <label for="exampleFormControlSelect1">견종</label><select class="form-control" id="ptype">
+						                              <label for="exampleFormControlSelect1">견종</label><select class="form-control" name= "ptype" id="ptype">
 						                                  <option>---견종 선택---</option>
 						                                  <option value="01">쉽독 , 캐틀독</option>
 						                                  <option value="02">핀셔,슈나우저-몰로세르 견종-스위스 마운틴 독,캐틀 독</option>
@@ -161,16 +181,17 @@
 						                                        	 src="" alt="프로필 사진" style="border-radius:50%; max-width:150px; max-height:150px;" />
 						                                        <div class="small font-italic text-muted mb-4">이미지 용량의 제한이 있습니다.</div>
 						                                          
-						                                        <input class="btn btn-primary" id="pphoto" type="button" value="프로필 사진 선택">
-						                                       
+						                                        <input type="file" class="btn btn-primary" id="pphoto" name="pphoto" type="button" value="프로필 사진 선택">
+						                                        <!-- 
 						                                        <input type="file" name="pphoto" id="pphoto" style="display:none;" />
+						                                         -->
 						                                    </div>
 						                                </div>
 						                            </div>
                                                 <hr class="my-4" />
                                                 <div class="d-flex justify-content-between">
-                                                    <button class="btn btn-light" type="button">Previous</button>
-                                                    <button class="btn btn-primary" type="button" id="Insert" name="Insert" >Submit</button>
+                                                    <button class="btn btn-light" type="button" id="Prev" name="Prev">조회</button>
+                                                    <button class="btn btn-primary" type="button" id="Insert" name="Insert" >추가</button>
                                                 </div>
                                                 </form>
 				</main>

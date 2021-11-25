@@ -1,5 +1,6 @@
 package a.b.c.com.pet.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
+import a.b.c.com.member.vo.Member;
 import a.b.c.com.pet.service.PetService;
 import a.b.c.com.pet.vo.PetVO;
 
@@ -46,15 +48,22 @@ public class PetController {
 	
 	//반려동물 프로필 진입---------------------------------------------------
 		@GetMapping("petInsertForm")
-		public String petInsertForm() {
+		public String petInsertForm(HttpServletRequest req,PetVO pvo, Member mvo) {
 			logger.info("PetController.petInsertForm 시작 >>>>>");
+			
+			//pvo.setMno(mvo.getMno());
+			pvo.setMno(req.getParameter("mno"));
+			logger.info("mno >>>>" + req.getParameter("mno"));
+			
 			return "pet/petInsertForm";
 		}
 	//전체조회----------------------------------------------------------------
 	@RequestMapping(value="petSelectAll",method=RequestMethod.GET)
-	public String petSelectAll(PetVO pvo, Model model) {
+	public String petSelectAll(PetVO pvo, Member mvo, Model model) {
 		logger.info("PetController.petSelectAll 시작 >>>>>");
-		
+		 
+		logger.info("mvo.getMno() >>>> " + mvo.getMno());
+		pvo.setMno(mvo.getMno());
 		//서비스 연결
 		List<PetVO> listAll = petService.petSelectAll(pvo);
 		logger.info("PetController.petSelectAll listAll.size() >>>>>" + listAll.size());
@@ -70,9 +79,14 @@ public class PetController {
 	}
 	//선택조회----------------------------------------------------------------
 	@GetMapping("petSelect")
-	public String petSelect(PetVO pvo, Model model) {
+	public String petSelect(PetVO pvo, Member member,Model model, HttpServletRequest req) {
 		logger.info("PetController.petSelect 시작 >>>>>");
-		logger.info("PetController.petSelect >>>>> pvo.getPno"+pvo.getPno());
+		
+		pvo.setMno(req.getParameter("mno"));
+		pvo.setPno(req.getParameter("pno"));
+		logger.info("PetController petSelect member.getMno(mno) >>>> "+req.getParameter("mno"));
+		logger.info("PetController petSelect pvo.getPno(pno) >>>> "+req.getParameter("pno"));
+		logger.info("PetController petSelect req.getAttribute(pno) >>>> "+req.getAttribute("pno"));
 		
 		List<PetVO> listS = petService.petSelect(pvo);
 		logger.info("PetController.petSelect listS.size() >>>>>"+listS.size());
@@ -87,64 +101,56 @@ public class PetController {
 	}
 	//추가하기----------------------------------------------------------------
 	@PostMapping("petInsert")
-	public String petInsert(HttpServletRequest req) {
+	public String petInsert(HttpServletRequest req, Member member, PetVO pvo, Model model) {
 		logger.info("PetController.petInsert 시작 >>>>>");
+		pvo.setMno(req.getParameter("mno"));
 		
 		//채번 구하기
-
-		//String pno = ChabunUtil.getBoardChabun("P", chabunService.getPetChabun().getPno());
-		String pno = "P202111170002";
-		
-		//String pno = ChabunUtil.getBoardChabun("P", chabunService.getPetChabun().getPnum());
+		String pno = ChabunUtil.getPetChabun("D", chabunService.getPetChabun().getPno());
+		logger.info("PetController.petInsert pno 채번 : " + pno);
 		
 		//이미지 업로드
-		FileUploadUtil fu = new FileUploadUtil( CommonUtils.MEMBER_IMG_UPLOAD_PATH
-											   ,CommonUtils.MEMBER_IMG_FILE_SIZE
-											   ,CommonUtils.MEMBER_EN_CODE);
+		FileUploadUtil fu = new FileUploadUtil( CommonUtils.PET_IMG_UPLOAD_PATH
+											   ,CommonUtils.PET_IMG_FILE_SIZE
+											   ,CommonUtils.PET_EN_CODE);
 		
 		boolean bool = fu.imgfileUploadSize(req);
 		logger.info("PetController.petInsert bool >>>>>"+ bool);
 		
-		PetVO pvo = null;
-		pvo = new PetVO();
-		pvo.petVOlog(pvo);
-		
 		//반려동물번호
 		pvo.setPno(pno);
 		//반려동물이름
-		//pvo.setPname(req.getParameter("pname"));
 		pvo.setPname(fu.getParameter("pname"));
 		//반려동물종
-		//pvo.setPtype(req.getParameter("ptype"));
 		pvo.setPtype(fu.getParameter("ptype"));
 		//반려동물성별
-		//pvo.setPgender(req.getParameter("pgender"));
 		pvo.setPgender(fu.getParameter("pgender"));
 		//반려동물중성화여부
-		//pvo.setPneutral(req.getParameter("pneutral"));
 		pvo.setPneutral(fu.getParameter("pneutral"));
 		//반려동물사진
-		//pvo.setPphoto(req.getParameter("pphoto"));
-		pvo.setPphoto(fu.getParameter("pphoto"));
+		ArrayList<String> aFileName = fu.getFileNames();
+		String pphoto = aFileName.get(0);
+		pvo.setPphoto(pphoto);
 		//반려동물몸무게
-		//pvo.setPweight(req.getParameter("pweight"));
 		pvo.setPweight(fu.getParameter("pweight"));
 		//반려동물병원
-		//pvo.setPhospital(req.getParameter("phospital"));
 		pvo.setPhospital(fu.getParameter("phospital"));
 		//반려동물특이사항
-		//pvo.setPmemo(req.getParameter("pmemo"));
 		pvo.setPmemo(fu.getParameter("pmemo"));
 		//반려동물나이
-		//pvo.setPages(req.getParameter("pages"));
 		pvo.setPages(fu.getParameter("pages"));
 		//회원번호
-		//pvo.setMno(req.getParameter("mno"));
 		pvo.setMno(fu.getParameter("mno"));
+		member.setMno(fu.getParameter("mno"));
+		
+		logger.info("mno >>>>>" + fu.getParameter("mno"));
+		String mno = fu.getParameter("mno");
 		
 		int nCnt = petService.petInsert(pvo);
 		
 		if(nCnt>0) {
+			logger.info("nCnt >>>>> "+nCnt);
+			model.addAttribute("mno", mno);
 			return "pet/petInsert";
 		}
 		
@@ -153,29 +159,59 @@ public class PetController {
 	
 	//수정하기---------------------------------------------------------------
 	@PostMapping("petUpdate")
-	public String petUpdate(HttpServletRequest req, PetVO pvo, Model model) {
+	public String petUpdate(HttpServletRequest req, Member member, PetVO pvo, Model model) {
 		logger.info("PetController.petUpdate 시작 >>>> ");
 		
+		//회원정보 받아옴
+		pvo.setMno(req.getParameter("mno"));
+		pvo.setPno(req.getParameter("pno"));
+		logger.info("PetController petUpdate member.getMno() >>>> "+req.getParameter("mno"));
+		logger.info("PetController petUpdate pvo.getPno() >>>> "+req.getParameter("pno"));
+		
 		//수정된 정보 받아옴
+		//이미지 업로드
+		FileUploadUtil fu = new FileUploadUtil( CommonUtils.PET_IMG_UPLOAD_PATH
+											   ,CommonUtils.PET_IMG_FILE_SIZE
+											   ,CommonUtils.PET_EN_CODE);
+		
+		boolean bool = fu.imgfileUploadSize(req);
+		logger.info("PetController.petUpdate bool >>>>>"+ bool);
+		
+		
+		
 		
 		//반려동물이름
-		pvo.setPname(req.getParameter("pname"));
+		pvo.setPname(fu.getParameter("pname"));
 		//반려동물종
-		pvo.setPtype(req.getParameter("ptype"));
+		pvo.setPtype(fu.getParameter("ptype"));
 		//반려동물성별
-		pvo.setPgender(req.getParameter("pgender"));
-		//반려동물중성화여부
-		pvo.setPneutral(req.getParameter("pneutral"));
+		pvo.setPgender(fu.getParameter("pgender"));
+		//반려동물중성화여부 
+		pvo.setPneutral(fu.getParameter("pneutral"));
 		//반려동물사진
-		pvo.setPphoto(req.getParameter("pphoto"));
+		ArrayList<String> aFileName = fu.getFileNames();
+		String pphoto = aFileName.get(0);
+		pvo.setPphoto(pphoto);
+		
 		//반려동물몸무게
-		pvo.setPweight(req.getParameter("pweight"));
+		pvo.setPweight(fu.getParameter("pweight"));
 		//반려동물병원
-		pvo.setPhospital(req.getParameter("phospital"));
+		pvo.setPhospital(fu.getParameter("phospital"));
 		//반려동물특이사항
-		pvo.setPmemo(req.getParameter("pmemo"));
+		pvo.setPmemo(fu.getParameter("pmemo"));
 		//반려동물나이
-		pvo.setPages(req.getParameter("pages"));
+		pvo.setPages(fu.getParameter("pages"));
+		//회원번호
+		pvo.setMno(fu.getParameter("mno"));
+		//반려견 번호
+		pvo.setPno(fu.getParameter("pno"));
+		
+		//회원번호
+		pvo.setMno(fu.getParameter("mno"));
+		member.setMno(fu.getParameter("mno"));
+		
+		logger.info("mno >>>>>" + fu.getParameter("mno"));
+		String mno = fu.getParameter("mno");
 		
 		//적용될 반려동물 번호 확인
 		logger.info("PetController.petUpdate pvo.getPno() >>>>"+pvo.getPno());
@@ -183,7 +219,9 @@ public class PetController {
 		int nCnt = petService.petUpdate(pvo);
 		logger.info("PetController.petUpdate nCnt>>>>" + nCnt);
 		
+		
 		if(nCnt > 0) {
+			model.addAttribute("mno", mno);
 			return "pet/petUpdate";
 		}
 		return "pet/myPetList";
@@ -191,10 +229,41 @@ public class PetController {
 	
 	//삭제하기----------------------------------------------------------------
 	@PostMapping("petDelete")
-	public String petDelete(PetVO pvo, Model model) {
+	public String petDelete(PetVO pvo, Member member,Model model, HttpServletRequest req) {
 		logger.info("PetController.petDelete 시작 >>>>>");
 		
-		logger.info("PetController.petDelete pvo.mno >>>>>");
+		//회원정보 받아옴
+		pvo.setMno(req.getParameter("mno"));
+		pvo.setPno(req.getParameter("pno"));
+		logger.info("PetController petUpdate member.getMno() >>>> "+req.getParameter("mno"));
+		logger.info("PetController petUpdate pvo.getPno() >>>> "+req.getParameter("pno"));
+		
+		//수정된 정보 받아옴
+		//이미지 업로드
+		FileUploadUtil fu = new FileUploadUtil( CommonUtils.PET_IMG_UPLOAD_PATH
+											   ,CommonUtils.PET_IMG_FILE_SIZE
+											   ,CommonUtils.PET_EN_CODE);
+		
+		boolean bool = fu.imgfileUploadSize(req);
+		logger.info("PetController.petUpdate bool >>>>>"+ bool);
+		
+		
+		
+		
+		//회원번호
+		pvo.setMno(fu.getParameter("mno"));
+		//반려견 번호
+		pvo.setPno(fu.getParameter("pno"));
+		
+		//회원번호
+		pvo.setMno(fu.getParameter("mno"));
+		member.setMno(fu.getParameter("mno"));
+		
+		logger.info("mno >>>>>" + fu.getParameter("mno"));
+		
+		//적용될 반려동물 번호 확인
+		logger.info("PetController.petUpdate pvo.getPno() >>>>"+pvo.getPno());
+		
 		int nCnt = petService.petDelete(pvo);
 		logger.info("PetController.petDelete nCnt>>>>" + nCnt);
 		
@@ -202,5 +271,11 @@ public class PetController {
 			return "pet/petDelete";
 		}
 		return "pet/myPetList";
+		
+		//========================================================================
+		
+		
+		
+		
 	}
 }

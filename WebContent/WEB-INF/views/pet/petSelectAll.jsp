@@ -1,3 +1,4 @@
+<%@page import="a.b.c.com.member.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="a.b.c.com.pet.vo.PetVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,28 +16,39 @@
 		<!-- 제이쿼리  -->
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		
+		<!-- w3 -->
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<!-- 자바스크립트 -->
 		<script type="text/javascript">
 		$(document).ready(function(){	
 			
+					
+			
+			
+			$("#Mypet").click(function(){
+				alert("mno >>>" + petSelectAllForm.mno.value);
+				$("#petSelectAllForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+			});
+			
+			
 			$(document).on("click", "#pno", function(){
 				
-				if($(this).prop('click')){			 
-					$('.pno').prop('click',false);
-					$(this).prop('click',true);
-				}
+				var pno = $(this).attr('value');
+				alert("pno >>>>>" + pno);	
+				//$("#petSelectAllForm").attr({ "method":"GET","action":"petSelect.wd","value":pno}).submit();
 			});
 			
-			$(document).on("click", "#select", function(){	
-				alert('댕댕이 번호 >>> '+pno)
-				$("#petSelectAllForm").attr({ "method":"GET","action":"petSelect.wd"}).submit();
-			});
-			
+				
+				
 			$(document).on("click", "#insert", function(){	
+				alert("mno >>>" + petSelectAllForm.mno.value);
 				
 				$("#petSelectAllForm").attr({ "method":"GET","action":"petInsertForm.wd"}).submit();
 			});
+			
+			
 		});
+		
 		</script>
 	</head>
 	<!-- /헤드 -->
@@ -74,8 +86,8 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link" href="account-profile.html">Profile</a>
-                            <a class="nav-link active ms-0" href="myPetList.wd">MyPet</a>
+                            <a class="nav-link" href="/profile.wd">Profile</a>
+                            <a class="nav-link active ms-0" id="Mypet" href="#myPetList.wd">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                         </nav>
@@ -84,39 +96,109 @@
 						Object obj = request.getAttribute("listAll");
 						System.out.println("obj >>>>>" + obj);
 						if (obj == null) return;
+						Member member = (Member)request.getAttribute("member");
 						
 						ArrayList<PetVO> aList = (ArrayList<PetVO>)obj;
 						
 						int nCnt = aList.size();
-						out.println("등록된 반려동물 수 :  "+nCnt);
+						
+						
 					%>
-					
+					<div class="w3-row">
+
 					<form name="petSelectAllForm" id="petSelectAllForm">
-					<button class="btn btn-primary" type="button" name="insert" id ="insert">추가하기</button>
+					<input type="hidden" name="mno" id="mno" value=<%=member.getMno() %>>
+					<div class="card-header text-primary">나의 댕댕이 관리</div>
+					<div class="card-body bg-white">
+						등록된 댕댕이 :  총 <%=nCnt %> 마리
+						<button class="btn btn-primary" type="button" name="insert" id ="insert" style="float : right">추가하기</button>
+					</div>
+					
+					</div>
+					<br>
 					<table>
 						<%
 						for(int i=0; i<nCnt; i++){
 							PetVO pvo = aList.get(i);
+							
+							
+							if(i%2==0){
 						%>
-						 
-						<tr>
-							<div class="card">
-								<input type="hidden" id = "pno" name="pno" class="pno" value=<%=pvo.getPno() %>>
-								<img id="select" name="select" class="card-img-top" src="<%=pvo.getPphoto() %>" alt="사진준비중">
-								<div class="card-body">
-									<h5 class="card-title"><%=pvo.getPname() %></h5>
+							<div class="w3-row">
+							
+						<%
+							}
+						%>
+						
+						 	<div class="w3-half w3-container">
+						 	<div class="card-header text-primary"><%=pvo.getPname() %></div>
+							<div class="card w3-center">
+								<a class="bg-transparent" href="/petSelect.wd?mno=<%=member.getMno() %>&pno=<%=pvo.getPno()%>">
+								<% if(pvo.getPphoto() != null) { %>
+                                 	<img id="select" 
+                                 	 src="/WithDog/img/pet/<%=pvo.getPphoto()%>" alt="댕댕이 사진"
+                                 	 style="border-radius:50%; width:300px; height:300px; margin :30px;"
+                                 	  />
+                               	<% } else { %>
+                               		<img id="select"  
+                                 	 src="/WithDog/img/pet/default.jpg" alt="댕댕이 사진" 
+                                 	 style="border-radius:50%; max-width:300px; max-height:300px; margin :30px;"
+                                 	 />
+                               	<% } %>
+								
+								</a>
+								<%
+									String type = "";
+									type=pvo.getPtype();
+									System.out.println("tyep >>>> " + type);
+									
+									
+									//견종 관련 코드
+									if(type.equals("01")){
+										type = "쉽독 , 캐틀독";
+									}else if(type.equals("02")){
+										type= "핀셔,슈나우저-몰로세르 견종-스위스 마운틴 독,캐틀 독";
+									}else if(type.equals("03")){
+										type= "테리어";
+									}else if(type.equals("04")){
+										type= "닥스훈트";
+									}else if(type.equals("05")){
+										type= "스피츠 , 프리미티브";
+									}else if(type.equals("06")){
+										type= "센트하운드";
+									}else if(type.equals("07")){
+										type = "포인팅 독";
+									}else if(type.equals("08")){
+										type= "리트리버, 플러싱 독, 워터 독";
+									}else if(type.equals("09")){
+										type= "토이독";
+									}else if(type.equals("10")){
+										type= "사이트 하운드";
+									}
+									
+									
+									
+								%>
+								<div class="card-body bg-primary text-light">
 									<p class="card-text">
-										<%=pvo.getPages() %>살<br>
-										<%=pvo.getPtype() %><br>
-										<%=pvo.getPweight() %>kg
-										
-									</p>
+										나이 : <%=pvo.getPages() %>살<br>
+										견종 : <%=type%><br>
+										무게 : <%=pvo.getPweight() %>kg
+									</p>	
+									<!-- 
+									<button class="btn btn-primary" type="button" name ="pno" id="pno"  value=<%=pvo.getPno() %>>수정/삭제</button>
+									 -->
 								</div>
 							</div>
-							</td>
-						</tr>
-						
-						
+							</div>
+							<%
+								if(i%2==1){
+							%>
+								</div>
+								<br>
+							<% 
+								}
+							%>
 						<% } %>
 					</table>
 				</form> 

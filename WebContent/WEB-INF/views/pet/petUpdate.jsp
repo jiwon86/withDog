@@ -1,3 +1,6 @@
+<%@page import="a.b.c.com.member.vo.Member"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="a.b.c.com.pet.vo.PetVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,10 +12,24 @@
 <html lang="ko">
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
+	<head>
+		<!-- 제이쿼리  -->
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		
+		<!-- 자바스크립트 -->
+		<script>
+		$(document).ready(function(){	
+			$("#SelectAll").click(function(){
+			alert("mno >>>" + petinsert.mno.value);
+			$("#petinsert").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+			});
+		});
+		</script>
+	</head>
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
-
+		
 		<!-- 헤더 -->
 		<jsp:include page="/header.wd" />
 		<!-- /헤더 -->
@@ -25,7 +42,7 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				 <main>
+            	 <main>
                     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                         <div class="container-xl px-4">
                             <div class="page-header-content">
@@ -44,14 +61,31 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
-                            <a class="nav-link" href="myPetList.wd">MyPet</a>
+                            <a class="nav-link" href="account-profile.html">Profile</a>
+                            <a class="nav-link active ms-0" id="Mypet" href="#myPetList.wd">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                         </nav>
                         <hr class="mt-0 mb-4" />
-					
+                <form id="petinsert" name="petinsert">
+            	<script type="text/javascript">
+					<%
+						Member member = (Member)request.getAttribute("member");
+						System.out.println("mno >>>>" + member.getMno());
+					%>
+				</script>
+					<input type="hidden" id="mno" name="mno" value = <%=member.getMno() %>>
+					<div class="card">
+					    <div class="card-header">수정 완료</div>
+					    <div class="card-body">나의 댕댕이 정보 수정이 완료되었습니다.</div>
+					</div>
+					<hr class="my-4" />
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-primary" type="button" id="SelectAll" name="SelectAll" >목록</button>
+                    </div>
+                    </form>
 				</main>
+				
 				<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 
@@ -60,6 +94,16 @@
 					===================================
 				--> 
 				<!-- ** 주요 내용 **  -->
+				<!-- 
+				<div class="card">
+					<img class="card-img-top" src="" alt="사진준비중">
+					<div class="card-body">
+						<h5 class="card-title">Test card</h5>
+						<p class="card-text">
+						</p>
+					</div>
+				</div>
+				 -->
 				
 				<!-- ** /주요 내용 ** -->
 				

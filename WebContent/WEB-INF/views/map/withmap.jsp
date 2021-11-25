@@ -50,6 +50,7 @@
 			gifSize = new kakao.maps.Size(80, 80), // 마커이미지의 크기입니다
 			gifOption = {offset: new kakao.maps.Point(35, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.    	
 				
+	
 	let		pop = false;
 	let		moveable = false;
 
@@ -57,7 +58,8 @@
 	let		markers = [];
 	let		wmark;
 	let 	jsonData;
-
+	//구글 키
+	const API_KEY = "AIzaSyAFETg9_IkmdP19ZbH4jCFyK1Ms-I4KoXE";
 				
 //-------------------------------------------------------------------------------------
 // Set Popup Overlay
@@ -80,7 +82,7 @@ var content = '<form id="popup" name="popup"><div class="overlaybox" id="overlay
 '        </li>' +
 '		<li>' +
 '            <span class="title">강아지 사진을 올려주세요!</span><br>' +
-'            <span class="imgfile"><input type="file"></span>' +
+'            <span class="imgfile"><input type="file" name="photo" id="photo"></span>' +
 '        </li>' +
 '		<li>' +
 '            <span class="title">돌봄 비용</span><br>' +
@@ -122,14 +124,16 @@ $(document).ready(function(){
 				success: function (data){
 					console.log("json data 동기화 ");
 					setTimeout(function() {markersLoad();}, 500); // 0.5초 뒤에 함수를 실행 시킴
+					getlocation();
 				}
 				,error: function (error){ alert("에러"); }
 			}); // end of ajax()	
 	
 	$('#submit').click(function(){
-	 
+	
+	// Create an FormData object 
     const form = $('#popup')[0];  	    
-    // Create an FormData object          
+             
    
 
     let Lat = latlng.getLat();
@@ -141,16 +145,13 @@ $(document).ready(function(){
     
 	console.log(Lat);
 	console.log(Lng);
-	//AJAX TEST	
+
 		$.ajax({			
 			url : 'mapTradeInsert.wd',		
 			type : 'post',
 			enctype : "multipart/form-data",
 			processData: false,    
 	        contentType: false,
-			beforeSend : function(xhr){
-				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-				},
 			data : formdata,
 		    success: function (data){
 		        alert("데이터전송 성공");
@@ -164,6 +165,42 @@ $(document).ready(function(){
 	});
 });
 
+function getlocation () {
+//HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+	if (navigator.geolocation) {
+	    
+	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	        
+	        var lat = position.coords.latitude, // 위도
+	            lon = position.coords.longitude; // 경도
+	        
+	        var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+	        map.panTo(locPosition);
+	 
+	            
+	      });
+	}else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+	    alert("브라우저가 최신 버전이 아닙니다!");
+	}
+}
+
+function get() {
+    
+    const url = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + API_KEY;
+	$.ajax({			
+		url : url,		
+		type : 'post',
+	    success: function (data){
+	        alert(data);
+	        
+	    },
+	    error: function (error){
+	        alert("에러");
+	    }
+	}); // end of ajax()
+ 
+}
 //취소 시 팝업을 하이드 시킴
 function hidePopup() {
 overlaybox.classList.add("hidden");
@@ -223,6 +260,7 @@ const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
     }); 
 
 	marker.setMap(map);
+	markers.push(marker);
 	let title = document.getElementById("title").value;
 	
 	markerInfoSet (title,marker);
@@ -309,7 +347,7 @@ function markerInfoSet (s,marker) {
 				        sethideMarkers(map);
 				        latlng = mouseEvent.latLng;
 				        const moveLatLon = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng());
-				        const popLocation = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()+0.003);
+				        const popLocation = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng());
 				        
 				        let message = '위도  : ' + latlng.getLat();
 				        message += '\n경도 : ' + latlng.getLng();

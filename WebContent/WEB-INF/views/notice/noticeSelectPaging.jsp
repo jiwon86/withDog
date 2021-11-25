@@ -4,7 +4,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
 	c:import : 외부 jsp 파일 접근 가능
@@ -16,11 +19,10 @@
 	<!-- /헤드 -->
 	
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
 <script type="text/javascript">
 
 		// 검색버튼
-		$(document).on("click", "#searchBtn", function(){
+		$(document).on("click", "#SBtn", function(){
 			// alert("searchBtn >>> : ");
 			$("#noticeList").attr({ "method":"GET"
 		        					,"action":"noticeSelectAll.wd"}).submit();
@@ -40,9 +42,24 @@
 			<!-- /사이드바 -->
 
 			<!-- 콘텐츠 -->
-<form name="boardList" id="boardList">
-			
-            <div id="layoutSidenav_content">
+<!--  <form name="boardList" id="boardList"> -->
+<% request.setCharacterEncoding("UTF-8");%> 
+<%
+
+	// 페이징 변수 세팅
+	int pageSize = 0;
+	int groupSize = 0;
+	int curPage = 0;
+	int totalCount = 0;
+	
+	Object objPaging = request.getAttribute("pagingVO");
+	NoticeVO pagingNVO = (NoticeVO)objPaging;
+
+	Object obj = request.getAttribute("listAll");
+	List<NoticeVO> list = (List)obj;
+	
+%>			
+<div id="layoutSidenav_content">
 <main style="width:960px; margin:0 auto;">
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
         <div class="container-xl px-4">
@@ -80,24 +97,15 @@
 					</tr> 
                 </div>
                  -->
-<% request.setCharacterEncoding("UTF-8");%> 
-<%
-	Object obj = request.getAttribute("listAll");
-	List<NoticeVO> list = (List) obj;
-	
-	int nCnt = list.size();
-	System.out.println("nCnt >>> : " + nCnt);
-%>
-                 <form action="/notice/search" method="GET">
-                 <!-- <form id="keyfilter" name="keyfilter"> -->
+                 <!--  <form action="/notice/search" method="GET"> -->
+                 <form id="keyfilter" name="keyfilter">
                  		<!-- <input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br> -->
-                 		<button class="btn btn-primary" style="float:right" id="searchBtn">검색하기</button>
-				    <div style="float:right">
-				        <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">
+                 		<div style="float:right">
+                 		<button class="btn btn-primary" style="float:right" id="SBtn">검색하기</button>
+				       <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;font-size:15px;width:280px;text-align:center;margin-right:10px;">
 				    </div>
-				   
-				    <br><br>
-				</form>
+				    <br>
+			 	</form>
                  <br>
                
                 <div class="dataTable-container">
@@ -116,17 +124,29 @@
                          <th data-sortable="" style="width: 1.576%;">
                          	<a href="#" class="dataTable-sorter">-</a>
                          </th>
-                         <th data-sortable="" style="width: 1.576%;">
-                            	<a href="#" class="dataTable-sorter">-</a>
-                            </th>
-                           </tr>
+                         <sec:authorize access="hasRole('ROLE_ADMIN')">
+                         	<th data-sortable="" style="width: 1.576%;">
+                            <a href="#" class="dataTable-sorter">-</a>
+                         </th>
+							</sec:authorize>
+                        </tr>
                        </thead>
-                       
-<%
-for(int i=0; i<nCnt; i++){
-	NoticeVO nvo = list.get(i);
-%>
+
                        <tbody>
+                       <%
+							List<NoticeVO> listAll = (List<NoticeVO>)request.getAttribute("listAll");
+							int nCnt = listAll.size();
+	
+	                       
+	                       for(int i=0; i<nCnt; i++){
+	                    		NoticeVO nvo = listAll.get(i);
+	                    		
+	                    		pageSize = Integer.parseInt(pagingNVO.getPageSize());
+	                    		groupSize = Integer.parseInt(pagingNVO.getGroupSize());
+	                    		curPage = Integer.parseInt(pagingNVO.getCurPage());
+	                    		totalCount = Integer.parseInt(nvo.getTotalCount());
+                    	%>
+                    	
 							<tr>
                                <td><%= nvo.getNnum() %></td>
                                <td><%= nvo.getNsubject() %></td>
@@ -140,28 +160,43 @@ for(int i=0; i<nCnt; i++){
                                <a href="noticeDelete.wd?nnum=<%= nvo.getNnum() %>" button class="btn btn-datatable btn-icon btn-transparent-dark"><i data-feather="trash-2"></i></button></a>
                                </td>
                                </sec:authorize>
-                           </tr>                          
-					  </tbody>				  
-<%
+
+                           </tr> 
+<% 
 						}
-%>
+%>					  
+					  </tbody>				  
                    </table>
                    </div>
+                   <!--  
                     <div class="dataTable-bottom">
-                    	<div class="dataTable-info">
-                      <nav class="dataTable-pagination">
-                       <ul class="dataTable-pagination-list">
-                        <li class="active"><a href="#" data-page="1">1</a></li>
-                        <li class=""><a href="#" data-page="2">2</a></li>
-                        <li class=""><a href="#" data-page="3">3</a></li>
-                        <li class=""><a href="#" data-page="4">4</a></li>
-                        <li class=""><a href="#" data-page="5">5</a></li>
-                        <li class=""><a href="#" data-page="6">6</a></li>
-                        <li class="pager"><a href="#" data-page="2">›</a></li>
-                       </ul>
-                      </nav>
-                     </div>
+	                    <div class="dataTable-info">
+	                      <nav class="dataTable-pagination">
+	                       <ul class="dataTable-pagination-list">
+	                        <li class="pager"><a href="#" data-page="2">‹‹</a></li>
+	                        <li class="pager"><a href="#" data-page="2">‹</a></li>
+	                        <li class="active"><a href="#" data-page="1">1</a></li>
+	                        <li class=""><a href="#" data-page="2">2</a></li>
+	                        <li class=""><a href="#" data-page="3">3</a></li>
+	                        <li class=""><a href="#" data-page="4">4</a></li>
+	                        <li class=""><a href="#" data-page="5">5</a></li>
+	                        <li class="pager"><a href="#" data-page="2">›</a></li>
+	                        <li class="pager"><a href="#" data-page="2">››</a></li>
+	                       </ul>
+	                      </nav>
+	                    </div>
                     </div>
+                    -->
+                    
+                    <jsp:include page="noticePaging.jsp" flush="true">
+						<jsp:param name="url" value="noticeSelectPaging.wd" />
+						<jsp:param name="str" value="" />
+						<jsp:param name="pageSize" value="<%=pageSize%>" />
+						<jsp:param name="groupSize" value="<%=groupSize%>" />
+						<jsp:param name="curPage" value="<%=curPage%>" />
+						<jsp:param name="totalCount" value="<%=totalCount%>" />
+					</jsp:include>
+					
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
 	                    <a href="noticeInsertForm.wd">
 	                    	<button class="btn btn-primary me-2 my-1 float-end" type="button">작성하기</button>
@@ -196,6 +231,5 @@ for(int i=0; i<nCnt; i++){
             </div>
 			<!-- /콘텐츠 -->
         </div>
-		</form>
     </body>
 </html>

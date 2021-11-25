@@ -13,7 +13,7 @@ NOTICE DELETE 중~
 	String nnum = (String)request.getAttribute("nnum");
 %>
 <script>
-	location.href="/noticeSelectAll.wd?nnum=<%=nnum%>";
+	location.href="/noticeSelectPaging.wd?nnum=<%=nnum%>";
 </script>
 
 </body>

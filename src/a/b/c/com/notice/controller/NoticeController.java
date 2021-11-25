@@ -47,6 +47,28 @@ public class NoticeController {
 		return "notice/noticeInsertForm";
 	}
 	
+	@RequestMapping(value="noticeSelectAll", method=RequestMethod.GET)
+	public String noticeSelectAll(NoticeVO nvo, Model model) {
+		logger.info("NoticeController noticeSelectAll 함수 진입 >>> : ");
+		
+		logger.info("NoticeController noticeSelectAll nvo.getKeyfilter() >>> : " + nvo.getKeyfilter());
+		logger.info("NoticeController noticeSelectAll nvo.getKeyKeyword() >>> : " + nvo.getKeyword());
+		logger.info("NoticeController noticeSelectAll nvo.getStartdate() >>> : " + nvo.getStartdate());
+		logger.info("NoticeController noticeSelectAll nvo.getEnddate() >>> : " + nvo.getEnddate());
+		
+		
+		List<NoticeVO> listAll = noticeService.noticeSelectPaging(nvo);
+		logger.info("NoticeController noticeSelectAll.size() >>> : " + listAll.size());
+				
+		if(listAll.size() > 0) {
+			model.addAttribute("listAll", listAll);
+			
+			return "notice/NoticeSelectAll";
+		}
+		
+		return "notice/noticeInsertForm";
+	}
+	/*
 	@RequestMapping("noticeSelectAll")
 	public String noticeSelectAll(NoticeVO nvo, Model model) {
 		
@@ -58,6 +80,7 @@ public class NoticeController {
 		
 		return "notice/noticeSelectAll";
 	}
+	*/
 	
 	// 상세조회
 	@RequestMapping(value="noticeSelect", method=RequestMethod.GET)
@@ -180,7 +203,7 @@ public class NoticeController {
 		
 		return "notice/noticeDelete";
 	}
-	/*
+	
 	@RequestMapping(value="noticeSelectPaging", method=RequestMethod.GET)
 	public String noticeSelectPaging(NoticeVO nvo, Model model) {
 		logger.info("NoticeController noticePaging 함수 진입 >>> : ");
@@ -218,8 +241,7 @@ public class NoticeController {
 			return "notice/noticeSelectPaging";
 		}
 		
-		return "notice/noticeInsertForm";
+		return "notice/noticeSelectAll";
 	}
 	
-	*/
 }

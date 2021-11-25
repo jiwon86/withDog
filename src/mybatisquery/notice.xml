@@ -29,14 +29,16 @@
 	SELECT * FROM (
 		SELECT A.NNUM			NNUM
 			  ,A.NSUBJECT		NSUBJECT
+			  ,A.NWRITER	    NWRITER
 			  ,A.NFILE			NFILE
 			  ,A.DELETEYN		DELETEYN
 			  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
 			  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
-			  ,CEIL(ROW_NUMBER() OVER(ORDER BY A.NNUM)/ #{pageSize, jdbcType=VARCHAR} ) pageSize
+			  ,CEIL(ROW_NUMBER() OVER(ORDER BY A.NNUM DESC)/ #{pageSize, jdbcType=VARCHAR} ) pageSize
 			  ,COUNT(A.NNUM) OVER() AS totalCount
 		FROM	NOTICE A
-		WHERE	A.DELETEYN = 'Y'
+		WHERE	A.DELETEYN = 'Y' 
+		AND A.NSUBJECT like '%' ||  #{keyword, jdbcType=VARCHAR} || '%'
 		ORDER BY 1 DESC
 		
 		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
@@ -53,8 +55,6 @@
 		  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
 	FROM	NOTICE A
 	WHERE A.DELETEYN = 'Y'
-
-<!--  
 	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
 		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
 		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
@@ -63,11 +63,11 @@
 		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>	
 	</if>
 	<if test="keyfilter=='key2'">
-		<![CDATA[AND A.NCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		<![CDATA[AND A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
 	</if>
 	<if test="keyfilter=='key3'">
 		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
-		<![CDATA[OR A.NCONTENT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+		<![CDATA[OR A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
 	</if>
 	<if test="keyfilter=='key4'">
 		<![CDATA[AND A.NWRITER LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
@@ -75,10 +75,44 @@
 	<if test="keyfilter=='key5'">
 		<![CDATA[AND A.NNUM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
 	</if>
--->
 	ORDER BY 1 DESC
 </select>
+<!-- 
+<select id ="noticeSelectPaging" parameterType="NoticeVO" resultType="NoticeVO">
+	SELECT A.NNUM		NNUM
+		  ,A.NSUBJECT	NSUBJECT
+		  ,A.NWRITER	NWRITER
+		  ,A.NCONTENTS	NCONTENTS
+		  ,A.NFILE		NFILE
+		  ,A.DELETEYN	DELETEYN
+		  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+	FROM	NOTICE A
+	WHERE A.DELETEYN = 'Y'
 
+	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	</if>
+	<if test="keyfilter=='key1'">
+		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>	
+	</if>
+	<if test="keyfilter=='key2'">
+		<![CDATA[AND A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="keyfilter=='key3'">
+		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		<![CDATA[OR A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	<if test="keyfilter=='key4'">
+		<![CDATA[AND A.NWRITER LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	<if test="keyfilter=='key5'">
+		<![CDATA[AND A.NNUM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	ORDER BY 1 DESC
+</select>
+ -->
 <select id="noticeSelect" parameterType="NoticeVO" resultType="NoticeVO">
 	SELECT A.NNUM		NNUM
 		  ,A.NSUBJECT	NSUBJECT

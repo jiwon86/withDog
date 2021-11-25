@@ -12,10 +12,11 @@
 <html lang="ko">
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
-	
-	
+
 	<style>
-#abcd.btn.btn-sm.btn-light.text-primary{}
+.fileimg {
+	width : 500px;
+}
 		
 	</style>
 
@@ -47,7 +48,7 @@
                                         </h1>
                                     </div>
                                     <div class="col-12 col-xl-auto mb-3">
-                                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectAll.wd">
+                                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectPaging.wd">
                                             <i class="me-1" data-feather="arrow-left"></i>
                                           	  공지사항 전체목록
                                         </a>
@@ -77,10 +78,14 @@ for(int i=0; i<nCnt; i++){
                                     </div>
                                     <div class="card-body">
                                     	<div style-"font-size:12px; color:gray;"><%= nvo.getNwriter() %> | 작성일 : <%= nvo.getInsertdate() %></div>
-                                    	<a href="/img/notice/<%= nvo.getNfile() %>" download><i data-feather="file"></i> <%= nvo.getNfile() %> 다운로드</a>
+                                    	<a href="/img/notice/<%= nvo.getNfile() %>" download><i data-feather="file"></i> <%= nvo.getNfile() %> 다운로드</a><br>
+                                    	<img class="fileimg" src="/img/notice/<%= nvo.getNfile() %>" />
                                     	<hr>
                                     	<br>
-                                    	<div><pre><%= nvo.getNcontents() %></pre></div>
+										 <div><pre><%= nvo.getNcontents() %></pre></div>
+										</div>
+									</div>
+									</div>
                                     	<br>
                                     	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	                                    	<a class="btn btn-warning" href="noticeUpdate.wd?nnum=<%= nvo.getNnum() %>">수정</a>

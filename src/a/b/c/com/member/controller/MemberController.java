@@ -34,6 +34,7 @@ public class MemberController {
 	private MemberService memberService;
 	private ChabunService chabunService;
 	
+	
 	@Autowired(required=false)
 	public MemberController(MemberService memberService, ChabunService chabunService) {
 		this.memberService = memberService;

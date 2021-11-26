@@ -54,13 +54,21 @@
 	let		pop = false;
 	let		moveable = false;
 
-	let		latlng;
+	let		latlng; // 위도 경도 
 	let		markers = [];
 	let		wmark;
 	let 	jsonData;
-	let		load = 0;
-	//구글 키
-	const API_KEY = "AIzaSyAFETg9_IkmdP19ZbH4jCFyK1Ms-I4KoXE";
+	let		load = 0; // JSON Data 로드 체크
+	
+	
+	let date = new Date('YYYY-MM-DDTHH:MM:SS');
+	console.log(date);
+
+	
+	
+
+	
+	
 				
 //-------------------------------------------------------------------------------------
 // Set Popup Overlay
@@ -95,12 +103,13 @@ let content ='<form id="popup" class="popup">'
 +		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
 +		'<li><label for="dogs"><i class="fas fa-dog"></i></i>&nbsp;돌 볼 반려동물</label><select class="form-control" id="dogs">'
 +			'<option>등록된 반려동물 표시</option></select></li>'
-+		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><input type="text" class="form-control" id="when" name="when" placeholder="맡기실 기간을 입력해주세요."></li>'
++		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when" name="when" placeholder="맡기실 기간을 입력해주세요.">'
++ 			' <i class="fas fa-bone fa-2x"></i><input type="datetime-local" class="form-control" id="when_2" name="when_2"></div></li>'
 +		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
 +		'<li><label for="content"><i class="fas fa-envelope-open-text"></i>&nbsp;상세 사항</label><textarea class="form-control" id="content" name="content" rows="3" placeholder="돌봄 시 필요한 사항을 적어주세요."></textarea></li>'
 +		'<li><label for="photo"><i class="fas fa-images"></i>&nbsp;반려동물 사진</label><input type="file" class="form-control" id="photo" name="photo"></li>'
-+		'<li><label for="addr_2"><i class="fas fa-map-marked-alt"></i>&nbsp;주소 정보</label><div class="addr"><input type="text" class="form-control addr" id="addr_1" name="addr_1" readonly>'
-+		'<input type="text" class="form-control addr" id="addr_2" name="addr_2">'
++		'<li><label for="addr_2"><i class="fas fa-map-marked-alt"></i>&nbsp;주소 정보</label><div class="item_2"><input type="text" class="form-control addr" id="addr_1" name="addr_1" readonly>'
++			'<i class="fas fa-bone fa-2x"></i><input type="text" class="form-control addr" id="addr_2" name="addr_2">'
 +			'</div></li>'
 +		'<li><button class="btn btn-primary smit" type="button" id="submit">신청 하기</button></li>'
 +'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
@@ -122,6 +131,10 @@ customOverlay.setMap(map);
 //OverlayBox - 생성시 classList hidden을 줘서 display : none 시킨다.
 const overlaybox = document.getElementById("overlaybox");
 overlaybox.classList.add("hidden");
+
+// 날짜 세팅
+const when_1 = document.getElementById('when');
+when_1.value = '';
 
 //----------------------------------------------------------------------------------
 $(document).ready(function(){
@@ -166,6 +179,12 @@ $(document).ready(function(){
 		}); // end of ajax()
 	});
 });
+
+$('#when').change(function(){
+	console.log($('#when').val);
+	console.log(when_1.value);
+});
+
 
 
 function markersjson (x) {
@@ -324,7 +343,7 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 		var iwContent = '<div class="tradeinfo" style="padding:5px;">'
 						+ '<img class="dogimg" src=/img/map/' + photo +'>'
 						+ '<div class="tradeinfo_2">'
-						+ '<ul><li>'+ title + '</li>'
+						+ '<ul class="tradelist"><li>'+ title + '</li>'
 						+ '<li>작성자 : '+ writer + '</li>'
 						+ '<li><i class="far fa-clock"></i>&nbsp;기간 : </li>'
 						+ '<li><i class="fas fa-coins"></i>&nbsp;돌봄 비용 : ' + price + '</li>'
@@ -336,7 +355,7 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 		    position: markLocation,
 		    content: iwContent,
 		    xAnchor: 0.45,
-		    yAnchor : 1.35
+		    yAnchor : 1.25
 	});	// end of event : mouseover
 
 	makerInfo.setMap(map);	

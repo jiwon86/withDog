@@ -8,6 +8,7 @@ import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.notice.vo.NoticeVO;
 
 @Repository
 public class ChabunDAOImpl implements ChabunDAO {
@@ -51,6 +52,15 @@ public class ChabunDAOImpl implements ChabunDAO {
 	public Member getMemChabun() {
 		logger.info("ChabunDAOImpl.getMemChabun() 함수 진입");
 		return sqlSession.selectOne("getMemChabun");
+	}
+
+
+	@Override
+	public NoticeVO getNoticeChabun() {
+		logger.info("ChabunDAOImpl.getNoticeChabun() 함수 진입 : ");
+
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getNoticeChabun");
 	}
 	
 	@Override

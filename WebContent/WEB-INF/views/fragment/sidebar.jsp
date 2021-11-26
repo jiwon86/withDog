@@ -45,7 +45,7 @@
                 <div class="collapse" id="collapseCustomerCenter" data-bs-parent="#accordionSidenavCustomerCenter">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
-                        <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
+                        <a class="nav-link hahmlet" href="noticeSelectPaging.wd">공지사항</a> 
                       <a class="nav-link hahmlet" href="qnaSelectAll.wd">Q&A</a>
                     </nav>
                 </div>                     

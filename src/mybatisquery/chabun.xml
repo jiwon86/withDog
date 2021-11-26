@@ -34,4 +34,8 @@
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
 	</select>
 	
+	<select id="getNoticeChabun" resultType="NoticeVO">
+		SELECT NVL(MAX(SUBSTR(A.NNUM, -4)), 0) + 1 NNUM FROM NOTICE A
+	</select>
+	
 </mapper>

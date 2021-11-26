@@ -5,6 +5,7 @@ import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.notice.vo.NoticeVO;
 
 
 public interface ChabunService {
@@ -23,5 +24,8 @@ public interface ChabunService {
 	public Member getMemChabun();
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
+	
+	
+	public NoticeVO getNoticeChabun();
 	
 }

@@ -196,7 +196,7 @@ public class MemberController {
 												   ,CommonUtils.MEMBER_EN_CODE);
 			
 			boolean bool = fu.imgfileUploadSize(req);
-			
+			logger.info(fu.toString());
 			logger.info("여기>>>>>>>>>>>>>>>>>>>>>>.");
 			
 			System.out.println("mno >>> : " + mno);
@@ -278,5 +278,46 @@ public class MemberController {
 			return msg;
 			
 		}
+		// 글 목록 페이징 조회
+	@RequestMapping(value="boardSelectPaging", method=RequestMethod.GET)
+	public String boardSelectPaging(Member member, Model model) {
+		logger.info("SpringBoardController boardSelectPaging 함수 진입 >>> :");	
+		
+		logger.info("SpringBoardController boardSelectPaging 함수 진입 >>> : 페이징 관련 로그 ================");	
+		
+		// 페이징 변수 세팅
+		int pageSize = CommonUtils.BOARD_PAGE_SIZE;
+		int groupSize = CommonUtils.BOARD_GROUP_SIZE;
+		int curPage = CommonUtils.BOARD_CUR_PAGE;
+		int totalCount = CommonUtils.BOARD_TOTAL_COUNT;
+		
+		if (member.getCurPage() !=null){
+			curPage = Integer.parseInt(member.getCurPage());
+		}
+		
+		member.setPageSize(String.valueOf(pageSize));
+		member.setGroupSize(String.valueOf(groupSize));
+		member.setCurPage(String.valueOf(curPage));
+		member.setTotalCount(String.valueOf(totalCount));
+		
+		logger.info("SpringBoardController boardSelectPaging bvo.getPageSize() >>> : " + member.getPageSize());
+		logger.info("SpringBoardController boardSelectPaging bvo.getGroupSize() >>> : " + member.getGroupSize());
+		logger.info("SpringBoardController boardSelectPaging bvo.getCurPage() >>> : " + member.getCurPage());
+		logger.info("SpringBoardController boardSelectPaging bvo.getTotalCount() >>> : " + member.getTotalCount());
+		
+		List<Member> listAll = memberService.MemberSelectPaging(member);
+		logger.info("MemberController AdminSelectPaging listAll.size() >>> : " + listAll.size());
+		
+		
+		if (listAll.size() > 0) { 
+			
+			model.addAttribute("pagingVO", member);
+			model.addAttribute("listAll", listAll);
+			logger.info("ddddddddddddddddd");
+			return "admin/AdminMemberPaging";
+		}
+		
+		return "admin/AdminMemberSelectAll";
+	}
 	
 }

@@ -17,6 +17,8 @@
 
 <body class="nav-fixed">
 
+
+
 <!-- 헤더 -->
 <jsp:include page="/header.wd" />
 <!-- /헤더 -->
@@ -76,8 +78,13 @@ width: 300px !important;
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <script type="text/javascript">
+const pw = document.getElementById("#mpw");	
+const pwch = document.getElementById("#mpwch");
+
 
 $(document).ready(function(){
+	
+
 	
 	let idCheck = false;
 	
@@ -101,7 +108,10 @@ $(document).ready(function(){
 		}).open();
 	});
 	
+		
 	var vm = new Vue({
+		
+	
 		el:"#show",
 		data:{
 			num01:null,
@@ -111,16 +121,31 @@ $(document).ready(function(){
 			sum:function(){
 				const same = "비밀번호가 같습니다";
 				const wrong = "!!비밀번호가 다릅니다!! ";
+				const null1 = "비밀번호를 입력 해주세요";
 				
 				console.log("## 합산 함수 호출 ##");
 				var num1= Number(this.num01);
 				var num2= Number(this.num02);
-				if(num1==num2){
+				
+				
+				
+				if(num1 == null || num2==null){
+					
+					return null1;
+				}
+					
+				
+				else if(num1==num2){
+					
 					return same;
 				}
+					
+				
 				else{
-				}
+					
 				return wrong;
+				
+				}
 			}
 		}
 	});
@@ -175,6 +200,20 @@ $(document).ready(function(){
 
 <!-- 콘텐츠 -->
 <div id="layoutSidenav_content">
+<ul class="navbar-nav align-items-center ms-auto">
+ <li class="nav-item dropdown no-caret me-3 d-lg-none">
+                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
+                    <!-- Dropdown - Search-->
+                    <div class="dropdown-menu dropdown-menu-end p-3 shadow animated--fade-in-up" aria-labelledby="searchDropdown">
+                        <form class="form-inline me-auto w-100">
+                            <div class="input-group input-group-joined input-group-solid">
+                                <input class="form-control pe-0" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                                <div class="input-group-text"><i data-feather="search"></i></div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                </ul>
 
   
 	<main width="1000px">
@@ -182,8 +221,6 @@ $(document).ready(function(){
                     <div class="row justify-content-center">
                         <div class="col-xl-8 col-lg-9">
                             <!-- Social registration form-->
-
-
 
 			<div class="card my-5">
                     <div class="card-body p-5 text-center" id="account">
@@ -199,8 +236,10 @@ $(document).ready(function(){
     <div class="card-body p-5">
         <!-- Login form-->
         <form enctype="multipart/form-data" method="POST" action="login1.wd">
+
             <!-- Form Row-->
             <div class="row gx-3">
+
                 <div class="col-md-6">
                     <!-- Form Group (first name)-->
                     <div class="mb-3">
@@ -212,25 +251,29 @@ $(document).ready(function(){
                         <input class="form-control form-control-solid" type="text" placeholder="Id를 입력해 주세요" 
                         aria-label="Last Name" aria-describedby="lastNameExample" name="mid" id="mid" required>
                     <!-- 중복확인 버튼 -->
+                    
                     </div>
                 </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                          <a class="btn btn-primary" id="idcheck" name="idcheck">Id Check</a>
-                    </div>
-                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                        <a class="btn btn-primary" id="idcheck" name="idcheck">Id Check</a>
+                  </div>
+              </div>
+              <br>
+            
             </div>
             <!-- Form Group (email address)-->
             
             <!-- Form Row-->
+
             <div class="row gx-3" id="show">
                 <div class="col-md-6">
                     <!-- Form Group (choose password)-->
                     <div class="mb-3">
                         <label class="text-gray-600 small" for="passwordExample">Password</label>
                         <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
-                        aria-label="Password" aria-describedby="passwordExample" name="mpw"
-                        v-model="num01" required />
+                        aria-label="Password" aria-describedby="passwordExample" id="mpw" name="mpw"
+                        v-model="num01" required minlength="6" maxlength="12"/>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -239,7 +282,7 @@ $(document).ready(function(){
                         <label class="text-gray-600 small" for="confirmPasswordExample">Confirm Password</label>
  					 <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
  					 aria-label="Confirm Password" aria-describedby="confirmPasswordExample" id="passcheck" 
- 					 v-model="num02" required /><b id="sumid">{{sum()}}</b>
+ 					 v-model="num02" required minlength="6" maxlength="12" /><b id="sumid">{{sum()}}</b>
  					 
    					<!-- <a class="btn btn-primary" href="auth-login-social.html" id="pwcheck" name="pwcheck">Pw Check</a> -->
                     </div>

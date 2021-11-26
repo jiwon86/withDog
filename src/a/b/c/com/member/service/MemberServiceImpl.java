@@ -55,5 +55,10 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberServiceImpl.memberAuthInsert() 함수 진입");
 		return memberDAO.memberAuthInsert(memberAuth);
 	}
+	
+	@Override
+	public List<Member> MemberSelectPaging(Member member){
+		return memberDAO.MemberSelectPaging(member);
+	}
 
 }

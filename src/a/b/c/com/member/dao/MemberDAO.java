@@ -15,5 +15,7 @@ public interface MemberDAO {
 	public List<Member> memberIdCheck(Member mvo);
 	// 권한 추가
 	public int memberAuthInsert(MemberAuth memberAuth);
+	// 페이징
+	public List<Member> MemberSelectPaging(Member member);
 
 }

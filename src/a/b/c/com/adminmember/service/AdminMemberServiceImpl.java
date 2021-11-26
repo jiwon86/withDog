@@ -45,5 +45,5 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 		// TODO Auto-generated method stub
 		return (Integer)adminMemberDAO.AdminMemberDelete(member);
 	}
-
+	
 }

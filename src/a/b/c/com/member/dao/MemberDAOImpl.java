@@ -17,7 +17,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Autowired(required = false)
 	private SqlSessionTemplate sqlSession;
-
+  
 	// 로그인 
 	@Override
 	public Member read(String userId) {
@@ -59,8 +59,12 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int memberAuthInsert(MemberAuth memberAuth) {
 		logger.info("MemberDAOImpl.memberAuthInsert() 함수 실행");
-		
 		return (Integer)sqlSession.insert("memberAuthInsert", memberAuth);
+	}
+	
+	@Override
+	public List<Member> MemberSelectPaging(Member mvo){
+		return sqlSession.selectList("MemberSelectPaging", mvo);
 	}
 
 }

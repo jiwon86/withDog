@@ -40,5 +40,7 @@ public class AdminMemberDAOImpl implements AdminMemberDAO {
 		// TODO Auto-generated method stub
 		return (Integer)sqlSession.delete("AdminMemberDelete", member);
 	}
+	
+	
 
 }

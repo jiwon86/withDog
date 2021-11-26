@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
+
 <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
     <!-- Sidenav Toggle Button-->
     <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle">
@@ -10,6 +11,16 @@
     </button>
 
     <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/">WITH DOG</a>
+	
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> 
+<script type="text/javascript"> 
+/* 	$(document).ready(function(){ */
+	/* 	$("#pointbtn").click(function(){
+			location.href="point.wd"
+		});
+	}); */
+
+</script>
 
     <!-- Navbar Items-->
     <ul class="navbar-nav align-items-center ms-auto">
@@ -17,13 +28,15 @@
         <!-- Alerts Dropdown-->
         <sec:authorize access="isAuthenticated()">
         <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+             <a href="point.wd" class="btn btn-primary" name="pointbtn" id="pointbtn">포인트 조회11</a>
+            
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             	<i data-feather="bell"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
                 <h6 class="dropdown-header dropdown-notifications-header">
                     <i class="me-2" data-feather="bell"></i>
-                    Alerts Center
+                    Alerts Center	
                 </h6>
                 <!-- Example Alert 1-->
                 <a class="dropdown-item dropdown-notifications-item" href="#!">

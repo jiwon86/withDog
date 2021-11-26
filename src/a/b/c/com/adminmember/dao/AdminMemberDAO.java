@@ -13,5 +13,5 @@ public interface AdminMemberDAO {
 	public int AdminMemberUpdate(Member member);
 	// 삭제하기
 	public int AdminMemberDelete(Member member);
-
+	
 }

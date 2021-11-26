@@ -26,7 +26,7 @@
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
 				<main>
-					
+					<a href="boardSelectPaging.wd">스프링 게시판 : 글목록 페이징 테스트</a><br>
 				</main>
 				<!--  
 					===================================

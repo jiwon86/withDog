@@ -65,11 +65,18 @@
                         </div>
                     </header>
                        <%
+                       int pageSize=0;
+                       int groupSize=0;
+                       int curPage=0;
+                       int totalCount=0;
+                       
+               				Object objPaging = request.getAttribute("pagingVO");
+               				Member pagingVO = (Member)objPaging;
+                    		
                				Object obj = request.getAttribute("listAll");
-              				List<Member> listall = (List<Member>)obj;
-                    				
-                			int nCnt = listall.size();
-                    		System.out.println("list.size() >>> :" + listall.size());
+                    		List<Member> list = (List)obj;
+                    		
+                    		int nCnt = list.size();
                    		%>
                    
                     <script type="text/javascript">
@@ -93,13 +100,18 @@
                                     </thead>
                                     <%
                                     	for(int i=0; i<nCnt; i++){
-                                    		Member member = listall.get(i);
+                                    		Member member = list.get(i);
                                     		String mno = member.getMno();
                                     		String mphoto = member.getMphoto();
                                     		String mid = member.getMid();
                                     		String mname = member.getMname();
                                     		String mroadaddress = member.getMroadaddress();
                                     		String updatedate = member.getUpdatedate();
+                                    		pageSize = Integer.parseInt(member.getPageSize());
+                                    		groupSize = Integer.parseInt(pagingVO.getGroupSize());
+                                    		curPage = Integer.parseInt(pagingVO.getCurPage());
+                                    		totalCount = Integer.parseInt(member.getTotalCount());
+                                    		
                                     		System.out.println(mno);
                                     %>
                                     <tbody>
@@ -132,7 +144,21 @@
                                         <%
                                         }
                                         %>
-                                        <div class="dataTable-top">
+<tr>
+<td colspan="7">
+<jsp:include page="AdminPaging.jsp" flush="true">
+	<jsp:param name="url" value="boardSelectPaging.wd"/>
+	<jsp:param name="str" value=""/>
+	<jsp:param name="pageSize" value="<%=pageSize%>"/>
+	<jsp:param name="groupSize" value="<%=groupSize%>"/>
+	<jsp:param name="curPage" value="<%=curPage%>"/>
+	<jsp:param name="totalCount" value="<%=totalCount%>"/>
+</jsp:include>
+</td>
+</tr>			
+                                        
+                                        
+                                      <!--   <div class="dataTable-top">
                                         	<div class="dataTable-dropdown">
                                         	<label>
                                         		<select class="dataTable-selector">
@@ -146,7 +172,6 @@
                                         			</div>
                                     </tbody>
                                    <div class="dataTable-bottom">
-                                   <div class="dataTable-info">Showing 21 to 30 of 57 entries</div>
                                    <nav class="dataTable-pagination"><ul class="dataTable-pagination-list">
                                    	<li class="pager"><a href="#" data-page="2">‹</a></li>
                                    	<li class=""><a href="#" data-page="1">1</a></li>
@@ -156,7 +181,7 @@
                                    	<li class=""><a href="#" data-page="5">5</a></li>
                                    	<li class=""><a href="#" data-page="6">6</a></li>
                                    	<li class="pager"><a href="#" data-page="4">›
-                                   	</a></li></ul></nav></div>
+                                   	</a></li></ul></nav></div> -->
                                 </table><br>
                            
                             </div>

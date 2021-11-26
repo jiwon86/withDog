@@ -32,7 +32,7 @@
                 <div class="collapse" id="collapseCareService" data-bs-parent="#accordionSidenavCareService">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCareServicePages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
-                        <a class="nav-link hahmlet" href="dashboard-2.html">내돌봄현황</a>
+                        <a class="nav-link hahmlet" href="selectTrade.wd">내돌봄현황</a>
                     </nav>
                 </div>       
                 
@@ -177,8 +177,60 @@
         <!-- Sidenav Footer-->
         <div class="sidenav-footer">
             <div class="sidenav-footer-content">
-                <div class="sidenav-footer-subtitle">Logged in as:</div>
-                <div class="sidenav-footer-title">Valerie Luna</div>
+                <div class="sidenav-footer-subtitle" id="time">현재 시간</div>
+                <div class="sidenav-footer-title" id="weather"></div>
+<script>
+       const clock = document.getElementById("time");
+       const weather = document.getElementById("weather");
+       let weather_icon;
+	   function getClock() {
+		   const date = new Date();
+		   const hours = String(date.getHours()).padStart(2,"0");
+		   const minutes =  String(date.getMinutes()).padStart(2,"0");
+		   const seconds =  String(date.getSeconds()).padStart(2,"0");
+		   clock.innerText = "TIME : "+hours+":"+minutes+":"+seconds;
+		}
+	   
+	   function getlocation () {
+		 //HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
+		 	if (navigator.geolocation) {
+		 	    
+		 	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+		 	    navigator.geolocation.getCurrentPosition(function(position) {
+		 	        
+		 	        var lat = position.coords.latitude, // 위도
+		 	            lon = position.coords.longitude; // 경도
+		 	            
+		 	       const url = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=e4e122a0b207778f1b37f15db40470ad";
+		 	      
+		 	    	  
+		 	    	    fetch(url)
+		 	    	    .then((response) => response.json())
+		 	    	    .then((data) => {
+		 	    	        const name = data.name;
+		 	    	        const temp = data.main.temp;
+		 	    	        const weather_main = data.weather[0].main;
+		 	    	        weather_icon = document.createElement("img");
+		 	    	        weather_icon.setAttribute('src','/image/weather/'+weather_main+'.png');
+		 	    	        weather_icon.setAttribute('class','weather_icon');
+		 	    	        weather_icon.setAttribute('width','60px');
+		 	    	        weather.appendChild(weather_icon);
+		 	    	      
+		 	    	        console.log(weather_main);
+     
+		 	    	    });
+		 	 
+		 	            
+		 	      });
+		 	}else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+		 	    alert("브라우저가 최신 버전이 아닙니다!");
+		 	}
+		 }
+	
+	getlocation();
+	getClock();
+	setInterval(getClock, 1000);
+</script>
             </div>
         </div>
     </nav>

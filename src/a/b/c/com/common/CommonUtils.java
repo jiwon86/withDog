@@ -5,8 +5,14 @@ public abstract class CommonUtils {
 	// 박상혁 : withdog_work
 	
 	
+<<<<<<< HEAD
+	public static final String WorkSpace = "pr_work";
+	
+	
+=======
 	public static final String WorkSpace = "project_work";
 
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
 	// 이미지 업로드
 	public static final String BOARD_IMG_UPLOAD_PATH 
 	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\board";
@@ -27,7 +33,11 @@ public abstract class CommonUtils {
 	
 	// 한태준 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH1
+<<<<<<< HEAD
+	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
+=======
 	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\member";
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
 	public static final int MEMBER_IMG_FILE_SIZE1 = 2*1024*1024;
 	public static final String MEMBER_EN_CODE1="UTF-8";
 

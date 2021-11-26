@@ -60,8 +60,14 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
+	// 맵 트레이드 번호
+	public static String getMapTradeChabun(String type, String memNum) {
+		return ChabunUtil.numpad(type, memNum);
+	}
+	
 	public static void main(String[] args) {
 		String c = "1";
+		System.out.println(ChabunUtil.getMapTradeChabun("a", c));
 		System.out.println("getMemChabun(\"m\", c) >>> : " + ChabunUtil.getMemChabun("m", c));
 		System.out.println("getBoardChabun(\"N\", c) >>> : " + ChabunUtil.getBoardChabun("N", c));
 		System.out.println("getRboardChabun(\"N\", c) >>> : " + ChabunUtil.getRboardChabun("N", c));

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "a.b.c.com.notice.dao.NoticeDAO">
+
+
+
+<insert id = "noticeInsert" parameterType="NoticeVO">
+
+	INSERT INTO NOTICE (NNUM,
+						NSUBJECT,
+						NWRITER,
+						NCONTENTS,
+						NFILE,
+						DELETEYN,
+						INSERTDATE,
+						UPDATEDATE)
+				VALUES( #{nnum, jdbcType=VARCHAR},
+						#{nsubject, jdbcType=VARCHAR},
+						#{nwriter, jdbcType=VARCHAR},
+						#{ncontents, jdbcType=VARCHAR},
+						#{nfile, jdbcType=VARCHAR},
+						'Y',
+						SYSDATE,
+						SYSDATE)
+</insert>
+
+<select id="noticeSelectPaging" parameterType="NoticeVO" resultType="NoticeVO">
+	SELECT * FROM (
+		SELECT A.NNUM			NNUM
+			  ,A.NSUBJECT		NSUBJECT
+			  ,A.NWRITER	    NWRITER
+			  ,A.NFILE			NFILE
+			  ,A.DELETEYN		DELETEYN
+			  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+			  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+			  ,CEIL(ROW_NUMBER() OVER(ORDER BY A.NNUM DESC)/ #{pageSize, jdbcType=VARCHAR} ) pageSize
+			  ,COUNT(A.NNUM) OVER() AS totalCount
+		FROM	NOTICE A
+		WHERE	A.DELETEYN = 'Y' 
+		AND A.NSUBJECT like '%' ||  #{keyword, jdbcType=VARCHAR} || '%'
+		ORDER BY 1 DESC
+		
+		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+</select>
+
+<select id ="noticeSelectAll" parameterType="NoticeVO" resultType="NoticeVO">
+	SELECT A.NNUM		NNUM
+		  ,A.NSUBJECT	NSUBJECT
+		  ,A.NWRITER	NWRITER
+		  ,A.NCONTENTS	NCONTENTS
+		  ,A.NFILE		NFILE
+		  ,A.DELETEYN	DELETEYN
+		  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+	FROM	NOTICE A
+	WHERE A.DELETEYN = 'Y'
+	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	</if>
+	<if test="keyfilter=='key1'">
+		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>	
+	</if>
+	<if test="keyfilter=='key2'">
+		<![CDATA[AND A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="keyfilter=='key3'">
+		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		<![CDATA[OR A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	<if test="keyfilter=='key4'">
+		<![CDATA[AND A.NWRITER LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	<if test="keyfilter=='key5'">
+		<![CDATA[AND A.NNUM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	ORDER BY 1 DESC
+</select>
+<!-- 
+<select id ="noticeSelectPaging" parameterType="NoticeVO" resultType="NoticeVO">
+	SELECT A.NNUM		NNUM
+		  ,A.NSUBJECT	NSUBJECT
+		  ,A.NWRITER	NWRITER
+		  ,A.NCONTENTS	NCONTENTS
+		  ,A.NFILE		NFILE
+		  ,A.DELETEYN	DELETEYN
+		  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+	FROM	NOTICE A
+	WHERE A.DELETEYN = 'Y'
+
+	<if test="startdate!=null and startdate!='' and enddate!=null and enddate!=''">
+		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startdate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{enddate, jdbcType=VARCHAR}), 'YYYY-MM-DD')]]>
+	</if>
+	<if test="keyfilter=='key1'">
+		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>	
+	</if>
+	<if test="keyfilter=='key2'">
+		<![CDATA[AND A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="keyfilter=='key3'">
+		<![CDATA[AND A.NSUBJECT LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>
+		<![CDATA[OR A.NCONTENTS LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	<if test="keyfilter=='key4'">
+		<![CDATA[AND A.NWRITER LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	<if test="keyfilter=='key5'">
+		<![CDATA[AND A.NNUM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
+	</if>
+	ORDER BY 1 DESC
+</select>
+ -->
+<select id="noticeSelect" parameterType="NoticeVO" resultType="NoticeVO">
+	SELECT A.NNUM		NNUM
+		  ,A.NSUBJECT	NSUBJECT
+		  ,A.NWRITER	NWRITER
+		  ,A.NCONTENTS	NCONTENTS
+		  ,A.NFILE		NFILE
+		  ,A.DELETEYN	DELETEYN
+		  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
+		  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+FROM NOTICE A WHERE A.DELETEYN='Y' AND A.NNUM = #{nnum, jdbcType=VARCHAR}
+</select>
+
+<update id ="noticeUpdate" parameterType="NoticeVO">
+	UPDATE NOTICE
+			SET 	NCONTENTS=#{ncontents, jdbcType=VARCHAR}
+				   ,NSUBJECT=#{nsubject, jdbcType=VARCHAR}	
+				   ,NFILE=#{nfile, jdbcType=VARCHAR}			
+			 	   ,UPDATEDATE = SYSDATE
+	WHERE DELETEYN = 'Y' 
+	AND 		   NNUM = #{nnum, jdbcType=VARCHAR}
+</update>
+
+<update id="noticeDelete" parameterType="NoticeVO">
+	UPDATE NOTICE SET DELETEYN = 'N', UPDATEDATE = SYSDATE
+	WHERE DELETEYN = 'Y' AND NNUM = #{nnum, jdbcType=VARCHAR}
+</update>
+</mapper>

@@ -12,10 +12,17 @@
                 </a>
                 
                 <!-- 권한 테스트 -->
-                <a class="nav-link" href="/register.wd">
+                   <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUserService" aria-expanded="false" aria-controls="collapseUserService">
                     <div class="nav-link-icon"><i data-feather="lock"></i></div>
                     <span class="hahmlet">관리자 페이지</span>
+                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
+                 <div class="collapse" id="collapseUserService" data-bs-parent="#accordionSidenavCustomerCenter">
+                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
+                        <a class="nav-link hahmlet" href="AdminMemberSelectAll.wd">회원리스트</a>
+                        <a class="nav-link hahmlet" href="dashboard-2.html">마커리스트</a>
+                    </nav>
+                </div>                     
        
                 <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCareService" aria-expanded="false" aria-controls="collapseCareService">
                     <div class="nav-link-icon"><i data-feather="github"></i></div>
@@ -38,7 +45,8 @@
                 <div class="collapse" id="collapseCustomerCenter" data-bs-parent="#accordionSidenavCustomerCenter">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
-                        <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
+                        <a class="nav-link hahmlet" href="noticeSelectPaging.wd">공지사항</a> 
+                      <a class="nav-link hahmlet" href="qnaSelectAll.wd">Q&A</a>
                     </nav>
                 </div>                     
             	

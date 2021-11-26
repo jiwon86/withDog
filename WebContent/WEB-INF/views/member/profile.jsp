@@ -10,6 +10,7 @@
 <html lang="ko">
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
+	
 	<head>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -24,7 +25,7 @@
 					}).open();
 				});
 				
-				$("#mbirth").datepicker({
+			/* 	$("#mbirth").datepicker({
 			        dateFormat: 'yy-mm-dd' //달력 날짜 형태
 	               ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 	               ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
@@ -36,7 +37,8 @@
 	               ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
 	               ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
 	               ,maxDate: "+0y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-				});
+				}); */
+				
 								
 				$("#inputImage").change(function(){
 					readURL(this);
@@ -170,7 +172,7 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
+                            <a class="nav-link active ms-0" href="profile.wd">Profile</a>
                             <a class="nav-link" href="myPetList.wd">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
@@ -235,15 +237,15 @@
 	                                            <div class="row gx-3 mb-3">
 	                                                <div class="col-md-6">
 	                                                    <label class="small mb-1" for="insertdate">계정 생성일</label>
-	                                                    <input class="form-control" id="insertdate" type="text" value="<%=member.getInsertdate()%>" disabled />
+	                                                    <input class="form-control" id="insertdate" type="date" value="<%=member.getInsertdate()%>" disabled />
 	                                                </div>
 	                                                <div class="col-md-6">
 	                                                    <label class="small mb-1" for="mbirth">생년월일</label>
-	                                                    <input class="form-control" id="mbirth" type="text" name="mbirth" 
+	                                                    <input class="form-control" id="mbirth" type="date" name="mbirth" 
 	                                                           placeholder="생년월일 입력" value="<%=member.getMbirth()%>" />
 	                                                </div>
 	                                            </div>
-	                                            
+	                                            1
 	                                            <!-- 우편번호, 우편번호 찾기 버튼 -->
 	                                            <div class="row gx-3 mb-3">
 	                                                <!-- Form Group (organization name)-->

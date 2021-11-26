@@ -32,7 +32,7 @@
 		.ibm-font {
 			font-family: 'IBM Plex Sans KR', sans-serif;
 		}
-		.dongle {
+		.dongle {W
 			font-family: 'Dongle', sans-serif;
 		}
 		.gothic {

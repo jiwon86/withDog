@@ -10,8 +10,8 @@
 <html lang="ko">
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
-	<!-- /헤드 -->
-			<script type="text/javascript">
+	<head>
+		<script type="text/javascript">
 			$(document).ready(function() {
 				
 				$("#zonecode").click(function() {
@@ -23,7 +23,7 @@
 						}
 					}).open();
 				});
-				
+				/*
 				$("#mbirth").datepicker({
 			        dateFormat: 'yy-mm-dd' //달력 날짜 형태
 	               ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
@@ -37,7 +37,8 @@
 	               ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
 	               ,maxDate: "+0y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 				});
-								
+				*/
+				
 				$("#inputImage").change(function(){
 					readURL(this);
 				});
@@ -117,6 +118,9 @@
 				}
 			}
 	</script>
+	</head>
+
+	<!-- /헤드 -->
 
     <body class="nav-fixed">
 
@@ -132,15 +136,24 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-            <%
+				
+				<!--  
+					===================================
+					<main> 내용 </main> 부분을 복사해서 
+					
+					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
+					===================================
+				--> 
+				<!-- ** 주요 내용 **  -->
+				<%
 					Member member = (Member)request.getAttribute("member");
 				
 					String mroadaddress = member.getMroadaddress();
 					String[] mroadaddressArr = mroadaddress.split("@");
 					String mphoto = member.getMphoto();
 				%>
-            <main>
-				       <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                <main>
+                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                         <div class="container-xl px-4">
                             <div class="page-header-content">
                                 <div class="row align-items-center justify-content-between pt-3">
@@ -158,8 +171,8 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link active ms-0" href="/profile.wd">Profile</a>
-                            <a class="nav-link" href="point.wd">Billing</a>
+                            <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
+                            <a class="nav-link" href="myPetList.wd">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                         </nav>
@@ -301,6 +314,7 @@
 					</div>
                     
                 </main>				
+				<!-- ** /주요 내용 ** -->
 				
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />

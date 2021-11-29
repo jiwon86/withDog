@@ -5,6 +5,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
+	public static final String BIZ_GUBUN_A = "A"; // 반려동물 관련 매칭
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
 	public static String numpad(String t, String c) {
@@ -37,12 +38,18 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
+	// 반려동물 위탁 매칭 번호
+	public static String getAgencyChabun(String type, String agencyNum) {
+		return BIZ_GUBUN_A.concat(ChabunUtil.numpad(type, agencyNum));
+	}
+	
 	public static void main(String[] args) {
 		String c = "1";
 		System.out.println("getMemChabun(\"m\", c) >>> : " + ChabunUtil.getMemChabun("m", c));
 		System.out.println("getBoardChabun(\"N\", c) >>> : " + ChabunUtil.getBoardChabun("N", c));
 		System.out.println("getRboardChabun(\"N\", c) >>> : " + ChabunUtil.getRboardChabun("N", c));
 		System.out.println(".getNoticeChabun(\"N\", c) >>> : " + ChabunUtil.getNoticeChabun("N", c));
+		System.out.println(".getAgencyChabun(\"N\", c) >>> : " + ChabunUtil.getAgencyChabun("m", c));
 	}
-	
+
 }

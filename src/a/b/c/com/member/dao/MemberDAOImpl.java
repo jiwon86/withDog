@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.member.vo.MemberAuth;
 
 @Repository
@@ -20,22 +20,22 @@ public class MemberDAOImpl implements MemberDAO {
 
 	// 로그인 
 	@Override
-	public Member read(String userId) {
+	public List<MemberVO> read(String userId) {
 
 		logger.info("MemberDAOImpl.read() 함수 실행");
 
-		return sqlSession.selectOne("read", userId);
+		return sqlSession.selectList("read", userId);
 	}
 
 	@Override
-	public Member memberSelect(String mid) {
+	public List<MemberVO> memberSelect(MemberVO mvo) {
 		logger.info("MemberDAOImpl.memberSelect() 함수 실행");
 
-		return sqlSession.selectOne("memberSelect", mid);
+		return sqlSession.selectList("memberSelect", mvo);
 	}
 
 	@Override
-	public int memberUpdate(Member mvo) {
+	public int memberUpdate(MemberVO mvo) {
 		logger.info("MemberDAOImpl.memberUpdate() 함수 실행");
 
 		return sqlSession.update("memberUpdate", mvo);
@@ -43,14 +43,14 @@ public class MemberDAOImpl implements MemberDAO {
 
 	// 가입하기
 	@Override
-	public int memberInsert(Member mvo) {
+	public int memberInsert(MemberVO mvo) {
 		logger.info("MemberDAOImpl.memberInsert() 함수 실행");
 		
 		return (Integer)sqlSession.insert("memberInsert",mvo);
 	}
 	//로그인 체크
 	@Override
-	public List<Member> loginCheck(Member mvo){
+	public List<MemberVO> loginCheck(MemberVO mvo){
 		logger.info("MemberDAOImpl.loginCheck() 함수 실행");
 		
 		return sqlSession.selectList("loginCheck",mvo);
@@ -58,7 +58,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	// 중복 체크하기
 	@Override
-	public List<Member> memberIdCheck(Member mvo){
+	public List<MemberVO> memberIdCheck(MemberVO mvo){
 		logger.info("MemberDAOImpl.memberIdCheck() 함수 실행");
 		
 		return sqlSession.selectList("memberIdCheck",mvo);

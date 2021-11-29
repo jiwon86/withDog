@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 // 멤버 VO객체
-public class Member implements Serializable{
+public class MemberVO implements Serializable{
 	
 	private static final long serialVersionUID = -4346265086625051741L;
 	
@@ -34,11 +34,11 @@ public class Member implements Serializable{
 				+ insertdate + ", updatedate=" + updatedate + ", authList=" + authList + "]";
 	}
 
-	public Member() {
+	public MemberVO() {
 		
 	}
 	
-	public Member(String mno, String mid, String mpw, 
+	public MemberVO(String mno, String mid, String mpw, 
 				  String memail, String mname, String mphoto, 
 				  String mzonecode, String mroadaddress, String mjibunaddress, 
 				  String deleteyn, String insertdate, String updatedate,

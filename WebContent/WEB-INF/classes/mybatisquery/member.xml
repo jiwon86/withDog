@@ -4,7 +4,7 @@
 		  
 <mapper namespace="a.b.c.com.member.dao.MemberDAO">
 
-	<resultMap type="Member" id="memberMap">
+	<resultMap type="MemberVO" id="memberMap">
 		<id property="mno" column="MNO" />
 		
 		<result property="mno" column="MNO" />
@@ -29,7 +29,7 @@
 		<result property="mauth" column="MAUTH" />
 	</resultMap>
 	
-	<insert id="memberInsert" parameterType="Member">
+	<insert id="memberInsert" parameterType="MemberVO">
 		 INSERT INTO MEMBER( 	 
 		     MNO      		<!-- COLUMN 1 -->
 			,MID 			<!-- COLUMN 2 -->
@@ -131,7 +131,7 @@
 	-->
 	
 	
-	<update id="memberUpdate" parameterType="Member">
+	<update id="memberUpdate" parameterType="MemberVO">
 		UPDATE MEMBER
 		SET
 			  MNAME      = #{mname, jdbcType=VARCHAR}
@@ -146,7 +146,7 @@
 		AND   MNO = #{mno, jdbcType=VARCHAR}
 	</update>
 	
-<select id="memberIdCheck" parameterType="Member" resultType="Member">
+<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
 	SELECT 	A.MID MID
 	FROM 	MEMBER A 
 	WHERE 	DELETEYN = 'Y'

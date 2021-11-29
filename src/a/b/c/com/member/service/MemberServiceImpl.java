@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.member.dao.MemberDAO;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.member.vo.MemberAuth;
 
 @Service
@@ -25,34 +25,34 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member memberSelect(String mid) {
+	public List<MemberVO> memberSelect(MemberVO mvo) {
 		logger.info("MemberServiceImpl.memberSelect() 함수 진입");
 
-		return memberDAO.memberSelect(mid);
+		return memberDAO.memberSelect(mvo);
 	}
 
 	@Override
-	public int memberUpdate(Member mvo) {
+	public int memberUpdate(MemberVO mvo) {
 		logger.info("MemberServiceImpl.memberUpdate() 함수 진입");
 
 		return memberDAO.memberUpdate(mvo);
 	}
 	// 가입하기
 	@Override
-	public int memberInsert(Member mvo) {
+	public int memberInsert(MemberVO mvo) {
 		logger.info("MemberServiceImpl.memberInsert() 함수 진입");
 		return (Integer)memberDAO.memberInsert(mvo);
 	}
 	//로그인 체크
 	@Override
-	public List<Member> loginCheck(Member mvo){
+	public List<MemberVO> loginCheck(MemberVO mvo){
 		logger.info("MemberServiceImpl.log9inCheck() 함수 진입");
 		return memberDAO.loginCheck(mvo);
 	}
 
 	// 중복 체크하기
 	@Override
-	public List<Member> memberIdCheck(Member mvo){
+	public List<MemberVO> memberIdCheck(MemberVO mvo){
 		logger.info("MemberServiceImpl.memberIdCheck() 함수 진입");
 		return memberDAO.memberIdCheck(mvo);
 	}

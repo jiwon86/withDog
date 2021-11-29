@@ -17,12 +17,16 @@
 		SELECT NVL(MAX(SUBSTR(A.MNUM, -4)), 0) + 1 MNUM FROM SPRING_MEMBER A
 	</select>
 	-->
-	<select id="getMemChabun" resultType="Member">
+	<select id="getMemChabun" resultType="MemberVO">
 		SELECT NVL(MAX(SUBSTR(A.MNO, -4)),0) + 1 MNO FROM MEMBER A 
 	</select>
 	
 	<select id="getMapChabun" resultType="MapTradeVO">
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
+	</select>
+
+	<select id="getAgencyChabun" resultType="AgencyVO">
+		SELECT NVL(MAX(SUBSTR(A.ANO, -4)),0) + 1 ANO FROM AGENCY A
 	</select>
 	
 </mapper>

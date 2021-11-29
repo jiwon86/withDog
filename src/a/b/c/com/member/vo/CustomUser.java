@@ -12,14 +12,14 @@ public class CustomUser extends User {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Member member;
+	private MemberVO member;
 
 	public CustomUser(String username, String password, 
 					  Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 	}
 	
-	public CustomUser(Member member) {
+	public CustomUser(MemberVO member) {
 		super(member.getMid(), member.getMpw(), 
 			  member.getAuthList().stream()
 			  .map(auth -> new SimpleGrantedAuthority(auth.getMauth()))
@@ -28,7 +28,7 @@ public class CustomUser extends User {
 		this.member = member;
 	}
 
-	public Member getMember() {
+	public MemberVO getMember() {
 		return member;
 	}
 	

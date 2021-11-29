@@ -4,14 +4,15 @@
 		  
 <configuration>
 	<typeAliases>
-		<typeAlias type="a.b.c.com.member.vo.Member" alias="Member" />
-
-		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />	
-		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
-
+		<typeAlias type="a.b.c.com.member.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />
+		
+		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
+		
 		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
+		
 		<typeAlias type="a.b.c.com.agency.vo.OfferVO" alias="OfferVO" />
-
+		<typeAlias type="a.b.c.com.agency.vo.ConditionVO" alias="ConditionVO" />
+		<typeAlias type="a.b.c.com.agency.vo.AgencyVO" alias="AgencyVO" />
 	</typeAliases>
 </configuration>

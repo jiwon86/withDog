@@ -4,25 +4,32 @@
 		  
 <mapper namespace="a.b.c.com.agency.dao.OfferDAO">
 	
-	<select id="offerSelectAll" parameterType="java.lang.String" resultType="OfferVO">
-		SELECT 
-			   T.TNO       TNO
-			 , T.TTITLE    TTITLE
-			 , T.TCONTENT  TCONTENT
-			 , T.TPRICE    TPRICE
-			 , T.TLAT      TLAT
-			 , T.TLNG      TLNG
-			 , T.MNO       MNO
-			 , T.PNO       PNO
-			 , TO_CHAR(TO_DATE(T.STARTDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')  STARTDATE
-			 , TO_CHAR(TO_DATE(T.ENDDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')    ENDDATE
-			 , T.DELETEYN  DELETEYN
-			 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
-			 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
-			 , M.MID       MID
-		FROM   TRADEMAP T, MEMBER M
-		WHERE  T.MNO = M.MNO 
-		AND    T.MNO = #{mno, jdbcType=VARCHAR}
+	<select id="offerSelectAll" parameterType="OfferVO" resultType="OfferVO">
+		SELECT * FROM (
+			SELECT
+				   T.TNO       TNO
+				 , T.TTITLE    TTITLE
+				 , T.TCONTENT  TCONTENT
+				 , T.TPRICE    TPRICE
+				 , T.TLAT      TLAT
+				 , T.TLNG      TLNG
+				 , T.MNO       MNO
+				 , T.PNO       PNO
+				 , TO_CHAR(TO_DATE(T.STARTDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')  STARTDATE
+				 , TO_CHAR(TO_DATE(T.ENDDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')    ENDDATE
+				 , T.DELETEYN  DELETEYN
+				 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
+				 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
+				 , M.MID       MID
+				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.TNO = T.TNO) conditionCount
+		 		 <!-- ? : 페이지 사이즈 : pageSize -->
+			     , CEIL(ROW_NUMBER() OVER(ORDER BY T.TNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
+			     , COUNT(T.TNO) OVER() AS totalCount
+			FROM   TRADEMAP T, MEMBER M
+			WHERE  T.MNO = M.MNO 
+			AND    T.MNO = #{mno, jdbcType=VARCHAR}
+			ORDER BY T.TNO DESC
+		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="offerSelect" parameterType="OfferVO" resultType="OfferVO">

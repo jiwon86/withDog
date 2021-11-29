@@ -5,9 +5,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import a.b.c.com.agency.vo.AgencyVO;
 import a.b.c.com.map.vo.MapTradeVO;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 
 
 @Repository
@@ -40,11 +40,18 @@ public class ChabunDAOImpl implements ChabunDAO {
 	}
 */
 	@Override
-	public Member getMemChabun() {
+	public MemberVO getMemChabun() {
 		logger.info("ChabunDAOImpl.getMemChabun() 함수 진입");
 		
 		return sqlSession.selectOne("getMemChabun");
 	}
-	
+
+
+	@Override
+	public AgencyVO getAgencyChabun() {
+		logger.info("ChabunDAOImpl.getAgencyChabun() 함수 진입");
+		
+		return sqlSession.selectOne("getAgencyChabun");
+	}
 	
 }

@@ -26,10 +26,10 @@ public class OfferServiceImpl implements OfferService {
 	}
 	
 	@Override
-	public List<OfferVO> offerSelectAll(String mno) {
+	public List<OfferVO> offerSelectAll(OfferVO offerVO) {
 		logger.info("OfferServiceImpl.offerSelectAll() 함수 진입");
 		
-		return offerDAO.offerSelectAll(mno);
+		return offerDAO.offerSelectAll(offerVO);
 	}
 
 	@Override

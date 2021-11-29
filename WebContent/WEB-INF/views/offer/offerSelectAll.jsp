@@ -64,7 +64,7 @@
                         <div class="row mb-4">
                             <div class="col-xl-6 mb-4">
                                 <!-- Dashboard example card 1-->
-                                <a class="card lift h-100" href="/offerSelectAll.wd">
+                                <a class="card lift h-100" href="/offerSelectAllPaging.wd">
                                     <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="me-3">
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-xl-6 mb-4">
                                 <!-- Dashboard example card 2-->
-                                <a class="card lift h-100" href="#!">
+                                <a class="card lift h-100" href="/myConditionSelectAllPaging.wd">
                                     <div class="card-body d-flex justify-content-center flex-column">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="me-3">
@@ -96,10 +96,20 @@
                         <!-- /탭메뉴 -->
                         
                         <!-- 돌봄신청 리스트 -->
-                        <h4 class="mb-0 mt-5">내 돌봄신청 정보</h4>
+                        <h4 class="mb-0 mt-5">내 조건제시 정보</h4>
                         <hr class="mt-2 mb-4" />
 
 						<%
+							
+							//페이징 변수 세팅
+							int pageSize = 0;
+							int groupSize = 0;
+							int curPage = 0;
+							int totalCount = 0;	
+							
+							Object objPaging = request.getAttribute("pagingOfferVO");
+							OfferVO pagingOfferVO = (OfferVO)objPaging;
+							
 							// 멤버 신청리스트 구하기
 							List<OfferVO> offerListAll = (List<OfferVO>) request.getAttribute("offerListAll");
 							int nCnt = offerListAll.size();
@@ -116,8 +126,17 @@
 								Date startDate = todayFormat.parse(ovo.getStartdate());
 								Date endDate = todayFormat.parse(ovo.getEnddate());
 								
+								System.out.println("*** startDate >>> : " + ovo.getStartdate());
+								System.out.println("*** endDate >>> : " + ovo.getEnddate());
+								
 								Map<String, Object> petMap = (Map<String, Object>) request.getAttribute("petMap");
 								List<PetVO> pvo = (List<PetVO>) petMap.get(ovo.getTno());
+								
+								pageSize = Integer.parseInt(pagingOfferVO.getPageSize());
+								groupSize = Integer.parseInt(pagingOfferVO.getGroupSize());
+								curPage = Integer.parseInt(pagingOfferVO.getCurPage());
+								totalCount = Integer.parseInt(ovo.getTotalCount());
+								
 								// a.after(b)
 								// after 1이 2보다 나중이면 true
 								// before 1이 2보다 먼저이면 true
@@ -155,7 +174,7 @@
 			                                        </p>
 			                                        <div class="small text-muted mt-3">
 			                                        	<i class="fas fa-exclamation-circle"></i>&nbsp; 
-			                                        	<span>7개의 조건제시가 존재</span>
+			                                        	<span><%=ovo.getConditionCount()%>개의 조건제시가 존재</span>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -195,7 +214,7 @@
 			                                        </p>
 			                                        <div class="small text-muted mt-3">
 			                                        	<i class="fas fa-exclamation-circle"></i>&nbsp; 
-			                                        	<span>7개의 조건제시가 존재</span>
+			                                        	<span><%=ovo.getConditionCount()%>개의 조건제시가 존재</span>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -235,7 +254,7 @@
 			                                        </p>
 			                                        <div class="small text-muted mt-3">
 			                                        	<i class="fas fa-exclamation-circle"></i>&nbsp; 
-			                                        	<span>7개의 조건제시가 존재</span>
+			                                        	<span><%=ovo.getConditionCount()%>개의 조건제시가 존재</span>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -246,21 +265,16 @@
                         <% 
                         	}
 						%>
-
                         
                         <!-- /돌봄신청 리스트 -->
-                        
-                        <nav class="dataTable-pagination float-end">
-                        	<ul class="dataTable-pagination-list">
-                        		<li class="active"><a href="#" data-page="1">1</a></li>
-                        		<li class=""><a href="#" data-page="2">2</a></li>
-                        		<li class=""><a href="#" data-page="3">3</a></li>
-                        		<li class=""><a href="#" data-page="4">4</a></li>
-                        		<li class=""><a href="#" data-page="5">5</a></li>
-                        		<li class=""><a href="#" data-page="6">6</a></li>
-                        		<li class="pager"><a href="#" data-page="2">›</a></li>
-                        	</ul>
-                        </nav>
+	                    <jsp:include page="offerPaging.jsp" flush="true">
+							<jsp:param name="url" value="offerSelectAllPaging.wd"/>
+							<jsp:param name="str" value=""/>
+							<jsp:param name="pageSize" value="<%=pageSize%>"/>
+							<jsp:param name="groupSize" value="<%=groupSize%>"/>
+							<jsp:param name="curPage" value="<%=curPage%>"/>
+							<jsp:param name="totalCount" value="<%=totalCount%>"/>
+						</jsp:include>
                         
 					</div>
                 </main>				

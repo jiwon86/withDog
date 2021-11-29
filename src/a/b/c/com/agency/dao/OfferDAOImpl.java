@@ -20,10 +20,10 @@ public class OfferDAOImpl implements OfferDAO {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<OfferVO> offerSelectAll(String mno) {
+	public List<OfferVO> offerSelectAll(OfferVO offerVO) {
 		logger.info("OfferDAOImpl.offerSelectAll() 함수 진입");
 		
-		return sqlSession.selectList("offerSelectAll", mno);
+		return sqlSession.selectList("offerSelectAll", offerVO);
 	}
 
 	@Override

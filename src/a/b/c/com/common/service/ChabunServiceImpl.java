@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import a.b.c.com.agency.vo.AgencyVO;
 import a.b.c.com.common.dao.ChabunDAO;
 
 import a.b.c.com.map.vo.MapTradeVO;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 
 @Service
 @Transactional
@@ -52,9 +53,16 @@ public class ChabunServiceImpl implements ChabunService {
 	*/
 
 	@Override
-	public Member getMemChabun() {
+	public MemberVO getMemChabun() {
 		logger.info("ChabunServiceImpl.getMemChabun() 함수 진입");
 		return chabunDAO.getMemChabun();
+	}
+
+	@Override
+	public AgencyVO getAgencyChabun() {
+		logger.info("ChabunServiceImpl.getAgencyChabun() 함수 진입");
+		
+		return chabunDAO.getAgencyChabun();
 	}
 	
 

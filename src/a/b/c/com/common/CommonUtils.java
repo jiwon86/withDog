@@ -37,6 +37,18 @@ public abstract class CommonUtils {
 	public static final int BOARD_CUR_PAGE = 1;
 	public static final int BOARD_TOTAL_COUNT = 0;
 	
+	// 돌봄신청 페이징 사이즈 초기회
+	public static final int OFFER_PAGE_SIZE = 3;
+	public static final int OFFER_GROUP_SIZE = 5;
+	public static final int OFFER_CUR_PAGE = 1;
+	public static final int OFFER_TOTAL_COUNT = 0;		
+	
+	// 조건제시 페이징 사이즈 초기회
+	public static final int CONDITION_PAGE_SIZE = 5;
+	public static final int CONDITION_GROUP_SIZE = 5;
+	public static final int CONDITION_CUR_PAGE = 1;
+	public static final int CONDITION_TOTAL_COUNT = 0;	
+	
 	// 맵관련
 	public static final String JSON_FILE_PATH 
 	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\";

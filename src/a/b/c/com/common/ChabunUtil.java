@@ -8,6 +8,7 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
+	public static final String BIZ_GUBUN_P = "P"; // 산책스타그램
 	
 	
 	
@@ -60,10 +61,18 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
+<<<<<<< HEAD
+	// 산책스타그램 번호
+	public static String getParkChabun(String type, String memNum) {
+		return BIZ_GUBUN_P.concat(ChabunUtil.numpad(type, memNum));
+	}
+	
+=======
 	// 맵 트레이드 번호
 	public static String getMapTradeChabun(String type, String memNum) {
 		return ChabunUtil.numpad(type, memNum);
 	}
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	
 	public static void main(String[] args) {
 		String c = "1";
@@ -71,9 +80,14 @@ public abstract class ChabunUtil {
 		System.out.println("getMemChabun(\"m\", c) >>> : " + ChabunUtil.getMemChabun("m", c));
 		System.out.println("getBoardChabun(\"N\", c) >>> : " + ChabunUtil.getBoardChabun("N", c));
 		System.out.println("getRboardChabun(\"N\", c) >>> : " + ChabunUtil.getRboardChabun("N", c));
+<<<<<<< HEAD
+		System.out.println("getNoticeChabun(\"N\", c) >>> : " + ChabunUtil.getNoticeChabun("N", c));
+		System.out.println("getParkChabun(\"N\", c) >>> : " + ChabunUtil.getParkChabun("N", c));
+=======
 		System.out.println(".getNoticeChabun(\"N\", c) >>> : " + ChabunUtil.getNoticeChabun("N", c));
 		System.out.println(".getQnaChabun(\"N\", c) >>> : " + ChabunUtil.getQnaChabun("N", c));
 		
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	}
 	
 }

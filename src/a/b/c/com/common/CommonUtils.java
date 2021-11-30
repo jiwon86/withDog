@@ -32,6 +32,12 @@ public abstract class CommonUtils {
 	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
 	public static final int MEMBER_IMG_FILE_SIZE1 = 2*1024*1024;
 	public static final String MEMBER_EN_CODE1="UTF-8";
+	
+	// 이미지 업로드
+	public static final String PARK_IMG_UPLOAD_PATH 
+	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\park";
+	public static final int PARK_IMG_FILE_SIZE = 2*1024*1024;
+	public static final String PARK_EN_CODE = "UTF-8";
 
 	// 게시판 페이징 사이즈 초기화
 	public static final int BOARD_PAGE_SIZE = 3;

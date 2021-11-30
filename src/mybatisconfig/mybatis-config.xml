@@ -16,6 +16,7 @@
 		<typeAlias type="a.b.c.com.notice.vo.NoticeVO" alias="NoticeVO" />
 		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
 		
+		<typeAlias type="a.b.c.com.park.vo.ParkVO" alias="ParkVO"/>
 		
 	</typeAliases>
 </configuration>

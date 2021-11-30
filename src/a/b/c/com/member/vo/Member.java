@@ -35,7 +35,6 @@ public class Member implements Serializable{
 	private String curPage;
 	private String totalCount;
 	
-	
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", mname=" + mname

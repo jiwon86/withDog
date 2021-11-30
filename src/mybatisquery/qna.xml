@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.b.c.com.qna.dao.QnaDAO">
+
+	<resultMap type="a.b.c.com.qna.vo.QnaVO" id="qvo">
+		<result property="qnanum"		column="QNANUM"/>
+		<result property="qnatitle"		column="QNATITLE"/>
+		<result property="qnacon"		column="QNACON"/>
+		<result property="qnawriter"	column="QNAWRITER"/>
+		<result property="qnapw"		column="QNAPW"/>
+		<result property="qnaanswer"	column="QNAANSWER"/>
+		<result property="qnafile"		column="QNAFILE"/>
+		
+	</resultMap>
+<!--getQnaChabun  -->
+	<insert id="qnaInsert" parameterType="QnaVO">
+		
+		INSERT INTO QNA(QNANUM, QNATITLE, QNACON,
+						QNAWRITER, QNAPW, QNAANSWER, QNAFILE,
+						QNAINSERTDATE, QNAUPDATEDATE, DELYN)
+		VALUES(#{qnanum, jdbcType=VARCHAR},
+			   #{qnatitle, jdbcType=VARCHAR},
+			   #{qnacon, jdbcType=VARCHAR},
+			   #{qnawriter, jdbcType=VARCHAR},
+			   #{qnapw, jdbcType=VARCHAR},
+			   #{qnaanswer, jdbcType=VARCHAR},
+			   #{qnafile, jdbcType=VARCHAR},
+			   SYSDATE, SYSDATE, 'Y')
+		
+	</insert>
+
+	<select id="qnaSelectAll" parameterType="QnaVO" resultType="QnaVO">
+	SELECT 	   A.QNANUM			QNANUM
+			  ,A.QNATITLE		QNATITLE
+			  ,A.QNACON			QNACON
+			  ,A.QNAWRITER		QNAWRITER
+			  ,A.QNAPW			QNAPW
+			  ,A.QNAANSWER		QNAANSWER
+			  ,A.QNAFILE		QNAFILE
+			  ,TO_CHAR(A.QNAINSERTDATE, 'YYYY-MM-DD')	QNAINSERTDATE
+			  ,TO_CHAR(A.QNAUPDATEDATE, 'YYYY-MM-DD')	QNAUPDATEDATE
+			  ,A.DELYN			DELYN
+	FROM 	QNA A
+	WHERE 	A.DELYN = 'Y' 
+
+	ORDER BY 1
+</select>
+
+<select id="qnaSelect" parameterType="QnaVO" resultType="QnaVO">
+	SELECT     A.QNANUM			QNANUM
+			  ,A.QNATITLE		QNATITLE
+			  ,A.QNACON			QNACON
+			  ,A.QNAWRITER		QNAWRITER
+			  ,A.QNAPW			QNAPW
+			  ,A.QNAANSWER		QNAANSWER
+			  ,A.QNAFILE		QNAFILE
+			  ,TO_CHAR(A.QNAINSERTDATE, 'YYYY-MM-DD')	QNAINSERTDATE
+			  ,TO_CHAR(A.QNAUPDATEDATE, 'YYYY-MM-DD')	QNAUPDATEDATE
+			  ,A.DELYN			DELYN
+	FROM QNA A
+	WHERE A.DELYN = 'Y' AND A.QNANUM = #{qnanum, jdbcType=VARCHAR}
+</select>
+
+<!-- selectAll에서 수정 -->
+<update id="qnaMyUpdate" parameterType="QnaVO">
+	UPDATE QNA SET QNATITLE = #{qnatitle, jdbcType=VARCHAR},
+				   QNACON = #{qnacon, jdbcType=VARCHAR},
+				   QNAFILE = #{qnafile, jdbcType=VARCHAR},
+	QNAUPDATEDATE = SYSDATE
+	WHERE DELYN = 'Y' AND QNANUM = #{qnanum, jdbcType=VARCHAR}
+</update>
+
+<!-- selectAll에서 삭제 -->
+<update id="qnaMyDelete" parameterType="QnaVO">
+	UPDATE QNA SET DELYN = 'N', QNAUPDATEDATE = SYSDATE
+	WHERE DELYN = 'Y' AND QNANUM = #{qnanum, jdbcType=VARCHAR}
+</update>
+</mapper>
+

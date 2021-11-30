@@ -34,6 +34,7 @@ public class MemberController {
 	private MemberService memberService;
 	private ChabunService chabunService;
 	
+	
 	@Autowired(required=false)
 	public MemberController(MemberService memberService, ChabunService chabunService) {
 		this.memberService = memberService;
@@ -100,6 +101,19 @@ public class MemberController {
 	public String profile(Principal principal, Model model) {
 		logger.info("MemberController.profile() 함수 진입");
 		String mid = principal.getName();
+		logger.info("member 아이디 >>> : " + mid);
+		
+		Member member = memberService.memberSelect(mid);
+		model.addAttribute("member", member);
+
+		return "member/profile";
+	}
+	
+	// 관리자페이지에서 상세보기로 넘기는곳
+	@RequestMapping("/adminpro")
+	public String profile2(HttpServletRequest req, Model model) {
+		logger.info("MemberController.profile2() 함수 진입");
+		String mid = req.getParameter("mid");
 		logger.info("member 아이디 >>> : " + mid);
 		
 		Member member = memberService.memberSelect(mid);
@@ -258,6 +272,7 @@ public class MemberController {
 			String msg="";
 			if(list.size() == 0) {
 				msg = "ID_YES";
+				
 			}else {
 				msg = "ID_NO";
 			}

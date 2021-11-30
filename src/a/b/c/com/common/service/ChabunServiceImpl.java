@@ -1,20 +1,21 @@
 package a.b.c.com.common.service;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import a.b.c.com.common.dao.ChabunDAO;
+import a.b.c.com.pet.vo.PetVO;
+
+
+
 import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
-<<<<<<< HEAD
 import a.b.c.com.park.vo.ParkVO;
-=======
 import a.b.c.com.notice.vo.NoticeVO;
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
+
 
 @Service
 @Transactional
@@ -22,6 +23,23 @@ public class ChabunServiceImpl implements ChabunService {
  
 	private Logger logger = Logger.getLogger(ChabunServiceImpl.class);
 
+
+	private ChabunDAO chabunDAO;
+	
+	@Autowired(required=false)
+	public ChabunServiceImpl(ChabunDAO chabunDAO) {
+		this.chabunDAO = chabunDAO;
+	}
+
+	@Override
+	public PetVO getPetChabun() {
+		// TODO Auto-generated method stub
+		return chabunDAO.getPetChabun();
+	}
+	
+	/*
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
 	private ChabunDAO chabunDAO;
 	
 	@Autowired(required=false)
@@ -58,7 +76,14 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("ChabunServiceImpl.getMemChabun() 함수 진입");
 		return chabunDAO.getMemChabun();
 	}
-<<<<<<< HEAD
+
+
+	@Override
+	public MapTradeVO getMapChabun() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 	@Override
 	public ParkVO getParkChabun() {
@@ -67,8 +92,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getParkChabun();
 	}
 	
-=======
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 	@Override
 	public NoticeVO getNoticeChabun() {

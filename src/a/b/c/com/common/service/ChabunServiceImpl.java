@@ -9,6 +9,7 @@ import a.b.c.com.common.dao.ChabunDAO;
 
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.park.vo.ParkVO;
 
 @Service
 @Transactional
@@ -55,6 +56,13 @@ public class ChabunServiceImpl implements ChabunService {
 	public Member getMemChabun() {
 		logger.info("ChabunServiceImpl.getMemChabun() 함수 진입");
 		return chabunDAO.getMemChabun();
+	}
+
+	@Override
+	public ParkVO getParkChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunServiceImpl.getParkChabun() 함수 진입");
+		return chabunDAO.getParkChabun();
 	}
 	
 

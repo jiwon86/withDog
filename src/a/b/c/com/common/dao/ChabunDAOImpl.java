@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.park.vo.ParkVO;
 
 
 @Repository
@@ -44,6 +45,15 @@ public class ChabunDAOImpl implements ChabunDAO {
 		logger.info("ChabunDAOImpl.getMemChabun() 함수 진입");
 		
 		return sqlSession.selectOne("getMemChabun");
+	}
+
+
+	@Override
+	public ParkVO getParkChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunDAOImpl.getParkChabun() 함수 진입");
+		
+		return sqlSession.selectOne("getParkChabun");
 	}
 	
 	

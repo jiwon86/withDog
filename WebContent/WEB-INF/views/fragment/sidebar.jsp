@@ -40,7 +40,13 @@
                         <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
                     </nav>
-                </div>                     
+                </div>       
+                
+                <div class="sidenav-menu-heading nanum">SNS</div>
+                     <a class="nav-link" href="/parkForm.wd">
+                    <div class="nav-link-icon"><i data-feather="camera"></i></div>
+                    <span class="hahmlet">산책스타그램</span>
+                </a>    
             	
             	<%-- 
                 <div class="sidenav-menu-heading d-sm-none">Account</div>

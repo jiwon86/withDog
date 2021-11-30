@@ -4,6 +4,7 @@ package a.b.c.com.common.service;
 import a.b.c.com.map.vo.MapTradeVO;
 
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.park.vo.ParkVO;
 
 
 public interface ChabunService {
@@ -19,5 +20,6 @@ public interface ChabunService {
 //	public Member getBoardChabun();
 //	public Member getRboardChabun();
 	public Member getMemChabun();
+	public ParkVO getParkChabun();
 	
 }

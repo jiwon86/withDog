@@ -11,7 +11,7 @@ public class MapTradeVO {
     private String TPHOTO;
     private String TLAT;
     private String TLNG;
-    private String MNO;
+    private String PROPOSE;
     private String DELETEYN;
     private String INSERTDATE;
     private String UPDATEDATE;
@@ -21,7 +21,7 @@ public class MapTradeVO {
     
 
 	public MapTradeVO(String tNO, String tTITLE, String tCONTENT, String tWRITER, String tPRICE, String tPHOTO,
-			String tLAT, String tLNG, String mNO, String dELETEYN, String iNSERTDATE, String uPDATEDATE) {
+			String tLAT, String tLNG, String pROPOSE, String dELETEYN, String iNSERTDATE, String uPDATEDATE) {
 		super();
 		TNO = tNO;
 		TTITLE = tTITLE;
@@ -31,7 +31,7 @@ public class MapTradeVO {
 		TPHOTO = tPHOTO;
 		TLAT = tLAT;
 		TLNG = tLNG;
-		MNO = mNO;
+		PROPOSE = pROPOSE;
 		DELETEYN = dELETEYN;
 		INSERTDATE = iNSERTDATE;
 		UPDATEDATE = uPDATEDATE;
@@ -71,8 +71,8 @@ public class MapTradeVO {
 		return TLNG;
 	}
 
-	public String getMNO() {
-		return MNO;
+	public String getPROPOSE() {
+		return PROPOSE;
 	}
 
 	public String getDELETEYN() {
@@ -119,8 +119,8 @@ public class MapTradeVO {
 		TLNG = tLNG;
 	}
 
-	public void setMNO(String mNO) {
-		MNO = mNO;
+	public void setPROPOSE(String pROPOSE) {
+		PROPOSE = pROPOSE;
 	}
 
 	public void setDELETEYN(String dELETEYN) {

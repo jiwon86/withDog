@@ -4,6 +4,15 @@
 		  
 <mapper namespace="a.b.c.com.common.dao.ChabunDAO">
 
+	<select id="getQnaChabun" resultType="QnaVO">
+		SELECT NVL(MAX(SUBSTR(A.QNANUM, -4)), 0) + 1 QNANUM FROM QNA A
+	</select>
+	
+	<select id="getRqnaChabun" resultType="RqnaVO">
+		SELECT NVL(MAX(SUBSTR(A.RQNANUM, -4)), 0) + 1 RQNANUM FROM RQNA A
+	</select>
+	
+
 	<!--  
 	<select id="getBoardChabun" resultType="boardVO">
 		SELECT NVL(MAX(SUBSTR(A.SBNUM, -4)), 0) + 1 SBNUM FROM SPRING_BOARD A
@@ -25,8 +34,13 @@
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
 	</select>
 	
+<<<<<<< HEAD
 	<select id="getParkChabun" resultType="ParkVO">
 		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 
+=======
+	<select id="getNoticeChabun" resultType="NoticeVO">
+		SELECT NVL(MAX(SUBSTR(A.NNUM, -4)), 0) + 1 NNUM FROM NOTICE A
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	</select>
 	
 </mapper>

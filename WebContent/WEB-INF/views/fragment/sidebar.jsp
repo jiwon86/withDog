@@ -32,7 +32,11 @@
                 <div class="collapse" id="collapseCareService" data-bs-parent="#accordionSidenavCareService">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCareServicePages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
+<<<<<<< HEAD
+                        <a class="nav-link hahmlet" href="takerequest.wd">내돌봄현황</a>
+=======
                         <a class="nav-link hahmlet" href="selectTrade.wd">내돌봄현황</a>
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                     </nav>
                 </div>       
                 
@@ -48,7 +52,13 @@
                         <a class="nav-link hahmlet" href="noticeSelectPaging.wd">공지사항</a> 
                       <a class="nav-link hahmlet" href="qnaSelectAll.wd">Q&A</a>
                     </nav>
-                </div>                     
+                </div>       
+                
+                <div class="sidenav-menu-heading nanum">SNS</div>
+                     <a class="nav-link" href="/parkForm.wd">
+                    <div class="nav-link-icon"><i data-feather="camera"></i></div>
+                    <span class="hahmlet">산책스타그램</span>
+                </a>    
             	
             	<%-- 
                 <div class="sidenav-menu-heading d-sm-none">Account</div>

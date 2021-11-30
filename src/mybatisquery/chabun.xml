@@ -34,8 +34,13 @@
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
 	</select>
 	
+<<<<<<< HEAD
+	<select id="getParkChabun" resultType="ParkVO">
+		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 
+=======
 	<select id="getNoticeChabun" resultType="NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNUM, -4)), 0) + 1 NNUM FROM NOTICE A
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	</select>
 	
 </mapper>

@@ -4,16 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A UPDATE</title>
+<title>Insert title here</title>
 </head>
 <body>
-Q&A UPDATE
-<hr>
 <script>
-	alert("수정되었습니다.");
-	console.log("수정되었습니다.");
-	location.href="qnaSelectAllPaging.wd";
+alert("작성자가 아닙니다 !");
+location.href="qnaSelectAll.wd";
 </script>
-
 </body>
 </html>

@@ -23,5 +23,4 @@ public interface ChabunService {
 	public Member getMemChabun();
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
-	
 }

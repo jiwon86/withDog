@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="a.b.c.com.qna.vo.QnaVO"%>
 <%@ page import="java.util.List"%>
 <%-- 
@@ -52,10 +53,10 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	//페이징 변수 세팅
-	//int pageSize = 0;
-	//int groupSize = 0;
-	//int curPage = 0;
-	//int totalCount = 0;
+	int pageSize = 0;
+	int groupSize = 0;
+	int curPage = 0;
+	int totalCount = 0;
 
 	Object objPaging = request.getAttribute("pagingQVO");
 	QnaVO pagingQVO = (QnaVO)objPaging; 
@@ -63,9 +64,7 @@
 	Object obj = request.getAttribute("listAll");
 	List<QnaVO> list = (List)obj;
 	
-	//pageSize = Integer.parseInt(pagingQVO.getPageSize());
-   // groupSize = Integer.parseInt(pagingQVO.getGroupSize());
-    //curPage = Integer.parseInt(pagingQVO.getCurPage());
+	
 	
 	int nCnt = list.size();
 	System.out.println("nCnt >>> : " + nCnt);
@@ -98,6 +97,7 @@
 		<div class="col-12 col-xl-auto mb-3">
 			<button class="btn btn-primary"
 				id="I">글쓰기</button>
+			<!-- <a class="btn btn-primary" href="myQnaInsert.wd">내 문의내역 확인</a> -->
 		</div>
 	</div>
 	<div class="col-lg-4 mb-4"></div>
@@ -140,8 +140,16 @@
 	   System.out.println("qvo.getQnafile >>>> : " + qvo.getQnafile());
 	   System.out.println("qvo.getQnapw >>>> : " + qvo.getQnapw());
 	   
+	   System.out.println("pagingQVO.getPageSize >>> : " + pagingQVO.getPageSize());
+	   System.out.println("pagingQVO.getGroupSize >>> : " + pagingQVO.getGroupSize());
+	   System.out.println("pagingQVO.getCurPaging >>> : " + pagingQVO.getCurPage());
+	   System.out.println("qvo.getTotalCount() >>> : " + qvo.getTotalCount());
+	   
+	   pageSize = Integer.parseInt(pagingQVO.getPageSize());
+	   groupSize = Integer.parseInt(pagingQVO.getGroupSize());
+	   curPage = Integer.parseInt(pagingQVO.getCurPage());
+	   totalCount = Integer.parseInt(qvo.getTotalCount());
 
-		//totalCount = Integer.parseInt(qvo.getTotalCount());
    %>
 <tbody>
 	<tr>
@@ -154,18 +162,19 @@
 		<td class="tt"><span class="badge bg-success">예정</span></td>	 
 
 <!-- 글수정 -->
+<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
 <td><a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="qnaSelect.wd?qnanum=<%=qvo.getQnanum() %>"> <i data-feather="edit"></i></a>
-                  </td>            					
+</td>            					
 <!-- 글삭제-->
 <td><a class="btn btn-datatable btn-icon btn-transparent-dark" href="qnaMyDelete.wd?qnanum=<%=qvo.getQnanum() %>"> <i data-feather="trash-2"></i></a>
-                  </td>            					
-
+</td>  
+</sec:authorize>          					
 </tr>
 <%
    }//end of for
 %>
 
-<%-- <tr>
+<tr>
 	 <td colspan="7"> 
 	<jsp:include page="qnaPaging.jsp" flush="true">
 		<jsp:param name="url" value="qnaSelectAllPaging.wd"/>
@@ -176,7 +185,7 @@
 		<jsp:param name="totalCount" value="<%=totalCount %>"/>
 	</jsp:include>
 	</td>
-</tr> --%>
+</tr>
 </tbody>
 				</table>
 					</div>

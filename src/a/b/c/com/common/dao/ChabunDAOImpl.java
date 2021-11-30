@@ -64,4 +64,5 @@ public class ChabunDAOImpl implements ChabunDAO {
 		logger.info("ChabunDAOImpl.getRqnaChabun() 함수 진입");
 		return sqlSession.selectOne("getRqnaChabun");
 	}
+	
 }

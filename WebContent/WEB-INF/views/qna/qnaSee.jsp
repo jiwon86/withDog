@@ -24,9 +24,9 @@
 								   "action":"qnaSelectAll.wd"}).submit(); //cotroller qnaSelectAll로이동
 		});
 	});
-
+	
 </script>
-    <body class="nav-fixed">
+    <body class="nav-fixed" onload="compCheck()">
 
 		<!-- 헤더 -->
 		<jsp:include page="/header.wd" />
@@ -57,10 +57,19 @@
 	Object obj = request.getAttribute("listS");
 	List<QnaVO> list = (List)obj;
 	QnaVO qvo = null;
+	
 	if(list.size() > 0){
 		qvo = list.get(0);
 	};
+	
 %>
+
+<%-- <%
+	String qnaanswer = "";
+	
+	QnaVO _qvo = null;
+	qnaanswer = _qvo.getQnaanswer();
+%> --%>
  <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
      <div class="container-xl px-4">
          <div class="page-header-content">
@@ -89,20 +98,36 @@
  <div class="card-body">
 
      <form name="qnaSeeForm" id="qnaSeeForm" name="qnaSeeForm">
+<%--      
+     	<script>
+     		function compCheck(){
+     			console.log("compCheck 진입 >>> : ");
+     			
+     			//QnaAnswer
+     			var ans = '<%= qnaanswer %>';
+     			if('01 == ans'){
+     				document.getElementssByName("qnaanswer")[0].check=true;
+     			}
+     			if('2 == ans'){
+     				document.getElementssByName("qnaanswer")[1].check=true;
+     			}
+     		}
+     	</script> --%>
+     	
          <!-- Form Group (qnanum)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnanum">글 번호</label>
-             <input class="form-control" id="qnanum" name="qnanum" type="text" value=<%=qvo.getQnanum()%> readonly/>
+             <input class="form-control" id="qnanum" name="qnanum" type="text" value=<%=qvo.getQnanum() %> readonly/>
          </div>
          <!-- Form Group (qnatitle)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnatitle">글 제목</label>
-             <input class="form-control" id="qnatitle" name="qnatitle" type="text" value=<%=qvo.getQnatitle()%> placeholder="Please enter title" readonly/>
+             <input class="form-control" id="qnatitle" name="qnatitle" type="text" value=<%=qvo.getQnatitle()%> placeholder="Please enter title" />
          </div>
          <!-- Form Group (qnawriter)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnawriter">작성자</label>
-             <input class="form-control" id="qnawriter" name="qnawriter" type="text" value=<%=qvo.getQnawriter()%> placeholder="Please enter your name" readonly/>
+             <input class="form-control" id="qnawriter" name="qnawriter" type="text" value=<%=qvo.getQnawriter()%> placeholder="Please enter your name" />
          </div>
          <!-- Form Group (qnacon)-->
          <div class="mb-3">
@@ -111,13 +136,20 @@
          </div><textarea disabled class="form-control" id="qnacon" name="qnacon" rows="10" cols="65" style="height:200px" placeholder="Please enter your question"><%=qvo.getQnacon()%></textarea>
          <div class="mb-3">
          	 <label class="small mb-1" for="qnafile">첨부파일</label>
-         	 <input class="form-control" id="qnafile" name="qnafile" type="file" value=<%=qvo.getQnafile()%> readonly>
+         	 <input class="form-control" id="qnafile" name="qnafile" type="file" value=<%=qvo.getQnafile()%>>
+         	 <img src="img/qna/<%= qvo.getQnafile() %>" style="width:50%;">
          </div>
+         
+          <div class="mb-3">
+         	 <label class="small mb-1" for="qnaanswer">예정/완료</label>
+         	 <input class="form-control" id="qnaanswer" name="qnaanswer" value=<%=qvo.getQnaanswer()%>>
+         </div>
+         
             <!-- Form Group (qnapw)-->
-         <div class="mb-3">
+         <%-- <div class="mb-3">
              <label class="small mb-1" for="qnapw">비밀번호(숫자 4개)</label>
              <input class="form-control" readonly id="qnapw" name="qnapw" style="width: 300px;line-height:20px;" type="password" value=<%=qvo.getQnapw()%> placeholder="Please enter the password in 4 digits." />
-         </div>
+         </div> --%>
          <br> 
          
          <div style="text-align:right">
@@ -127,11 +159,12 @@
         </form>
     </div>
 </div>
-
+<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 x -->
  <!-- url붙여서 댓글 가져오기 -->
  <c:import url="/rqnaForm.wd">
 	<c:param name="qnanum" value="<%=qvo.getQnanum()%>"></c:param>
-</c:import>	       
+</c:import>	
+</sec:authorize>       
 </main>				
 			<!-- ** /주요 내용 ** -->
 				

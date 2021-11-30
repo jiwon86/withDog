@@ -68,7 +68,7 @@ public class RqnaController {
 		String listStr = list.get(0).getRqnanum()
 				+","+list.get(0).getRqnatitle()
 				+","+list.get(0).getRqnacon()
-				+","+list.get(0).getRqnainsert();
+				+","+list.get(0).getRqnainsertdate();
 		return listStr;
 	}
 	
@@ -90,7 +90,7 @@ public class RqnaController {
 			String s0 = _rbvo.getRqnanum();
 			String s1 = _rbvo.getRqnatitle();
 			String s2 = _rbvo.getRqnacon();
-			String s3 = _rbvo.getRqnainsert();
+			String s3 = _rbvo.getRqnainsertdate();
 			ss = s0+","+s1+","+s2+","+s3;
 			listStr += ss+"&";
 		}

@@ -76,5 +76,28 @@
 	UPDATE QNA SET DELYN = 'N', QNAUPDATEDATE = SYSDATE
 	WHERE DELYN = 'Y' AND QNANUM = #{qnanum, jdbcType=VARCHAR}
 </update>
+
+<select id="qnaSelectAllPaging" parameterType="QnaVO" resultType="QnaVO">
+	SELECT * FROM (
+	  SELECT  A.QNANUM			QNANUM
+			  ,A.QNATITLE		QNATITLE
+			  ,A.QNACON			QNACON
+			  ,A.QNAWRITER		QNAWRITER
+			  ,A.QNAPW			QNAPW
+			  ,A.QNAANSWER		QNAANSWER
+			  ,A.QNAFILE		QNAFILE
+			  ,TO_CHAR(A.QNAINSERTDATE, 'YYYY-MM-DD')	QNAINSERTDATE
+			  ,TO_CHAR(A.QNAUPDATEDATE, 'YYYY-MM-DD')	QNAUPDATEDATE
+			  ,A.DELYN			DELYN
+			  <!-- ? : 페이지 사이즈 : pageSize -->
+			  ,CEIL(ROW_NUMBER() OVER(ORDER BY A.QNANUM) / #{pageSize, jdbcType=VARCHAR})  pageSize
+			  ,COUNT(A.QNANUM) OVER() AS totalCount
+		FROM  QNA A
+		WHERE A.DELYN = 'Y'
+		ORDER BY 1 DESC
+		<!-- ? : 현재 페이지 : curPage -->
+	) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+</select>
+
 </mapper>
 

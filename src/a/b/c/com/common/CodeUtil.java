@@ -1,6 +1,9 @@
 package a.b.c.com.common;
 
 public class CodeUtil {
+	
+	//Q&A 라벨
+	public static final String[] qna_value = {"예정", "완료"};
 
 	// 성별 라벨
 	public static final String[] gender_value = {"여자", "남자"};

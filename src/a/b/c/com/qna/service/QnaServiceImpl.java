@@ -60,9 +60,9 @@ public class QnaServiceImpl implements QnaService {
 	
 	//페이징
 	@Override
-	public List<QnaVO> qnaSelectPaging(QnaVO qvo) {
+	public List<QnaVO> qnaSelectAllPaging(QnaVO qvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.qnaSelectPaging(qvo);
+		return qnaDAO.qnaSelectAllPaging(qvo);
 	}
 	
 	//selectAll에서 수정

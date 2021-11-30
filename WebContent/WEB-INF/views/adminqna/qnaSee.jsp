@@ -18,18 +18,10 @@
 	
 	$(document).ready(function(){
 		
-		//U
-		$(document).on("click", "#Updatebtn", function(){
-			alert("U >>> : ");
-			$("#qnaUpdateForm").attr({"method":"GET",
-									  "action":"qnaMyUpdate.wd"}).submit(); //cotroller qnaMyUpdate로이동
-		});
-		
-		//D
-		$(document).on("click", "#Deletebtn", function(){
-			alert("D >>> : ");
-			$("#qnaUpdateForm").attr({"method":"GET",
-									  "action":"qnaMyDelete.wd"}).submit(); //cotroller qnaMyDelete로 이동
+		//Back to SelectAll
+		$(document).on("click", "#Backbtn", function(){
+			$("#qnaSeeForm").attr({"method":"GET",
+								   "action":"qnaSelectAll.wd"}).submit(); //cotroller qnaSelectAll로이동
 		});
 	});
 
@@ -65,11 +57,10 @@
 	Object obj = request.getAttribute("listS");
 	List<QnaVO> list = (List)obj;
 	QnaVO qvo = null;
+	
 	if(list.size() > 0){
 		qvo = list.get(0);
 	};
-	
-
 %>
  <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
      <div class="container-xl px-4">
@@ -98,7 +89,7 @@
  <div class="card-header">Q&A 글수정</div>
  <div class="card-body">
 
-     <form name="qnaUpdateForm" id="qnaUpdateForm">
+     <form name="qnaSeeForm" id="qnaSeeForm" name="qnaSeeForm">
          <!-- Form Group (qnanum)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnanum">글 번호</label>
@@ -107,21 +98,22 @@
          <!-- Form Group (qnatitle)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnatitle">글 제목</label>
-             <input class="form-control" id="qnatitle" name="qnatitle" type="text" value=<%=qvo.getQnatitle()%> placeholder="Please enter title" />
+             <input class="form-control" id="qnatitle" name="qnatitle" type="text" value=<%=qvo.getQnatitle()%> placeholder="Please enter title" readonly/>
          </div>
          <!-- Form Group (qnawriter)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnawriter">작성자</label>
-             <input class="form-control" id="qnawriter" name="qnawriter" type="text" value=<%=qvo.getQnawriter()%> placeholder="Please enter your name" />
+             <input class="form-control" id="qnawriter" name="qnawriter" type="text" value=<%=qvo.getQnawriter()%> placeholder="Please enter your name" readonly/>
          </div>
          <!-- Form Group (qnacon)-->
          <div class="mb-3">
-             <label class="small mb-1" for="qnacon">글 내용</label>
+             <label class="small mb-1" for="qnacon" >글 내용</label>
              
-         </div><textarea class="form-control" id="qnacon" name="qnacon" rows="10" cols="65" style="height:200px" placeholder="Please enter your question"><%=qvo.getQnacon()%></textarea>
+         </div><textarea disabled class="form-control" id="qnacon" name="qnacon" rows="10" cols="65" style="height:200px" placeholder="Please enter your question"><%=qvo.getQnacon()%></textarea>
          <div class="mb-3">
          	 <label class="small mb-1" for="qnafile">첨부파일</label>
-         	 <input class="form-control" id="qnafile" name="qnafile" type="file" value=<%=qvo.getQnafile()%> >
+         	 <input class="form-control" id="qnafile" name="qnafile" type="file" value=<%=qvo.getQnafile()%> readonly>
+         	 <img src="img/qna/<%= qvo.getQnafile() %>" style="width:50%;">
          </div>
             <!-- Form Group (qnapw)-->
          <%-- <div class="mb-3">
@@ -131,14 +123,18 @@
          <br> 
          
          <div style="text-align:right">
-            <button class="btn btn-primary" type="button" align="right" id="Updatebtn" name="Updatebtn">Update</button>
-         	<button class="btn btn-primary" type="button" align="right" id="Deletebtn" name="Deletebtn">Delete</button>
+            <button class="btn btn-primary" type="button" align="right" id="Backbtn" name="Backbtn">Back</button>
          </div>
         
         </form>
     </div>
 </div>
-                
+<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 x -->
+ <!-- url붙여서 댓글 가져오기 -->
+ <c:import url="/rqnaForm.wd">
+	<c:param name="qnanum" value="<%=qvo.getQnanum()%>"></c:param>
+</c:import>	
+</sec:authorize>       
 </main>				
 			<!-- ** /주요 내용 ** -->
 				
@@ -149,6 +145,6 @@
             </div>
 			<!-- /콘텐츠 -->
         </div>
-		
+	 
     </body>
 </html>

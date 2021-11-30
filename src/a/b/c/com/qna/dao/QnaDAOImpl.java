@@ -52,9 +52,9 @@ public class QnaDAOImpl implements QnaDAO {
 
 	//페이징
 	@Override
-	public List<QnaVO> qnaSelectPaging(QnaVO qvo){
+	public List<QnaVO> qnaSelectAllPaging(QnaVO qvo){
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelectPaging", qvo);
+		return sqlSession.selectList("qnaSelectAllPaging", qvo);
 	}
 	
 	//selectAll에서 수정

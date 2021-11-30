@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 public class QnaVO {
 	private static Logger logger = Logger.getLogger(QnaVO.class);
+	
 	//기본 필드
 	private String qnanum;
 	private String qnatitle;
@@ -254,7 +255,10 @@ public class QnaVO {
 		logger.info("QnA 입력일 >>> : " + qvo.getQnainsertdate());
 		logger.info("QnA 수정일 >>> : " + qvo.getQnaupdatedate());
 		logger.info("QnA 삭제여부 >>> : " + qvo.getDelyn());
-		
-		
+		logger.info("QnA getPageSize >>> : " + qvo.getPageSize());
+		logger.info("QnA getGroupSize >>> : " + qvo.getGroupSize());
+		logger.info("QnA getCurPage >>> : " + qvo.getCurPage());
+		logger.info("QnA getTotalCount >>> : " + qvo.getTotalCount());
 	}
+	
 }

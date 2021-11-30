@@ -12,7 +12,6 @@
 		SELECT NVL(MAX(SUBSTR(A.RQNANUM, -4)), 0) + 1 RQNANUM FROM RQNA A
 	</select>
 	
-
 	<!--  
 	<select id="getBoardChabun" resultType="boardVO">
 		SELECT NVL(MAX(SUBSTR(A.SBNUM, -4)), 0) + 1 SBNUM FROM SPRING_BOARD A

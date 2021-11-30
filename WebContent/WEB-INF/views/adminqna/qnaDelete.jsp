@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Q&A UPDATE</title>
+<title>Q&A DELETE</title>
 </head>
 <body>
-Q&A UPDATE
+Q&A DELETE
 <hr>
 <script>
-	alert("수정되었습니다.");
-	console.log("수정되었습니다.");
-	location.href="qnaSelectAllPaging.wd";
+	alert("삭제되었습니다.");
+	console.log("삭제되었습니다.");
+	location.href="qnaSelectAll.wd";
 </script>
 
 </body>

@@ -21,6 +21,7 @@
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
                         <a class="nav-link hahmlet" href="AdminMemberSelectAll.wd">회원리스트</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">마커리스트</a>
+                        <a class="nav-link hahmlet" href="adQnaSelectAllPaging.wd">Q&A 리스트</a>
                     </nav>
                 </div>                     
        
@@ -46,7 +47,7 @@
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
-                      <a class="nav-link hahmlet" href="qnaSelectAll.wd">Q&A</a>
+                      <a class="nav-link hahmlet" href="qnaSelectAllPaging.wd">Q&A</a>
                     </nav>
                 </div>                     
             	

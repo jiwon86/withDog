@@ -1,5 +1,6 @@
 package a.b.c.com.qna.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,11 +44,11 @@ public class QnaController {
 	
 	//글쓰기(qnaInsert-qnaSelectAll-qnaForm)
 	@RequestMapping(value="qnaInsert", method=RequestMethod.POST)
-	public String qnaInsert(HttpServletRequest req) {
+	public String qnaInsert(HttpServletRequest req ) {
+		//String mid = principal.getName();Principal principal
 		logger.info("QnaController.qnaInsert 함수 진입 >>> : ");
 		
 		//채번 구하기 
-//	#####################################"N"은 머지????????????????????????????????######################################################
 		String qnanum = ChabunUtil.getQnaChabun("N", chabunService.getQnaChabun().getQnanum());
 //		String qnanum = chabunService.getQnaChabun().getQnanum();
 		logger.info("QnaController.qnaInsert qnanum >>> : " + qnanum);
@@ -77,7 +78,7 @@ public class QnaController {
 		logger.info("req.getparameter >>> : " + req.getParameter("qnmanum"));
 		_qvo.setQnatitle(fu.getParameter("qnatitle"));
 		_qvo.setQnacon(fu.getParameter("qnacon"));
-		_qvo.setQnawriter(fu.getParameter("qnawriter"));
+		//_qvo.setQnawriter(mid);
 		_qvo.setQnapw(fu.getParameter("qnapw"));
 		_qvo.setQnaanswer(fu.getParameter("qnaanswer"));
 		_qvo.setQnafile(fu.getParameter("qnafile"));
@@ -88,20 +89,63 @@ public class QnaController {
 		
 		if(nCnt > 0) {return "qna/qnaInsert";}
 		
-		return "qna/qnaSelectAll";
+		return "qna/qnaSelectAllForm";
 		
 	}
+	
+	//글 목록 페이징 조회
+	@RequestMapping(value="qnaSelectAllPaging", method=RequestMethod.GET)
+	public String qnaSelectAllPaging(QnaVO qvo, Model model) {
+		logger.info("QnaController qnaSelectAllPaging 함수 진입 >>> : ");
+		logger.info("QnaController qnaSelectAllPaging 함수 진입 >>> : 페이징 관련 로그 ===========");
+		
+		//페이징 변수 셋팅
+		int pageSize = CommonUtils.QnA_PAGE_SIZE; //3
+		int groupSize = CommonUtils.QnA_GROUP_SIZE; //5
+		int curPage = CommonUtils.QnA_CUR_PAGE; //1
+		int totalCount = CommonUtils.QnA_TOTAL_COUNT; //0
+		
+		if(qvo.getCurPage() != null) {
+			curPage = Integer.parseInt(qvo.getCurPage());
+		}
+		
+		qvo.setPageSize(String.valueOf(pageSize));
+		qvo.setGroupSize(String.valueOf(groupSize));
+		qvo.setCurPage(String.valueOf(curPage));
+		qvo.setTotalCount(String.valueOf(totalCount));
+		
+		logger.info("QnaController qnaSelectAllPaging qvo.getPageSize() >>> : " + qvo.getPageSize());
+		logger.info("QnaController qnaSelectAllPaging qvo.getGroupSize() >>> : " + qvo.getGroupSize());
+		logger.info("QnaController qnaSelectAllPaging qvo.getCurPage() >>> : " + qvo.getCurPage());
+		logger.info("QnaController qnaSelectAllPaging qvo.getTotalCount() >>> : " + qvo.getTotalCount());
+		
+		List<QnaVO> listAll = qnaService.qnaSelectAllPaging(qvo);
+		logger.info("QnaController qnaSelectAllPaging listAll.size() >>> : " + listAll.size());
+		
+		if(listAll.size()>0) {
+			
+			for(int i=0; i<listAll.size(); i++) {
+				QnaVO sqvo = (QnaVO)listAll.get(i);
+				//logger.info("listAll ::: sqvo.getPageSize() >>> : " + sqvo.getPageSize());
+				//logger.info("listAll ::: sqvo.getGroupSize() >>> : " + sqvo.getGroupSize());
+				//logger.info("listAll ::: sqvo.getCurPage() >>> : " + sqvo.getCurPage());
+				//logger.info("listAll ::: sqvo.getTotalCount() >>> : " + sqvo.getTotalCount());
+			}
+			
+			
+			model.addAttribute("pagingQVO", qvo);
+			model.addAttribute("listAll", listAll);
+			
+			return "qna/qnaSelectAllForm";
+		}
+		
+		return "qna/qnaSelectAllForm";
+	}
+	
+	
 	// 글 목록 조회
 	@RequestMapping(value="qnaSelectAll", method=RequestMethod.GET)
 	public String qnaSelectAll(@ModelAttribute QnaVO qvo, Model model) {
-		logger.info("QnaController qnaSelectAll 함수 진입 >>> :");	
-		
-		logger.info("QnaController qnaSelectAll 검색 관련 로그  >>> : ===================================");
-		logger.info("ddddddddddddddddddddddd" + qvo.getQnanum());
-		logger.info("QnaController qnaSelectAll qvo.getKeyfilter() >>> : " + qvo.getKeyfilter());
-		logger.info("QnaController qnaSelectAll  qvo.getKeyword() >>> : " + qvo.getKeyword());
-		logger.info("QnaController qnaSelectAll qvo.getStartdate() >>> : " + qvo.getStartdate());
-		logger.info("QnaController qnaSelectAll  qvo.getEnddate() >>> : " + qvo.getEnddate());
 		
 		List<QnaVO> listAll = qnaService.qnaSelectAll(qvo);
 		logger.info("QnaController qnaSelectAll listAll.size() >>> : " + listAll.size());
@@ -109,15 +153,17 @@ public class QnaController {
 		if (listAll.size() > 0) { 
 						
 			model.addAttribute("listAll", listAll);
-			return "qna/qnaSelectAll";
+			return "qna/qnaSelectAllForm";
 		}
 		
 		return "qna/qnaForm";
 		}
 	
+	
 	//게시글 수정/삭제 글 조회
 	@RequestMapping(value="qnaSelect", method=RequestMethod.GET)
-	public String qnaSelect(String qnanum, Model model) {
+	public String qnaSelect(String qnanum, Model model,Principal principal) {
+		//String mid = principal.getName();
 		logger.info("QnaController qnaSelect 함수 진입 >>> : " );
 		
 		 List<QnaVO> listS = qnaService.qnaSelect(qnanum);
@@ -127,7 +173,14 @@ public class QnaController {
 			 model.addAttribute("listS", listS);
 			 return "qna/qnaSelect";
 		 }
-		 
+		// QnaVO qvo = listS.get(0);
+			/*
+			 * if (mid.equals(qvo.getQnawriter())) { System.out.println("1");
+			 * if(listS.size() == 1) { model.addAttribute("listS", listS); return
+			 * "qna/qnaSelect"; } } else {
+			 * 
+			 * return "qna/fail"; }
+			 */
 		
 		return "qna/qnaSelect";
 	}
@@ -142,7 +195,7 @@ public class QnaController {
 		
 		if(nCnt > 0) { return "qna/qnaUpdate"; } 
 		
-		return "qna/qnaSelectAll"; 
+		return "qna/qnaSelectAllForm"; 
 	}
 	
 	//selectAll 에서 삭제
@@ -157,7 +210,7 @@ public class QnaController {
 			
 			return "qna/qnaDelete";
 		}
-		return "qna/qnaSelectAll";
+		return "qna/qnaSelectAllForm";
 	}
 	
 	@RequestMapping("qnaSee")
@@ -172,6 +225,6 @@ public class QnaController {
 			 model.addAttribute("listS", listS);
 			 return "qna/qnaSee";
 		 }
-		 return "qna/qnaSelectAll";
+		 return "qna/qnaSelectAllForm";
 	}
 }

@@ -24,7 +24,7 @@
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
 	
-	<resultMap type="MemberAuth" id="authMap">
+	<resultMap type="MemberAuthVO" id="authMap">
 		<result property="mno" column="MNO" />
 		<result property="mauth" column="MAUTH" />
 	</resultMap>
@@ -61,7 +61,7 @@
 	      ) 
 	</insert>
 
-	<insert id="memberAuthInsert" parameterType="MemberAuth">
+	<insert id="memberAuthInsert" parameterType="MemberAuthVO">
 		 INSERT INTO MEMBER_AUTH( 	 
 		      MNO      	
 			, MAUTH

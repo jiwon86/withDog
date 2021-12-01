@@ -71,6 +71,12 @@ public class AgencyController {
 
 	}
 	
+	@RequestMapping("/chatPayment")
+	public String chatPayment() {
+		
+		return "agency/chatPayment";
+	}
+	
 	
 	
 }

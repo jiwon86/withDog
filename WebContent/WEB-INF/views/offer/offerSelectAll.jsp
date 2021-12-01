@@ -50,7 +50,7 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                                                                  돌봄서비스
+                                                                                  돌봄서비스 (조건제시가 없으면 조건제시 상세보기 갈때 에러터짐)
                                         </h1>
                                         <div class="page-header-subtitle">Example dashboard overview and content summary</div>
                                     </div>
@@ -150,12 +150,18 @@
 			                                <div class="col">
 			                                    <div class="card-body py-4">
 			                                        <span class="card-title text-cyan mb-2 " style="font-size:20px; font-weight:bold;">
-			                                        	<%= ovo.getTno() %>		
+			                                        	<%= ovo.getTno() %>
 			                                        </span>
+			                                        
+			                                         
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-cyan"></i>
 			                                       		<span class="hahmlet" style="font-size:13px; color:#4cc1c1; font-weight:bold;">준비중</span>
 			                                        </span>
+			                                        <p class="card-text mb-1 hahmlet">
+			                                        	<i class="fas fa-user"></i> &nbsp;
+			                                        	<span><%= ovo.getMname() %> (<%= ovo.getMid() %>)</span>
+			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="far fa-compass"></i> &nbsp;
 			                                        	<span><%=ovo.getTlat()%>, <%=ovo.getTlng()%></span>
@@ -197,6 +203,10 @@
 			                                       		<span class="hahmlet" style="font-size:13px; color:#13a4a4; font-weight:bold;">진행중</span>
 			                                        </span>
 			                                        <p class="card-text mb-1 hahmlet">
+			                                        	<i class="fas fa-user"></i> &nbsp;
+			                                        	<span><%= ovo.getMname() %> (<%= ovo.getMid() %>)</span>
+			                                        </p>
+			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="text-black-50 mt-1" data-feather="map-pin"></i> &nbsp;
 			                                        	<span><%=ovo.getTlat()%>, <%=ovo.getTlng()%></span>
 			                                        </p>
@@ -236,6 +246,10 @@
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-red"></i>
 			                                       		<span class="hahmlet" style="font-size:13px; color:red; font-weight:bold;">종&nbsp;료</span>
 			                                        </span>
+			                                       	<p class="card-text mb-1 hahmlet">
+			                                        	<i class="fas fa-user"></i> &nbsp;
+			                                        	<span><%= ovo.getMname() %> (<%= ovo.getMid() %>)</span>
+			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="text-black-50 mt-1" data-feather="map-pin"></i> &nbsp;
 			                                        	<span><%=ovo.getTlat()%>, <%=ovo.getTlng()%></span>

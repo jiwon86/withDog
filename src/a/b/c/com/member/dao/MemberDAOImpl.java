@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import a.b.c.com.member.vo.MemberVO;
-import a.b.c.com.member.vo.MemberAuth;
+import a.b.c.com.member.vo.MemberAuthVO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -65,7 +65,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int memberAuthInsert(MemberAuth memberAuth) {
+	public int memberAuthInsert(MemberAuthVO memberAuth) {
 		logger.info("MemberDAOImpl.memberAuthInsert() 함수 실행");
 		
 		return (Integer)sqlSession.insert("memberAuthInsert", memberAuth);

@@ -24,7 +24,7 @@ import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.service.MemberService;
 import a.b.c.com.member.vo.MemberVO;
-import a.b.c.com.member.vo.MemberAuth;
+import a.b.c.com.member.vo.MemberAuthVO;
 
 @Controller
 public class MemberController {
@@ -239,7 +239,7 @@ public class MemberController {
 			int nCnt = memberService.memberInsert(member);
 			
 			if(nCnt > 0 ) {
-				MemberAuth memberAuth = new MemberAuth();
+				MemberAuthVO memberAuth = new MemberAuthVO();
 				
 				memberAuth.setMno(mno);
 				

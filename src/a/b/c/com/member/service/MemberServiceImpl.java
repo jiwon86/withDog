@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.member.dao.MemberDAO;
 import a.b.c.com.member.vo.MemberVO;
-import a.b.c.com.member.vo.MemberAuth;
+import a.b.c.com.member.vo.MemberAuthVO;
 
 @Service
 @Transactional
@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int memberAuthInsert(MemberAuth memberAuth) {
+	public int memberAuthInsert(MemberAuthVO memberAuth) {
 		logger.info("MemberServiceImpl.memberAuthInsert() 함수 진입");
 		return memberDAO.memberAuthInsert(memberAuth);
 	}

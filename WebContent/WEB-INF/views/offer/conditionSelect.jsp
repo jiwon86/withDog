@@ -169,7 +169,7 @@
 	                                	<span>계정 아이디</span>
 	                                </h4>
 	                                <hr>
-	                                <p class="lead mb-4 ms-2"><%=cvo.getMno() %></p>
+	                                <p class="lead mb-4 ms-2"><%=cvo.getMname() %> (<%=cvo.getMid() %>)</p>
                                 </div>
                                 
                                 <div>

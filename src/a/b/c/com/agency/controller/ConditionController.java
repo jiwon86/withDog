@@ -217,6 +217,8 @@ public class ConditionController {
 		
 		// JSON문자열로 만들기 위해 신청정보 Map형태로 만들기
 		obj.put("tno", ovo.getTno());
+		obj.put("mid", ovo.getMid());
+		obj.put("mname", ovo.getMname());
 		obj.put("tlag", ovo.getTlat());
 		obj.put("tlng", ovo.getTlng());
 		obj.put("startdate", ovo.getStartdate());

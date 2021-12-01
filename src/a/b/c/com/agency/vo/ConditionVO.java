@@ -10,6 +10,8 @@ public class ConditionVO {
 	private String deleteyn;
 	private String insertdate;
 	private String updatedate;
+	private String mid;
+	private String mname;
 	
 	private String pageSize;
 	private String groupSize;
@@ -23,8 +25,8 @@ public class ConditionVO {
 	public ConditionVO(String cno, String mno, String tno, 
 					   String cprice, String caddress, String ccontent,
 					   String deleteyn, String insertdate, String updatedate, 
-					   String pageSize, String groupSize, String curPage,
-			           String totalCount) {
+					   String mid, String mname, String pageSize,
+					   String groupSize, String curPage, String totalCount) {
 		this.cno = cno;
 		this.mno = mno;
 		this.tno = tno;
@@ -34,6 +36,8 @@ public class ConditionVO {
 		this.deleteyn = deleteyn;
 		this.insertdate = insertdate;
 		this.updatedate = updatedate;
+		this.mid = mid;
+		this.mname = mname;
 		this.pageSize = pageSize;
 		this.groupSize = groupSize;
 		this.curPage = curPage;
@@ -110,6 +114,22 @@ public class ConditionVO {
 
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
+	}
+
+	public String getMid() {
+		return mid;
+	}
+
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	public String getPageSize() {

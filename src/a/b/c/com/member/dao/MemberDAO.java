@@ -3,7 +3,7 @@ package a.b.c.com.member.dao;
 import java.util.List;
 
 import a.b.c.com.member.vo.MemberVO;
-import a.b.c.com.member.vo.MemberAuth;
+import a.b.c.com.member.vo.MemberAuthVO;
 
 public interface MemberDAO {
 	public List<MemberVO> read(String userId);
@@ -16,6 +16,6 @@ public interface MemberDAO {
 	// 중복 체크하기
 	public List<MemberVO> memberIdCheck(MemberVO mvo);
 	// 권한 추가
-	public int memberAuthInsert(MemberAuth memberAuth);
+	public int memberAuthInsert(MemberAuthVO memberAuth);
 
 }

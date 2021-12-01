@@ -21,6 +21,7 @@
 				 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
 				 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
 				 , M.MID       MID
+				 , M.MNAME     MNAME
 				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.TNO = T.TNO) conditionCount
 		 		 <!-- ? : 페이지 사이즈 : pageSize -->
 			     , CEIL(ROW_NUMBER() OVER(ORDER BY T.TNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
@@ -48,6 +49,7 @@
 			 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
 			 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
 			 , M.MID       MID
+			 , M.MNAME     MNAME
 		FROM   TRADEMAP T, MEMBER M
 		WHERE  T.MNO = M.MNO 
 		AND    T.MNO = #{mno, jdbcType=VARCHAR}	

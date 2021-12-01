@@ -46,6 +46,8 @@
 				console.log("성공");
 				var result = JSON.parse(resData);
 				console.log("tno >>> : " + result.tno);
+				console.log("mid >>> : " + result.mid);
+				console.log("mname >>> : " + result.mname);
 				console.log("tlag >>> : " + result.tlag);
 				console.log("tlng >>> : " + result.tlng);
 				console.log("startdate >>> : " + result.startdate);
@@ -63,6 +65,7 @@
 				const today = new Date(getToday());
 				
 				//$("#modalTno").text(result.tno);
+				$("#modalAccount").text(result.mname + " (" + result.mid + ")");
 				$("#modalLocation").text(result.tlag + " , " + result.tlng);
 				$("#modalDate").text(result.startdate + " ~ " + result.enddate);
 				$("#modalTprice").text(result.tprice);
@@ -274,10 +277,10 @@
                             	<div>
 	                                <h4 class="ms-1">
 	                                	<i class="fas fa-user"></i> &nbsp; 
-	                                	<span>계정 아이디</span>
+	                                	<span>사용자</span>
 	                                </h4>
 	                                <hr>
-	                                <p class="lead mb-4 ms-2"><%=cvo.getMno() %></p>
+	                                <p class="lead mb-4 ms-2"><%=cvo.getMname() %> (<%=cvo.getMid() %>)</p>
                                 </div>
                                 
                                 <div>
@@ -371,6 +374,16 @@
 		                            
 		                            <div class="card-body">
 		                            	<br>
+		                            	<div>
+			                                <h4 class="ms-1">
+			                                	<i class="fas fa-user"></i> &nbsp; 
+			                                	<span>사용자</span>
+			                                </h4>
+			                                <hr>
+			                                <p class="lead mb-4 ms-2" id="modalAccount"></p>
+		                                </div>
+		                                <br>
+		                                
 		                            	<div>
 			                                <h4 class="ms-1">
 			                                	<i class="fas fa-map-marked-alt"></i> &nbsp; 

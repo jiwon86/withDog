@@ -19,6 +19,10 @@
 	<head>
 		<script type="text/javascript">
 		
+			function chatPaymentBtnClick() {
+				location.href="/chatPayment.wd";
+			}
+		
 			// 수락버튼 누를 때 이벤트 함수
 			function acceptBtnClick(e) {
 				// ajax로 insert 혹은 update문이 실행되야 한다.
@@ -46,7 +50,7 @@
         			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
             			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
             		</div>
-            		<div class="btn btn-green hahmlet">
+            		<div class="btn btn-green hahmlet" onclick="chatPaymentBtnClick()">
             			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
             		</div>
 				`;
@@ -212,6 +216,15 @@
                             	<div>
 	                                <h4 class="ms-1">
 	                                	<i class="fas fa-map-marked-alt"></i> &nbsp; 
+	                                	<span>사용자</span>
+	                                </h4>
+	                                <hr>
+	                                <p class="lead mb-4 ms-2"><%= ovo.getMname() %> (<%= ovo.getMid() %>)</p>
+                                </div>
+                                <br>
+                            	<div>
+	                                <h4 class="ms-1">
+	                                	<i class="fas fa-map-marked-alt"></i> &nbsp; 
 	                                	<span>지역</span>
 	                                </h4>
 	                                <hr>
@@ -322,8 +335,8 @@
 			                                            <%=cvo.getCno() %>
 			                                        </h5>
 			                                        <p class="card-text mb-1 hahmlet">
-			                                        	<i class="fas fa-user"></i> &nbsp;&nbsp;
-			                                        	<span><%=cvo.getMno() %></span>
+			                                        	<i class="fas fa-user"></i> &nbsp;
+			                                        	<span><%= cvo.getMname() %> (<%= cvo.getMid() %>)</span>
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="fas fa-coins"></i> &nbsp; 
@@ -347,7 +360,7 @@
 				                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
 					                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
 					                                    		</div>
-					                                    		<div class="btn btn-green hahmlet">
+					                                    		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick()">
 					                                    			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
 					                                    		</div>
 				                                    <%		
@@ -389,20 +402,6 @@
 							<jsp:param name="curPage" value="<%=curPage%>"/>
 							<jsp:param name="totalCount" value="<%=totalCount%>"/>
 						</jsp:include>
-                        
-                        <!--  
-                        <nav class="dataTable-pagination float-end">
-                        	<ul class="dataTable-pagination-list">
-                        		<li class="active"><a href="#" data-page="1">1</a></li>
-                        		<li class=""><a href="#" data-page="2">2</a></li>
-                        		<li class=""><a href="#" data-page="3">3</a></li>
-                        		<li class=""><a href="#" data-page="4">4</a></li>
-                        		<li class=""><a href="#" data-page="5">5</a></li>
-                        		<li class=""><a href="#" data-page="6">6</a></li>
-                        		<li class="pager"><a href="#" data-page="2">›</a></li>
-                        	</ul>
-                        </nav>
-                        -->
                         
                     </div>
                 </main>				

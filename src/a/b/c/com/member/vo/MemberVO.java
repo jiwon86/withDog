@@ -24,7 +24,7 @@ public class MemberVO implements Serializable{
 	private String insertdate;
 	private String updatedate;
 	
-	private List<MemberAuth> authList;
+	private List<MemberAuthVO> authList;
 	
 	@Override
 	public String toString() {
@@ -42,7 +42,7 @@ public class MemberVO implements Serializable{
 				  String memail, String mname, String mphoto, 
 				  String mzonecode, String mroadaddress, String mjibunaddress, 
 				  String deleteyn, String insertdate, String updatedate,
-				  List<MemberAuth> authList) {
+				  List<MemberAuthVO> authList) {
 		this.mno = mno;
 		this.mid = mid;
 		this.mpw = mpw;
@@ -162,11 +162,11 @@ public class MemberVO implements Serializable{
 		this.updatedate = updatedate;
 	}
 
-	public List<MemberAuth> getAuthList() {
+	public List<MemberAuthVO> getAuthList() {
 		return authList;
 	}
 
-	public void setAuthList(List<MemberAuth> authList) {
+	public void setAuthList(List<MemberAuthVO> authList) {
 		this.authList = authList;
 	}	
 	

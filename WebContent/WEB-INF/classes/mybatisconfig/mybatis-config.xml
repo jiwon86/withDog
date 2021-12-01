@@ -5,7 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="a.b.c.com.member.vo.MemberVO" alias="MemberVO" />
-		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />
+		<typeAlias type="a.b.c.com.member.vo.MemberAuthVO" alias="MemberAuthVO" />
 		
 		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
 		

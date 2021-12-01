@@ -16,10 +16,13 @@
 				, C.DELETEYN DELETEYN
 				, C.INSERTDATE INSERTDATE
 				, C.UPDATEDATE UPDATEDATE
+				, M.MID MID
+				, M.MNAME MNAME
 			    , CEIL(ROW_NUMBER() OVER(ORDER BY C.CNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
 				, COUNT(C.CNO) OVER() AS totalCount
-			FROM CONDITION C
-			WHERE C.TNO = #{tno, jdbcType=VARCHAR}
+			FROM CONDITION C, MEMBER M
+			WHERE C.MNO = M.MNO
+			AND C.TNO = #{tno, jdbcType=VARCHAR}
 			ORDER BY C.CNO DESC
 		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
 	</select>
@@ -35,8 +38,11 @@
 			, C.DELETEYN DELETEYN
 			, C.INSERTDATE INSERTDATE
 			, C.UPDATEDATE UPDATEDATE
-		FROM CONDITION C
-		WHERE C.CNO = #{cno, jdbcType=VARCHAR}
+			, M.MID
+			, M.MNAME
+		FROM CONDITION C, MEMBER M
+		WHERE C.MNO = M.MNO
+		AND C.CNO = #{cno, jdbcType=VARCHAR}
 	</select>	
 
 	<select id="myConditionSelectAll" parameterType="ConditionVO" resultType="ConditionVO">
@@ -51,10 +57,13 @@
 				, C.DELETEYN DELETEYN
 				, C.INSERTDATE INSERTDATE
 				, C.UPDATEDATE UPDATEDATE
+				, M.MID MID
+				, M.MNAME MNAME
 			    , CEIL(ROW_NUMBER() OVER(ORDER BY C.CNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
 				, COUNT(C.CNO) OVER() AS totalCount
-			FROM CONDITION C
-			WHERE C.MNO = #{mno, jdbcType=VARCHAR}
+			FROM CONDITION C, MEMBER M
+			WHERE C.MNO = M.MNO
+			AND C.MNO = #{mno, jdbcType=VARCHAR}
 			ORDER BY C.CNO DESC
 		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
 	</select>
@@ -70,8 +79,11 @@
 			, C.DELETEYN DELETEYN
 			, C.INSERTDATE INSERTDATE
 			, C.UPDATEDATE UPDATEDATE
-		FROM CONDITION C
-		WHERE C.MNO = #{mno, jdbcType=VARCHAR}
+			, M.MID MID
+			, M.MNAME MNAME
+		FROM CONDITION C, MEMBER M
+		WHERE C.MNO = M.MNO
+		AND C.MNO = #{mno, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="offerSelectAjax" parameterType="OfferVO" resultType="OfferVO">
@@ -90,6 +102,7 @@
 				 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
 				 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
 				 , M.MID       MID
+				 , M.MNAME     MNAME
 			FROM   TRADEMAP T, MEMBER M
 			WHERE  T.MNO = M.MNO 
 			AND    T.TNO = #{tno, jdbcType=VARCHAR}	

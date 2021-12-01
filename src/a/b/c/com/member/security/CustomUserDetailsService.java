@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import a.b.c.com.member.dao.MemberDAO;
-import a.b.c.com.member.vo.CustomUser;
+import a.b.c.com.member.vo.CustomUserVO;
 import a.b.c.com.member.vo.MemberVO;
 
 public class CustomUserDetailsService implements UserDetailsService {
@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		List<MemberVO> memberList = memberDAO.read(userName);
 		MemberVO _member = memberList.get(0);
 		
-		return _member == null ? null : new CustomUser(_member);
+		return _member == null ? null : new CustomUserVO(_member);
 	}
 
 }

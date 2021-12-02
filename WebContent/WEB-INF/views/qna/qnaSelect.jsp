@@ -32,6 +32,17 @@
 									  "action":"qnaMyDelete.wd"}).submit(); //cotroller qnaMyDelete로 이동
 		});
 	});
+	$('input[type=radio][name=qnaanswer]').on('click',function(){
+		var chkValue = $('input[type=radio][name=qnaanswer]:checked').val();
+		
+		if(chkValue == '01'){
+			$('#answer01').css('display','block');
+			$('#answer02').css('display','none');
+		}else if(chkValue == '02'){
+			$('#answer01').css('display','red');
+			$('#answer02').css('display','yellow');
+		}
+	});
 
 </script>
     <body class="nav-fixed">
@@ -59,22 +70,46 @@
 					===================================
 				--> 
 				<!-- ** 주요 내용 **  -->
-<main>
+<main style="width:960px; margin:0 auto;">
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	Object obj = request.getAttribute("listS");
 	List<QnaVO> list = (List)obj;
 	QnaVO qvo = null;
+	
+	String qnaanswer = "";
+	String qnanum = "";
+	String qnawriter = "";
+	
 	if(list.size() > 0){
 		qvo = list.get(0);
+		qnaanswer = qvo.getQnaanswer();
+		qnawriter = qvo.getQnawriter();
 	};
 	
-
+	
 %>
+
+<script>
+	function compCheck(){
+		console.log("compCheck 진입 >>> : ");
+		
+		var qnaanswer = '<%= qnaanswer %>';
+		console.log("qnaanswer >>> : " + qnaanswer);
+		if('01' == qnaanswer){
+			document.getElementsById("qnaanswer")[0].checked=true;
+		}
+		if('02' == qnaanswer){
+			document.getElementsById("qnaanswer")[1].checked=true;
+		}
+	}
+
+</script>
+
  <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
      <div class="container-xl px-4">
          <div class="page-header-content">
-             <div class="row align-items-center justify-content-between pt-3">
+             <div class="row align-items-center justify-content-between pt-3" >
                  <div class="col-auto mb-3">
                      <h1 class="page-header-title">
                          <div class="page-header-icon"><i data-feather="user"></i>&nbsp&nbsp<h2>Q&A</h2></div>
@@ -84,26 +119,23 @@
          </div>
      </div>
  </header>
- <!-- Main page content-->
 <div class="container-xl px-4 mt-4">
-<!-- Account page navigation-->
 <nav class="nav nav-borders">
     <a class="nav-link active" href="account-security.html">sd</a>
 </nav>
 <hr class="mt-0 mb-4" />
-<div class="row">
-    <div class="col-lg-8">
-        <!-- Change password card-->
+<div class="row" style="margin:0 auto;">
+   
 <div class="card mb-4" style="margin:0 auto;">
  <div class="card-header">Q&A 글수정</div>
  <div class="card-body">
 
      <form name="qnaUpdateForm" id="qnaUpdateForm">
-         <!-- Form Group (qnanum)-->
+        <!-- Form Group (qnanum)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnanum">글 번호</label>
-             <input class="form-control" id="qnanum" name="qnanum" type="text" value=<%=qvo.getQnanum()%> readonly/>
-         </div>
+             <input class="form-control" id="qnanum" name="qnanum" type="text" value= <%= qvo.getQnanum() %> readonly />
+         </div> 
          <!-- Form Group (qnatitle)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnatitle">글 제목</label>
@@ -123,11 +155,13 @@
          	 <label class="small mb-1" for="qnafile">첨부파일</label>
          	 <input class="form-control" id="qnafile" name="qnafile" type="file" value=<%=qvo.getQnafile()%> >
          </div>
-            <!-- Form Group (qnapw)-->
-         <%-- <div class="mb-3">
-             <label class="small mb-1" for="qnapw">비밀번호(숫자 4개)</label>
-             <input class="form-control" readonly id="qnapw" name="qnapw" style="width: 300px;line-height:20px;" type="password" value=<%=qvo.getQnapw()%> placeholder="Please enter the password in 4 digits." />
-         </div> --%>
+         
+         <input type="radio" name="qnaanswer" id="qnaanswer" value="01" checked /> 예정
+         <input type="radio" name="qnaanswer" id="qnaanswer" value="02"/> 완료
+         <div id="answer01"><p>예쩡</p></div>
+         
+         <div id="answer02"><p>완려</p></div>
+
          <br> 
          
          <div style="text-align:right">
@@ -138,7 +172,14 @@
         </form>
     </div>
 </div>
-                
+
+<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 x -->
+ <!-- url붙여서 댓글 가져오기 -->
+ <c:import url="/rqnaForm.wd">
+	<c:param name="qnanum" value="<%=qvo.getQnanum()%>"></c:param>
+</c:import>	
+</sec:authorize>       
+           
 </main>				
 			<!-- ** /주요 내용 ** -->
 				

@@ -262,8 +262,8 @@ rqnaForm : 답변
 	<td>작성자</td>
 	<td>
 		<input type="text" name="rqnatitle" id="rqnatitle"/>
-		<input type="hidden" name="qnanum" id="qnanum" value="<%=qnanum %>">
-		<input type="hidden" name="rqnanum" id="rqnanum">
+		<input type="hidden" name="qnanum" id="qnanum" value="<%=qnanum %>" />
+		<input type="hidden" name="rqnanum" id="rqnanum" />
 	</td>
 </tr>
 

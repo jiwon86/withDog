@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="a.b.c.com.qna.vo.QnaVO"%>
 <%@ page import="java.util.List"%>
+<%@page import="a.b.c.com.common.CodeUtil"%>
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
 	c:import : 외부 jsp 파일 접근 가능
@@ -30,7 +31,6 @@
 			alert("I >>>");
 			location.href="qnaForm.wd";
 		});
-
 	})
 
 </script>
@@ -114,17 +114,18 @@
 						<th class="border-gray-200" scope="col">글번호</th>
 						<th class="border-gray-200" scope="col">제목</th>
 						<th class="border-gray-200" scope="col">글쓴이</th>
+						<th class="border-gray-200" scope="col">내용</th>
 						<th class="border-gray-200" scope="col">작성일</th>
 						<th class="border-gray-200" scope="col">답변</th>
 						<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
-						<th class="border-gray-200" scope="col">최종 수정일</th>
-						<th class="border-gray-200" scope="col">답변유무</th>
 						<th class="border-gray-200" scope="col">수정</th>
 						<th	class="border-gray-200" scope="col">삭제</th>
 						</sec:authorize>
 					</tr>
 				</thead>
 <%
+	//String qnaanswer = "";
+
    for(int i=0; i<nCnt; i++){
 	   QnaVO qvo = list.get(i);
 	   String qnanum = qvo.getQnanum();
@@ -132,18 +133,23 @@
 	   String qnawriter = qvo.getQnawriter();
 	   String qnacon = qvo.getQnacon();
 	   String qnafile = qvo.getQnafile();
-	   String qnapw = qvo.getQnapw();
+	   String qnainsertdate = qvo.getQnainsertdate();
+	   String qnaupdatedate = qvo.getQnaupdatedate();
+	   //String qnaanswer = qvo.getQnaanswer();
+	   //String qnaanswer = CodeUtil.answer(qvo.getQnaanswer());
+	   
 	   System.out.println("qvo.getQnanum >>>> : " + qvo.getQnanum());
 	   System.out.println("qvo.getQnatitle >>>> : " + qvo.getQnatitle());
 	   System.out.println("qvo.getQnawriter >>>> : " + qvo.getQnawriter());
 	   System.out.println("qvo.getQnacon >>>> : " + qvo.getQnacon());
 	   System.out.println("qvo.getQnafile >>>> : " + qvo.getQnafile());
-	   System.out.println("qvo.getQnapw >>>> : " + qvo.getQnapw());
+	   System.out.println("qvo.getQnaanswer >>>> : " + qvo.getQnaanswer());
+	   System.out.println("qvo.getQnainsertdate >>>> : " + qvo.getQnainsertdate());
 	   
-	   System.out.println("pagingQVO.getPageSize >>> : " + pagingQVO.getPageSize());
+/* 	   System.out.println("pagingQVO.getPageSize >>> : " + pagingQVO.getPageSize());
 	   System.out.println("pagingQVO.getGroupSize >>> : " + pagingQVO.getGroupSize());
 	   System.out.println("pagingQVO.getCurPaging >>> : " + pagingQVO.getCurPage());
-	   System.out.println("qvo.getTotalCount() >>> : " + qvo.getTotalCount());
+	   System.out.println("qvo.getTotalCount() >>> : " + qvo.getTotalCount()); */
 	   
 	   pageSize = Integer.parseInt(pagingQVO.getPageSize());
 	   groupSize = Integer.parseInt(pagingQVO.getGroupSize());
@@ -158,24 +164,21 @@
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnanum() %></a></td>
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnatitle() %></a></td>
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnawriter() %></a></td>
+		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnacon() %></a></td>
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnainsertdate() %></a></td>
-	<%
-		//if(qvo.getQnaupdatedate() == strDate)
-	%>	
 		
-		<td class="tt"><span class="badge bg-success">예정</span></td>	
+		<td class="tt"><!-- <span class="badge bg-success">예정</span> -->
+		<%=qvo.getQnaanswer() %>
+		</td>	
 		
-
-<!-- 글수정 -->
 <sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
-<td><class="tt"> <%=qvo.getQnaupdatedate() %></td>
-<td class="tt"><span class="badge bg-success">
-			<select name="yesorno" id="yesorno">
-				<option value="예정">예정</option>
-				<option value="완료">완료</option>
-			</select>
-		</span>
-		</td>
+<!-- <td>
+		<select name="qnaanswer" id="qnaanswer" >
+			<option value="1">예정</option>
+			<option value="2">완료</option>
+		</select>
+</td>	 -->
+
 <td><a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="qnaSelect.wd?qnanum=<%=qvo.getQnanum() %>"> <i data-feather="edit"></i></a>
 </td>            					
 <!-- 글삭제-->

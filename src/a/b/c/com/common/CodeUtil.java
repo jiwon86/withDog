@@ -18,6 +18,11 @@ public class CodeUtil {
 	public static final String[] hobby_lavel = {"알고리즘", "코딩", "분석설계", "데이터베이스", "스크립트"};
 	public static final String[] hobby_value = {"01", "02", "03", "04", "05"};
 	
+	/*
+	 * //qnaanswer public static String answer(String s) { return
+	 * "01".equals(s.toUpperCase()) ? "예정" : "완료"; }
+	 */
+	
 	// 생년월일
 	public static String birth(String s) {
 		String s0 = "";

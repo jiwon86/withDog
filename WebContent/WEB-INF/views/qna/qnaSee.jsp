@@ -51,7 +51,7 @@
 					===================================
 				--> 
 				<!-- ** 주요 내용 **  -->
-<main>
+<main style="width:960px; margin:0 auto;">
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	Object obj = request.getAttribute("listS");
@@ -64,16 +64,10 @@
 	
 %>
 
-<%-- <%
-	String qnaanswer = "";
-	
-	QnaVO _qvo = null;
-	qnaanswer = _qvo.getQnaanswer();
-%> --%>
  <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
      <div class="container-xl px-4">
          <div class="page-header-content">
-             <div class="row align-items-center justify-content-between pt-3">
+             <div class="row align-items-center justify-content-between pt-3" >
                  <div class="col-auto mb-3">
                      <h1 class="page-header-title">
                          <div class="page-header-icon"><i data-feather="user"></i>&nbsp&nbsp<h2>Q&A</h2></div>
@@ -85,14 +79,15 @@
  </header>
  <!-- Main page content-->
 <div class="container-xl px-4 mt-4">
-<!-- Account page navigation-->
+
 <nav class="nav nav-borders">
     <a class="nav-link active" href="account-security.html">sd</a>
 </nav>
+
 <hr class="mt-0 mb-4" />
-<div class="row">
-    <div class="col-lg-8">
-        <!-- Change password card-->
+
+<div class="row" style="margin:0 auto;">
+   
 <div class="card mb-4" style="margin:0 auto;">
  <div class="card-header">Q&A 글수정</div>
  <div class="card-body">
@@ -114,11 +109,11 @@
      		}
      	</script> --%>
      	
-         <!-- Form Group (qnanum)-->
+        <!-- Form Group (qnanum)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnanum">글 번호</label>
              <input class="form-control" id="qnanum" name="qnanum" type="text" value=<%=qvo.getQnanum() %> readonly/>
-         </div>
+         </div> 
          <!-- Form Group (qnatitle)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnatitle">글 제목</label>
@@ -140,16 +135,6 @@
          	 <img src="img/qna/<%= qvo.getQnafile() %>" style="width:50%;">
          </div>
          
-          <div class="mb-3">
-         	 <label class="small mb-1" for="qnaanswer">예정/완료</label>
-         	 <input class="form-control" id="qnaanswer" name="qnaanswer" value=<%=qvo.getQnaanswer()%>>
-         </div>
-         
-            <!-- Form Group (qnapw)-->
-         <%-- <div class="mb-3">
-             <label class="small mb-1" for="qnapw">비밀번호(숫자 4개)</label>
-             <input class="form-control" readonly id="qnapw" name="qnapw" style="width: 300px;line-height:20px;" type="password" value=<%=qvo.getQnapw()%> placeholder="Please enter the password in 4 digits." />
-         </div> --%>
          <br> 
          
          <div style="text-align:right">

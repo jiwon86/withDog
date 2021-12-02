@@ -19,4 +19,6 @@ public interface QnaDAO {
 	//selectAll에서 수정, 삭제
 	public int qnaMyUpdate(QnaVO qvo);
 	public int qnaMyDelete(QnaVO qvo);
+	
+	public List<QnaVO> qnaanswer(QnaVO qvo);
 }

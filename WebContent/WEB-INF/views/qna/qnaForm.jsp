@@ -52,7 +52,7 @@
 					===================================
 				--> 
 				<!-- ** 주요 내용 **  -->
-<main>
+<main style="width:960px; margin:0 auto;">
  <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
      <div class="container-xl px-4">
          <div class="page-header-content">
@@ -66,16 +66,13 @@
          </div>
      </div>
  </header>
- <!-- Main page content-->
 <div class="container-xl px-4 mt-4">
-<!-- Account page navigation-->
 <nav class="nav nav-borders">
     <a class="nav-link active" href="account-security.html">sd</a>
 </nav>
 <hr class="mt-0 mb-4" />
-<div class="row">
-    <div class="col-lg-8">
-        <!-- Change password card-->
+<div class="row" style="margin:0 auto;">
+   
 <div class="card mb-4" style="margin:0 auto;">
  <div class="card-header">Q&A 글쓰기</div>
  <div class="card-body">
@@ -85,7 +82,7 @@
          <div class="mb-3">
              <label class="small mb-1" for="qnanum">글 번호</label>
              <input class="form-control" id="qnanum" name="qnanum" type="text" readonly/>
-         </div>
+         </div> 
          <!-- Form Group (qnatitle)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnatitle">글 제목</label>
@@ -94,7 +91,7 @@
          <!-- Form Group (qnawriter)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnawriter">작성자</label>
-             <input class="form-control" id="qnawriter" name="qnawriter"type="text" placeholder="Please enter your name" />
+             <input class="form-control" id="qnawriter" name="qnawriter" type="text" placeholder="Please enter your name" />
          </div>
          <!-- Form Group (qnacon)-->
          <div class="mb-3">
@@ -105,11 +102,6 @@
          	 <label class="small mb-1" for="qnapw">첨부파일</label>
          	 <input class="form-control" id="qnafile" name="qnafile" type="file">
          </div>
-            <!-- Form Group (qnapw)-->
-         <!-- <div class="mb-3">
-             <label class="small mb-1" for="qnapw">비밀번호(숫자 4개)</label>
-             <input class="form-control" id="qnapw" name="qnapw" style="width: 300px;line-height:20px;" type="password" placeholder="Please enter the password in 4 digits." />
-         </div> -->
          <br> 
          
          <div style="text-align:right">

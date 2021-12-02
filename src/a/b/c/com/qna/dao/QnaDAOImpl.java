@@ -26,12 +26,11 @@ public class QnaDAOImpl implements QnaDAO {
 		return sqlSession.selectList("qnaSelect", qnanum);
 	}
 
-	@Override
-	public List<QnaVO> qnaSelectAll(QnaVO qvo) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("qnaSelectAll", qvo);
+	 @Override public List<QnaVO> qnaSelectAll(QnaVO qvo) {  
+		 //TODO Auto-generated method stub 
+		 return sqlSession.selectList("qnaSelectAll", qvo); 
 	}
-
+	 
 	@Override
 	public int qnaInsert(QnaVO qvo) {
 		// TODO Auto-generated method stub
@@ -69,5 +68,10 @@ public class QnaDAOImpl implements QnaDAO {
 	public  int qnaMyDelete(QnaVO qvo){
 		// TODO Auto-generated method stub
 		return (Integer)sqlSession.update("qnaMyDelete", qvo);
+	}
+	
+	@Override
+	public List<QnaVO> qnaanswer(QnaVO qvo){
+		return sqlSession.selectList("qnaanswer", qvo);
 	}
 }

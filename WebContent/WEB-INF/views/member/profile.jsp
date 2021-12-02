@@ -14,6 +14,11 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				
+				$("#Mypet").click(function(){
+					//alert("mno >>>" + memberUpdateForm.mno.value);
+					$("#memberUpdateForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				});
+				
 				$("#zonecode").click(function() {
 					new daum.Postcode({
 						oncomplete: function(data) {
@@ -171,7 +176,7 @@
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
                             <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
-                            <a class="nav-link" href="myPetList.wd">MyPet</a>
+                            <a class="nav-link" href="#" id="Mypet">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                         </nav>

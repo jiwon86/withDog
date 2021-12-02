@@ -1,0 +1,56 @@
+0. PET 테이블 생성 전 :
+MEMBER/MEMBER_AUTH가 먼저 생성 되어 있어야함
+
+
+1. PET 테이블 생성 쿼리
+
+CREATE TABLE PET(
+                 PNO VARCHAR2(20) PRIMARY KEY --반려동물 고유번호
+                ,PNAME VARCHAR2(50)           --반려동물 이름
+                ,PTYPE VARCHAR2(50)           --반려동물 종
+                ,PGENDER VARCHAR2(50)         --반려동물 성별
+                ,PNEUTRAL VARCHAR2(50)        --반려동물 중성화여부 : Y/N
+                ,PPHOTO VARCHAR2(50)          --반려동물 사진
+                ,PWEIGHT VARCHAR2(50)         --반려동물 몸무게
+                ,PHOSPITAL VARCHAR2(50)       --반려동물 병원
+                ,PMEMO VARCHAR2(1000 BYTE)    --반려동물 특이사항
+                ,PAGES VARCHAR2(50)           --반려동물 나이
+                ,MNO VARCHAR2(20)             --회원번호
+                ,DELETEYN VARCHAR2(1)
+                ,INSERTDATE DATE
+                ,UPDATEDATE DATE
+                ,CONSTRAINT MNO_PET_FK FOREIGN KEY (MNO) REFERENCES MEMBER(MNO) --회원번호 FK
+            )  
+
+
+2.PET 예시 데이터
+
+-- 회원 데이터가 먼저 만들어 있어야함 
+INSERT INTO MEMBER VALUES('M202111140003', 'test1', '1234', 'sksskdua1234@naver.com', '테스트', '19940820', '3.jpg', '02512', '서울 동대문구 장안벚꽃로 276@1', '서울 동대문구 휘경동 49-15', 'Y', SYSDATE, SYSDATE);
+INSERT INTO PET VALUES('P202111170001','댕댕이1','01','01','Y','1.JPG','50','청라동물병원','사람너무좋아함','5','M202111140003','Y',SYSDATE,SYSDATE);
+
+3. PET 채번 데이터
+
+SELECT NVL(MAX(SUBSTR(A.PNO, -4)), 0) + 1 PNO FROM PET A;
+
+4.PET 선택을 위한 쿼리 
+
+	SELECT
+         A.PNO       PNO
+        ,A.PNAME     PNAME
+        ,A.PTYPE     PTYPE
+        ,A.PGENDER   PGENDER
+        ,A.PNEUTRAL   PNEUTRAL
+        ,A.PPHOTO    PPHOTO
+        ,A.PWEIGHT  PWEIGHT
+        ,A.PHOSPITAL    PHOSPITAL
+        ,A.PMEMO     PMEMO
+        ,A.PAGES    PAGES
+        ,A.MNO      MNO
+        ,A.DELETEYN DELETEYN
+        ,A.INSERTDATE   INSERTDATE
+        ,A.UPDATEDATE   UPDATEDATE
+	FROM PET A
+	WHERE A.DELETEYN = 'Y'
+	AND A.MNO='M202111140003'
+	ORDER BY 1;

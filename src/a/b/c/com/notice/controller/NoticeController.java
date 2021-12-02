@@ -57,16 +57,19 @@ public class NoticeController {
 		logger.info("NoticeController noticeSelectAll nvo.getEnddate() >>> : " + nvo.getEnddate());
 		
 		
+		
+		
 		List<NoticeVO> listAll = noticeService.noticeSelectPaging(nvo);
 		logger.info("NoticeController noticeSelectAll.size() >>> : " + listAll.size());
 				
 		if(listAll.size() > 0) {
 			model.addAttribute("listAll", listAll);
 			
-			return "notice/NoticeSelectAll";
+			//return "notice/NoticeSelectAll";
+			return "notice/noticeSelectPaging";
 		}
-		
-		return "notice/noticeInsertForm";
+		return "notice/noticeSelectPaging";
+		//return "notice/noticeInsertForm";
 	}
 	/*
 	@RequestMapping("noticeSelectAll")
@@ -229,6 +232,7 @@ public class NoticeController {
 		logger.info("SpringNoticeController noticeSelectPaging nvo.getGroupSize() >>> : " + nvo.getGroupSize());
 		logger.info("SpringNoticeController noticeSelectPaging nvo.getCurPage() >>> : " + nvo.getCurPage());
 		logger.info("SpringNoticeController noticeSelectPaging nvo.getTotalCount() >>> : " + nvo.getTotalCount());
+		logger.info("NoticeController noticeSelectAll nvo.getKeyKeyword() >>> : " + nvo.getKeyword());
 		
 		NoticeVO.printVO(nvo);
 		

@@ -14,6 +14,7 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
+
 	$(document).ready(function(){
 		$(document).on("click", "#nbtn", function(){
 			console.log("nbtn >>> : ");
@@ -23,6 +24,7 @@
 			}).submit();
 		});
 	});
+	
 </script>
 <jsp:include page="/head.wd" />
 	<!-- /헤드 -->
@@ -57,7 +59,7 @@
 	                        </h1>
 	                    </div>
 	                    <div class="col-12 col-xl-auto mb-3">
-	                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectAll.wd">
+	                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectPaging.wd">
 	                            <i class="me-1" data-feather="arrow-left"></i>
 	                          	  공지사항 전체목록
 	                        </a>
@@ -75,6 +77,8 @@
 	            <div class="col-lg-8">
 	            	
 	          	</div>
+
+<!-- JSP -->
 	<%
 	List<NoticeVO> listS = (List<NoticeVO>)request.getAttribute("listS");
 	int nCnt = listS.size();
@@ -105,7 +109,7 @@
 	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">파일 업로드</div>
 	                    <div class="card-body">
 		                     <div class="mb-3">
-							  <label for="formFile" class="form-label">Default file input example</label>
+							  <label for="formFile" class="form-label"></label>
 							  <input class="form-control" type="file" id="nfile" name="nfile">
 							</div>
 	                    </div>

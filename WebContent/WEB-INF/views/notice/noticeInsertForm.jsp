@@ -56,7 +56,7 @@
 	                        </h1>
 	                    </div>
 	                    <div class="col-12 col-xl-auto mb-3">
-	                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectAll.wd">
+	                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectPaging.wd">
 	                            <i class="me-1" data-feather="arrow-left"></i>
 	                          	  공지사항 전체목록
 	                        </a>

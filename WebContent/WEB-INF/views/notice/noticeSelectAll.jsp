@@ -25,6 +25,13 @@
 			$("#noticeList").attr({ "method":"GET"
 		        					,"action":"noticeSelectAll.wd"}).submit();
 		});
+		
+		
+		
+		/* <button class="btn btn-primary" style="float:right" id="searchBtn">검색하기</button>
+	    <div style="float:right">
+	        <input id="keyword" name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">
+	    </div> */
 </script>
 
     <body class="nav-fixed">
@@ -93,7 +100,7 @@
                  		<!-- <input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br> -->
                  		<button class="btn btn-primary" style="float:right" id="searchBtn">검색하기</button>
 				    <div style="float:right">
-				        <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">
+				        <input id="keyword" name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">
 				    </div>
 				   
 				    <br><br>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div id="layoutSidenav_nav">
     <nav class="sidenav shadow-right sidenav-light">
         <div class="sidenav-menu">
@@ -12,6 +13,7 @@
                 </a>
                 
                 <!-- 권한 테스트 -->
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUserService" aria-expanded="false" aria-controls="collapseUserService">
                     <div class="nav-link-icon"><i data-feather="lock"></i></div>
                     <span class="hahmlet">관리자 페이지</span>
@@ -22,8 +24,10 @@
                         <a class="nav-link hahmlet" href="AdminMemberSelectAll.wd">회원리스트</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">마커리스트</a>
                     </nav>
-                </div>                     
-       
+                </div>    
+                 </sec:authorize>
+            
+                              
                 <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCareService" aria-expanded="false" aria-controls="collapseCareService">
                     <div class="nav-link-icon"><i data-feather="github"></i></div>
                     <span class="hahmlet">돌봄서비스</span>

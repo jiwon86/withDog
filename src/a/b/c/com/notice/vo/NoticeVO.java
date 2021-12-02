@@ -254,7 +254,7 @@ public class NoticeVO {
 
 	// 매개변수 확인
 	public static void printVO(NoticeVO nvo) {
-		logger.info("SpringBoardVO 데이터 확인 시작  >>> : ");
+		logger.info("NoticeVO 데이터 확인 시작  >>> : ");
 		
 		logger.info("공지사항 번호 >>> : " + nvo.getNnum());
 		logger.info("공지사항 제목>>> : " + nvo.getNsubject());

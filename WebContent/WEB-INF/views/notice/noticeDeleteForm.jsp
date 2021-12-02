@@ -57,7 +57,7 @@
 	                        </h1>
 	                    </div>
 	                    <div class="col-12 col-xl-auto mb-3">
-	                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectAll.wd">
+	                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectPaging.wd">
 	                            <i class="me-1" data-feather="arrow-left"></i>
 	                          	  공지사항 전체목록
 	                        </a>
@@ -102,11 +102,12 @@
 	                </div>
 	                
 	                <div class="card mb-4" style="width:900px;">
-	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;" >파일 업로드</div>
+	                    <div class="card-header" style="width:900px;" style="height:40px;line-height:15px;">파일 업로드</div>
 	                    <div class="card-body">
 		                     <div class="mb-3">
-							  <label for="formFile" class="form-label">Default file input example</label>
-							  <input class="form-control" type="file" id="nfile" name="nfile" readonly>
+							  <label for="formFile" class="form-label">업로드된 파일명</label>
+							  <div class="form-control" type="file" id="nfile" name="nfile" readonly><%= nvo.getNfile() %></div>
+								<!-- <input class="form-control" type="file" id="nfile" name="nfile" readonly> --> 
 							</div>
 	                    </div>
 	                </div>

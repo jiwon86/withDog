@@ -26,8 +26,6 @@ public class Member implements Serializable{
 	
 	private List<MemberAuth> authList;
 	
-	
-
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", mname=" + mname

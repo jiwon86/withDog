@@ -59,7 +59,7 @@ public abstract class CommonUtils {
 
 	//Pet 이미지 업로드 패스
 	public static final String PET_IMG_UPLOAD_PATH= 
-	"C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\pet\\";
+	"C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\pet\\";
 	//배동민 컴퓨터 구동용 이미지 업로드 패스
 	//public static final String PET_IMG_UPLOAD_PATH = "C:\\00.KOSMO93\\100.project\\el_withdog_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\WithDog\\img\\pet\\";
 	public static final int PET_IMG_FILE_SIZE = 2*1024*1024;

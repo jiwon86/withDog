@@ -11,7 +11,7 @@
 <script>
 
 alert("결제가 실패 했습니다");
-location.href = "point.wd";
+location.href = "payfail.wd";
 </script>
 </body>
 </html>

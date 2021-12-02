@@ -15,6 +15,11 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				
+				$("#Mypet").click(function(){
+					//alert("mno >>>" + memberUpdateForm.mno.value);
+					$("#memberUpdateForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				});
+				
 				$("#zonecode").click(function() {
 					new daum.Postcode({
 						oncomplete: function(data) {

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">                 
+
+<mapper namespace = "a.b.c.com.pet.dao.PetDAO">
+
+	
+<select id = "petSelectAll" parameterType="Pet" resultType="Pet">
+	SELECT
+         A.PNO       PNO
+        ,A.PNAME     PNAME
+        ,A.PTYPE     PTYPE
+        ,A.PGENDER   PGENDER
+        ,A.PNEUTRAL   PNEUTRAL
+        ,A.PPHOTO    PPHOTO
+        ,A.PWEIGHT  PWEIGHT
+        ,A.PHOSPITAL    PHOSPITAL
+        ,A.PMEMO     PMEMO
+        ,A.PAGES    PAGES
+        ,A.MNO      MNO
+        ,A.DELETEYN DELETEYN
+        ,A.INSERTDATE   INSERTDATE
+        ,A.UPDATEDATE   UPDATEDATE
+FROM PET A
+WHERE A.DELETEYN = 'Y'
+AND A.MNO=#{mno,jdbcType=VARCHAR}
+ORDER BY 1
+</select>
+
+<insert id='petInsert' parameterType="Pet">
+INSERT INTO PET(
+	 PNO
+	,PNAME
+	,PTYPE
+	,PGENDER
+	,PNEUTRAL
+	,PPHOTO
+	,PWEIGHT
+	,PHOSPITAL
+	,PMEMO
+	,PAGES
+	,MNO
+	,DELETEYN
+	,INSERTDATE
+	,UPDATEDATE
+	)VALUES(
+	 #{pno,jdbcType=VARCHAR}
+	,#{pname,jdbcType=VARCHAR}
+	,#{ptype,jdbcType=VARCHAR}
+	,#{pgender,jdbcType=VARCHAR}
+	,#{pneutral,jdbcType=VARCHAR}
+	,#{pphoto,jdbcType=VARCHAR}
+	,#{pweight,jdbcType=VARCHAR}
+	,#{phospital,jdbcType=VARCHAR}	
+	,#{pmemo,jdbcType=VARCHAR}
+	,#{pages,jdbcType=VARCHAR}
+	,#{mno,jdbcType=VARCHAR}
+	,'Y'
+	,SYSDATE
+	,SYSDATE
+	)
+</insert>
+<select id = "petSelect" parameterType="Pet" resultType="Pet">
+	SELECT
+         A.PNO       PNO
+        ,A.PNAME     PNAME
+        ,A.PTYPE     PTYPE
+        ,A.PGENDER   PGENDER
+        ,A.PNEUTRAL   PNEUTRAL
+        ,A.PPHOTO    PPHOTO
+        ,A.PWEIGHT  PWEIGHT
+        ,A.PHOSPITAL    PHOSPITAL
+        ,A.PMEMO     PMEMO
+        ,A.PAGES    PAGES
+        ,A.MNO      MNO
+        ,A.DELETEYN DELETEYN
+        ,A.INSERTDATE   INSERTDATE
+        ,A.UPDATEDATE   UPDATEDATE
+FROM PET A
+WHERE A.DELETEYN = 'Y'
+AND PNO=#{pno,jdbcType=VARCHAR}
+AND A.MNO=#{mno,jdbcType=VARCHAR}
+</select>
+<update id="petUpdate" parameterType="Pet">
+UPDATE PET
+		 SET 
+		 PNAME = #{pname,jdbcType=VARCHAR}
+		,PTYPE = #{ptype,jdbcType=VARCHAR}
+		,PGENDER = #{pgender,jdbcType=VARCHAR}
+		,PNEUTRAL = #{pneutral,jdbcType=VARCHAR}
+		,PPHOTO = #{pphoto,jdbcType=VARCHAR}
+		,PWEIGHT = #{pweight,jdbcType=VARCHAR}
+		,PHOSPITAL = #{phospital,jdbcType=VARCHAR}	
+		,PMEMO = #{pmemo,jdbcType=VARCHAR}
+		,PAGES = #{pages,jdbcType=VARCHAR}
+		,UPDATEDATE = SYSDATE
+WHERE 	DELETEYN = 'Y'
+AND 	PNO= #{pno,jdbcType=VARCHAR}
+</update>
+<update id="petDelete" parameterType="Pet">
+UPDATE  PET
+SET		DELETEYN = 'N' 
+WHERE 	DELETEYN = 'Y'
+		AND PNO=#{pno,jdbcType=VARCHAR}
+</update>
+</mapper>

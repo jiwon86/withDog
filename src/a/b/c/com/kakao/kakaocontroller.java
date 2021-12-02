@@ -46,11 +46,9 @@ public class kakaocontroller {
 			DataOutputStream dataSend = new DataOutputStream(send); // 이제 데이터를 줄 수 있다.
 			dataSend.writeBytes(parameter); // OutputStream은 데이터를 바이트 형식으로 주고 받기로 약속되어 있다. (형변환)
 			dataSend.close(); // flush가 자동으로 호출이 되고 닫는다. (보내고 비우고 닫다)
-			
+			// pg_token=f0418aa8072f4c600cc2
 			int result = connection.getResponseCode(); // 전송 잘 됐나 안됐나 번호를 받는다.
 			InputStream receive; // 받다
-			
-			
 			
 			if(result == 200) {
 				receive = connection.getInputStream();
@@ -59,6 +57,7 @@ public class kakaocontroller {
 				System.out.println("Parameter값 >>> : " + parameter); 
 				model.addAttribute("sname",sname);
 				model.addAttribute("price",price);
+				
 			}else {
 				System.out.println("aa");
 				receive = connection.getErrorStream(); 
@@ -76,6 +75,7 @@ public class kakaocontroller {
 		}
 		return "";
 	}
+	
 	@RequestMapping("/paysuccess")
 	public String paysuccess (Model model) {
 		return "/point/kakaopay";

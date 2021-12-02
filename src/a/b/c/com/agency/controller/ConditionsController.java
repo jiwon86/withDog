@@ -28,9 +28,9 @@ import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.pet.vo.PetVO;
 
 @Controller
-public class ConditionController {
+public class ConditionsController {
 	
-	private Logger logger = Logger.getLogger(ConditionController.class);
+	private Logger logger = Logger.getLogger(ConditionsController.class);
 	
 	private ConditionService conditionService;
 	private MemberService memberService;
@@ -38,7 +38,7 @@ public class ConditionController {
 	private AgencyService agencyService;
 	
 	@Autowired(required = false)
-	public ConditionController(ConditionService conditionService, MemberService memberService, 
+	public ConditionsController(ConditionService conditionService, MemberService memberService, 
 							   OfferService offerService, AgencyService agencyService) {
 		this.conditionService = conditionService;
 		this.memberService = memberService;

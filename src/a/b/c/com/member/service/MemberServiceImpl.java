@@ -43,6 +43,7 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("MemberServiceImpl.memberInsert() 함수 진입");
 		return (Integer)memberDAO.memberInsert(mvo);
 	}
+	
 	//로그인 체크
 	@Override
 	public List<MemberVO> loginCheck(MemberVO mvo){

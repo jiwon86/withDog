@@ -25,80 +25,126 @@
 		
 			// 수락버튼 누를 때 이벤트 함수
 			function acceptBtnClick(e) {
-				// ajax로 insert 혹은 update문이 실행되야 한다.
-				let cnoVal = $(e).parent().prev().find(".cno").val();
-				let tnoVal = $(e).parent().prev().find(".tno").val();
 				
-				let typeVal = "GET";
-				let urlVal = "/agencyCheckAjax.wd";
+				var mAccount = $(e).parent().prev().find(".mAccount").text();
 				
-				console.log("cnoVal >>> : " + cnoVal);
-				console.log("tnoVal >>> : " + tnoVal);
+				Swal.fire({
+					title: "정말로 " + mAccount + "님의 조건제시를 수락하시겠습니까?",
+					text: "다시 한번 조건제시을 확인해 주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '확인',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
+
+						// ajax로 insert 혹은 update문이 실행되야 한다.
+						let cnoVal = $(e).parent().prev().find(".cno").val();
+						let tnoVal = $(e).parent().prev().find(".tno").val();
+						
+						let typeVal = "GET";
+						let urlVal = "/agencyCheckAjax.wd";
+						
+						console.log("cnoVal >>> : " + cnoVal);
+						console.log("tnoVal >>> : " + tnoVal);
+						
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+								"tno": tnoVal
+							},
+							success: whenSuccess1,
+							error: whenError1
+						});
+						
+						let cancelBtn = `
+		        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+		            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+		            		</div>
+		            		<div class="btn btn-green hahmlet" onclick="chatPaymentBtnClick()">
+		            			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
+		            		</div>
+						`;
+						
+						$(e).parent().html(cancelBtn);
+						
+					}
+				})
 				
-				$.ajax({
-					url: urlVal,
-					type: typeVal,
-					data: {
-						"cno": cnoVal,
-						"tno": tnoVal
-					},
-					success: whenSuccess1,
-					error: whenError
-				});
-				
-				let cancelBtn = `
-        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-            		</div>
-            		<div class="btn btn-green hahmlet" onclick="chatPaymentBtnClick()">
-            			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-            		</div>
-				`;
-				
-				$(e).parent().html(cancelBtn);
 			}
 			
 			// 취소버튼 누를 때 이벤트 함수
 			function cancelBtnClick(e) {
-				// ajax로 update문이 실행되어야 한다.
-				let cnoVal = $(e).parent().prev().find(".cno").val();
-				let tnoVal = $(e).parent().prev().find(".tno").val();
-				let typeVal = "GET";
-				let urlVal = "/agencyCheckAjax.wd";
 				
-				console.log("cnoVal >>> : " + cnoVal);
-				console.log("tnoVal >>> : " + tnoVal);
+				var mAccount = $(e).parent().prev().find(".mAccount").text();
 				
-				$.ajax({
-					url: urlVal,
-					type: typeVal,
-					data: {
-						"cno": cnoVal,
-						"tno": tnoVal
-					},
-					success: whenSuccess2,
-					error: whenError
-				});
-				
-				let acceptBtn = `
-                	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-						<i class="far fa-check-circle"></i> &nbsp; 수락
-					</div>	                      				
-				`;
-				
-				$(e).parent().html(acceptBtn);
+				Swal.fire({
+					title: "정말로 " + mAccount + "님의 조건제시를 해제하시겠습니까?",
+					text: "다시 한번 조건제시을 확인해 주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '확인',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
+
+						// ajax로 update문이 실행되어야 한다.
+						let cnoVal = $(e).parent().prev().find(".cno").val();
+						let tnoVal = $(e).parent().prev().find(".tno").val();
+						let typeVal = "GET";
+						let urlVal = "/agencyCheckAjax.wd";
+						
+						console.log("cnoVal >>> : " + cnoVal);
+						console.log("tnoVal >>> : " + tnoVal);
+						
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+								"tno": tnoVal
+							},
+							success: whenSuccess2,
+							error: whenError2
+						});
+						
+						let acceptBtn = `
+		                	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+								<i class="far fa-check-circle"></i> &nbsp; 수락
+							</div>	                      				
+						`;
+						
+						$(e).parent().html(acceptBtn);						
+
+					}
+				})
+
 			}
 			
 			function whenSuccess1(resData) {
 				console.log("성공");
+				$("#liveToast1").toast("show");
 			}
 			
 			function whenSuccess2(resData) {
 				console.log("성공");
+				$("#liveToast3").toast("show");
 			}
 			
-			function whenError() {
+			function whenError1() {
 				console.log("실패");
+				$("#liveToast2").toast("show");
+			}
+			
+			function whenError2() {
+				console.log("실패");
+				$("#liveToast4").toast("show");
 			}
 			
 		</script>
@@ -194,7 +240,7 @@
 	                                        <span style="font-size:35px; font-weight:bold; color:#13a4a4;"><%=ovo.getTno()%></span> &nbsp;
 	                                        <span class="me-3">
 	                                           	<i class="fas fa-circle fa-sm ms-3 text-teal"></i>
-	                                       		<span class="hahmlet" style="font-size:13px; color::#13a4a4; font-weight:bold;">진행중</span>
+	                                       		<span class="hahmlet" style="font-size:13px; color:#13a4a4; font-weight:bold;">진행중</span>
 	                                        </span>
                                         <% } %>
                                         
@@ -336,7 +382,7 @@
 			                                        </h5>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="fas fa-user"></i> &nbsp;
-			                                        	<span><%= cvo.getMname() %> (<%= cvo.getMid() %>)</span>
+			                                        	<span class="mAccount"><%= cvo.getMname() %> (<%= cvo.getMid() %>)</span>
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="fas fa-coins"></i> &nbsp; 
@@ -404,6 +450,45 @@
 						</jsp:include>
                         
                     </div>
+                    
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+						<div id="liveToast1" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락을 성공하셨습니다.
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+						
+						<div id="liveToast2" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락을 실패하셨습니다
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+						
+						<div id="liveToast3" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락해제를 성공하셨습니다.
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+						
+						<div id="liveToast4" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락해제를 실패하셨습니다
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+					</div>
+                    
                 </main>				
 				<!-- ** /주요 내용 ** -->
 				

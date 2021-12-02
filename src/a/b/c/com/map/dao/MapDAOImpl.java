@@ -35,4 +35,29 @@ public class MapDAOImpl implements MapDAO {
 		return (Integer)sqlSession.insert("mapTradeInsert", mvo);
 	}
 
+	@Override
+	public int mapTradeUpdate(MapTradeVO mvo) {
+		// TODO Auto-generated method stub
+		logger.info("MapDAOImpl-----mapTradeUpdate()");
+		return (Integer)sqlSession.update("mapTradeUpdate", mvo);
+	}
+
+
+	@Override
+	public MapTradeVO selectMarker(String tno) {
+		// TODO Auto-generated method stub
+		logger.info("MapDAOImpl.selectMarker()");
+		return sqlSession.selectOne("selectMarker", tno);
+	}
+
+
+	@Override
+	public List<MapTradeVO> selectTrade(MapTradeVO mvo) {
+		// TODO Auto-generated method stub
+		logger.info("MapDAOImpl.selectTrade()");
+		return sqlSession.selectList("selectTrade", mvo);
+	}
+
+	
+	
 }

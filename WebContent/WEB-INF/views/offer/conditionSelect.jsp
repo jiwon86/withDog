@@ -16,80 +16,124 @@
 		
 			// 수락버튼 누를 때 이벤트 함수
 			function acceptBtnClick(e) {
-				// ajax로 insert 혹은 update문이 실행되야 한다.
-				let cnoVal = $(e).parent().parent().find(".cno").val();
-				let tnoVal = $(e).parent().parent().find(".tno").val();
 				
-				let typeVal = "GET";
-				let urlVal = "/agencyCheckAjax.wd";
+				var mAccount = $(e).parent().parent().find(".mAccount").text();
 				
-				console.log("cnoVal >>> : " + cnoVal);
-				console.log("tnoVal >>> : " + tnoVal);
+				Swal.fire({
+					title: "정말로 " + mAccount + "님의 조건제시를 해제하시겠습니까?",
+					text: "다시 한번 조건제시을 확인해 주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '확인',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
 				
-				$.ajax({
-					url: urlVal,
-					type: typeVal,
-					data: {
-						"cno": cnoVal,
-						"tno": tnoVal
-					},
-					success: whenSuccess1,
-					error: whenError
-				});
+						// ajax로 insert 혹은 update문이 실행되야 한다.
+						let cnoVal = $(e).parent().parent().find(".cno").val();
+						let tnoVal = $(e).parent().parent().find(".tno").val();
+						
+						let typeVal = "GET";
+						let urlVal = "/agencyCheckAjax.wd";
+						
+						console.log("cnoVal >>> : " + cnoVal);
+						console.log("tnoVal >>> : " + tnoVal);
+						
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+								"tno": tnoVal
+							},
+							success: whenSuccess1,
+							error: whenError1
+						});
+						
+						let cancelBtn = `
+		        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+		            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+		            		</div>
+		            		<div class="btn btn-green hahmlet">
+		            			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
+		            		</div>
+						`;
+						
+						$(e).parent().html(cancelBtn);
+					}
+				})
 				
-				let cancelBtn = `
-        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-            		</div>
-            		<div class="btn btn-green hahmlet">
-            			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-            		</div>
-				`;
-				
-				$(e).parent().html(cancelBtn);
 			}
 			
 			// 취소버튼 누를 때 이벤트 함수
 			function cancelBtnClick(e) {
-				// ajax로 update문이 실행되어야 한다.
-				let cnoVal = $(e).parent().parent().find(".cno").val();
-				let tnoVal = $(e).parent().parent().find(".tno").val();
-				let typeVal = "GET";
-				let urlVal = "/agencyCheckAjax.wd";
 				
-				console.log("cnoVal >>> : " + cnoVal);
-				console.log("tnoVal >>> : " + tnoVal);
+				var mAccount = $(e).parent().prev().find(".mAccount").text();
 				
-				$.ajax({
-					url: urlVal,
-					type: typeVal,
-					data: {
-						"cno": cnoVal,
-						"tno": tnoVal
-					},
-					success: whenSuccess2,
-					error: whenError
-				});
+				Swal.fire({
+					title: "정말로 " + mAccount + "님의 조건제시를 해제하시겠습니까?",
+					text: "다시 한번 조건제시을 확인해 주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '확인',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
 				
-				let acceptBtn = `
-                	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-						<i class="far fa-check-circle"></i> &nbsp; 수락
-					</div>	                      				
-				`;
-				
-				$(e).parent().html(acceptBtn);
+						// ajax로 update문이 실행되어야 한다.
+						let cnoVal = $(e).parent().parent().find(".cno").val();
+						let tnoVal = $(e).parent().parent().find(".tno").val();
+						let typeVal = "GET";
+						let urlVal = "/agencyCheckAjax.wd";
+						
+						console.log("cnoVal >>> : " + cnoVal);
+						console.log("tnoVal >>> : " + tnoVal);
+						
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+								"tno": tnoVal
+							},
+							success: whenSuccess2,
+							error: whenError2
+						});
+						
+						let acceptBtn = `
+		                	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+								<i class="far fa-check-circle"></i> &nbsp; 수락
+							</div>	                      				
+						`;
+						
+						$(e).parent().html(acceptBtn);
+					}
+				})	
+						
 			}
 			
 			function whenSuccess1(resData) {
 				console.log("성공");
+				$("#liveToast1").toast("show");
 			}
 			
 			function whenSuccess2(resData) {
 				console.log("성공");
+				$("#liveToast3").toast("show");
 			}
 			
-			function whenError() {
+			function whenError1() {
 				console.log("실패");
+				$("#liveToast2").toast("show");
+			}
+			
+			function whenError2() {
+				console.log("실패");
+				$("#liveToast4").toast("show");
 			}
 			
 		</script>
@@ -169,7 +213,7 @@
 	                                	<span>계정 아이디</span>
 	                                </h4>
 	                                <hr>
-	                                <p class="lead mb-4 ms-2"><%=cvo.getMname() %> (<%=cvo.getMid() %>)</p>
+	                                <p class="lead mb-4 ms-2 mAccount"><%=cvo.getMname() %> (<%=cvo.getMid() %>)</p>
                                 </div>
                                 
                                 <div>
@@ -236,6 +280,45 @@
                         <!-- /상세 돌봄신청 정보 -->
                         
                     </div>
+                    
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+						<div id="liveToast1" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락을 성공하셨습니다.
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+						
+						<div id="liveToast2" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락을 실패하셨습니다
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+						
+						<div id="liveToast3" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락해제를 성공하셨습니다.
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+						
+						<div id="liveToast4" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+						  <div class="d-flex">
+						    <div class="toast-body">
+						            조건제시 수락해제를 실패하셨습니다
+						    </div>
+						    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+						  </div>
+						</div>
+					</div>
+                    
                 </main>				
 				<!-- ** /주요 내용 ** -->
 				

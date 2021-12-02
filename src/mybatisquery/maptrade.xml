@@ -47,6 +47,29 @@
 	AND A.TNO = #{TNO, jdbcType=VARCHAR} 
 </select>
 
+
+<select id="selectMarkerID" parameterType="MapTradeVO" resultType="MapTradeVO">	
+	SELECT
+	    A.TNO       TNO
+	    ,A.TTITLE   TTITLE   
+	    ,A.TCONTENT TCONTENT
+	    ,A.TWRITER  TWRITER
+	    ,A.TPRICE   TPRICE 
+	    ,A.TPHOTO   TPHOTO 
+	    ,A.TLAT     TLAT 
+	    ,A.TLNG     TLNG 
+	    ,A.PROPOSE      PROPOSE 
+	    ,A.DELETEYN DELETEYN
+	    ,A.INSERTDATE INSERTDATE
+	    ,A.UPDATEDATE UPDATEDATE
+	    
+	FROM TRADEMAP A
+	
+	WHERE 	A.DELETEYN = 'Y'
+	AND A.TWRITER = #{TWRITER, jdbcType=VARCHAR} 
+</select>
+
+
 <select id="selectTrade" parameterType="MapTradeVO" resultType="MapTradeVO">	
 	SELECT
 	    A.TNO       TNO

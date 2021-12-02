@@ -60,16 +60,7 @@
 	let 	jsonData;
 	let		load = 0; // JSON Data 로드 체크
 	
-	
-	let date = new Date('YYYY-MM-DDTHH:MM:SS');
-	console.log(date);
-
-	
-	
-
-	
-	
-				
+		
 //-------------------------------------------------------------------------------------
 // Set Popup Overlay
 
@@ -103,7 +94,7 @@ let content ='<form id="popup" class="popup">'
 +		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
 +		'<li><label for="dogs"><i class="fas fa-dog"></i></i>&nbsp;돌 볼 반려동물</label><select class="form-control" id="dogs">'
 +			'<option>등록된 반려동물 표시</option></select></li>'
-+		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when" name="when" placeholder="맡기실 기간을 입력해주세요.">'
++		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when_1" name="when_1" placeholder="맡기실 기간을 입력해주세요.">'
 + 			' <i class="fas fa-bone fa-2x"></i><input type="datetime-local" class="form-control" id="when_2" name="when_2"></div></li>'
 +		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
 +		'<li><label for="content"><i class="fas fa-envelope-open-text"></i>&nbsp;상세 사항</label><textarea class="form-control" id="content" name="content" rows="3" placeholder="돌봄 시 필요한 사항을 적어주세요."></textarea></li>'
@@ -132,9 +123,45 @@ customOverlay.setMap(map);
 const overlaybox = document.getElementById("overlaybox");
 overlaybox.classList.add("hidden");
 
+function addTime (str, time) {
+	
+	// str = h 시간// m 분
+	// time 더 할 시간
+	let nowDate = new Date();
+	
+	let month = nowDate.getMonth() + 1;
+	
+	if (str == 'm') {
+		nowDate.setMinutes(nowDate.getMinutes() + time);
+	}
+	
+	if (str == 'h') {
+		nowDate.setHours(nowDate.getHours() + time);
+	}
+	
+	let year = nowDate.getFullYear();
+		month = month.toString().padStart(2, '0');
+	let date = nowDate.getDate().toString().padStart(2, '0');
+	let hours = nowDate.getHours().toString().padStart(2, '0');
+	let minutes = nowDate.getMinutes().toString().padStart(2, '0');
+
+	
+	nowDate =  year + '-' + month + '-' + date + 'T' + hours + ':' + minutes;
+	
+	console.log(nowDate);
+	
+	return nowDate;
+	
+}
+
+
+
 // 날짜 세팅
-const when_1 = document.getElementById('when');
-when_1.value = '';
+const when_1 = document.getElementById('when_1');
+const when_2 = document.getElementById('when_2');
+
+
+
 
 //----------------------------------------------------------------------------------
 $(document).ready(function(){
@@ -417,6 +444,14 @@ function searchAddrFromCoords(coords, callback) {
 				        message += '\n경도 : ' + latlng.getLng();
 				        
 				        console.log(message);
+				        
+				        // 시간 설정
+				        let startDate = addTime('m', 30); // 30분
+						let endDate = addTime('h', 3); // 3시간
+				        when_1.value = startDate;
+						when_1.setAttribute('min', startDate);
+						when_2.value = endDate;
+						when_2.setAttribute('min', endDate);
 				    	
 						 // 지도 이동 및 축소 제한
 				    	 moveable = false;

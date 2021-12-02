@@ -25,14 +25,6 @@
 		
 		int nCnt = list.size();
 		System.out.println("nCnt >>> : " + nCnt);
-		
-		/* 
-		Object objID = request.getAttribute("listId");
-		List<ReviewVO> listid = (List)objID;
-		
-		int nCntID = listid.size();
-		System.out.println("nCntID >>> : " + nCntID);
-		 */
 	%>
 
 	<style>
@@ -46,24 +38,6 @@
 	.trcon:hover{background:#d3d3d3;}
 	
 	</style>
-	
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript">
-	
-	$(document).ready(function(){
-		 
-		// 검색버튼
-		
-		$(document).on("click", "#searchBtn", function(){
-			alert("searchBtn >>> : ");
-			$("#RevieList").attr({"method":"GET"
-								 ,"action":"reviewSelectAll.wd"}).submit();
-		});
-		 
-	});
-	
-	</script>
-	
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
@@ -81,9 +55,8 @@
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
 				
-				<main style="margin:0 auto; width:960px;height:900px;background:#fff;">
-				<form name="RevieList" id="RevieList">
-				
+				<main>
+				<form action="reviewSelect.wd" method="GET" name="RevieList" id="RevieList">
                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
                         <div class="container-xl px-4">
                             <div class="page-header-content pt-4">
@@ -96,15 +69,16 @@
                             </div>
                         </div>
                     </header>
-                    
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
                         <div class="card mb-4">
                             <div class="card-header">돌봄의 후기들</div>
                             <div class="card-body">
+                            	
+                                
+                                <table id="datatablesSimple"style="width:100%;text-align:center;border:1px solid #d3d3d3;border-radius: 100px;">
                                 <input type="hidden" id="crnum" name="crnum"/>
-                                <table id="datatablesSimple" style="width:100%;text-align:center;border:1px solid #d3d3d3;border-radius: 100px;">
-
+                                	
                                     <thead>
                                         <tr style="background:#194ae8;">
                                             <th  style="color:#fff;">글번호</th>
@@ -115,24 +89,14 @@
                                         </tr>
                                     </thead>
                                    <%
-                                   if(nCnt >= 0 ){
+                                   
 									for(int i=0; i<nCnt; i++){		
 										ReviewVO rvo = list.get(i);	
-										
 										pageSize = Integer.parseInt(reviewPagingBVO.getPageSize());
 										groupSize = Integer.parseInt(reviewPagingBVO.getGroupSize());
 										curPage = Integer.parseInt(reviewPagingBVO.getCurPage());
 										totalCount = Integer.parseInt(rvo.getTotalCount());
 										
-										/* 
-										for(int j=0; i<nCntID ; j++){
-											ReviewVO rvo_ = listid.get(j);
-											
-											pageSize = Integer.parseInt(reviewPagingBVO.getPageSize());
-											groupSize = Integer.parseInt(reviewPagingBVO.getGroupSize());
-											curPage = Integer.parseInt(reviewPagingBVO.getCurPage());
-											totalCount = Integer.parseInt(rvo.getTotalCount());
-										 */
 									%>		
                                     <tbody>
                                     	
@@ -152,37 +116,27 @@
                                         </tr>
                                     
                                    <%
-											
-                                    		//} // end of for
-										} 
-                                   }
+                                    		} // end of for
                                    %>
                                    </tbody>
                                 </table>
                                
                             </div>
                         </div>
-                       
-                        <div style="float:right;">
-							<a href="reviewInsertForm.wd"><button class="btn btn-primary me-2 my-1" type="button" id="I" style="float:right;">글쓰기</button></a>
-                        	<button type="button" id="searchBtn" class="btn btn-primary me-2 my-1" style=" float:right;margin-left:10px;">검색</button>
-                        	<input type="text" id="keyword" name="keyword" class="dataTable-input" placeholder="돌봄이 찾기" style="width:50%; float:right;margin-top:3px;">
-                        </div>
                         <div>
-	                       <div>
-	                       <div>
-	                       		<jsp:include page="reviewPaging.jsp" flush="true">
-									<jsp:param name="url" value="reviewSelectAll.wd"/>
-									<jsp:param name="str" value=""/>
-									<jsp:param name="pageSize" value="<%=pageSize%>" />
-									<jsp:param name="groupSize" value="<%=groupSize%>"/>
-									<jsp:param name="curPage" value="<%=curPage%>"/>
-									<jsp:param name="totalCount" value="<%=totalCount%>"/>
-								</jsp:include>
-							</div>
-							</div>
-                        </div> 
-                       
+                        	<input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br>
+							<input type="text" id="startdate" name="startdate" size="12" placeholder="시작일 ">
+							~ <input type="text" id="enddate" name="enddate" size="12" placeholder="종료일">
+                        	<a href="reviewInsertForm.wd"><button class="btn btn-primary me-2 my-1" type="button" id="I" style="float:right;">글쓰기</button></a>
+                        </div>
+                       <jsp:include page="reviewPaging.jsp" flush="true">
+							<jsp:param name="url" value="reviewSelectPaging.wd"/>
+							<jsp:param name="str" value=""/>
+							<jsp:param name="pageSize" value="<%=pageSize%>"/>
+							<jsp:param name="groupSize" value="<%=groupSize%>"/>
+							<jsp:param name="curPage" value="<%=curPage%>"/>
+							<jsp:param name="totalCount" value="<%=totalCount%>"/>
+						</jsp:include>
                     </div>
                     </form>
                 </main>

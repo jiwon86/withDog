@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import a.b.c.com.member.vo.Member;
 import a.b.c.com.review.dao.ReviewDAO;
 import a.b.c.com.review.dao.ReviewDAOImpl;
 import a.b.c.com.review.vo.ReviewVO;
@@ -36,14 +37,14 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List selectReview(ReviewVO rvo) {
+	public List<ReviewVO> selectReview(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewServiceImpl selectReview() 함수진입 >>> ");
 		return reviewDAO.selectReview(rvo);
 	}
 
 	@Override
-	public List selectAllReview(ReviewVO rvo) {
+	public List<ReviewVO> selectAllReview(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewServiceImpl selectAllReview() 함수진입 >>> ");
 		return reviewDAO.selectAllReview(rvo);
@@ -60,7 +61,30 @@ public class ReviewServiceImpl implements ReviewService {
 	public int deleteReview(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewServiceImpl deleteReview() 함수진입 >>> ");
-		return 0;
+		return reviewDAO.deleteReview(rvo);
+	}
+	
+	// 아이디 검색 페이징
+	@Override
+	public List<ReviewVO> reviewSelectAllserch(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("ReviewServiceImpl reviewSelectAllserch() 함수진입 >>> ");
+		return reviewDAO.reviewSelectAllserch(rvo);
+	}
+	
+	// 후기게시판 해당 아이디만 나오게 전체조회
+	@Override
+	public List<ReviewVO> reviewIDlist(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("ReviewServiceImpl reviewIDlist() 함수진입 >>> ");
+		return reviewDAO.reviewIDlist(rvo);
 	}
 
+	@Override
+	public List<Member> selectRwriter(ReviewVO rvo) {
+		// TODO Auto-generated method stub
+		logger.info("ReviewServiceImpl selectRwriter() 함수진입 >>> ");
+		return reviewDAO.selectRwriter(rvo);
+	}
+	
 }

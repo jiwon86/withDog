@@ -78,7 +78,6 @@ public class MemberController {
 		
 		if(principal != null) {
 			String mid = principal.getName();
-			
 			Member member = memberService.memberSelect(mid);
 			model.addAttribute("member", member);
 		}

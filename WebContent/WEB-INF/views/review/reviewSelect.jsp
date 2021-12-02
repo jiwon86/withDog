@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="a.b.c.com.review.vo.ReviewVO" %>
+<%@ page import="a.b.c.com.member.vo.Member" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,7 +19,14 @@
 			rvo = list.get(0);
 		};
 	%>
+	<% request.setCharacterEncoding("UTF-8"); 
+		String mid = (String)request.getAttribute("mid");
+		System.out.println(mid);
+	%>
+	<%
+		Member member = (Member)request.getAttribute("member");
 	
+	%>
 	<style>
 	
 	/*.str{background:url('/image/review/star.png');width:500px;height:500px;}*/
@@ -74,17 +83,27 @@
 	
 		$(document).ready(function(){
 			
-		// U 업데이트 부분
-		$(document).on("click", "#U", function(){
+			// 업데이트 부분
+			$(document).on("click", "#U", function(){
+				
+				$("#RevieList").attr({
+					"method":"GET",
+					"action":"reviewUpdateForm.wd"
+				}).submit();
+				
+			});
 			
-			alert("U");
-			
-			$("#RevieList").attr({
-									"method":"GET",
-									"action":"reviewUpdateForm.wd"
-			}).submit();
-			
-		});
+			// 삭제 부분
+			$(document).on("click", "#D", function(){
+				
+				alert("후기가 삭제됐습니다.");
+				
+				$("#RevieList").attr({
+					"method":"GET",
+					"action":"reviewDelete.wd"
+				}).submit();
+				
+			});
 			
 		});
 	
@@ -92,31 +111,20 @@
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
-	<%-- <% request.setCharacterEncoding("UTF-8"); %>
-	<%
-	
-		Object obj = request.getAttribute("listAll");
-		List<ReviewVO> list = (List)obj;
-		
-		int nCnt = list.size();
-		System.out.println("nCnt >>> : " + nCnt);
-	
-	%> --%>
-	
 		<!-- 헤더 -->
-		<%@ include file="/WEB-INF/views/fragment/header.jsp" %>
+		<jsp:include page="/header.wd" />
 		<!-- /헤더 -->
 
 		
         <div id="layoutSidenav">
 			<!-- 사이드바 -->
-			<%@ include file="/WEB-INF/views/fragment/sidebar.jsp" %>
+			<jsp:include page="/sidebar.wd" />
 			<!-- /사이드바 -->
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
 				
-				<main>
+				<main style="margin:0 auto; width:960px;background:#fff;">
 				
                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
                         <div class="container-xl px-4">
@@ -153,14 +161,17 @@
                             <form name="RevieList" id="RevieList">
                                 <div class="card mb-4" >
                                 	<input type="hidden" id="crnum" name="crnum" value=<%=rvo.getCrnum() %> />
-                                	<input type="hidden" id="cnum" name="cnum" />
                                     <div class="card-header">제목</div>
                                     <div class="card-body">
-                             			<div class="lh-base form-control"><%=rvo.getCrsubject() %></div>
+                             			<input class="lh-base form-control" style="background:#fff;" value="<%=rvo.getCrsubject() %>" disabled />
                                     </div>
-                                    <div class="card-header">작성자</div>
+                                    <div class="card-header">돌봄이</div>
                                     <div class="card-body">
-                             			<div class="lh-base form-control"><%=rvo.getCrwriter() %></div>
+                             			<input class="lh-base form-control" type="text" id="mid" name="mid" value="<%=rvo.getMid() %>" disabled/>
+                                    </div>
+                                     <div class="card-header">작성자</div>
+                                    <div class="card-body">
+                             			<input type="text" id="rwriter" name="rwriter" class="lh-base form-control" style="width:100%" value="<%=rvo.getRwriter() %>" disabled/>
                                     </div>
                                     <div class="card-header">평점</div>
                                     <span class="strcon">
@@ -176,22 +187,22 @@
 									</span>
                                     <div class="card-header">후기내용</div>
                                     <div class="card-body">
-                                    	<div class="lh-base form-control" name="crmemo" id="crmemo" style="height:100%;" ><%=rvo.getCrmemo() %></div>
+                                    	<textarea class="lh-base form-control" type="text" name="crmemo" id="crmemo" rows="10" disabled style="background:#fff;"><%=rvo.getCrmemo() %></textarea>
                                     </div>
-                                    <!-- 
-                                    <div class="card-body">
-                                    	<div style="margin-top:-25px;">
-                                    		<span style="float:right;">신고하기</span>
-                                    		<input type="checkbox" value="신고하기" name="crreport" id="crreport" style="float:right;margin-top:3px;margin-right:5px;width:15px;height:15px;">
-                                    	</div>
-                                    </div>
-                                     -->
+                                    
+                                    
                                 </div>
-                                <div>
-                                	<button class="btn btn-primary" type="submit" id="U" style="width:49.6%;float:left;margin-right:5px;">수정하기</button>
-                                	<button class="btn btn-primary" type="submit" id="D" style="width:49.6%;float:left;">삭제하기</button>
-                                </div>
+                               
                                 </form>
+                                
+                               	<%-- <sec:authorize access="hasRole('ROLE_ADMIN')"> --%>
+                                <div>
+                              
+                                	<button class="btn btn-primary" type="submit" id="U" style="width:49.6%;float:left;margin-right:4px;">수정하기</button>
+                                	<button class="btn btn-primary" type="submit" id="D" style="width:49.6%;float:left;">삭제하기</button>
+                                
+                                </div>
+                                <%-- </sec:authorize> --%>
                                 <a href="reviewSelectAll.wd"><button class="btn btn-primary mt-2" type="button" style="width:100%;">목록보기</button></a>
                             </div>
                         </div>
@@ -203,7 +214,7 @@
 				<!-- ** /주요 내용 ** -->
 				
 				<!-- 바닥글 -->
-				<%@ include file="/WEB-INF/views/fragment/footer.jsp" %>
+				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->
                 
             </div>

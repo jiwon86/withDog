@@ -66,7 +66,8 @@
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
         	
         	<%
-        		Member member = (Member)request.getAttribute("member");
+        	Member member = (Member)request.getAttribute("member");
+	        	
         	%>
         	
         	<!-- 로그인 -->

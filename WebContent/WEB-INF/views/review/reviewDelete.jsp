@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>review update</title>
+<title>review insert</title>
 </head>
 <body>
-review update
+review insert
 <hr>
 <script>
 	location.href="reviewSelectAll.wd";

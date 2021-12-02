@@ -146,7 +146,6 @@
 				<!-- ** 주요 내용 **  -->
 				<%
 					Member member = (Member)request.getAttribute("member");
-				
 					String mroadaddress = member.getMroadaddress();
 					String[] mroadaddressArr = mroadaddress.split("@");
 					String mphoto = member.getMphoto();
@@ -170,10 +169,11 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
+                            <a class="nav-link active ms-0" href="/profile.wd">Profile</a>
                             <a class="nav-link" href="myPetList.wd">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
+                            <a class="nav-link" href="myReviewList.wd">MyReview</a>
                         </nav>
                         <hr class="mt-0 mb-4" />
                         

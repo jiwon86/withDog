@@ -88,11 +88,11 @@
              <label class="small mb-1" for="qnatitle">글 제목</label>
              <input class="form-control" id="qnatitle" name="qnatitle" type="text" placeholder="Please enter title" />
          </div>
-         <!-- Form Group (qnawriter)-->
+         <!-- Form Group (qnawriter)
          <div class="mb-3">
              <label class="small mb-1" for="qnawriter">작성자</label>
              <input class="form-control" id="qnawriter" name="qnawriter" type="text" placeholder="Please enter your name" />
-         </div>
+         </div>-->
          <!-- Form Group (qnacon)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnacon">글 내용</label>

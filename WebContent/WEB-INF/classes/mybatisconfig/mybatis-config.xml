@@ -14,10 +14,6 @@
 		<typeAlias type="a.b.c.com.notice.vo.NoticeVO" alias="NoticeVO" />
 		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
 		
-<<<<<<< HEAD
 		<typeAlias type="a.b.c.com.park.vo.ParkVO" alias="ParkVO"/>
-=======
-		
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	</typeAliases>
 </configuration>

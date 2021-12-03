@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page import="a.b.c.com.qna.vo.QnaVO" %>
 <%@ page import="java.util.List" %>
 <%-- 
@@ -21,7 +22,7 @@
 		//Back to SelectAll
 		$(document).on("click", "#Backbtn", function(){
 			$("#qnaSeeForm").attr({"method":"GET",
-								   "action":"qnaSelectAll.wd"}).submit(); //cotroller qnaSelectAll로이동
+								   "action":"qnaSelectAllPaging.wd"}).submit(); 
 		});
 	});
 	
@@ -80,9 +81,9 @@
  <!-- Main page content-->
 <div class="container-xl px-4 mt-4">
 
-<nav class="nav nav-borders">
+<!-- <nav class="nav nav-borders">
     <a class="nav-link active" href="account-security.html">sd</a>
-</nav>
+</nav> -->
 
 <hr class="mt-0 mb-4" />
 
@@ -93,21 +94,6 @@
  <div class="card-body">
 
      <form name="qnaSeeForm" id="qnaSeeForm" name="qnaSeeForm">
-<%--      
-     	<script>
-     		function compCheck(){
-     			console.log("compCheck 진입 >>> : ");
-     			
-     			//QnaAnswer
-     			var ans = '<%= qnaanswer %>';
-     			if('01 == ans'){
-     				document.getElementssByName("qnaanswer")[0].check=true;
-     			}
-     			if('2 == ans'){
-     				document.getElementssByName("qnaanswer")[1].check=true;
-     			}
-     		}
-     	</script> --%>
      	
         <!-- Form Group (qnanum)-->
          <div class="mb-3">
@@ -117,12 +103,12 @@
          <!-- Form Group (qnatitle)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnatitle">글 제목</label>
-             <input class="form-control" id="qnatitle" name="qnatitle" type="text" value=<%=qvo.getQnatitle()%> placeholder="Please enter title" />
+             <input class="form-control" id="qnatitle" name="qnatitle" type="text" value=<%=qvo.getQnatitle()%> placeholder="Please enter title" readonly/>
          </div>
          <!-- Form Group (qnawriter)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnawriter">작성자</label>
-             <input class="form-control" id="qnawriter" name="qnawriter" type="text" value=<%=qvo.getQnawriter()%> placeholder="Please enter your name" />
+             <input class="form-control" id="qnawriter" name="qnawriter" type="text" value=<%=qvo.getQnawriter()%> placeholder="Please enter your name" readonly/>
          </div>
          <!-- Form Group (qnacon)-->
          <div class="mb-3">
@@ -143,13 +129,14 @@
         
         </form>
     </div>
-</div>
-<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 x -->
+
  <!-- url붙여서 댓글 가져오기 -->
  <c:import url="/rqnaForm.wd">
 	<c:param name="qnanum" value="<%=qvo.getQnanum()%>"></c:param>
 </c:import>	
-</sec:authorize>       
+
+
+</div>
 </main>				
 			<!-- ** /주요 내용 ** -->
 				

@@ -80,7 +80,6 @@ public class QnaController {
 		_qvo.setQnafile(fu.getParameter("qnafile"));
 		int nCnt = qnaService.qnaInsert(_qvo);	
 		
-		
 		if(nCnt > 0) {return "qna/qnaInsert";}
 		
 		return "qna/qnaSelectAllForm";
@@ -108,29 +107,14 @@ public class QnaController {
 		qvo.setCurPage(String.valueOf(curPage));
 		qvo.setTotalCount(String.valueOf(totalCount));
 		
-		/*
-		 * logger.info("QnaController qnaSelectAllPaging qvo.getPageSize() >>> : " +
-		 * qvo.getPageSize());
-		 * logger.info("QnaController qnaSelectAllPaging qvo.getGroupSize() >>> : " +
-		 * qvo.getGroupSize());
-		 * logger.info("QnaController qnaSelectAllPaging qvo.getCurPage() >>> : " +
-		 * qvo.getCurPage());
-		 * logger.info("QnaController qnaSelectAllPaging qvo.getTotalCount() >>> : " +
-		 * qvo.getTotalCount());
-		 */
 		List<QnaVO> listAll = qnaService.qnaSelectAllPaging(qvo);
 		QnaVO sqsvo = (QnaVO)listAll.get(0);
-		System.out.println("ssss :  "+sqsvo.getQnanum());
 		logger.info("QnaController qnaSelectAllPaging listAll.size() >>> : " + listAll.size());
 		
 		if(listAll.size()>0) {
 			
 			for(int i=0; i<listAll.size(); i++) {
 				QnaVO sqvo = (QnaVO)listAll.get(i);
-				//logger.info("listAll ::: sqvo.getPageSize() >>> : " + sqvo.getPageSize());
-				//logger.info("listAll ::: sqvo.getGroupSize() >>> : " + sqvo.getGroupSize());
-				//logger.info("listAll ::: sqvo.getCurPage() >>> : " + sqvo.getCurPage());
-				//logger.info("listAll ::: sqvo.getTotalCount() >>> : " + sqvo.getTotalCount());
 				System.out.println(sqvo.getQnanum());
 			}
 			

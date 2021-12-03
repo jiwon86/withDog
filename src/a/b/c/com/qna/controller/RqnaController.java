@@ -1,5 +1,6 @@
 package a.b.c.com.qna.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -38,8 +39,8 @@ public class RqnaController {
 	//댓글등록
 	@RequestMapping(value="rqnaInsert", method=RequestMethod.POST)
 	@ResponseBody
-	public String rqnaInsert(RqnaVO rqvo) {
-		logger.info("RqnaController rqnaInsert >>> : ");
+	public String rqnaInsert(RqnaVO rqvo, Principal principal) {
+		//logger.info("RqnaController rqnaInsert >>> : ");
 		logger.info("RqnaController rqnaInsert rqvo.getQnanum() >>> : " + rqvo.getQnanum());
 		logger.info("RqnaController rqnaInsert rqvo.getRqnacon() >>> : " + rqvo.getRqnacon());
 		
@@ -47,6 +48,7 @@ public class RqnaController {
 		logger.info("RqnaController rqnaInsert rqnanum >>> : " + rqnanum);
 		
 		rqvo.setRqnanum(rqnanum);
+		rqvo.setRqnawriter(principal.getName());
 		int nCnt = rqnaService.rqnaInsert(rqvo);
 		logger.info("RqnaController rqnaInsert nCnt >>> : " + nCnt);
 		

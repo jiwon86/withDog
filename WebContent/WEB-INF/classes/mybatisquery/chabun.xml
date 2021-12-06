@@ -11,7 +11,6 @@
 	<select id="getRqnaChabun" resultType="RqnaVO">
 		SELECT NVL(MAX(SUBSTR(A.RQNANUM, -4)), 0) + 1 RQNANUM FROM RQNA A
 	</select>
-	
 
 	<select id="getPetChabun" resultType="Pet">
 		SELECT NVL(MAX(SUBSTR(A.PNO, -4)), 0) + 1 PNO FROM PET A
@@ -25,9 +24,16 @@
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
 	</select>
 
+
 	<select id="getParkChabun" resultType="ParkVO">
 		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 
 	</select>
+
+	
+	<select id="getRparkChabun" resultType="RparkVO">
+		SELECT NVL(MAX(SUBSTR(A.RINUM, -4)),0) + 1 RINUM FROM DOG_RPARK A 
+	</select>
+
 
 	<select id="getNoticeChabun" resultType="NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNUM, -4)), 0) + 1 NNUM FROM NOTICE A

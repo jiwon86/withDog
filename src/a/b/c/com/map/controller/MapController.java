@@ -15,8 +15,10 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
@@ -24,6 +26,10 @@ import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.map.service.MapService;
 import a.b.c.com.map.vo.MapTradeVO;
+import a.b.c.com.member.service.MemberService;
+import a.b.c.com.member.vo.Member;
+import a.b.c.com.pet.service.PetService;
+import a.b.c.com.pet.vo.PetVO;
 
 
 @Controller
@@ -32,23 +38,34 @@ public class MapController {
 	// Log Set
 	private Logger logger = Logger.getLogger(MapController.class);
 	private MapService mapService;
+	private MemberService memberService;
 	private ChabunService chabunService;
+	private PetService petService;
 	
 	@Autowired(required=false)	
-	public MapController (MapService mapService ,ChabunService chabunService) {
+	public MapController (MapService mapService ,ChabunService chabunService, MemberService memberService, PetService petService) {
 		this.mapService = mapService;
 		this.chabunService = chabunService;
+		this.memberService = memberService;
+		this.petService = petService;
 	}
 	
 	@RequestMapping("/withmap")
-	public String withmap(Principal principal) {
+	public String withmap(Principal principal, Model model) {
 		logger.info("MapController ------ withmap() ");
+
 		try {
+			
 			String mid = principal.getName();
+			Member member = memberService.memberSelect(mid);
+			model.addAttribute("member", member);
+			
+			
 		}catch (Exception e) {
+			logger.info(e.getMessage());
 			return "member/loginForm";
 		}
-		
+
 		//logger.info("member 아이디 >>> : " + mid);
 		return "map/withmap";
 	}
@@ -72,6 +89,7 @@ public class MapController {
 	}
 	
 	@RequestMapping("/setmarkers")
+	@ResponseBody
 	public String setmarkers(MapTradeVO mvo) {
 		
 		List<MapTradeVO> listall = mapService.setMarkers(mvo);
@@ -121,7 +139,7 @@ public class MapController {
 		}
 		
 		
-		return "map/withmap";
+		return "success";
 	}
 	
 	@SuppressWarnings("unused")
@@ -199,6 +217,44 @@ public class MapController {
 		model.addAttribute("loginid" ,mid);
 		
 		return "map/selectTrade";
+	}
+	
+	@RequestMapping(value="/petlist_id",produces="application/text; charset=UTF-8")
+	@ResponseBody
+	public String petlistid (PetVO pvo, HttpServletRequest req) {
+		String mno = req.getParameter("mno");
+		
+		
+		System.out.println("mno :::::    "+mno);
+		pvo.setMno(mno);
+		List<PetVO> listAll = petService.petSelectAll(pvo);
+		
+		// JSON SET
+		JSONObject jObj = null;
+		JSONArray jArr = new JSONArray();
+
+		try {
+			
+			for (int i = 0; listAll.size() > i; i++) {
+				jObj = new JSONObject();
+
+				PetVO pvo_ = listAll.get(i);
+				jObj.put("pno", pvo_.getPno());
+				jObj.put("pname", pvo_.getPname());
+				jArr.add(jObj);
+			}
+
+			// JOSN FILE IO SET
+			String josnStr = jArr.toString();
+			System.out.println(josnStr);
+
+		} catch (Exception e) {
+			System.out.println("에러" + e.getMessage());
+		}
+
+		String josnStr = jArr.toString();
+
+		return josnStr;
 	}
 	
 	

@@ -4,21 +4,25 @@
 		  
 <configuration>
 	<typeAliases>
+		<!-- Member -->
 		<typeAlias type="a.b.c.com.member.vo.Member" alias="Member" />
 		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />	
-
+		
+		<!-- Qna -->
 		<typeAlias type="a.b.c.com.qna.vo.QnaVO" alias="QnaVO" />	
 		<typeAlias type="a.b.c.com.qna.vo.RqnaVO" alias="RqnaVO" />
-
+		
+		<!-- Map -->
 		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
-		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />
+		
+		<!-- Notice -->
 		<typeAlias type="a.b.c.com.notice.vo.NoticeVO" alias="NoticeVO" />
+		
+		<!-- Pet -->
 		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
 		
-<<<<<<< HEAD
+		<!-- Park -->
 		<typeAlias type="a.b.c.com.park.vo.ParkVO" alias="ParkVO"/>
-=======
-		
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 	</typeAliases>
 </configuration>

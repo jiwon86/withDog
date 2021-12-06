@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="a.b.c.com.member.vo.Member"%>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -30,7 +31,11 @@
 				<script type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f59b335fdce7811c29ddb73572e2a37b&libraries=services"></script>
 				<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-								
+<%
+	Member member = (Member)request.getAttribute("member");
+%>
+
+						
 				<script>
 				<!--MAP API SET-->
 				const container = document.getElementById('map');
@@ -59,6 +64,7 @@
 	let		wmark;
 	let 	jsonData;
 	let		load = 0; // JSON Data 로드 체크
+	let 	petinfo;
 	
 		
 //-------------------------------------------------------------------------------------
@@ -93,7 +99,7 @@ let content ='<form id="popup" class="popup">'
 +	'<ul class="list">'	
 +		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
 +		'<li><label for="dogs"><i class="fas fa-dog"></i></i>&nbsp;돌 볼 반려동물</label><select class="form-control" id="dogs">'
-+			'<option>등록된 반려동물 표시</option></select></li>'
++			'</select></li>'
 +		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when_1" name="when_1" placeholder="맡기실 기간을 입력해주세요.">'
 + 			' <i class="fas fa-bone fa-2x"></i><input type="datetime-local" class="form-control" id="when_2" name="when_2"></div></li>'
 +		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
@@ -105,7 +111,6 @@ let content ='<form id="popup" class="popup">'
 +		'<li><button class="btn btn-primary smit" type="button" id="submit">신청 하기</button></li>'
 +'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
 +'			<input type="hidden" id="lng" name="lng" value=""></input>'	
-
 +'</ul></div>'
 +'</div></form>';
 
@@ -115,6 +120,8 @@ const customOverlay = new kakao.maps.CustomOverlay({
     content: content  
 });
 
+
+
 // 커스텀 오버레이를 생성 한다.
 customOverlay.setMap(map);
 
@@ -123,6 +130,8 @@ customOverlay.setMap(map);
 const overlaybox = document.getElementById("overlaybox");
 overlaybox.classList.add("hidden");
 
+
+// 시간을 관리하는 함수
 function addTime (str, time) {
 	
 	// str = h 시간// m 분
@@ -159,6 +168,8 @@ function addTime (str, time) {
 // 날짜 세팅
 const when_1 = document.getElementById('when_1');
 const when_2 = document.getElementById('when_2');
+// 반려동물 리스트
+const dogs = document.getElementById('dogs');
 
 
 
@@ -171,49 +182,63 @@ $(document).ready(function(){
 	// 위치 불러오기
 	getlocation();
 	
-	$('#submit').click(function(){
+	$('#submit').click(function(){	
+		// 게시글 등록
+	    const form = $('#popup')[0];  	          
+	    let Lat = latlng.getLat();
+	    let Lng = latlng.getLng();
+	    
+		document.getElementById("lat").value = Lat;
+		document.getElementById("lng").value = Lng;
+		let formdata = new FormData(form);
+    
+		console.log(Lat);
+		console.log(Lng);
 	
-	// Create an FormData object 
-    const form = $('#popup')[0];  	    
-             
-   
-
-    let Lat = latlng.getLat();
-    let Lng = latlng.getLng();
-    
-	document.getElementById("lat").value = Lat;
-	document.getElementById("lng").value = Lng;
-	let formdata = new FormData(form);
-    
-	console.log(Lat);
-	console.log(Lng);
-
-		$.ajax({			
-			url : 'mapTradeInsert.wd',		
-			type : 'post',
-			enctype : "multipart/form-data",
-			processData: false,    
-	        contentType: false,
-			data : formdata,
-		    success: function (data){
-		        alert("데이터전송 성공");
-		        submitPopup();
-		    },
-		    error: function (error){
-		        alert("에러");
-		        hidePopup();
-		    }
-		}); // end of ajax()
+			$.ajax({			
+				url : 'mapTradeInsert.wd',		
+				type : 'post',
+				enctype : "multipart/form-data",
+				processData: false,    
+		        contentType: false,
+				data : formdata,
+			    success: function (data){
+			        alert("데이터전송 성공");
+			        submitPopup();
+			    },
+			    error: function (error){
+			        alert("에러");
+			        hidePopup();
+			    }
+			}); // end of ajax()
 	});
+	
+	// 멤버 번호를 가져옴
+	let mno = "mno="+'${member.mno}';
+	// 펫정보 가져오기
+	$.ajax({			
+		url : 'petlist_id.wd',		
+		type : 'get',
+		data : mno,
+		
+		dataType : 'json',
+		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+	    success: function (data){
+	    	console.log(data);
+	    	petinfo = data;
+	    	// 반려동물 리스트	
+	    	for (i=0; i < petinfo.length; i++) {
+	    		dogs.innerHTML += "<option>"+petinfo[i].pname+"</option>";
+	    	}
+	    },
+	    error: function (error){
+	        alert(error.toString());
+	    }
+	}); // end of ajax()
+	
 });
 
-$('#when').change(function(){
-	console.log($('#when').val);
-	console.log(when_1.value);
-});
-
-
-
+// 마커의 대한 json data를 가져온다
 function markersjson (x) {
 	//MARKER DB -> JSON 최신화
 	// x = 1 처음 실행
@@ -221,9 +246,8 @@ function markersjson (x) {
 	$.ajax({			
 				url : 'setmarkers.wd',		
 				type : 'get',			
-				data : {},
 				success: function (data){
-					console.log("json data 동기화 ");
+					console.log("JSON DATA 동기화 : " + data);
 					setTimeout(function() {markersLoad(x);}, 500); // 0.5초 뒤에 함수를 실행 시킴
 				}
 				,error: function (error){ alert("에러"); }
@@ -484,22 +508,15 @@ function searchAddrFromCoords(coords, callback) {
 						 const markerImage = new kakao.maps.MarkerImage(gifSrc, gifSize, gifOption);
 						    
 						 // 지도를 클릭한 위치에 표출할 마커입니다
-						    
 						 wmark = new kakao.maps.Marker({ 
 						    	position : latlng,
 						    	image : markerImage
 						    }); 
 						 wmark.setMap(map);
-
 						 pop = true;
-
-				    }
-				      
+				    }				      
 				});
-				
-
-
-				
+		
 				</script>			
 		</main>
 

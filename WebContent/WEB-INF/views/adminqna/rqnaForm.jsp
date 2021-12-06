@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +87,7 @@
 		
 		//댓글 삭제
 		$(document).on("click", ".deleteBtn", function(){
-			alert("댓글을 삭제하시겠습니까? ");
+			alert("D >>> : ");
 			
 			var rqnanum = $(this).parents("li").attr("dataNum");
 			var target = $(this).parents(".rbmemoItem");
@@ -209,7 +208,7 @@
 	}
 	
 	//댓글길이 체크--------------------------------------
-	//한글 포함 문자열 길이
+	//한글 포함 문자열 실이
 	function getTextLength(s){
 		var len =0;
 		for(var i=0; i<s.length; i++){
@@ -249,7 +248,7 @@
 </script>
 </head>
 <body>
-<div class="card-header">답변</div>
+rqnaForm : 답변
 <hr>
 <%request.setCharacterEncoding("UTF-8"); %>
 <%
@@ -259,28 +258,25 @@
 <div id="rqnawriterdiv">
 <form name="rqnaForm" id="rqnaForm">
 <table>
-<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
 <tr>
 	<td>작성자</td>
 	<td>
 		<input type="text" name="rqnatitle" id="rqnatitle"/>
-		<input type="hidden" name="qnanum" id="qnanum" value="<%= qnanum %>" />
-		<input type="hidden" name="rqnanum" id="rqnanum" />
+		<input type="hidden" name="qnanum" id="qnanum" value="<%=qnanum %>">
+		<input type="hidden" name="rqnanum" id="rqnanum">
 	</td>
 </tr>
-</sec:authorize>
-<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
+
 <tr>
 	<td>덧글내용</td>
 	<td>
 		<textarea name="rqnacon" id="rqnacon" rows=5 cols="50" style="resize: none"></textarea>
-		<!-- <div><span class="bytes">0</span>bytes</div> -->
+		<div><span class="bytes">0</span>bytes</div>
 		<div style="text-align:right">
             <button class="btn btn-primary" type="button" align="right" id="SAVEbtn" name="SAVEbtn">SAVE</button>
          </div>
 		</td>
 	</tr>
-</sec:authorize>
 </table>
 <hr>
 <ul name="rqnalist" id="rqnalist">

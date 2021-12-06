@@ -12,7 +12,7 @@ Q&A DELETE
 <script>
 	alert("삭제되었습니다.");
 	console.log("삭제되었습니다.");
-	location.href="qnaSelectAll.wd";
+	location.href="qnaSelectAllForm.wd";
 </script>
 
 </body>

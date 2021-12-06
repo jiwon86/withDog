@@ -28,5 +28,6 @@
 			<value>a.b.c.com.**.dao</value>
 		</property>
 	</bean>
+	
 
 </beans>

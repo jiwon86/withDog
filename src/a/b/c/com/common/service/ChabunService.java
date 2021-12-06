@@ -1,6 +1,6 @@
 package a.b.c.com.common.service;
-import a.b.c.com.pet.vo.PetVO;
 
+import a.b.c.com.pet.vo.PetVO;
 import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
@@ -30,7 +30,6 @@ public interface ChabunService {
 	public ParkVO getParkChabun();
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
-	
 	
 	public NoticeVO getNoticeChabun();
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.park.dao.ParkDAO">
+
+<!-- 
+	<resultMap type="ParkVO" id="pvo">
+		<id property="iid" column="iid" />
+		
+		<result property="iid" column="IID" />
+		<result property="iphoto" column="IPHOTO" />
+		<result property="iupload" column="IUPLOAD" />
+		<result property="icontent" column="ICONTENT" />
+		<result property="deleteyn" column="DELETEYN" />
+		<result property="iupdate" column="IUPDATE" />
+		<result property="iinsert" column="IINSERT" />
+	</resultMap>
+ -->
+ 
+	<insert id="parkInsert" parameterType="ParkVO">
+		 INSERT INTO DOG_PARK( 	 
+		 	 INUM			<!-- COLUMN 1 -->
+		    ,IID      		<!-- COLUMN 2 -->
+			,IPHOTO 			<!-- COLUMN 3 -->
+			,IUPLOAD 			<!-- COLUMN 4 -->
+			,ICONTENT 		<!-- COLUMN 5 -->
+	      	,DELETEYN   		<!-- COLUMN 6 --> 
+	      	,IUPDATE 		<!-- COLUMN 7 -->
+	      	,IINSERT 		<!-- COLUMN 8 -->
+	     ) VALUES ( 	 
+	   	     #{inum, jdbcType=VARCHAR} 				<!-- placeholer 1 -->
+			,#{iid, jdbcType=VARCHAR} 				<!-- placeholer 2 -->
+			,#{iphoto, jdbcType=VARCHAR} 				<!-- placeholer 3 -->
+	       	,#{iupload, jdbcType=VARCHAR}  				<!-- placeholer 4 -->
+	       	,#{icontent, jdbcType=VARCHAR}  			<!-- placeholer 5 -->
+	       	,'Y'  									<!-- placeholer 6 -->
+	       	,SYSDATE  								<!-- placeholer 7 -->
+	       	,SYSDATE 								<!-- placeholer 8 -->
+	      ) 
+	</insert>
+	
+	<select id="parkSelect" parameterType="ParkVO" resultType="ParkVO">
+	SELECT  A.INUM  	INUM
+	       ,A.IID       IID
+	       ,A.IPHOTO 	IPHOTO
+	       ,A.IUPLOAD   IUPLOAD
+	       ,A.ICONTENT 	ICONTENT
+	       ,A.DELETEYN  DELETEYN
+	       ,TO_CHAR(A.IINSERT, 'YYYY-MM-DD') IINSERT
+	       ,TO_CHAR(A.IUPDATE, 'YYYY-MM-DD') IUPDATE
+	FROM DOG_PARK A 
+	WHERE A.DELETEYN='Y' 
+	AND A.INUM = #{inum, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="parkSelectAll" parameterType="ParkVO" resultType="ParkVO">
+		SELECT 
+			A.INUM			 INUM
+		   ,A.IID            IID
+		   ,A.IPHOTO         IPHOTO
+		   ,A.IUPLOAD        IUPLOAD
+		   ,A.ICONTENT       ICONTENT
+		   ,A.DELETEYN       DELETEYN
+		   ,TO_CHAR(A.IINSERT, 'YYYY-MM-DD') IINSERT
+	       ,TO_CHAR(A.IUPDATE, 'YYYY-MM-DD') IUPDATE
+	FROM 	DOG_PARK A
+	WHERE 	A.DELETEYN = 'Y' 
+	ORDER BY A.INUM DESC
+	</select>
+	
+	<update id="parkUpdate" parameterType="ParkVO">
+		UPDATE DOG_PARK
+		SET
+			<!-- , IUPLOAD     = #{iupload, jdbcType=VARCHAR} -->
+			  ICONTENT     = #{icontent, jdbcType=VARCHAR}
+			, IUPDATE = SYSDATE
+		WHERE DELETEYN='Y'
+		AND   INUM = #{inum, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="parkDelete" parameterType="ParkVO">
+	UPDATE DOG_PARK SET DELETEYN = 'N', IUPDATE = SYSDATE
+	WHERE DELETEYN = 'Y' AND INUM = #{inum, jdbcType=VARCHAR}
+</update>
+
+
+</mapper>

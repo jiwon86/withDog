@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.PayVO;
 
 @Repository
 public class AgencyDAOImpl implements AgencyDAO {
@@ -40,14 +41,35 @@ public class AgencyDAOImpl implements AgencyDAO {
 	public int agencyUpdateN(AgencyVO avo) {
 		logger.info("AgencyDAOImpl.agencyUpdateN() 함수진입");
 		
-		return sqlSession.update("agencyUpdateN", avo);
+		return (Integer)sqlSession.update("agencyUpdateN", avo);
 	}
 
 	@Override
 	public int agencyUpdateY(AgencyVO avo) {
 		logger.info("AgencyDAOImpl.agencyUpdateY() 함수진입");
 		
-		return sqlSession.update("agencyUpdateY", avo);
+		return (Integer)sqlSession.update("agencyUpdateY", avo);
+	}
+
+	@Override
+	public int payAjax(PayVO pvo) {
+		logger.info("AgencyDAOImpl.payAjax() 함수진입");
+		
+		return (Integer)sqlSession.insert("payAjax", pvo);
+	}
+
+	@Override
+	public List<PayVO> paySelect(PayVO pvo) {
+		logger.info("AgencyDAOImpl.paySelect() 함수진입");
+		
+		return sqlSession.selectList("paySelect", pvo);
+	}
+
+	@Override
+	public int payCount(PayVO pvo) {
+		logger.info("AgencyDAOImpl.payCount() 함수진입");
+		
+		return (Integer)sqlSession.selectOne("payCount", pvo);
 	}
 	
 	

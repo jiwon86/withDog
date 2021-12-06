@@ -1,13 +1,13 @@
 package a.b.c.com.common.service;
-import a.b.c.com.pet.vo.PetVO;
-
 import a.b.c.com.agency.vo.AgencyVO;
-import a.b.c.com.qna.vo.QnaVO;
-import a.b.c.com.qna.vo.RqnaVO;
+import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.MemberVO;
-import a.b.c.com.park.vo.ParkVO;
 import a.b.c.com.notice.vo.NoticeVO;
+import a.b.c.com.park.vo.ParkVO;
+import a.b.c.com.pet.vo.PetVO;
+import a.b.c.com.qna.vo.QnaVO;
+import a.b.c.com.qna.vo.RqnaVO;
 
 public interface ChabunService {
 
@@ -30,4 +30,5 @@ public interface ChabunService {
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
 	public NoticeVO getNoticeChabun();
+	public PayVO getPayChabun();
 }

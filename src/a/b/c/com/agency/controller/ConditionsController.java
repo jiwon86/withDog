@@ -22,6 +22,7 @@ import a.b.c.com.agency.service.OfferService;
 import a.b.c.com.agency.vo.AgencyVO;
 import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.OfferVO;
+import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.member.service.MemberService;
 import a.b.c.com.member.vo.MemberVO;
@@ -90,6 +91,7 @@ public class ConditionsController {
 			List<ConditionVO> conditionListAll = conditionService.myConditionSelectAll(conditionVO);
 			List<Integer> agencyListAnoCount = new ArrayList<>();
 			List<String> agencyListMatchyn = new ArrayList<>();
+			List<Integer> payListCount = new ArrayList<>();
 			
 			for(int i=0; i<conditionListAll.size(); i++) {
 				String tno = conditionListAll.get(i).getTno();
@@ -110,12 +112,21 @@ public class ConditionsController {
 				}
 				
 				agencyListAnoCount.add(anoCount);
+				
+				PayVO _pvo = new PayVO();
+				_pvo.setTno(tno);
+				_pvo.setCno(cno);
+				
+				int payCount = agencyService.payCount(_pvo);
+				
+				payListCount.add(payCount);
 			}
 			
 			model.addAttribute("agencyListMatchyn", agencyListMatchyn);
 			model.addAttribute("agencyListAnoCount", agencyListAnoCount);
 			model.addAttribute("pagingConditionVO", conditionVO);
 			model.addAttribute("conditionListAll", conditionListAll);
+			model.addAttribute("payListCount", payListCount);
 		}
 		
 		return "condition/conditionSelectAll";
@@ -148,6 +159,7 @@ public class ConditionsController {
 			List<ConditionVO> conditionList = conditionService.conditionSelect(_cvo);
 			List<Integer> agencyListAnoCount = new ArrayList<>();
 			List<String> agencyListMatchyn = new ArrayList<>();
+			List<Integer> payListCount = new ArrayList<>();
 			
 			String tno = conditionList.get(0).getTno();
 			
@@ -167,9 +179,18 @@ public class ConditionsController {
 			
 			agencyListAnoCount.add(anoCount);
 			
+			PayVO _pvo = new PayVO();
+			_pvo.setTno(tno);
+			_pvo.setCno(cno);
+			
+			int payCount = agencyService.payCount(_pvo);
+			
+			payListCount.add(payCount);
+			
 			model.addAttribute("agencyListMatchyn", agencyListMatchyn);
 			model.addAttribute("agencyListAnoCount", agencyListAnoCount);
 			model.addAttribute("conditionList", conditionList);
+			model.addAttribute("payListCount", payListCount);
 		}
 		
 		return "condition/conditionSelect";

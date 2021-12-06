@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.agency.dao.AgencyDAO;
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.PayVO;
 
 @Service
 @Transactional
@@ -55,6 +56,27 @@ public class AgencyServiceImpl implements AgencyService {
 		logger.info("AgencyServiceImpl.agencyUpdateY() 함수 진입");
 		
 		return agencyDAO.agencyUpdateY(avo);
+	}
+
+	@Override
+	public int payAjax(PayVO pvo) {
+		logger.info("AgencyServiceImpl.payAjax() 함수 진입");
+		
+		return agencyDAO.payAjax(pvo);
+	}
+
+	@Override
+	public List<PayVO> paySelect(PayVO pvo) {
+		logger.info("AgencyServiceImpl.paySelect() 함수 진입");
+		
+		return agencyDAO.paySelect(pvo);
+	}
+
+	@Override
+	public int payCount(PayVO pvo) {
+		logger.info("AgencyServiceImpl.payCount() 함수 진입");
+		
+		return agencyDAO.payCount(pvo);
 	}
 	
 	

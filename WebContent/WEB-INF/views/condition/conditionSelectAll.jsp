@@ -194,6 +194,13 @@
 				return todayTime;
 			}			
 			
+			function chatPaymentResultBtnClick(cno, tno) {
+				console.log("cno >>> : " + cno);
+				console.log("tno >>> : " + tno);
+				
+				location.href=`/chatPaymentResult2.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
+			}
+			
 		</script>
 	</head>
 	<!-- /헤드 -->
@@ -287,22 +294,26 @@
 							ConditionVO pagingConditionVO = (ConditionVO)request.getAttribute("pagingConditionVO");
                 			
 							List<ConditionVO> conditionListAll = (List<ConditionVO>) request.getAttribute("conditionListAll");
-
+							
                 			List<Integer> agencyListAnoCount = (List<Integer>) request.getAttribute("agencyListAnoCount"); 
                 			// agencySelectCount가 0이면 "N"이 들어가 있음
                 			List<String> agencyListMatchyn = (List<String>) request.getAttribute("agencyListMatchyn");
-							
+                			List<Integer> payListCount = (List<Integer>) request.getAttribute("payListCount");
+                			
 							for(int i=0; i<conditionListAll.size(); i++) {
 								ConditionVO cvo = conditionListAll.get(i);
 								
                     			int agencySelectCount = agencyListAnoCount.get(i);
                     			String matchyn = agencyListMatchyn.get(i);
+                    			int payCount = payListCount.get(i);
 								
 								pageSize = Integer.parseInt(pagingConditionVO.getPageSize());
 								groupSize = Integer.parseInt(pagingConditionVO.getGroupSize());
 								curPage = Integer.parseInt(pagingConditionVO.getCurPage());
 								totalCount = Integer.parseInt(cvo.getTotalCount());
 								
+								String cno = cvo.getCno();
+								String tno = cvo.getTno();
 						%>
 	                            <div class="col-lg-6 mb-4">
 	                                <div class="card lift lift-sm h-100">
@@ -330,16 +341,25 @@
 	                                    </div>
 	                                    
 	                                    <div class="card-footer">
-	                                    
 	                                    	<span class="controlBtn">
 	                                    		<%
 	                                    			if(agencySelectCount > 0) {
 	                                    				if(matchyn.equals("Y")) {
+	                                    					if(payCount > 0) {
 	                                    		%>
-					                                    	<div class="btn btn-green hahmlet">
-					                                    		<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-					                                    	</div>
+					                                    		<div class="btn btn-green hahmlet chatPaymentBtn" 
+					                                    			 onclick="chatPaymentResultBtnClick('<%=cno%>', '<%=tno%>')">
+					                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제완료
+					                                    		</div>	
 		                                    	<%
+	                                    					} else {
+	                                    		%>
+				                                    			<button class="btn btn-yellow" type="button" disabled>
+																  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+																  &nbsp;&nbsp;결제완료 대기중..
+																</button>	                                    		
+	                                    		<%				
+	                                    					}
 	                                    				} else {
 		                                    	%>
 			                                    			<button class="btn btn-primary" type="button" disabled>

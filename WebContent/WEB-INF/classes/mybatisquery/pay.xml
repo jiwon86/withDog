@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.agency.dao.AgencyDAO">
+
+	<insert id="payAjax" parameterType="PayVO">
+		INSERT INTO PAY(
+			PAYNO,
+			IMPID,
+			TNO,
+			CNO,
+			MERCHANTID,
+			APPLYNUM,
+			CARDNAME,
+			PAYMETHOD,
+			CARDNUMBER,
+			PAYAMOUNT,
+			PAYNAME,
+			TMNO,
+			CMNO,
+			DELETEYN,
+			INSERTDATE,
+			UPDATEDATE
+		) VALUES (
+			#{payno, jdbcType=VARCHAR},
+			#{impid, jdbcType=VARCHAR},
+			#{tno, jdbcType=VARCHAR},
+			#{cno, jdbcType=VARCHAR},
+			#{merchantid, jdbcType=VARCHAR},
+			#{applynum, jdbcType=VARCHAR},
+			#{cardname, jdbcType=VARCHAR},
+			#{paymethod, jdbcType=VARCHAR},
+			#{cardnumber, jdbcType=VARCHAR},
+			#{payamount, jdbcType=VARCHAR},
+			#{payname, jdbcType=VARCHAR},
+			#{tmno, jdbcType=VARCHAR},
+			#{cmno, jdbcType=VARCHAR},
+			'Y',
+			SYSDATE,
+			SYSDATE
+		)
+	</insert>
+	
+	<select id="paySelect" parameterType="PayVO" resultType="PayVO">
+		SELECT 
+			P.PAYNO PAYNO,
+			P.IMPID IMPID,
+			P.TNO TNO,
+			P.CNO CNO,
+			P.MERCHANTID MERCHANTID,
+			P.APPLYNUM APPLYNUM,
+			P.CARDNAME CARDNAME,
+			P.PAYMETHOD PAYMETHOD,
+			P.CARDNUMBER CARDNUMBER,
+			P.PAYAMOUNT PAYAMOUNT,
+			P.PAYNAME PAYNAME,
+			P.TMNO TMNO,
+			P.CMNO CMNO,
+			P.DELETEYN DELETEYN,
+			TO_CHAR(P.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
+			TO_CHAR(P.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE
+		FROM  PAY P
+		WHERE DELETEYN = 'Y'
+		AND   TNO = #{tno, jdbcType=VARCHAR}
+		AND   CNO = #{cno, jdbcType=VARCHAR}
+		AND   (TMNO = #{tmno, jdbcType=VARCHAR} OR 
+			  CMNO = #{cmno, jdbcType=VARCHAR})
+	</select>
+	
+	<select id="payCount" parameterType="PayVO" resultType="int">
+		SELECT
+			COUNT(P.PAYNO) PAYNOCOUNT
+		FROM PAY P
+		WHERE DELETEYN = 'Y'
+		AND   TNO = #{tno, jdbcType=VARCHAR}
+		AND   CNO = #{cno, jdbcType=VARCHAR}
+	</select>
+
+</mapper>

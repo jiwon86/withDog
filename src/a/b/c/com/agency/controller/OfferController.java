@@ -18,6 +18,7 @@ import a.b.c.com.agency.service.OfferService;
 import a.b.c.com.agency.vo.AgencyVO;
 import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.OfferVO;
+import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.member.service.MemberService;
 import a.b.c.com.member.vo.MemberVO;
@@ -223,8 +224,6 @@ public class OfferController {
 				petList.add(p);
 			}
 
-			model.addAttribute("petList", petList);
-
 			// 조건제시 정보 가져오기		
 			int pageSize = CommonUtils.CONDITION_PAGE_SIZE;
 			int groupSize = CommonUtils.CONDITION_GROUP_SIZE;
@@ -246,6 +245,7 @@ public class OfferController {
 			List<ConditionVO> conditionList = conditionService.conditionSelectAll(conditionVO);
 			List<Integer> agencyListAnoCount = new ArrayList<>();
 			List<String> agencyListMatchyn = new ArrayList<>();
+			List<Integer> payListCount = new ArrayList<>();
 			for(int i=0; i<conditionList.size(); i++) {
 				String cno = conditionList.get(i).getCno();
 				
@@ -264,12 +264,22 @@ public class OfferController {
 				}
 				
 				agencyListAnoCount.add(anoCount);
+				
+				PayVO _pvo = new PayVO();
+				_pvo.setTno(tno);
+				_pvo.setCno(cno);
+				
+				int payCount = agencyService.payCount(_pvo);
+				
+				payListCount.add(payCount);
 			}
 			
+			model.addAttribute("pagingConditionVO", conditionVO);
+			model.addAttribute("petList", petList);
 			model.addAttribute("agencyListMatchyn", agencyListMatchyn);
 			model.addAttribute("agencyListAnoCount", agencyListAnoCount);
-			model.addAttribute("pagingConditionVO", conditionVO);
 			model.addAttribute("conditionList", conditionList);
+			model.addAttribute("payListCount", payListCount);
 		}
 		
 		return "offer/offerSelect";
@@ -286,6 +296,7 @@ public class OfferController {
 		List<ConditionVO> conditionList = conditionService.conditionSelect(conditionVO);
 		List<Integer> agencyListAnoCount = new ArrayList<>();
 		List<String> agencyListMatchyn = new ArrayList<>();
+		List<Integer> payListCount = new ArrayList<>();
 		
 		String tno = conditionList.get(0).getTno();
 		conditionVO.setTno(tno);
@@ -306,9 +317,18 @@ public class OfferController {
 		
 		agencyListAnoCount.add(anoCount);
 		
+		PayVO _pvo = new PayVO();
+		_pvo.setTno(tno);
+		_pvo.setCno(cno);
+		
+		int payCount = agencyService.payCount(_pvo);
+		
+		payListCount.add(payCount);
+		
 		model.addAttribute("agencyListMatchyn", agencyListMatchyn);
 		model.addAttribute("agencyListAnoCount", agencyListAnoCount);
 		model.addAttribute("conditionList", conditionList);
+		model.addAttribute("payListCount", payListCount);
 		
 		return "offer/conditionSelect";
 	}

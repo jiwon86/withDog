@@ -195,6 +195,13 @@
 				return todayTime;
 			}
 			
+			function chatPaymentResultBtnClick(cno, tno) {
+				console.log("cno >>> : " + cno);
+				console.log("tno >>> : " + tno);
+				
+				location.href=`/chatPaymentResult2.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
+			}
+			
 		</script>		
 	</head>
 	<!-- /헤드 -->
@@ -251,9 +258,13 @@
 							
                 			List<Integer> agencyListAnoCount = (List<Integer>) request.getAttribute("agencyListAnoCount"); 
                 			List<String> agencyListMatchyn = (List<String>) request.getAttribute("agencyListMatchyn");
-							
+                			List<Integer> payListCount = (List<Integer>) request.getAttribute("payListCount");
+                			
                 			int agencySelectCount = agencyListAnoCount.get(0);
                 			String matchyn = agencyListMatchyn.get(0);
+                			int payCount = payListCount.get(0);
+                			
+							String cno = cvo.getCno();
                 			
 							// 오늘 날짜 구하기
 							Date today = new Date();
@@ -316,11 +327,21 @@
                                		<%
                                			if(agencySelectCount > 0) {
                                				if(matchyn.equals("Y")) {
+                            					if(payCount > 0) {
                                		%>
-		                                    	<div class="btn btn-green hahmlet">
-		                                    		<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-		                                    	</div>
+		                                    		<div class="btn btn-green hahmlet chatPaymentBtn" 
+		                                    			 onclick="chatPaymentResultBtnClick('<%=cno%>', '<%=tno%>')">
+		                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제완료
+		                                    		</div>	
                                    	<%
+                            					} else {
+                            		%>
+	                                    			<button class="btn btn-yellow" type="button" disabled>
+													  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+													  &nbsp;&nbsp;결제완료 대기중..
+													</button>	                              		
+                            		<%				
+                            					}
                                   			} else {
                                    	%>
                                     			<button class="btn btn-primary" type="button" disabled>

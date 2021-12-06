@@ -4,6 +4,7 @@
 		  
 <configuration>
 	<typeAliases>
+	
 		<typeAlias type="a.b.c.com.member.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="a.b.c.com.member.vo.MemberAuthVO" alias="MemberAuthVO" />
 
@@ -19,6 +20,7 @@
 		<typeAlias type="a.b.c.com.agency.vo.ConditionVO" alias="ConditionVO" />
 		<typeAlias type="a.b.c.com.agency.vo.AgencyVO" alias="AgencyVO" />
 		<typeAlias type="a.b.c.com.park.vo.ParkVO" alias="ParkVO"/>
+		<typeAlias type="a.b.c.com.agency.vo.PayVO" alias="PayVO"/>
 		
 	</typeAliases>
 </configuration>

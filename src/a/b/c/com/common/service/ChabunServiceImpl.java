@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.common.dao.ChabunDAO;
 import a.b.c.com.pet.vo.PetVO;
 
@@ -118,6 +119,13 @@ public class ChabunServiceImpl implements ChabunService {
 	public RqnaVO getRqnaChabun() {
 		logger.info("ChabunServiceImpl.getRqnaChabun() 함수 진입");
 		return chabunDAO.getRqnaChabun();
+	}
+
+	@Override
+	public PayVO getPayChabun() {
+		logger.info("ChabunServiceImpl.getPayChabun() 함수 진입");
+		
+		return chabunDAO.getPayChabun();
 	}
 	
 

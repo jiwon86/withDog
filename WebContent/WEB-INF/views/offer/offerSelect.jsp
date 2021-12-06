@@ -19,12 +19,27 @@
 	<head>
 		<script type="text/javascript">
 		
-			function chatPaymentBtnClick() {
-				location.href="/chatPayment.wd";
+			function chatPaymentResultBtnClick(e) {
+				let cno = $(e).parent().prev().find(".cno").val();
+				let tno = $(e).parent().prev().find(".tno").val();
+				console.log("cno >>> : " + cno);
+				console.log("tno >>> : " + tno);
+				
+				location.href=`/chatPaymentResult.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
+			}
+		
+			function chatPaymentBtnClick(e) {
+				let cno = $(e).parent().prev().find(".cno").val();
+				let tno = $(e).parent().prev().find(".tno").val();
+				console.log("cno >>> : " + cno);
+				console.log("tno >>> : " + tno);
+				location.href=`/chatPayment.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
 			}
 		
 			// 수락버튼 누를 때 이벤트 함수
 			function acceptBtnClick(e) {
+				let paycount = $(e).parent().prev().find(".paycount").val();
+				console.log("paycount >>> : " + paycount);
 				
 				var mAccount = $(e).parent().prev().find(".mAccount").text();
 				
@@ -61,14 +76,24 @@
 							error: whenError1
 						});
 						
-						let cancelBtn = `
-		        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-		            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-		            		</div>
-		            		<div class="btn btn-green hahmlet" onclick="chatPaymentBtnClick()">
-		            			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-		            		</div>
-						`;
+						let cancelBtn = "";
+						
+						if(paycount > 0) {
+							cancelBtn = `
+                        		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentResultBtnClick(this)">
+                    				<i class="fas fa-check-circle"></i> &nbsp; 결제완료
+                    			</div>	
+							`;	
+						} else {
+							cancelBtn = `
+			        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+			            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+			            		</div>
+			            		<div class="btn btn-yellow hahmlet" onclick="chatPaymentBtnClick(this)">
+			            			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
+			            		</div>
+							`;							
+						}
 						
 						$(e).parent().html(cancelBtn);
 						
@@ -79,6 +104,8 @@
 			
 			// 취소버튼 누를 때 이벤트 함수
 			function cancelBtnClick(e) {
+				let paycount = $(e).parent().prev().find(".paycount").val();
+				console.log("paycount >>> : " + paycount);
 				
 				var mAccount = $(e).parent().prev().find(".mAccount").text();
 				
@@ -249,7 +276,7 @@
 	                                        <span style="font-size:35px; font-weight:bold; color:red;"><%=ovo.getTno()%></span> &nbsp;
 	                                        <span class="me-3">
 	                                           	<i class="fas fa-circle fa-sm ms-3 text-red"></i>
-	                                       		<span class="hahmlet" style="font-size:13px; color:red; font-weight:bold;">준비중</span>
+	                                       		<span class="hahmlet" style="font-size:13px; color:red; font-weight:bold;">종료</span>
 	                                        </span>
                                         <% } %>                                        
                                         
@@ -356,13 +383,14 @@
                     			List<Integer> agencyListAnoCount = (List<Integer>) request.getAttribute("agencyListAnoCount"); 
                     			// agencySelectCount가 0이면 "N"이 들어가 있음
                     			List<String> agencyListMatchyn = (List<String>) request.getAttribute("agencyListMatchyn");
+                    			List<Integer> payListCount = (List<Integer>) request.getAttribute("payListCount");
                     			
                     			if(conditionList.size() > 0) {
 	                        		for(int i=0; i<conditionCnt; i++) {
 	                        			ConditionVO cvo = conditionList.get(i);
 	                        			int anoCount = agencyListAnoCount.get(i);
-	                        			
 	                        			String matchyn = agencyListMatchyn.get(i);
+	                        			int payCount = payListCount.get(i);
 	                        			
 	                					pageSize = Integer.parseInt(pagingConditionVO.getPageSize());
 	                					groupSize = Integer.parseInt(pagingConditionVO.getGroupSize());
@@ -375,6 +403,7 @@
 			                                    <div class="card-body" onclick="javascript:location.href='/conditionSelect.wd?cno=<%=cvo.getCno() %>'">
 			                                        <input type="hidden" class="cno" value="<%=cvo.getCno() %>" />
 			                                        <input type="hidden" class="tno" value="<%=ovo.getTno() %>" />
+			                                        <input type="hidden" class="paycount" value="<%=payCount%>" />
 			                                        
 			                                        <h5 class="card-title text-primary mb-2">
 			                                            <i class="me-2" data-feather="edit-2"></i>
@@ -402,14 +431,27 @@
 			                                    	<%
 			                                    		if(anoCount > 0) {
 			                                    			if(matchyn.equals("Y")) {
+			                                    				if(payCount > 0) {
 			                                    	%>
-				                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-					                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-					                                    		</div>
-					                                    		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick()">
-					                                    			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-					                                    		</div>
+			                                    					<!--  
+					                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+						                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+						                                    		</div>
+						                                    		-->
+						                                    		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentResultBtnClick(this)">
+						                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제완료
+						                                    		</div>			                                    					
 				                                    <%		
+			                                    				} else {
+			                                    	%>
+					                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+						                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+						                                    		</div>
+						                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
+						                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
+						                                    		</div>
+			                                    	<%
+			                                    				}
 				                                    		} else {
 				                                    %>
 					                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
@@ -433,22 +475,33 @@
                             <% 
                         			}
                     			} else {
-                    				
+                    		%>
+                    				<h2>현재 조건제시가 없습니다.</h2>
+                    		<%
                     			}
                             %>
                             
                         </div>
                         <!-- /조건제시 정보 -->
                         
-	                    <jsp:include page="conditionPaging.jsp" flush="true">
-							<jsp:param name="url" value="offerSelect.psh"/>
-							<jsp:param name="str" value=""/>
-							<jsp:param name="pageSize" value="<%=pageSize%>"/>
-							<jsp:param name="groupSize" value="<%=groupSize%>"/>
-							<jsp:param name="curPage" value="<%=curPage%>"/>
-							<jsp:param name="totalCount" value="<%=totalCount%>"/>
-						</jsp:include>
-                        
+                        <% 
+                        	if(conditionList.size() > 0) { 
+                        %>
+			                    <jsp:include page="conditionPaging.jsp" flush="true">
+									<jsp:param name="url" value="offerSelect.psh"/>
+									<jsp:param name="str" value=""/>
+									<jsp:param name="pageSize" value="<%=pageSize%>"/>
+									<jsp:param name="groupSize" value="<%=groupSize%>"/>
+									<jsp:param name="curPage" value="<%=curPage%>"/>
+									<jsp:param name="totalCount" value="<%=totalCount%>"/>
+								</jsp:include>
+                        <%
+                        	} else {
+                        %>
+                        	
+                        <%
+                        	}
+                        %>
                     </div>
                     
                     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">

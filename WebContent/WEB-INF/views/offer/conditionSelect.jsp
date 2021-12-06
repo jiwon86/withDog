@@ -14,8 +14,27 @@
 		<head>
 		<script type="text/javascript">
 		
+			function chatPaymentResultBtnClick(e) {
+				let cno = $(e).parent().parent().find(".cno").val();
+				let tno = $(e).parent().parent().find(".tno").val();
+				console.log("cno >>> : " + cno);
+				console.log("tno >>> : " + tno);
+				
+				location.href=`/chatPaymentResult.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
+			}
+		
+			function chatPaymentBtnClick(e) {
+				let cno = $(e).parent().parent().find(".cno").val();
+				let tno = $(e).parent().parent().find(".tno").val();
+				console.log("cno >>> : " + cno);
+				console.log("tno >>> : " + tno);
+				location.href=`/chatPayment.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
+			}
+		
 			// 수락버튼 누를 때 이벤트 함수
 			function acceptBtnClick(e) {
+				let paycount = $(e).parent().parent().find(".paycount").val();
+				console.log("paycount >>> : " + paycount);
 				
 				var mAccount = $(e).parent().parent().find(".mAccount").text();
 				
@@ -52,14 +71,24 @@
 							error: whenError1
 						});
 						
-						let cancelBtn = `
-		        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-		            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-		            		</div>
-		            		<div class="btn btn-green hahmlet">
-		            			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-		            		</div>
-						`;
+						let cancelBtn = "";
+						
+						if(paycount > 0) {
+							cancelBtn = `
+                        		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentResultBtnClick(this)">
+                    				<i class="fas fa-check-circle"></i> &nbsp; 결제완료
+                    			</div>	
+							`;	
+						} else {
+							cancelBtn = `
+			        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+			            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+			            		</div>
+			            		<div class="btn btn-yellow hahmlet" onclick="chatPaymentBtnClick(this)">
+			            			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
+			            		</div>
+							`;							
+						}
 						
 						$(e).parent().html(cancelBtn);
 					}
@@ -190,8 +219,11 @@
 						
             			List<Integer> agencyListAnoCount = (List<Integer>) request.getAttribute("agencyListAnoCount");
             			List<String> agencyListMatchyn = (List<String>) request.getAttribute("agencyListMatchyn");
+            			List<Integer> payListCount = (List<Integer>) request.getAttribute("payListCount");
+            			
             			int anoCount = agencyListAnoCount.get(0);
             			String matchyn = agencyListMatchyn.get(0);
+            			int payCount = payListCount.get(0);
 					%>
 					
                         <div class="card mb-4 mt-4">
@@ -207,6 +239,8 @@
                             <div class="card-body">
                           		<input type="hidden" class="cno" value="<%=cvo.getCno() %>" /> 
 			                    <input type="hidden" class="tno" value="<%=cvo.getTno() %>" />
+			                    <input type="hidden" class="paycount" value="<%=payCount%>" />
+			                    
                             	<div>
 	                                <h4 class="ms-1">
 	                                	<i class="fas fa-user"></i> &nbsp; 
@@ -249,14 +283,27 @@
                                    	<%
                                    		if(anoCount > 0) {
                                    			if(matchyn.equals("Y")) {
+                                   				if(payCount > 0) {
                                    	%>
-                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-	                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-	                                    		</div>
-	                                    		<div class="btn btn-green hahmlet">
-	                                    			<i class="fas fa-check-circle"></i> &nbsp; 매칭성공
-	                                    		</div>
+		                                    		<!--  
+	                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+		                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+		                                    		</div>
+		                                    		-->
+		                                    		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentResultBtnClick(this)">
+		                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제완료
+		                                    		</div>	
                                     <%		
+                                   				} else {
+                                   	%>
+	                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+		                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+		                                    		</div>
+		                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
+		                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
+		                                    		</div>
+		                            <%
+                                   				}
                                     		} else {
                                     %>
 	                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">

@@ -33,6 +33,7 @@
 <select id="rqnaSelectAll" parameterType="rqnaVO" resultType="rqnaVO">
 	SELECT * FROM RQNA WHERE RQNADELYN = 'Y'
 	AND QNANUM = #{qnanum, jdbcType=VARCHAR}
+	ORDER BY 8 DESC
 </select>
 
 <update id="rqnaUpdate" parameterType="rqnaVO">
@@ -42,8 +43,8 @@
 </update>
 
 <update id="rqnaDelete" parameterType="rqnaVO">
-	UPDATE QNA SET RQNADELYN = 'N', 
-				   RQNAUPDATEDATE = SYSDATE
-	WHERE RQNAUPDATEDATE = 'Y' AND RQNANUM = #{rqnanum, jdbcType=VARCHAR}
+	UPDATE RQNA SET RQNADELYN = 'N', 
+				   RQNAINSERTDATE = SYSDATE
+	WHERE RQNADELYN = 'Y' AND RQNANUM = #{rqnanum, jdbcType=VARCHAR}
 </update>
 </mapper>

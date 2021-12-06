@@ -8,9 +8,10 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
+
+	public static final String BIZ_GUBUN_PE = "P"; //반려동물
 	public static final String BIZ_GUBUN_P = "P"; // 산책스타그램
 	public static final String BIZ_GUBUN_RP = "RP"; // 산책스타그램 댓글
-	
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
 	public static String numpad(String t, String c) {
@@ -62,6 +63,11 @@ public abstract class ChabunUtil {
 	}
 	
 
+	//반려동물 번호
+	public static String getPetChabun(String type, String memNum) {
+		return BIZ_GUBUN_PE.concat(ChabunUtil.numpad(type, memNum));
+	}
+
 	// 산책스타그램 번호
 	public static String getParkChabun(String type, String memNum) {
 		return BIZ_GUBUN_P.concat(ChabunUtil.numpad(type, memNum));
@@ -77,7 +83,6 @@ public abstract class ChabunUtil {
 	public static String getMapTradeChabun(String type, String memNum) {
 		return ChabunUtil.numpad(type, memNum);
 	}
-
 	
 	public static void main(String[] args) {
 		String c = "1";
@@ -91,6 +96,7 @@ public abstract class ChabunUtil {
 		System.out.println("getRparkChabun(\"N\", c) >>> : " + ChabunUtil.getRparkChabun("N", c));
 
 		System.out.println(".getNoticeChabun(\"N\", c) >>> : " + ChabunUtil.getNoticeChabun("N", c));
+		System.out.print("getPetChabun() >>>>>" + ChabunUtil.getPetChabun(BIZ_GUBUN_PE, c));
 		System.out.println(".getQnaChabun(\"N\", c) >>> : " + ChabunUtil.getQnaChabun("N", c));
 		
 

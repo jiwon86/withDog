@@ -1,3 +1,4 @@
+<%@page import="a.b.c.com.pet.vo.PetVO"%>
 <%@page import="a.b.c.com.member.vo.Member"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -67,9 +68,15 @@
                        <%
                				Object obj = request.getAttribute("listAll");
               				List<Member> listall = (List<Member>)obj;
+              				
+              				/* Object obj1 = request.getAttribute("listAll1");
+              				List<PetVO> listall1 = (List<PetVO>)obj1; */
                     				
                 			int nCnt = listall.size();
                     		System.out.println("list.size() >>> :" + listall.size());
+                    		
+                    		/* int nCnt1 = listall1.size();
+                    		System.out.println("listall1.size() >>> : " + listall1.size()); */
                    		%>
                    
                     <script type="text/javascript">
@@ -77,6 +84,7 @@
                     
                     </script>
                     <!-- Main page content-->
+                    
                     <div class="container-fluid px-4">
                         <div class="card">
                             <div class="card-body" align="center">
@@ -92,8 +100,22 @@
                                         </tr>
                                     </thead>
                                     <%
+                              /*       String pname = "";
+                                    String ptype= "";
+                                    String pgender ="";
+                                    String natural = "";
+                                    
+                                    	for(int j=0; j<nCnt1; j++){
+                                    		PetVO pvo = listall1.get(j);
+                                    		pname = pvo.getPname();
+                                    		ptype = pvo.getPtype();
+                                    		pgender = pvo.getPgender();
+                                    		natural = pvo.getPneutral();
+                                    	}
+                                  */
                                     	for(int i=0; i<nCnt; i++){
                                     		Member member = listall.get(i);
+                                    		
                                     		String mno = member.getMno();
                                     		String mphoto = member.getMphoto();
                                     		String mid = member.getMid();
@@ -116,11 +138,10 @@
                                             <td class="bor"><%=mname %></td>
                                             <td class="bor"><%=mroadaddress %></td>
                                             <td  class="bor">
-                                                <span class="badge bg-green-soft text-green">포메라니안</span>
-                                                <span class="badge bg-blue-soft text-blue">성별 : 남자</span>
-                                                <span class="badge bg-red-soft text-red">성별 : 여자</span>
-                                                <span class="badge bg-purple-soft text-purple">중성화 수술 : 유</span>
-                                                <span class="badge bg-yellow-soft text-yellow">중성화수술 : 무(자연)</span>
+                                                <span class="badge bg-green-soft text-green">펫 이름 :포메라니안</span>
+                                                <span class="badge bg-red-soft text-red"> 견종 : 포메라니안</span>
+                                                <span class="badge bg-blue-soft text-blue">성별 : 포메라니안</span>
+                                                <span class="badge bg-purple-soft text-purple">중성화 수술 : 포메라니안</span>
                                             </td>
                                             <td id="insertdateform" name="insertdateform" class="bor"><%=updatedate %></td>
                                             <td class="bor">

@@ -1,5 +1,6 @@
 package a.b.c.com.adminmember.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -13,15 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import a.b.c.com.adminmember.service.AdminMemberService;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.member.vo.Member;
+import a.b.c.com.pet.service.PetService;
+import a.b.c.com.pet.vo.PetVO;
 
 @Controller
 public class AdminMemberController {
-
+	
+	
+	private PetService petService;
 	private AdminMemberService adminMemberService;
 	
 	@Autowired(required=false)
-	public AdminMemberController(AdminMemberService adminMemberService) {
+	public AdminMemberController(AdminMemberService adminMemberService, PetService petService) {
 		this.adminMemberService = adminMemberService;
+		this.petService = petService;
 	}
 
 	Logger logger = Logger.getLogger(AdminMemberController.class);
@@ -32,21 +38,53 @@ public class AdminMemberController {
 		
 		List<Member> listAll = adminMemberService.AdminMemberSelectAll(member);
 		
+//		String mno[] = null;
+//		String mname = "";
+//		
+//		for(int i=0; i < listAll.size(); i++) {
+//			mno[i] = listAll.get(i).getMno(); 
+//			logger.info("memmno 에 들어있는 값 >>> : " + mno[i]); 
+//			mname = listAll.get(i).getMname();
+//		}
+//		
+//		List<PetVO> listAll1 = petService.petSelectAll1(mno);
+//
+//		logger.info("셋팅 다한 listAll1 >>> : " + listAll1.size());
+//		
+//		for(int j=0; j<listAll.size(); j++) {
+//			pvo.setMno(listAll.get(j).getMno());
+//			logger.info(">>>>>>>" + pvo.getMno());
+//			// 분명 여기서 로그 찍어보녀 4개 전부다 나오는데
+//			logger.info("pvo>>> : " + pvo);
+//		}
+		
+		
+//		logger.info(">>>>>>>>>>>>>>>>>>" + mno);
 		logger.info("member.toString() >>> : " + member.toString());
 		logger.info("listAll.size() >>> : " + listAll.size());
 		logger.info("dsff" + listAll.toString());
+//		logger.info("petVO 관련 >>> : " + listAll1.toString());
+//		logger.info("list.get(0).getMno >>>.>>>>" + listAll1.get(0).getMno());
+		logger.info("list.get(1).getMno >>>.>>>>" + listAll.get(1).getMno());
+//		logger.info("ddddd>>>>>>>>> : " + listAll.);
+//		logger.info("listAll1 의 사이즈  >>> ::: : " + listAll1.size());
+//		logger.info("memmno, mname >>> : " + mno);
+//		logger.info("memmno, mname >>> : " + mname);
 		
-		model.addAttribute("listAll",listAll);
 		
 		if(listAll.size() > 0) {
+			model.addAttribute("listAll",listAll);
+//			model.addAttribute("listAll1", listAll1);
 			return "admin/AdminMemberSelectAll";
 		}else {
 		
 		return "admin/AdminMemberSelectAll";
 		}
-		
-		
 	}
+		
+	
+		
+	
 	/*
 	@RequestMapping("AdminProfile")
 	public String AdminProfile(@ModelAttribute Member member, Model model, HttpServletRequest req) {

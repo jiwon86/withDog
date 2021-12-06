@@ -22,8 +22,6 @@
 		<script type="text/javascript">
 		$(document).ready(function(){	
 			
-					
-			
 			
 			$("#Mypet").click(function(){
 				alert("mno >>>" + petSelectAllForm.mno.value);

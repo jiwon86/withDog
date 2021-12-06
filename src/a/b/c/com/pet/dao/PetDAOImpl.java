@@ -25,8 +25,15 @@ public class PetDAOImpl implements PetDAO {
 	public List<PetVO> petSelectAll(PetVO pvo) {
 		// TODO Auto-generated method stub
 		logger.info("PetDAOImpl.petSelectAll 시작 >>>> ");
+		
 		return sqlSession.selectList("petSelectAll", pvo);
 	}
+//	@Override
+//	public List<PetVO> petSelectAll1(String mno){
+//		
+//		return sqlSession.selectList("petSelectAll1", mno);
+//		
+//	}
 
 	@Override
 	public List<PetVO> petSelect(PetVO pvo) {

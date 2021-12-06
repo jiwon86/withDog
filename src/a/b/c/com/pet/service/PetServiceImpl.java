@@ -63,5 +63,11 @@ public class PetServiceImpl implements PetService {
 		logger.info("PetServiceImpl.petDelete 시작 >>>>>> ");
 		return petDAO.petDelete(pvo);
 	}
+	
+//	@Override
+//	public List<PetVO> petSelectAll1(String mno){
+//		logger.info("petServiceImpl.petSelectAll >>> 시작 >>> ");
+//		return petDAO.petSelectAll1(mno);
+//	}
 
 }

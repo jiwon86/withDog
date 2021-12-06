@@ -11,4 +11,5 @@ public interface PetDAO {
 	public int petInsert(PetVO pvo);
 	public int petUpdate(PetVO pvo);
 	public int petDelete(PetVO pvo);
+//	public List<PetVO> petSelectAll1(String mno);
 }

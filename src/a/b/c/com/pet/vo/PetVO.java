@@ -20,6 +20,15 @@ public class PetVO {
 	private String pages;
 	private String mno;
 	
+	
+	
+	@Override
+	public String toString() {
+		return "PetVO [logger=" + logger + ", pno=" + pno + ", pname=" + pname + ", ptype=" + ptype + ", pgender="
+				+ pgender + ", pneutral=" + pneutral + ", pphoto=" + pphoto + ", pweight=" + pweight + ", phospital="
+				+ phospital + ", pmemo=" + pmemo + ", pages=" + pages + ", mno=" + mno + "]";
+	}
+
 	//생성자----------------------------------------
 	public PetVO() {
 		

@@ -27,6 +27,29 @@ AND A.MNO=#{mno,jdbcType=VARCHAR}
 ORDER BY 1
 </select>
 
+<!-- <select id = "petSelectAll1" parameterType="Pet" resultType="Pet">
+SELECT
+         A.PNO       PNO
+        ,A.PNAME     PNAME
+        ,A.PTYPE     PTYPE
+        ,A.PGENDER   PGENDER
+        ,A.PNEUTRAL   PNEUTRAL
+        ,A.PPHOTO    PPHOTO
+        ,A.PWEIGHT  PWEIGHT
+        ,A.PHOSPITAL    PHOSPITAL
+        ,A.PMEMO     PMEMO
+        ,A.PAGES    PAGES
+        ,A.MNO      MNO
+        ,A.DELETEYN DELETEYN
+        ,A.INSERTDATE   INSERTDATE
+        ,A.UPDATEDATE   UPDATEDATE
+FROM PET A INNER JOIN MEMBER M
+ON(A.MNO = M.MNO)
+WHERE A.DELETEYN = 'Y'
+AND A.MNO=#{mno,jdbcType=VARCHAR}
+ORDER BY 1;
+</select> -->
+
 <insert id='petInsert' parameterType="Pet">
 INSERT INTO PET(
 	 PNO

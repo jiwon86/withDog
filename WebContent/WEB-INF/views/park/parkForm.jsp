@@ -20,8 +20,6 @@
 			 $(".movement").attr({ "method":"GET"
 				                   ,"action":"parkSelect.wd"}).submit();
 		}); 
-	
-		
 		//  D
 		$(document).on("click", "#D", function(){
 			confirm("삭제하시겠습니까?");
@@ -30,6 +28,288 @@
 				                  ,"action":"parkDelete.wd"}).submit();
 		});
 		 
+</script>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		selectAll();
+		
+		//댓글등록
+		/*
+		$(document).on("click", "#SAVEbtn", function(e){
+			let inum = $(e);
+			console.log("inum >>> : " + inum);
+			
+			let insertURL = "rparkInsert.wd";
+			let method = "POST";
+			let dataParam = {
+					inum : $("#inum").val(),
+					ricontent : $("#ricontent").text(),
+					riname : $("#riname").val()
+			};
+			
+			//dataParam = $("#rparkForm").serialize();
+			//alert("dataParam >>> : " + dataParam);
+			
+			$.ajax({
+				url : insertURL,
+				type : method,
+				data : dataParam,
+				success : whenSuccess,
+				error : whenError
+			});
+			
+			function whenSuccess(resData){
+				alert("resData >>> :" +resData);
+				if("GOOD" == resData){
+					rparkFormData();
+					location.reload();
+				}
+			}
+			
+			function whenError(e){
+				alert("e >>> : " + e.responseText);
+				console.log("e >>> :  + e.responseText");
+			}
+		});
+		*/
+		
+		/*
+		//단건조회
+		$(document).on("click", "#S", function() {
+			//alert("S >>> : ");
+			
+			let selectURL = "rparkSelect.wd";
+			let method = "POST";
+			let dataParam = {
+					rinum :$("#rinum").val(),
+			};
+			System.out.println("dataParam >>> : " +dataParam);
+			
+			$.ajax({
+				url: selectURL,
+				type: method,
+				data: dataParam,
+				success : whenSuccess,
+				error : whenError
+			});
+			
+			function whenSuccess(resData){
+				//alert("resData >>> : " + resData);
+				let v = resData.split(",");
+				for(let i=0; i <v.length; i++){
+					console.log("v[0]" + v[0]);
+					console.log("v[1]" + v[1]);
+					console.log("v[2]" + v[2]);
+					console.log("v[3]" + v[3]);
+					addNewItem(v[0], v[1], v[2], v[3]);
+				}
+				
+			}
+			function whenError(e){
+				console.log("e >>> : " + e.responseText);
+			}
+		});
+		*/
+		
+		//댓글 삭제
+		$(document).on("click", ".deleteBtn", function(){
+			//alert("D >>> : ");
+			
+			var rinum = $(this).parents("li").attr("dataNum");
+			var target = $(this).parents(".rbmemoItem");
+			console.log("target >>> : " + target);
+			
+			let selectURL = "rparkDelete.wd";
+			let method="POST";
+			let dataParam = {
+					rinum : rinum,
+			};
+			
+			//dataParam = $("#jsonTestForm").serialize();
+			//alert("dataParam >>> : " + dataParam);
+			
+			$.ajax({
+				url : selectURL,
+				type: method,
+				data: dataParam,
+				success: whenSuccess,
+				error: whenError
+			});
+			
+			function whenSuccess(resData){
+				//alert("resData >>> : " + resData);
+				console.log("resData >>> : " + resData);
+				if("GOOD" == resData){
+					alert("댓글이 삭제되었습니다.");
+					target.remove();
+				}
+			}
+			function whenError(e){
+				//alert("e >>> : " + e.responseText);
+			}
+		});
+	});
+	
+	//게시글 번호로 댓글 전체조회
+	function selectAll(){
+		
+		//alert("SALL >>> : ");
+		
+		let selectAllURL = "rparkSelectAll.wd";
+		let method="POST";
+		let dataParam = {
+			inum: $("#inum").val(),
+		};
+		//dataParam = $("#jsonTestForm").serialize();
+		//alert("dataParam >>> : " + dataParam);
+		
+		$.ajax({
+			url: selectAllURL,
+			type: method,
+			data: dataParam,
+			success: whenSuccess,
+			error: whenError
+		});
+		
+		function whenSuccess(resData){
+			//alert("resData >>> : " + resData);
+			console.log("whenSuccess rparkSelectAll resData >>> : " + resData);
+			
+			if(isEmpty(resData)){
+				return false;
+			}
+			
+			let v = resData.split("&");
+			for(let i=0; i<v.length-1; i++){
+				console.log(v[i]);
+				let vv = v[i].split(",");
+				let j=0;
+				for(; j<vv.length-1; j++){
+					console.log("vv[j] >>> : " + vv[j]);
+				}
+				addNewItem(vv[0], vv[1], vv[2], vv[3], vv[4]);
+			}
+		}
+		function whenError(e){
+			alert("e >>> : " + e.responseText);
+		}
+	}
+	
+	function rparkInsert(e) {
+		let inum = $(e).parent().find(".inum").val();
+		
+		let insertURL = "rparkInsert.wd";
+		let method = "POST";
+		let dataParam = {
+				inum : inum,
+				ricontent : $("#ricontent").val(),
+				riname : $("#riname").val()
+		};
+		
+		//dataParam = $("#rparkForm").serialize();
+		//alert("dataParam >>> : " + dataParam);
+		
+		$.ajax({
+			url : insertURL,
+			type : method,
+			data : dataParam,
+			success : whenSuccess,
+			error : whenError
+		});
+		
+		function whenSuccess(resData){
+			alert("resData >>> :" +resData);
+			if("GOOD" == resData){
+				rparkFormData();
+				location.reload();
+			}
+		}
+		
+		function whenError(e){
+			alert("e >>> : " + e.responseText);
+			console.log("e >>> :  + e.responseText");
+		}
+	};
+	
+	//새로운 글 화면에 추가
+	function addNewItem(num, writer, con, datetime, inum){
+		
+		console.log("inum >>> : " + inum);
+		
+		//데이터 체크
+		if(isEmpty(num)) return false;
+		
+		//새로운 글이 추가될 li태그
+		var newLi = $("<li>");
+		newLi.attr("dataNum", num);
+		newLi.addClass("rbmemoItem");
+		//작성자 정보가 지정될 <p> 태그
+		var writerP = $("<p>");
+		writerP.addClass("writer");
+		//작성자 정보의 이름
+		var nameSpan=$("<span>");
+		nameSpan.addClass("name");
+		nameSpan.html(decodeURIComponent(writer) + "님");
+		//작성일시
+		var dateSpan = $("<span>");
+		dateSpan.html(" / " + datetime + " ");
+		//삭제버튼
+		var delInput = $("<input>");
+		delInput.attr({"type":"button", "value":"삭제하기"});
+		delInput.addClass("deleteBtn");
+		//내용
+		var contentP = $("<p>");
+		contentP.html(decodeURIComponent(con));
+		
+		//조립하기
+		writerP.append(nameSpan).append(dateSpan).append(delInput);
+		newLi.append(writerP).append(contentP);
+		
+		$("#rparklist").append(newLi);
+	}
+	
+	//댓글길이 체크--------------------------------------
+	//한글 포함 문자열 실이
+	function getTextLength(s){
+		var len =0;
+		for(var i=0; i<s.length; i++){
+			if(escape(s.charAt(i)).length == 6){
+				len++;
+			}
+			len++;
+		}
+		return len;
+	}
+	function cut_200(obj){
+		var t = $(obj).val();
+		var l = t.length;
+		while(getTextLength(t) > 200){
+			l--;
+			t= t.substring(0,1);
+		}
+		$(obj).val(t);
+		$('.bytes').text(getTextLength(t));
+	}
+	
+	//댓글 길이 체크------------------------------
+	// 댓글 등록 후 입력창 초기화 (*오타)
+	function rparkFormData() {
+		$("#riname").val("");
+		$("#ricontent").val("");
+	}
+	
+	//데이터 체크
+	function isEmpty(val){
+		if(typeof val=="undefined" || val==null || val==""){
+			return true;
+		}else{
+			return false;
+		}
+	}
 </script>
 
 <body class="nav-fixed">
@@ -52,7 +332,8 @@
 
 		<!-- 콘텐츠 -->
 		<div id="layoutSidenav_content">
-			<main></main>
+			<main>
+			</main>
 			<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 
@@ -66,7 +347,7 @@
 				<div style="width:760px; margin:0 auto;">
 					<h2 class="mt-4">댕댕스타그램</h2>
 					<div> 
-						<a href="parkInsert.wd" class="btn btn-primary float-end">사진업로드</a>
+						<a href="parkInsert.wd" class="btn btn-warning float-end">사진업로드</a>
 					</div>
 					<br><br>
 					
@@ -131,12 +412,20 @@
 						        <label class="small mb-1" for="inputNotificationSms">
 						       		<%= svo.getIcontent() %>
 						        </label>
+						        
+						        <!-- 댓글들어갈곳 -->
+						         <!-- url붙여서 댓글 가져오기 -->
+								 <c:import url="/rparkForm.wd">
+								   <c:param name="inum" value="<%=svo.getInum()%>"></c:param>
+								 </c:import>   
 					        </div>
 					        <!-- 오른쪽으로 옮기기 -->
 					     	<span style="margin-left:620px;"><%= svo.getIinsert()%> </span>
 					    </div>
 					    <div style="clear:both;"></div>
 					</div>
+					
+					 
 					<%
 						}
 					%>

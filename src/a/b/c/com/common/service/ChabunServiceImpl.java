@@ -10,11 +10,11 @@ import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
-<<<<<<< HEAD
 import a.b.c.com.park.vo.ParkVO;
-=======
+import a.b.c.com.park.vo.RparkVO;
+
 import a.b.c.com.notice.vo.NoticeVO;
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 
 @Service
 @Transactional
@@ -58,7 +58,7 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("ChabunServiceImpl.getMemChabun() 함수 진입");
 		return chabunDAO.getMemChabun();
 	}
-<<<<<<< HEAD
+
 
 	@Override
 	public ParkVO getParkChabun() {
@@ -67,9 +67,13 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getParkChabun();
 	}
 	
-=======
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
-
+	@Override
+	public RparkVO getRparkChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunServiceImplt.getRparkChabun() 함수 진입");
+		return chabunDAO.getRparkChabun();
+	}
+	
 	@Override
 	public NoticeVO getNoticeChabun() {
 		// TODO Auto-generated method stub
@@ -77,8 +81,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getNoticeChabun();
 	}
 
-
-	
 	
 	@Override
 	public QnaVO getQnaChabun() {
@@ -91,6 +93,8 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("ChabunServiceImpl.getRqnaChabun() 함수 진입");
 		return chabunDAO.getRqnaChabun();
 	}
+
+	
 	
 
 }

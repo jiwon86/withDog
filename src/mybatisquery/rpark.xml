@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<mapper namespace="a.b.c.com.park.dao.RparkDAO">
+
+	<insert id="rparkInsert" parameterType="RparkVO">
+	
+	INSERT INTO DOG_RPARK (RINUM,
+					  INUM,
+					  RINAME,
+					  RICONTENT,
+					  RIDELETE,
+					  RIINSERT
+					  )
+		  VALUES ( #{rinum, jdbcType=VARCHAR},
+		  		   #{inum, jdbcType=VARCHAR},
+		  		   #{riname, jdbcType=VARCHAR},
+		  		   #{ricontent, jdbcType=VARCHAR},
+		  		   'Y', SYSDATE)
+</insert>
+
+<select id="rparkSelect" parameterType="RparkVO" resultType="RparkVO">
+	SELECT * FROM DOG_RPARK WHERE RIDELETE = 'Y'
+	AND RINUM = #{rinum, jdbcType=VARCHAR}
+</select>
+
+<select id="rparkSelectAll" parameterType="RparkVO" resultType="RparkVO">
+	SELECT * FROM DOG_RPARK WHERE RIDELETE = 'Y'
+	<!-- AND INUM = #{inum, jdbcType=VARCHAR} -->
+	ORDER BY RINUM DESC
+</select>
+
+<update id="rparkDelete" parameterType="RparkVO">
+	UPDATE DOG_RPARK SET RIDELETE = 'N', 
+				   RIINSERT = SYSDATE
+	WHERE RIDELETE = 'Y' AND RINUM = #{rinum, jdbcType=VARCHAR}
+</update>
+</mapper>

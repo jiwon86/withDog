@@ -5,11 +5,10 @@ import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
-<<<<<<< HEAD
 import a.b.c.com.park.vo.ParkVO;
-=======
+import a.b.c.com.park.vo.RparkVO;
 import a.b.c.com.notice.vo.NoticeVO;
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 
 
 public interface ChabunDAO {
@@ -24,9 +23,9 @@ public interface ChabunDAO {
 //	public Member getBoardChabun();
 //	public Member getRboardChabun();
 	public Member getMemChabun();
-<<<<<<< HEAD
+
 	public ParkVO getParkChabun();
-=======
+	public RparkVO getRparkChabun();
 	
 //	public NoticeVO getNoitceChabun();
 //	public NoticeVO getRnoticeChabun();
@@ -34,6 +33,5 @@ public interface ChabunDAO {
 	
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 }

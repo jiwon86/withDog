@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>   
-<%@page import="a.b.c.com.park.vo.ParkVO"%>
+<%@ page import="a.b.c.com.park.vo.ParkVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
@@ -24,10 +24,17 @@
 
 <body class="nav-fixed">
 
+	<%
+		Object obj = request.getAttribute("list");
+		List<ParkVO> list = (List)obj;
+		ParkVO svo = null;
+		if(list.size() > 0) {
+			svo = list.get(0);
+		}
+	%>
 	<!-- 헤더 -->
 	<jsp:include page="/header.wd" />
 	<!-- /헤더 -->
-
 
 	<div id="layoutSidenav">
 		<!-- 사이드바 -->
@@ -36,7 +43,8 @@
 
 		<!-- 콘텐츠 -->
 		<div id="layoutSidenav_content">
-			<main></main>
+			<main>
+		</main>
 			<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 
@@ -46,6 +54,7 @@
 				-->
 			<!-- ** 주요 내용 **  -->
 		<div>
+		
 			<!-- <form name="move" id="move"> -->
 					<main style="width: 960px; margin:0 auto;">
 				
@@ -59,16 +68,6 @@
 					</div>
 					<br><br>
 					
-					<!-- 카드 -->
-					<!-- boardSelect -->
-					 <%
-					 	Object obj = request.getAttribute("list");
-					 	List<ParkVO> list = (List)obj;
-					 	ParkVO svo = null;
-					 	if (list.size() == 1) {
-					 		svo = list.get(0);
-					 	};
-					 %> 
 					<div class="card card-header-actions mx-auto mb-3 mt-3" style="clear:both;">
 					    <div class="card-header">
 					    	<div class="avatar avatar-xl" style="margin-left:305px;">

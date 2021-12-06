@@ -160,8 +160,8 @@ public class MapController {
 		String writer = principal.getName();
 
 		MapTradeVO mvo = new MapTradeVO();
+
 		String tno = ChabunUtil.getMapTradeChabun("a", chabunService.getMapChabun().getTNO());
-		
 		System.out.println("사진  : "+tphoto + bool );
 		
 		try {

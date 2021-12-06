@@ -29,15 +29,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 	@Autowired(required=false)
 	private SqlSessionTemplate sqlSession;
 	
-	
-//	@Override
-//	public SpringBoardVO getBoardChabun() {
-//		logger.info("ChabunDAOImpl.getBoardChabun() 함수 진입");
-//		
-//		return sqlSession.selectOne("getBoardChabun");
-//	}
-
-
 	@Override
 	public PetVO getPetChabun() {
 		// TODO Auto-generated method stub
@@ -45,38 +36,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getPetChabun");
 	}
 	
-	/*
-	@Override
-	public SpringBoardVO getBoardChabun() {
-		logger.info("ChabunDAOImpl.getBoardChabun() 함수 진입");
-		
-		return sqlSession.selectOne("getBoardChabun");
-	}
-
-
-
-	@Override
-	public MapTradeVO getMapChabun() {
-		// TODO Auto-generated method stub
-		logger.info("ChabunDAOImpl.getMapChabun()");
-		return sqlSession.selectOne("getMapChabun");
-	}
-	
-	
-//	@Override
-//	public Member getBoardChabun() {
-//		logger.info("ChabunDAOImpl.getBoardChabun() 함수 진입");
-//		
-//		return sqlSession.selectOne("getBoardChabun");
-//	}
-	/*
-	@Override
-	public SpringRboardVO getRboardChabun() {
-		logger.info("ChabunDAOImpl.getRboardChabun() 함수 진입");
-		
-		return sqlSession.selectOne("getRboardChabun");
-	}
-*/
 	@Override
 	public Member getMemChabun() {
 		logger.info("ChabunDAOImpl.getMemChabun() 함수 진입");
@@ -87,7 +46,7 @@ public class ChabunDAOImpl implements ChabunDAO {
 	@Override
 	public MapTradeVO getMapChabun() {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("getMapChabun");
 	}
 
 	@Override

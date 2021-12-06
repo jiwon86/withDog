@@ -98,8 +98,9 @@ let content ='<form id="popup" class="popup">'
 +'<div class="area_1">'
 +	'<ul class="list">'	
 +		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
-+		'<li><label for="dogs"><i class="fas fa-dog"></i></i>&nbsp;돌 볼 반려동물</label><select class="form-control" id="dogs">'
-+			'</select></li>'
++		'<li id="dogs"><label for="dogs"><i class="fas fa-dog"></i>&nbsp;돌 볼 반려동물</label><br>&nbsp&nbsp'
+			
++			'</li>'
 +		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when_1" name="when_1" placeholder="맡기실 기간을 입력해주세요.">'
 + 			' <i class="fas fa-bone fa-2x"></i><input type="datetime-local" class="form-control" id="when_2" name="when_2"></div></li>'
 +		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
@@ -111,6 +112,7 @@ let content ='<form id="popup" class="popup">'
 +		'<li><button class="btn btn-primary smit" type="button" id="submit">신청 하기</button></li>'
 +'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
 +'			<input type="hidden" id="lng" name="lng" value=""></input>'	
++'			<input type="hidden" id="pno" name="pno" value=""></input>'	
 +'</ul></div>'
 +'</div></form>';
 
@@ -227,16 +229,39 @@ $(document).ready(function(){
 	    	console.log(data);
 	    	petinfo = data;
 	    	// 반려동물 리스트	
-	    	for (i=0; i < petinfo.length; i++) {
-	    		dogs.innerHTML += "<option>"+petinfo[i].pname+"</option>";
+	    	if (petinfo.length != 0) {
+		    	for (i=0; i < petinfo.length; i++) {
+		    		pname = petinfo[i].pname;
+		    		pno = petinfo[i].pno;
+		    		dogs.innerHTML +=  "<input class='form-check-input' id='"+ pno +"' type='checkbox'" + "value=" + pno + " OnClick='checkDog(this)'>&nbsp&nbsp"
+										+ "<label class='form-check-label' for='" +pno + "'>" + pname + "</label>&nbsp&nbsp&nbsp&nbsp"
+		    		//dogs.innerHTML += "<option>"+petinfo[i].pname+"</option>";
+		    	}
+	    	} else {
+	    		dogs.innerHTML +=  "<a href='/petSelectAll.wd?mno=${member.mno}'> 반려동물 등록 하기</a>";
 	    	}
 	    },
 	    error: function (error){
-	        alert(error.toString());
+	        alert(error);
 	    }
 	}); // end of ajax()
 	
 });
+
+// 체크박스 이벤트
+function checkDog (box) {
+	
+	let pno = document.getElementById("pno");
+	let checkbox = box.value;
+	
+	if (box.checked == true) {
+		pno.value += checkbox+" ";
+	} else {
+		pno.value = pno.value.replace(checkbox, "");
+	}
+	console.log(pno.value);
+}
+
 
 // 마커의 대한 json data를 가져온다
 function markersjson (x) {
@@ -341,7 +366,7 @@ function markersLoad(x) {
 					,contentType: "application/x-www-form-urlencoded; charset=UTF-8"		
 					,success: function (data){
 					    	
-					   	const jsonData = data;
+					   	jsonData = data;
 					   	let i;
 					    let size = jsonData.length;
 					    if (x == 1){

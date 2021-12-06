@@ -24,6 +24,15 @@ public abstract class ChabunUtil {
 		return ymd.concat(c);
 	}
 	
+	public static String numpad2(String c) {
+		for(int i=c.length(); i<4; i++) {
+			c = "0" + c;
+		}
+		
+		
+		return c;
+	}
+	
 	/*
 	 * //Q&A Chabun public static String qnanumpad(String q, String n) { for(int
 	 * i=n.length(); i<3; i++) { n = "0" + n; }
@@ -76,12 +85,12 @@ public abstract class ChabunUtil {
 
 	// 맵 트레이드 번호
 	public static String getMapTradeChabun(String type, String memNum) {
-		return ChabunUtil.numpad(type, memNum);
+		return ChabunUtil.numpad2(memNum);
 	}
 	
 	public static void main(String[] args) {
 		String c = "1";
-		System.out.println(ChabunUtil.getMapTradeChabun("a", c));
+		System.out.println(getMapTradeChabun("a", c));
 		System.out.println("getMemChabun(\"m\", c) >>> : " + ChabunUtil.getMemChabun("m", c));
 		System.out.println("getBoardChabun(\"N\", c) >>> : " + ChabunUtil.getBoardChabun("N", c));
 		System.out.println("getRboardChabun(\"N\", c) >>> : " + ChabunUtil.getRboardChabun("N", c));

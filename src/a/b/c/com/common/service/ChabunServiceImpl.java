@@ -37,40 +37,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getPetChabun();
 	}
 	
-	/*
-=======
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
-	private ChabunDAO chabunDAO;
-	
-	@Autowired(required=false)
-	public ChabunServiceImpl(ChabunDAO chabunDAO) {
-		this.chabunDAO = chabunDAO;
-	}
-	
-	@Override
-	public MapTradeVO getMapChabun() {
-		// TODO Auto-generated method stub
-		logger.info("ChabunServiceImpl.getMapChabun() 함수 진입");
-		
-		return chabunDAO.getMapChabun();
-	}
-	
-	/*
-	@Override
-	public SpringBoardVO getBoardChabun() {
-		logger.info("ChabunServiceImpl.getBoardChabun() 함수 진입");
-		
-		return chabunDAO.getBoardChabun();
-	}
-
-	@Override
-	public SpringRboardVO getRboardChabun() {
-		logger.info("ChabunServiceImpl.getRboardChabun() 함수 진입");
-		
-		return chabunDAO.getRboardChabun();
-	}
-	*/
-
 	@Override
 	public Member getMemChabun() {
 		logger.info("ChabunServiceImpl.getMemChabun() 함수 진입");
@@ -81,10 +47,9 @@ public class ChabunServiceImpl implements ChabunService {
 	@Override
 	public MapTradeVO getMapChabun() {
 		// TODO Auto-generated method stub
-		return null;
+		return chabunDAO.getMapChabun();
 	}
 	
-
 	@Override
 	public ParkVO getParkChabun() {
 		// TODO Auto-generated method stub

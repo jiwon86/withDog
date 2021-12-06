@@ -263,6 +263,7 @@
 		delInput.addClass("deleteBtn");
 		//내용
 		var contentP = $("<p>");
+		
 		contentP.html(decodeURIComponent(con));
 		
 		//조립하기

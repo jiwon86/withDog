@@ -39,11 +39,16 @@
 	</select>
 
 
-	
 
 	<select id="getParkChabun" resultType="ParkVO">
 		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 
 	</select>
+
+	
+	<select id="getRparkChabun" resultType="RparkVO">
+		SELECT NVL(MAX(SUBSTR(A.RINUM, -4)),0) + 1 RINUM FROM DOG_RPARK A 
+	</select>
+
 
 	<select id="getNoticeChabun" resultType="NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNUM, -4)), 0) + 1 NNUM FROM NOTICE A

@@ -8,8 +8,10 @@ import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
 
+
 import a.b.c.com.park.vo.ParkVO;
 
+import a.b.c.com.park.vo.RparkVO;
 import a.b.c.com.notice.vo.NoticeVO;
 
 
@@ -28,6 +30,11 @@ public interface ChabunDAO {
 	public Member getMemChabun();
 
 	public ParkVO getParkChabun();
+
+	public RparkVO getRparkChabun();
+	
+//	public NoticeVO getNoitceChabun();
+//	public NoticeVO getRnoticeChabun();
 
 
 	//	public NoticeVO getNoitceChabun();

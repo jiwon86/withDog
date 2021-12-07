@@ -97,11 +97,13 @@ public class MapController {
 		
 		//JSON SET
 		JSONObject jObj = null;
+		JSONObject jObj2 = null;
 		JSONArray jArr = new JSONArray();
-		
+		JSONArray jArr2 = new JSONArray();
 		try {
 			for(int i=0; listall.size() > i ;  i++) {
 				jObj = new JSONObject();
+				jObj2 = new JSONObject();
 				
 				MapTradeVO mvo_ = listall.get(i);
 				jObj.put("tno", mvo_.getTNO());
@@ -116,10 +118,11 @@ public class MapController {
 				jObj.put("deleteyn", mvo_.getDELETEYN());
 				jObj.put("insertdate", mvo_.getINSERTDATE());
 				jObj.put("updatedate", mvo_.getUPDATEDATE());
-				
-				System.out.println("lng" + mvo_.getTLNG());
-				
+				jObj2.put("aa", "1");
+				jArr2.add(jObj2);
+				jArr.add(jArr2);
 				jArr.add(jObj);
+				
 			}
 			
 			// JOSN FILE IO SET

@@ -136,12 +136,12 @@
 								<a class="bg-transparent" href="/petSelect.wd?mno=<%=member.getMno() %>&pno=<%=pvo.getPno()%>">
 								<% if(pvo.getPphoto() != null) { %>
                                  	<img id="select" 
-                                 	 src="/WithDog/img/pet/<%=pvo.getPphoto()%>" alt="댕댕이 사진"
+                                 	 src="/img/pet/<%=pvo.getPphoto()%>" alt="댕댕이 사진"
                                  	 style="border-radius:50%; width:300px; height:300px; margin :30px;"
                                  	  />
                                	<% } else { %>
                                		<img id="select"  
-                                 	 src="/WithDog/img/pet/default.jpg" alt="댕댕이 사진" 
+                                 	 src="/img/pet/default.jpg" alt="댕댕이 사진" 
                                  	 style="border-radius:50%; max-width:300px; max-height:300px; margin :30px;"
                                  	 />
                                	<% } %>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="a.b.c.com.review.vo.ReviewVO" %>
-<%@ page import="a.b.c.com.member.vo.Member"%>
+<%@ page import="a.b.c.com.member.vo.MemberVO"%>
 
 <!DOCTYPE html>
 <html lang="ko">

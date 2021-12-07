@@ -17,7 +17,7 @@ import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.service.MemberService;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.review.service.ReviewService;
 import a.b.c.com.review.vo.ReviewVO;
 
@@ -101,7 +101,9 @@ public class ReviewController {
 		String mid = principal.getName();
 		
 		rmid = rvo.getMid();
-		Member member = memberService.memberSelect(mid);
+		MemberVO member = new MemberVO();
+		List<MemberVO> memberList = memberService.memberSelect(member);
+		member = memberList.get(0);
 
 		List<ReviewVO> listAll = reviewService.selectAllReview(rvo);
 		logger.info("listAll.size() >>> " + listAll.size());

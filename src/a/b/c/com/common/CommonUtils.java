@@ -3,25 +3,8 @@ package a.b.c.com.common;
 public abstract class CommonUtils {
 
 
-	public static final String WorkSpace = "el_web_withdog_work";
+	public static final String WorkSpace = "pr_work";
 
-
-	//public static final String WorkSpace = "el_withdog_work";
-	// 박상혁 : withdog_work
-<<<<<<< HEAD
-
-	
-	
-
-=======
-<<<<<<< HEAD
-	
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
-	
-
-	public static final String WorkSpace = "withdog_work";
-	//public static final String WorkSpace = "pr_work";
-	//public static final String WorkSpace = "project_work";
 	public static final String WorkSpace_pr = "pr_work";
 
 	public static final String WorkSpace_project = "project_work";
@@ -99,7 +82,8 @@ public abstract class CommonUtils {
 
 	//Pet 이미지 업로드 패스
 	public static final String PET_IMG_UPLOAD_PATH= 
-			"C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\pet\\";
+	"C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\pet\\";
+
 	//배동민 컴퓨터 구동용 이미지 업로드 패스
 	//public static final String PET_IMG_UPLOAD_PATH = "C:\\00.KOSMO93\\100.project\\el_withdog_work\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\WithDog\\img\\pet\\";
 	public static final int PET_IMG_FILE_SIZE = 2*1024*1024;

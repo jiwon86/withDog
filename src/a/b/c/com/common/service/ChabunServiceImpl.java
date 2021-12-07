@@ -15,12 +15,11 @@ import a.b.c.com.pet.vo.PetVO;
 import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
-<<<<<<< HEAD
-import a.b.c.com.member.vo.Member;
+
 import a.b.c.com.review.vo.ReviewVO;
-=======
+
 import a.b.c.com.member.vo.MemberVO;
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 import a.b.c.com.park.vo.ParkVO;
 import a.b.c.com.park.vo.RparkVO;
 
@@ -47,38 +46,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getPetChabun();
 	}
 	
-	/*
-	private ChabunDAO chabunDAO;
-	
-	@Autowired(required=false)
-	public ChabunServiceImpl(ChabunDAO chabunDAO) {
-		this.chabunDAO = chabunDAO;
-	}
-	
-	@Override
-	public MapTradeVO getMapChabun() {
-		// TODO Auto-generated method stub
-		logger.info("ChabunServiceImpl.getMapChabun() 함수 진입");
-		
-		return chabunDAO.getMapChabun();
-	}
-	
-	/*
-	@Override
-	public SpringBoardVO getBoardChabun() {
-		logger.info("ChabunServiceImpl.getBoardChabun() 함수 진입");
-		
-		return chabunDAO.getBoardChabun();
-	}
-
-	@Override
-	public SpringRboardVO getRboardChabun() {
-		logger.info("ChabunServiceImpl.getRboardChabun() 함수 진입");
-		
-		return chabunDAO.getRboardChabun();
-	}
-	*/
-
 	@Override
 	public MemberVO getMemChabun() {
 		logger.info("ChabunServiceImpl.getMemChabun() 함수 진입");
@@ -95,9 +62,10 @@ public class ChabunServiceImpl implements ChabunService {
 	@Override
 	public MapTradeVO getMapChabun() {
 		// TODO Auto-generated method stub
-		return null;
+		return chabunDAO.getMapChabun();
 	}
 	
+
 	// review
 	@Override
 	public ReviewVO getReviewCrnumChabun() {

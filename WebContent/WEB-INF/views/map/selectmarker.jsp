@@ -19,8 +19,8 @@
 	boolean myContent = false;
 	boolean waitPropose = false;
 	MapTradeVO mvo = (MapTradeVO)obj;
-	String writer = mvo.getTWRITER();
-	String propose = mvo.getPROPOSE();
+	String writer = mvo.getTwriter();
+	String propose = mvo.getPropose();
 	System.out.println("writer : " + writer + "id : " + loginid);
 	if (loginid.equals(writer)) {
 		myContent = true;
@@ -85,7 +85,7 @@ $(document).ready(function(){
                                             <div class="page-header-icon"><i data-feather="github"></i></div>
                                             	돌봄 신청하기
                                         </h1>
-                                        <div class="page-header-subtitle">ID : <%= mvo.getTWRITER() %></div>
+                                        <div class="page-header-subtitle">ID : </div>
                                     </div>
                                     <div class="col-12 col-xl-auto mt-4">WITH DOG</div>
                                 </div>
@@ -96,15 +96,15 @@ $(document).ready(function(){
                     <!-- Main page content-->
                     <div class="container-xl px-4 mt-n10">
                         <div class="card">
-                            <div class="card-header"><%= mvo.getTTITLE()%></div>
+                            <div class="card-header"></div>
                             <div class="card-body">
 	                            
-	                            	<img src="/img/map/<%=mvo.getTPHOTO() %>" class="dogimg">
+	                            	<img src="/img/map/<%=mvo.getTphoto() %>" class="dogimg">
 	                            
 	                            	<ul class="list">돌봄 상세 사항
-	                            		<li class="textcon"><textarea class="form-control" rows="3" disabled><%= mvo.getTCONTENT() %></textarea></li>
+	                            		<li class="textcon"><textarea class="form-control" rows="3" disabled></textarea></li>
 	                            		<li>돌봄 기간  : </li>
-	                            		<li><img src="/image/map/coin.png" class="icons"> <%= mvo.getTPRICE() %></li>
+	                            		<li><img src="/image/map/coin.png" class="icons"> /li>
 	                            		<li><img src="/image/map/doghouse.png" class="icons"> 주소</li>
 	                            	</ul>
 	                            	
@@ -117,7 +117,7 @@ $(document).ready(function(){
                            			<button class="btn btn-success" id="submit" type="button">신청하기</button>
                            		<% } %>
                             <form id="aaa">
-                            	<input type="hidden" value=<%=mvo.getTNO() %> name="TNO">
+                            	<input type="hidden" value="" name="TNO">
                             </form>
                             
                             </div>

@@ -25,7 +25,7 @@
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
                 <h6 class="dropdown-header dropdown-notifications-header">
                     <i class="me-2" data-feather="bell"></i>
-                    Alerts Center
+                    	알림
                 </h6>
                 <!-- Example Alert 1-->
                 <a class="dropdown-item dropdown-notifications-item" href="#!">
@@ -68,14 +68,9 @@
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
         	
         	<%
-<<<<<<< HEAD
-        	Member member = (Member)request.getAttribute("member");
-	        	
-        	%>
-=======
+
         	       MemberVO member = (MemberVO)request.getAttribute("member");
         	 %>
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
         	
         	<!-- 로그인 -->
         	<sec:authorize access="isAuthenticated()">

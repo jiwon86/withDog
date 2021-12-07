@@ -21,6 +21,11 @@
 
 		<!-- 헤더 -->
 		<jsp:include page="/header.wd" />
+			<script type="text/javascript">
+				function offerLocationBtn(tno) {
+					location.href=`/offerSelect.wd?tno=${"${tno}"}`;
+				}
+			</script>
 		<!-- /헤더 -->
 
 		
@@ -165,7 +170,7 @@
 
 		                                    <hr class="my-4" />
 		                                    <div class="d-flex justify-content-between">
-		                                        <button class="btn btn-primary btn-lg" style="margin:0 auto;" type="button">확인</button>
+		                                        <button class="btn btn-primary btn-lg" style="margin:0 auto;" type="button" onclick="offerLocationBtn('<%=ovo.getTno()%>')">확인</button>
 		                                    </div>
 		                                </div>
 		                            </div>

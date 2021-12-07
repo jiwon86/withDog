@@ -8,18 +8,19 @@
 		SELECT * FROM (
 			SELECT
 				   T.TNO       TNO
-				 , T.TTITLE    TTITLE
 				 , T.TCONTENT  TCONTENT
 				 , T.TPRICE    TPRICE
 				 , T.TLAT      TLAT
 				 , T.TLNG      TLNG
+				 , T.TADDRESS   TADDRESS
+				 , T.TPHOTO    TPHOTO
 				 , T.MNO       MNO
 				 , T.PNO       PNO
-				 , TO_CHAR(TO_DATE(T.STARTDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')  STARTDATE
-				 , TO_CHAR(TO_DATE(T.ENDDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')    ENDDATE
+				 , TO_CHAR(T.STARTDATE, 'YYYY-MM-DD HH24:MI')  STARTDATE
+				 , TO_CHAR(T.ENDDATE, 'YYYY-MM-DD HH24:MI')    ENDDATE
 				 , T.DELETEYN  DELETEYN
-				 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
-				 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
+				 , TO_CHAR(T.INSERTDATE, 'YYYY-MM-DD')         INSERTDATE
+				 , TO_CHAR(T.UPDATEDATE, 'YYYY-MM-DD')         UPDATEDATE
 				 , M.MID       MID
 				 , M.MNAME     MNAME
 				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.TNO = T.TNO) conditionCount
@@ -36,18 +37,19 @@
 	<select id="offerSelect" parameterType="OfferVO" resultType="OfferVO">
 		SELECT 
 			   T.TNO       TNO
-			 , T.TTITLE    TTITLE
 			 , T.TCONTENT  TCONTENT
 			 , T.TPRICE    TPRICE
 			 , T.TLAT      TLAT
 			 , T.TLNG      TLNG
+			 , T.TADDRESS  TADDRESS
+			 , T.TPHOTO    TPHOTO
 			 , T.MNO       MNO
 			 , T.PNO       PNO
-			 , TO_CHAR(TO_DATE(T.STARTDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')  STARTDATE
-			 , TO_CHAR(TO_DATE(T.ENDDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')    ENDDATE
+			 , TO_CHAR(T.STARTDATE, 'YYYY-MM-DD HH24:MI')  STARTDATE
+			 , TO_CHAR(T.ENDDATE, 'YYYY-MM-DD HH24:MI')    ENDDATE
 			 , T.DELETEYN  DELETEYN
-			 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
-			 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
+			 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')         INSERTDATE
+			 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')         UPDATEDATE
 			 , M.MID       MID
 			 , M.MNAME     MNAME
 		FROM   TRADEMAP T, MEMBER M
@@ -80,5 +82,10 @@
 			#{pno, jdbcType=VARCHAR}
 		</foreach>
 	</select>
+
+	<update id="offerUpdatePropose" parameterType="OfferVO">
+		UPDATE TRADEMAP SET PROPOSE = '1'
+		WHERE TNO = #{tno, jdbcType=VARCHAR}
+	</update>
 
 </mapper>

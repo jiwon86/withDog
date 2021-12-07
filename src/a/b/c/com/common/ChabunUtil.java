@@ -11,7 +11,8 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_A = "A"; // 반려동물 관련 매칭
 	public static final String BIZ_GUBUN_PE = "P"; //반려동물
 	public static final String BIZ_GUBUN_P = "P"; // 산책스타그램
-	public static final String BIZ_GUBUN_PAY = "PAY"; //결제
+	public static final String BIZ_GUBUN_PAY = "PAY"; // 결제
+	public static final String BIZ_GUBUN_C = "C"; // 조건제시
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
 	public static String numpad(String t, String c) {
@@ -88,6 +89,11 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_PAY.concat(ChabunUtil.numpad(type, payNum));
 	}
 	
+	// 조건제시 번호
+	public static String getConditionChabun(String type, String cNum) {
+		return BIZ_GUBUN_C.concat(ChabunUtil.numpad(type, cNum));
+	}
+	
 	public static void main(String[] args) {
 		String c = "1";
 		System.out.println(ChabunUtil.getMapTradeChabun("a", c));
@@ -102,6 +108,7 @@ public abstract class ChabunUtil {
 		System.out.print("getPetChabun() >>>>>" + ChabunUtil.getPetChabun(BIZ_GUBUN_PE, c));
 		System.out.println(".getQnaChabun(\"N\", c) >>> : " + ChabunUtil.getQnaChabun("N", c));
 		System.out.println("getPayChabun >>> : " + ChabunUtil.getPayChabun("m", c));
+		System.out.println("getConditionChabun >>> : " + ChabunUtil.getConditionChabun("m", c));
 	}
 
 }

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.OfferVO;
 import a.b.c.com.pet.vo.PetVO;
 
@@ -38,6 +39,13 @@ public class OfferDAOImpl implements OfferDAO {
 		logger.info("OfferDAOImpl.petSelectAll() 함수 진입");
 		
 		return sqlSession.selectList("petSelectAll", offerMap);
+	}
+
+	@Override
+	public int offerUpdatePropose(OfferVO ovo) {
+		logger.info("OfferDAOImpl.offerUpdatePropose() 함수 진입");
+		
+		return (Integer)sqlSession.update("offerUpdatePropose", ovo);
 	}
 
 }

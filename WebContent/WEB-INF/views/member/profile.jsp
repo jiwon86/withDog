@@ -17,7 +17,7 @@
 				
 				$("#Mypet").click(function(){
 					//alert("mno >>>" + memberUpdateForm.mno.value);
-					$("#memberUpdateForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+					$("#memberUpdateForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 				});
 				
 				$("#zonecode").click(function() {
@@ -177,7 +177,7 @@
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
                             <a class="nav-link active ms-0" href="/profile.wd">Profile</a>
-                            <a class="nav-link" href="myPetList.wd">MyPet</a>
+                            <a class="nav-link" id="Mypet" href="#">MyPet</a>
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                         </nav>

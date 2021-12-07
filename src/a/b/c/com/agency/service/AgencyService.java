@@ -3,6 +3,7 @@ package a.b.c.com.agency.service;
 import java.util.List;
 
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.PayVO;
 
 public interface AgencyService {
@@ -14,4 +15,5 @@ public interface AgencyService {
 	public int payAjax(PayVO pvo);
 	public List<PayVO> paySelect(PayVO pvo);
 	public int payCount(PayVO pvo);
+	public List<PayVO> paySelectPayno(PayVO pvo);
 }

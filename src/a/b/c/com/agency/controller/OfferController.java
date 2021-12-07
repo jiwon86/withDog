@@ -332,5 +332,125 @@ public class OfferController {
 		
 		return "offer/conditionSelect";
 	}
+
+	// http://localhost:8088/offerMapSelect?tno=?&mno=?
+	@GetMapping("/offerMapSelect")
+	public String offerMapSelect(Principal principal, Model model, String tno, String mno) {
+		
+		String myMno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			myMno = memberList.get(0).getMno();
+			model.addAttribute("mno", mno);
+		}
+		
+		if(mno != null) {
+			// 반려동물 신청 정보 가져오기
+			OfferVO _ovo = new OfferVO();
+			
+			// *** map에서 mno가져와야 함.
+			//_ovo.setMno(mno);
+			_ovo.setMno(mno);
+			_ovo.setTno(tno);
+			
+			// 반려동물 신청 상세보기 정보
+			List<OfferVO> offerList = offerService.offerSelect(_ovo);
+			
+			OfferVO ovo = offerList.get(0);
+			
+			// 반려동물 리스트 정보
+			String pno = ovo.getPno();
+			String[] pnoArr = pno.split(" ");
+			
+			Map<String, Object> offerMap = new HashMap<>();
+			offerMap.put("pnoArr", pnoArr);
+			offerMap.put("mno", ovo.getMno());
+			
+			List<PetVO> PetListAll = offerService.petSelectAll(offerMap);
+			
+			List<PetVO> petList = new ArrayList<>();
+			
+			for(int i=0; i<PetListAll.size(); i++) {
+				PetVO p = PetListAll.get(i);					
+				
+				petList.add(p);
+			}
+
+			// 조건제시 정보 가져오기		
+			/*
+			int pageSize = CommonUtils.CONDITION_PAGE_SIZE;
+			int groupSize = CommonUtils.CONDITION_GROUP_SIZE;
+			int curPage = CommonUtils.CONDITION_CUR_PAGE;
+			int totalCount = CommonUtils.CONDITION_TOTAL_COUNT;
+			*/
+			
+			ConditionVO conditionVO = new ConditionVO();
+			conditionVO.setTno(tno);
+			conditionVO.setMno(myMno);
+			
+			/*
+			if(conditionVO.getCurPage() != null) {
+				curPage = Integer.parseInt(conditionVO.getCurPage());
+			}
+			
+			conditionVO.setPageSize(String.valueOf(pageSize));
+			conditionVO.setGroupSize(String.valueOf(groupSize));
+			conditionVO.setCurPage(String.valueOf(curPage));
+			conditionVO.setTotalCount(String.valueOf(totalCount));
+			*/
+			
+			List<ConditionVO> conditionList = conditionService.conditionMapSelect(conditionVO);
+			
+			List<Integer> agencyListAnoCount = new ArrayList<>();
+			List<String> agencyListMatchyn = new ArrayList<>();
+			List<Integer> payListCount = new ArrayList<>();
+			for(int i=0; i<conditionList.size(); i++) {
+				String cno = conditionList.get(i).getCno();
+				
+				AgencyVO _avo = new AgencyVO();
+				_avo.setTno(tno);
+				_avo.setCno(cno);
+				
+				int anoCount = agencyService.agencySelectCount(_avo);
+				
+				if(anoCount > 0) {
+					String matchyn = agencyService.agencyMatchyn(_avo).get(0).getMatchyn();
+					
+					agencyListMatchyn.add(matchyn);
+				} else {
+					agencyListMatchyn.add("N");
+				}
+				
+				agencyListAnoCount.add(anoCount);
+				
+				PayVO _pvo = new PayVO();
+				_pvo.setTno(tno);
+				_pvo.setCno(cno);
+				
+				int payCount = agencyService.payCount(_pvo);
+				
+				payListCount.add(payCount);
+			}
+			
+			model.addAttribute("offerList", offerList);
+			model.addAttribute("pagingConditionVO", conditionVO);
+			model.addAttribute("petList", petList);
+			model.addAttribute("agencyListMatchyn", agencyListMatchyn);
+			model.addAttribute("agencyListAnoCount", agencyListAnoCount);
+			model.addAttribute("conditionList", conditionList);
+			model.addAttribute("payListCount", payListCount);
+		}
+		
+		return "agency/offerMapSelect";
+	}	
 	
 }

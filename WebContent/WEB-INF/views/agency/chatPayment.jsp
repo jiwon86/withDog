@@ -228,7 +228,7 @@
 				*/
 				merchant_uid: 'merchant_' + new Date().getTime(),
 				name: '위드독 결제',
-				amount: <%--<%= cvo.getCprice()%> --%> 100,
+				amount: '<%= cvo.getCprice()%>',
 				buyer_email: '<%= mvo.getMemail()%>',
 				buyer_name: '<%= mvo.getMname()%>',
 				buyer_addr: '<%= mvo.getMjibunaddress()%>',

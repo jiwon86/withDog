@@ -29,9 +29,9 @@ import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.pet.vo.PetVO;
 
 @Controller
-public class ConditionsController {
+public class ConditionController {
 	
-	private Logger logger = Logger.getLogger(ConditionsController.class);
+	private Logger logger = Logger.getLogger(ConditionController.class);
 	
 	private ConditionService conditionService;
 	private MemberService memberService;
@@ -39,7 +39,7 @@ public class ConditionsController {
 	private AgencyService agencyService;
 	
 	@Autowired(required = false)
-	public ConditionsController(ConditionService conditionService, MemberService memberService, 
+	public ConditionController(ConditionService conditionService, MemberService memberService, 
 							   OfferService offerService, AgencyService agencyService) {
 		this.conditionService = conditionService;
 		this.memberService = memberService;
@@ -208,7 +208,7 @@ public class ConditionsController {
 		// 반려동물 정보 가져오기
 		String pno = ovo.getPno();
 		String[] pnoArr = pno.split(" ");
-		String mno = offerVO.getMno();
+		String mno = ovo.getMno();
 			
 		Map<String, Object> offerMap = new HashMap<>();
 		offerMap.put("pnoArr", pnoArr);
@@ -242,6 +242,8 @@ public class ConditionsController {
 		obj.put("mname", ovo.getMname());
 		obj.put("tlag", ovo.getTlat());
 		obj.put("tlng", ovo.getTlng());
+		obj.put("taddress", ovo.getTaddress());
+		obj.put("tphoto", ovo.getTphoto());
 		obj.put("startdate", ovo.getStartdate());
 		obj.put("enddate", ovo.getEnddate());
 		obj.put("tprice", ovo.getTprice());

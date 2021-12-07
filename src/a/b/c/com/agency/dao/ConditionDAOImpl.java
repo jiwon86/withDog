@@ -60,4 +60,18 @@ public class ConditionDAOImpl implements ConditionDAO {
 		return sqlSession.selectList("petSelect", offerMap);
 	}
 
+	@Override
+	public List<ConditionVO> conditionMapSelect(ConditionVO conditionVO) {
+		logger.info("ConditionDAOImpl.conditionMapSelect() 함수 진입");
+		
+		return sqlSession.selectList("conditionMapSelect", conditionVO);
+	}
+
+	@Override
+	public int conditionInsert(ConditionVO conditionVO) {
+		logger.info("ConditionDAOImpl.conditionInsert() 함수 진입");
+		
+		return (Integer)sqlSession.insert("conditionInsert", conditionVO);
+	}
+	
 }

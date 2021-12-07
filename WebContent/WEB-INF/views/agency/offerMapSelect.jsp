@@ -18,160 +18,12 @@
 	<jsp:include page="/head.wd" />
 	<head>
 		<script type="text/javascript">
-		
-			function chatPaymentResultBtnClick(e) {
-				let cno = $(e).parent().prev().find(".cno").val();
-				let tno = $(e).parent().prev().find(".tno").val();
+
+			function chatPaymentResultBtnClick(cno, tno) {
 				console.log("cno >>> : " + cno);
 				console.log("tno >>> : " + tno);
 				
-				location.href=`/chatPaymentResult.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
-			}
-		
-			function chatPaymentBtnClick(e) {
-				let cno = $(e).parent().prev().find(".cno").val();
-				let tno = $(e).parent().prev().find(".tno").val();
-				console.log("cno >>> : " + cno);
-				console.log("tno >>> : " + tno);
-				location.href=`/chatPayment.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
-			}
-		
-			// 수락버튼 누를 때 이벤트 함수
-			function acceptBtnClick(e) {
-				let paycount = $(e).parent().prev().find(".paycount").val();
-				console.log("paycount >>> : " + paycount);
-				
-				var mAccount = $(e).parent().prev().find(".mAccount").text();
-				
-				Swal.fire({
-					title: "정말로 " + mAccount + "님의 조건제시를 수락하시겠습니까?",
-					text: "다시 한번 조건제시을 확인해 주세요.",
-					icon: "warning",
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-				    cancelButtonColor: '#d33',
-				    confirmButtonText: '확인',
-				    cancelButtonText: '취소'					
-				}).then((result) => {
-					if(result.value) {
-
-						// ajax로 insert 혹은 update문이 실행되야 한다.
-						let cnoVal = $(e).parent().prev().find(".cno").val();
-						let tnoVal = $(e).parent().prev().find(".tno").val();
-						
-						let typeVal = "GET";
-						let urlVal = "/agencyCheckAjax.wd";
-						
-						console.log("cnoVal >>> : " + cnoVal);
-						console.log("tnoVal >>> : " + tnoVal);
-						
-						$.ajax({
-							url: urlVal,
-							type: typeVal,
-							data: {
-								"cno": cnoVal,
-								"tno": tnoVal
-							},
-							success: whenSuccess1,
-							error: whenError1
-						});
-						
-						let cancelBtn = "";
-						
-						if(paycount > 0) {
-							cancelBtn = `
-                        		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentResultBtnClick(this)">
-                    				<i class="fas fa-check-circle"></i> &nbsp; 결제완료
-                    			</div>	
-							`;	
-						} else {
-							cancelBtn = `
-			        			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-			            			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-			            		</div>
-			            		<div class="btn btn-yellow hahmlet" onclick="chatPaymentBtnClick(this)">
-			            			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
-			            		</div>
-							`;							
-						}
-						
-						$(e).parent().html(cancelBtn);
-						
-					}
-				})
-				
-			}
-			
-			// 취소버튼 누를 때 이벤트 함수
-			function cancelBtnClick(e) {
-				let paycount = $(e).parent().prev().find(".paycount").val();
-				console.log("paycount >>> : " + paycount);
-				
-				var mAccount = $(e).parent().prev().find(".mAccount").text();
-				
-				Swal.fire({
-					title: "정말로 " + mAccount + "님의 조건제시를 해제하시겠습니까?",
-					text: "다시 한번 조건제시을 확인해 주세요.",
-					icon: "warning",
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-				    cancelButtonColor: '#d33',
-				    confirmButtonText: '확인',
-				    cancelButtonText: '취소'					
-				}).then((result) => {
-					if(result.value) {
-
-						// ajax로 update문이 실행되어야 한다.
-						let cnoVal = $(e).parent().prev().find(".cno").val();
-						let tnoVal = $(e).parent().prev().find(".tno").val();
-						let typeVal = "GET";
-						let urlVal = "/agencyCheckAjax.wd";
-						
-						console.log("cnoVal >>> : " + cnoVal);
-						console.log("tnoVal >>> : " + tnoVal);
-						
-						$.ajax({
-							url: urlVal,
-							type: typeVal,
-							data: {
-								"cno": cnoVal,
-								"tno": tnoVal
-							},
-							success: whenSuccess2,
-							error: whenError2
-						});
-						
-						let acceptBtn = `
-		                	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-								<i class="far fa-check-circle"></i> &nbsp; 수락
-							</div>	                      				
-						`;
-						
-						$(e).parent().html(acceptBtn);						
-
-					}
-				})
-
-			}
-			
-			function whenSuccess1(resData) {
-				console.log("성공");
-				$("#liveToast1").toast("show");
-			}
-			
-			function whenSuccess2(resData) {
-				console.log("성공");
-				$("#liveToast3").toast("show");
-			}
-			
-			function whenError1() {
-				console.log("실패");
-				$("#liveToast2").toast("show");
-			}
-			
-			function whenError2() {
-				console.log("실패");
-				$("#liveToast4").toast("show");
+				location.href=`/chatPaymentResult2.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
 			}
 			
 		</script>
@@ -201,11 +53,13 @@
 				--> 
 				<!-- ** 주요 내용 **  -->
 				<% 
+					/*
 					int pageSize = 0;
 					int groupSize = 0;
 					int curPage = 0;
 					int totalCount = 0;
-				
+					*/
+					
 					// 신청 리스트
 					List<OfferVO> offerList = (List<OfferVO>) request.getAttribute("offerList");
 					OfferVO ovo = offerList.get(0);
@@ -216,6 +70,14 @@
 					
 					// 조건제시 페이징
 					ConditionVO pagingConditionVO = (ConditionVO) request.getAttribute("pagingConditionVO");
+					
+            		List<ConditionVO> conditionList = (List<ConditionVO>) request.getAttribute("conditionList");
+        			int conditionCnt = conditionList.size();
+        			
+        			List<Integer> agencyListAnoCount = (List<Integer>) request.getAttribute("agencyListAnoCount"); 
+        			// agencySelectCount가 0이면 "N"이 들어가 있음
+        			List<String> agencyListMatchyn = (List<String>) request.getAttribute("agencyListMatchyn");
+        			List<Integer> payListCount = (List<Integer>) request.getAttribute("payListCount");
 					
 					// 오늘 날짜 구하기
 					Date today = new Date();
@@ -301,7 +163,7 @@
 	                                	<span>지역</span>
 	                                </h4>
 	                                <hr>
-	                                <p class="lead mb-4 ms-2"><%= ovo.getTaddress() %></p>
+	                                <p class="lead mb-4 ms-2"><%= ovo.getTlat() %>, <%= ovo.getTlng() %></p>
                                 </div>
                                 <br>
                                 
@@ -366,25 +228,33 @@
 	                                  <%= ovo.getTcontent() %>
 	                               </div>
                                </div>		                       
+                               <br>
                                
+                               <%
+                               	 if(conditionList.size() > 0) {
+                               %>
+									<div class="alert alert-danger" role="alert">
+									  <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;조건제시는 1개이상 신청하실 수 없습니다.
+									</div>
+                               <%
+                               	 } else {
+                               %>
+	                               	<div>
+	                               	    <button class="btn btn-primary" type="button">조건제시 작성</button>
+	                               	</div>
+                               <%
+                               	 }
+                               %>
                             </div>
                         </div>
                         <!-- /신청정보 카드 -->
 
-						<h4 class="mb-0 mt-5">조건제시 정보</h4>
+						<h4 class="mb-0 mt-5">나의 조건제시 정보</h4>
                         <hr class="mt-2 mb-4" />
                         <!-- 조건제시 정보 -->
                         <div class="row">
                         	
                         	<%
-                        		List<ConditionVO> conditionList = (List<ConditionVO>) request.getAttribute("conditionList");
-                    			int conditionCnt = conditionList.size();
-                    			
-                    			List<Integer> agencyListAnoCount = (List<Integer>) request.getAttribute("agencyListAnoCount"); 
-                    			// agencySelectCount가 0이면 "N"이 들어가 있음
-                    			List<String> agencyListMatchyn = (List<String>) request.getAttribute("agencyListMatchyn");
-                    			List<Integer> payListCount = (List<Integer>) request.getAttribute("payListCount");
-                    			
                     			if(conditionList.size() > 0) {
 	                        		for(int i=0; i<conditionCnt; i++) {
 	                        			ConditionVO cvo = conditionList.get(i);
@@ -392,10 +262,15 @@
 	                        			String matchyn = agencyListMatchyn.get(i);
 	                        			int payCount = payListCount.get(i);
 	                        			
+	                        			String cno = cvo.getCno();
+	    								String tno = cvo.getTno();
+	    								
+	                        			/*
 	                					pageSize = Integer.parseInt(pagingConditionVO.getPageSize());
 	                					groupSize = Integer.parseInt(pagingConditionVO.getGroupSize());
 	                					curPage = Integer.parseInt(pagingConditionVO.getCurPage());
 	                        			totalCount = Integer.parseInt(cvo.getTotalCount());
+	                        			*/
                         	%>
 			                        	<!-- 조건제시 정보 -->
 			                            <div class="col-lg-6 mb-4">
@@ -433,38 +308,34 @@
 			                                    			if(matchyn.equals("Y")) {
 			                                    				if(payCount > 0) {
 			                                    	%>
-			                                    					<!--  
-					                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-						                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-						                                    		</div>
-						                                    		-->
-						                                    		<div class="btn btn-green hahmlet chatPaymentBtn" onclick="chatPaymentResultBtnClick(this)">
+						                                    		<div class="btn btn-green hahmlet chatPaymentBtn" 
+						                                    			 onclick="chatPaymentResultBtnClick('<%=cno%>', '<%=tno%>')">
 						                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제완료
-						                                    		</div>			                                    					
+						                                    		</div>	                                    					
 				                                    <%		
 			                                    				} else {
 			                                    	%>
-					                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-						                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-						                                    		</div>
-						                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
-						                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
-						                                    		</div>
+					                                    			<button class="btn btn-yellow" type="button" disabled>
+																	  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+																	  &nbsp;&nbsp;결제완료 대기중..
+																	</button>	 
 			                                    	<%
 			                                    				}
 				                                    		} else {
 				                                    %>
-					                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-																	<i class="far fa-check-circle"></i> &nbsp; 수락
-																</div>	 
+				                                    			<button class="btn btn-primary" type="button" disabled>
+																  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+																  &nbsp;&nbsp;조건수락 대기중..
+																</button>
 				                                    <%	
 				                                    		}
 			                                    			
 			                                    		} else {
 			                                    	%>
-					                                    	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-																<i class="far fa-check-circle"></i> &nbsp; 수락
-															</div>	                                    	
+					                                    	<button class="btn btn-primary" type="button" disabled>
+															  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+															  &nbsp;&nbsp;조건수락 대기중..
+															</button>                                    	
 			                                    	<%
 			                                    		}
 			                                    	%>
@@ -484,6 +355,7 @@
                         </div>
                         <!-- /조건제시 정보 -->
                         
+                        <%-- 
                         <% 
                         	if(conditionList.size() > 0) { 
                         %>
@@ -502,6 +374,7 @@
                         <%
                         	}
                         %>
+                        --%>
                     </div>
                     
                     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">

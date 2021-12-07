@@ -1,5 +1,6 @@
 package a.b.c.com.common.service;
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.MemberVO;
@@ -31,4 +32,5 @@ public interface ChabunService {
 	public RqnaVO getRqnaChabun();
 	public NoticeVO getNoticeChabun();
 	public PayVO getPayChabun();
+	public ConditionVO getConditionChabun();
 }

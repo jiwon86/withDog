@@ -15,6 +15,11 @@
 <html lang="ko">
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
+	<script type="text/javascript">
+		function conditionLocationBtn(cno) {
+			location.href=`/myConditionSelect.wd?cno=${"${cno}"}`;
+		}
+	</script>
 	<!-- /헤드 -->
 
     <body class="nav-fixed">
@@ -165,7 +170,7 @@
 
 		                                    <hr class="my-4" />
 		                                    <div class="d-flex justify-content-between">
-		                                        <button class="btn btn-primary btn-lg" style="margin:0 auto;" type="button" >확인</button>
+		                                        <button class="btn btn-primary btn-lg" style="margin:0 auto;" type="button" onclick="conditionLocationBtn('<%=cvo.getCno()%>')">확인</button>
 		                                    </div>
 		                                </div>
 		                            </div>

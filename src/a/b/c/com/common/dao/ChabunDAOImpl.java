@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.pet.vo.PetVO;
 import a.b.c.com.qna.vo.QnaVO;
@@ -127,5 +128,12 @@ public class ChabunDAOImpl implements ChabunDAO {
 		logger.info("ChabunDAOImpl.getPayChabun() 함수 진입");
 		
 		return sqlSession.selectOne("getPayChabun");
+	}
+
+	@Override
+	public ConditionVO getConditionChabun() {
+		logger.info("ChabunDAOImpl.getConditionChabun() 함수 진입");
+		
+		return sqlSession.selectOne("getConditionChabun");
 	}
 }

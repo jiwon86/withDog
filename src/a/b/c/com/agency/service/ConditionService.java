@@ -14,4 +14,6 @@ public interface ConditionService {
 	public List<ConditionVO> myConditionSelect(ConditionVO conditionVO);
 	public List<OfferVO> offerSelectAjax(OfferVO offerVO);
 	public List<PetVO> petSelect(Map<String, Object> offerMap);
+	public List<ConditionVO> conditionMapSelect(ConditionVO conditionVO);
+	public int conditionInsert(ConditionVO conditionVO);
 }

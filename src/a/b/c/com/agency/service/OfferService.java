@@ -10,4 +10,5 @@ public interface OfferService {
 	public List<OfferVO> offerSelectAll(OfferVO offerVO);
 	public List<OfferVO> offerSelect(OfferVO ovo);
 	public List<PetVO> petSelectAll(Map<String, Object> offerMap);
+	public int offerUpdatePropose(OfferVO ovo);
 }

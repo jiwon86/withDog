@@ -68,6 +68,20 @@ public class ConditionServiceImpl implements ConditionService {
 		return conditionDAO.petSelect(offerMap);
 	}
 
+	@Override
+	public List<ConditionVO> conditionMapSelect(ConditionVO conditionVO) {
+		logger.info("ConditionServiceImpl.conditionMapSelect() 함수 진입");
+		
+		return conditionDAO.conditionMapSelect(conditionVO);
+	}
+
+	@Override
+	public int conditionInsert(ConditionVO conditionVO) {
+		logger.info("ConditionServiceImpl.conditionInsert() 함수 진입");
+		
+		return conditionDAO.conditionInsert(conditionVO);
+	}
+
 
 
 }

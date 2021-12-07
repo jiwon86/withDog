@@ -46,4 +46,11 @@ public class OfferServiceImpl implements OfferService {
 		return offerDAO.petSelectAll(offerMap);
 	}
 
+	@Override
+	public int offerUpdatePropose(OfferVO ovo) {
+		logger.info("OfferServiceImpl.offerUpdatePropose() 함수 진입");
+		
+		return offerDAO.offerUpdatePropose(ovo);
+	}
+
 }

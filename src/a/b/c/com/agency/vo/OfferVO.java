@@ -7,6 +7,8 @@ public class OfferVO {
 	private String tprice;
 	private String tlat;
 	private String tlng;
+	private String taddress;
+	private String tphoto;
 	private String mno;
 	private String pno;
 	private String startdate;
@@ -29,19 +31,20 @@ public class OfferVO {
 		
 	}
 
-	public OfferVO(String tno, String ttitle, String tcontent, 
-				   String tprice, String tlat, String tlng, 
-				   String mno, String pno, String startdate, 
-				   String enddate, String deleteyn, String insertdate, 
-				   String updatedate, String mid, String mname, 
-				   String pageSize, String groupSize, String curPage, 
-				   String totalCount, String conditionCount) {
+	public OfferVO( String tno, String ttitle, String tcontent, String tprice, 
+					String tlat, String tlng, String taddress, String tphoto, 
+					String mno, String pno, String startdate, String enddate, 
+					String deleteyn, String insertdate, String updatedate, String mid, 
+					String mname, String pageSize, String groupSize, String curPage,
+					String totalCount, String conditionCount) {
 		this.tno = tno;
 		this.ttitle = ttitle;
 		this.tcontent = tcontent;
 		this.tprice = tprice;
 		this.tlat = tlat;
 		this.tlng = tlng;
+		this.taddress = taddress;
+		this.tphoto = tphoto;
 		this.mno = mno;
 		this.pno = pno;
 		this.startdate = startdate;
@@ -104,6 +107,22 @@ public class OfferVO {
 
 	public void setTlng(String tlng) {
 		this.tlng = tlng;
+	}
+
+	public String getTaddress() {
+		return taddress;
+	}
+
+	public void setTaddress(String taddress) {
+		this.taddress = taddress;
+	}
+
+	public String getTphoto() {
+		return tphoto;
+	}
+
+	public void setTphoto(String tphoto) {
+		this.tphoto = tphoto;
 	}
 
 	public String getMno() {
@@ -216,6 +235,6 @@ public class OfferVO {
 
 	public void setConditionCount(String conditionCount) {
 		this.conditionCount = conditionCount;
-	}
+	}	
 	
 }

@@ -50,9 +50,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                                                                  돌봄서비스 (조건제시가 없으면 조건제시 상세보기 갈때 에러터짐)
+                                                                                  돌봄서비스
                                         </h1>
-                                        <div class="page-header-subtitle">Example dashboard overview and content summary</div>
+                                        <div class="page-header-subtitle">간편하고 편리한 돌봄서비스를 이용해보세요.</div>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                             <div class="me-3">
                                                 <i class="feather-xl text-primary mb-3" data-feather="package"></i>
                                                 <h5 class="hahmlet">돌봄신청 현황</h5>
-                                                <div class="text-muted small">To create informative visual elements on your pages</div>
+                                                <div class="text-muted small">반려동물 돌봄신청 현황을 확인</div>
                                             </div>
                                             <img src="/template/assets/img/illustrations/browser-stats.svg" alt="..." style="width: 8rem" />
                                         </div>
@@ -85,7 +85,7 @@
                                             <div class="me-3">
                                                 <i class="feather-xl text-secondary mb-3" data-feather="book"></i>
                                                 <h5 class="hahmlet">조건제시 현황</h5>
-                                                <div class="text-muted small">To keep you on track when working with our toolkit</div>
+                                                <div class="text-muted small">조건제시를 통해 반려동물을 맡아주세요.</div>
                                             </div>
                                             <img src="/template/assets/img/illustrations/processing.svg" alt="..." style="width: 8rem" />
                                         </div>
@@ -96,7 +96,7 @@
                         <!-- /탭메뉴 -->
                         
                         <!-- 돌봄신청 리스트 -->
-                        <h4 class="mb-0 mt-5">내 조건제시 정보</h4>
+                        <h4 class="mb-0 mt-5">내 돌봄신청 정보</h4>
                         <hr class="mt-2 mb-4" />
 
 						<%
@@ -107,21 +107,22 @@
 							int curPage = 0;
 							int totalCount = 0;	
 							
-							Object objPaging = request.getAttribute("pagingOfferVO");
-							OfferVO pagingOfferVO = (OfferVO)objPaging;
-							
-							// 멤버 신청리스트 구하기
-							List<OfferVO> offerListAll = (List<OfferVO>) request.getAttribute("offerListAll");
-							int nCnt = offerListAll.size();
-							
 							// 오늘 날짜 구하기
 							Date today = new Date();
-							SimpleDateFormat todayFormat = new SimpleDateFormat("yyyy/MM/dd H:m");
-							
+							SimpleDateFormat todayFormat = new SimpleDateFormat("yyyy-MM-dd H:m");
 							String todayString = todayFormat.format(today);
 							Date todayDate = todayFormat.parse(todayString);
 							
-							for(int i=0; i<nCnt; i++) {
+							// 멤버 신청리스트 구하기
+							List<OfferVO> offerListAll = (List<OfferVO>) request.getAttribute("offerListAll");
+							
+							if(offerListAll.size() > 0) {
+							
+							Object objPaging = request.getAttribute("pagingOfferVO");
+							OfferVO pagingOfferVO = (OfferVO)objPaging;
+							
+							
+							for(int i=0; i<offerListAll.size(); i++) {
 								OfferVO ovo = offerListAll.get(i);
 								Date startDate = todayFormat.parse(ovo.getStartdate());
 								Date endDate = todayFormat.parse(ovo.getEnddate());
@@ -164,7 +165,7 @@
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="far fa-compass"></i> &nbsp;
-			                                        	<span><%=ovo.getTlat()%>, <%=ovo.getTlng()%></span>
+			                                        	<span><%= ovo.getTaddress() %></span>
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="far fa-clock"></i> &nbsp; 
@@ -208,7 +209,7 @@
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="text-black-50 mt-1" data-feather="map-pin"></i> &nbsp;
-			                                        	<span><%=ovo.getTlat()%>, <%=ovo.getTlng()%></span>
+			                                        	<span><%= ovo.getTaddress() %></span>
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="text-black-50 mt-1" data-feather="clock"></i> &nbsp; 
@@ -252,7 +253,7 @@
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="text-black-50 mt-1" data-feather="map-pin"></i> &nbsp;
-			                                        	<span><%=ovo.getTlat()%>, <%=ovo.getTlng()%></span>
+			                                        	<span><%= ovo.getTaddress() %></span>
 			                                        </p>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="text-black-50 mt-1" data-feather="clock"></i> &nbsp; 
@@ -278,7 +279,17 @@
 
                         <% 
                         	}
+							} else {
 						%>
+								<h2>현재 돌봄신청이 존재하지 않습니다.</h2>
+						<%
+							}
+						%>
+                        
+                        
+                        <% 
+                        	if(offerListAll.size() > 0) {
+                        %>
                         
                         <!-- /돌봄신청 리스트 -->
 	                    <jsp:include page="offerPaging.jsp" flush="true">
@@ -289,6 +300,9 @@
 							<jsp:param name="curPage" value="<%=curPage%>"/>
 							<jsp:param name="totalCount" value="<%=totalCount%>"/>
 						</jsp:include>
+                        <%
+                        	}
+                        %>
                         
 					</div>
                 </main>				

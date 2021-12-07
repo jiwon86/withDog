@@ -53,5 +53,9 @@
 	<select id="getPayChabun" resultType="PayVO">
 		SELECT NVL(MAX(SUBSTR(A.PAYNO, -4)), 0) + 1 PAYNO FROM PAY A
 	</select>
+	
+	<select id="getConditionChabun" resultType="ConditionVO">
+		SELECT NVL(MAX(SUBSTR(A.CNO, -4)), 0) + 1 CNO FROM CONDITION A
+	</select>
 
 </mapper>

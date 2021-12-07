@@ -49,6 +49,8 @@
 				console.log("tno >>> : " + result.tno);
 				console.log("tlag >>> : " + result.tlag);
 				console.log("tlng >>> : " + result.tlng);
+				console.log("taddress >>> : " + result.taddress);
+				console.log("tphoto >>> : " + result.tphoto);
 				console.log("startdate >>> : " + result.startdate);
 				console.log("enddate >>> : " + result.enddate);
 				console.log("tprice >>> : " + result.tprice);
@@ -65,7 +67,7 @@
 				
 				//$("#modalTno").text(result.tno);
 				$("#modalAccount").text(result.mname + " (" + result.mid + ")");
-				$("#modalLocation").text(result.tlag + " , " + result.tlng);
+				$("#modalLocation").text(result.taddress);
 				$("#modalDate").text(result.startdate + " ~ " + result.enddate);
 				$("#modalTprice").text(result.tprice);
 				$("#modalTcontent").text(result.tcontent);
@@ -81,6 +83,8 @@
 					var pweight = petArr["pweight"];
 					var pmemo = petArr["pmemo"];
 					var pages = petArr["pages"];
+					
+					console.log(pname + ", " + ptype + ", " + pgender + ", " + pneutral);
 					
 					let $petTag = `
                         <div class="col-lg-4 mb-3">
@@ -284,6 +288,7 @@
                         <h4 class="mb-0 mt-5">내 조건제시 정보</h4>
                         <hr class="mt-2 mb-4" />
 
+						<div class="row">
 						<%
 							//페이징 변수 세팅
 							int pageSize = 0;
@@ -291,10 +296,12 @@
 							int curPage = 0;
 							int totalCount = 0;	
 							
-							ConditionVO pagingConditionVO = (ConditionVO)request.getAttribute("pagingConditionVO");
                 			
 							List<ConditionVO> conditionListAll = (List<ConditionVO>) request.getAttribute("conditionListAll");
 							
+							if(conditionListAll.size() > 0) {
+							
+							ConditionVO pagingConditionVO = (ConditionVO)request.getAttribute("pagingConditionVO");
                 			List<Integer> agencyListAnoCount = (List<Integer>) request.getAttribute("agencyListAnoCount"); 
                 			// agencySelectCount가 0이면 "N"이 들어가 있음
                 			List<String> agencyListMatchyn = (List<String>) request.getAttribute("agencyListMatchyn");
@@ -390,7 +397,13 @@
 	                            </div>
                         <%
 							}
+							} else {
+						%>
+								<h2>현재 조건제시가 없습니다.</h2>
+						<%
+							}
                         %>
+                        </div>
                         
                         <!-- 
                         	<div class="btn btn-red hahmlet">
@@ -400,6 +413,9 @@
                         
                         <!-- /돌봄신청 리스트 -->
                         
+                        <% 
+                        	if(conditionListAll.size() > 0) {
+                        %>
                         <!-- /돌봄신청 리스트 -->
 	                    <jsp:include page="conditionPaging.jsp" flush="true">
 							<jsp:param name="url" value="myConditionSelectAllPaging.wd"/>
@@ -409,6 +425,9 @@
 							<jsp:param name="curPage" value="<%=curPage%>"/>
 							<jsp:param name="totalCount" value="<%=totalCount%>"/>
 						</jsp:include>
+                        <%
+                        	}
+                        %>
                         
 					</div>
                 </main>				

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -184,10 +186,23 @@ public class AgencyController {
 		
 		logger.info("payno >>> : " + payno);
 		
-		int result = agencyService.payAjax(pvo);
+		int insertResult = agencyService.payAjax(pvo);
 		
-		if(result > 0) {
-			return "success";
+		if(insertResult > 0) {
+			PayVO _pvo = new PayVO();
+			_pvo.setPayno(payno);
+			
+			List<PayVO> payList = agencyService.paySelectPayno(_pvo);
+			
+			OfferVO _ovo = new OfferVO();
+			String tno = payList.get(0).getTno();
+			_ovo.setTno(tno);
+			
+			int updateResult = offerService.offerUpdatePropose(_ovo);
+			
+			if(updateResult > 0) {
+				return "success";
+			}
 		}
 		
 		return "fail";
@@ -356,5 +371,118 @@ public class AgencyController {
 		}		
 		
 		return "agency/chatPaymentResultCondition";
+	}
+	
+	// http://localhost:8088/conditionInsertForm?tno=?&mno=?
+	@GetMapping("/conditionInsertForm")
+	public String conditionInsertForm(Principal principal, Model model, String tno, String mno) {
+
+		String myMno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			myMno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			model.addAttribute("mvo", mvo);
+		}
+		
+		if(mno != null) {
+			//========== 반려동물 신청 상세정보 =========
+			OfferVO _ovo = new OfferVO();
+			_ovo.setMno(mno);
+			_ovo.setTno(tno);
+
+			List<OfferVO> offerList = offerService.offerSelect(_ovo);
+			//========== /반려동물 신청 상세정보 =========
+		
+			
+			//========== 반려동물 리스트 ===========
+			OfferVO ovo = offerList.get(0);
+			String pno = ovo.getPno();
+			String[] pnoArr = pno.split(" ");
+			
+			Map<String, Object> offerMap = new HashMap<>();
+			offerMap.put("pnoArr", pnoArr);
+			offerMap.put("mno", mno);
+			
+			List<PetVO> PetListAll = offerService.petSelectAll(offerMap);
+			
+			List<PetVO> petList = new ArrayList<>();
+			
+			for(int i=0; i<PetListAll.size(); i++) {
+				PetVO p = PetListAll.get(i);					
+				
+				petList.add(p);
+			}
+			//========== /반려동물 리스트 ===========
+			
+			
+			model.addAttribute("offerList", offerList);
+			model.addAttribute("petList", petList);
+		}
+		
+		return "agency/conditionInsertForm";
 	}	
+	
+	@PostMapping("/conditionInsert")
+	public String conditionInsert(Principal principal, Model model, HttpServletRequest req) {
+		
+		String mno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			model.addAttribute("mvo", mvo);
+		}
+		
+		String cno = ChabunUtil.getConditionChabun("m",chabunService.getConditionChabun().getCno());
+		String tno = req.getParameter("tno");
+		String cprice = req.getParameter("cprice");
+		String ccontent = req.getParameter("ccontent");
+		String czonecode = req.getParameter("czonecode");
+		String croadaddress = req.getParameter("croadaddress");
+		String croadaddressdetail = req.getParameter("croadaddressdetail");
+		String cjibunaddress = req.getParameter("cjibunaddress");
+		String caddress = croadaddress.concat(" " + croadaddressdetail);
+		
+		logger.info("cno >>> : " + cno);
+		logger.info("tno >>> : " + tno);
+		logger.info("cprice >>> : " + cprice);
+		logger.info("ccontent >>> : " + ccontent);
+		logger.info("czonecode >>> : " + czonecode);
+		logger.info("croadaddress >>> : " + croadaddress);
+		logger.info("croadaddressdetail >>> : " + croadaddressdetail);
+		logger.info("cjibunaddress >>> : " + cjibunaddress);
+		logger.info("caddress >>> : " + caddress);
+		
+		ConditionVO conditionVO = new ConditionVO();
+		conditionVO.setCno(cno);
+		conditionVO.setMno(mno);
+		conditionVO.setTno(tno);
+		conditionVO.setCprice(cprice);
+		conditionVO.setCcontent(ccontent);
+		conditionVO.setCaddress(caddress);
+		
+		int insertCnt = conditionService.conditionInsert(conditionVO);
+		
+		model.addAttribute("cno", cno);
+		
+		return "agency/conditionInsert";
+	}
+	
 }

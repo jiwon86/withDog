@@ -89,18 +89,19 @@
 	<select id="offerSelectAjax" parameterType="OfferVO" resultType="OfferVO">
 			SELECT 
 				   T.TNO       TNO
-				 , T.TTITLE    TTITLE
 				 , T.TCONTENT  TCONTENT
 				 , T.TPRICE    TPRICE
 				 , T.TLAT      TLAT
 				 , T.TLNG      TLNG
+				 , T.TADDRESS  TADDRESS
+				 , T.TPHOTO    TPHOTO
 				 , T.MNO       MNO
 				 , T.PNO       PNO
-				 , TO_CHAR(TO_DATE(T.STARTDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')  STARTDATE
-				 , TO_CHAR(TO_DATE(T.ENDDATE, 'YYYY/MM/DD HH24:MI'), 'YYYY/MM/DD HH24:MI')    ENDDATE
+				 , TO_CHAR(T.STARTDATE, 'YYYY-MM-DD HH24:MI')  STARTDATE
+				 , TO_CHAR(T.ENDDATE, 'YYYY-MM-DD HH24:MI')    ENDDATE
 				 , T.DELETEYN  DELETEYN
-				 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         INSERTDATE
-				 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY/MM/DD'), 'YYYY/MM/DD')         UPDATEDATE
+				 , TO_CHAR(T.INSERTDATE, 'YYYY-MM-DD')         INSERTDATE
+				 , TO_CHAR(T.UPDATEDATE, 'YYYY-MM-DD')         UPDATEDATE
 				 , M.MID       MID
 				 , M.MNAME     MNAME
 			FROM   TRADEMAP T, MEMBER M
@@ -132,5 +133,49 @@
 			#{pno, jdbcType=VARCHAR}
 		</foreach>
 	</select>
+
+	<select id="conditionMapSelect" parameterType="ConditionVO" resultType="ConditionVO">
+		SELECT 
+		      C.CNO CNO
+		    , C.MNO MNO
+		    , C.TNO TNO
+		    , C.CPRICE CPRICE
+		    , C.CADDRESS CADDRESS
+		    , C.CCONTENT CCONTENT
+		    , C.DELETEYN DELETEYN
+		    , C.INSERTDATE INSERTDATE
+		    , C.UPDATEDATE UPDATEDATE
+		    , M.MID MID
+		    , M.MNAME MNAME
+		FROM CONDITION C, MEMBER M
+		WHERE C.MNO = M.MNO
+		AND C.MNO = #{mno, jdbcType=VARCHAR}
+		AND C.TNO = #{tno, jdbcType=VARCHAR}
+		ORDER BY C.CNO DESC	
+	</select>
+	
+	<insert id="conditionInsert" parameterType="ConditionVO">
+		INSERT INTO CONDITION (
+			  CNO
+			, MNO
+			, TNO
+			, CPRICE
+			, CADDRESS
+			, CCONTENT
+			, DELETEYN
+			, INSERTDATE
+			, UPDATEDATE
+		) VALUES(
+			  #{cno, jdbcType=VARCHAR}
+			, #{mno, jdbcType=VARCHAR}
+			, #{tno, jdbcType=VARCHAR}
+			, #{cprice, jdbcType=VARCHAR}
+			, #{caddress, jdbcType=VARCHAR}
+			, #{ccontent, jdbcType=VARCHAR}
+			, 'Y'
+			, SYSDATE
+			, SYSDATE
+		)		
+	</insert>
 
 </mapper>

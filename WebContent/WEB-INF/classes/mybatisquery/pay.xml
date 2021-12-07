@@ -77,4 +77,11 @@
 		AND   CNO = #{cno, jdbcType=VARCHAR}
 	</select>
 
+	<select id="paySelectPayno" parameterType="PayVO" resultType="PayVO">
+		SELECT
+			P.TNO TNO
+		FROM PAY P
+		WHERE PAYNO = #{payno, jdbcType=VARCHAR}
+	</select>
+
 </mapper>

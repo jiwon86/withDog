@@ -340,7 +340,7 @@
 			                              %>
 				                               <div class="col-lg-4 mb-3">
 				                                   <div class="d-flex align-items-center">
-				                                       <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png"></div>
+				                                       <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/img/pet/<%=pvo.getPphoto()%>"></div>
 				                                       <div class="ms-3">
 				                                           <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=pvo.getPtype()%>)</span></div>
 				                                           <div class="small text-muted">중형견(<%=pvo.getPweight()%>)/<%=pvo.getPages()%>살/중성화 x(<%=pvo.getPneutral()%>)</div>

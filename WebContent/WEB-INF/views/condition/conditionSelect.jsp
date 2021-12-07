@@ -83,10 +83,12 @@
 					var pmemo = petArr["pmemo"];
 					var pages = petArr["pages"];
 					
+					var link = `/img/pet/${"${pphoto}"}`;
+					
 					let $petTag = `
                         <div class="col-lg-4 mb-3">
 	                        <div class="d-flex align-items-center">
-	                            <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png"></div>
+	                            <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src=${"${link}"}></div>
 	                            <div class="ms-3">
 	                                <div class="fs-4 text-dark fw-500">${"${pname}"}&nbsp;<span style="font-size:12px;">(${"${ptype}"})</span></div>
 	                                <div class="small text-muted">중형견(${"${pweight}"})/${"${pages}"}살/중성화 x(${"${pneutral}"})</div>

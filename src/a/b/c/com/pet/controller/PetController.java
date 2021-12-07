@@ -55,7 +55,7 @@ public class PetController {
 	public String petInsertForm(Principal principal, Model model, HttpServletRequest req,PetVO pvo, MemberVO mvo) {
 		logger.info("PetController.petInsertForm 시작 >>>>>");
 		
-		String mno = null;
+		String _mno = null;
 		
 		// 세션을 통해 멤버번호를 가져오기
 		if(principal != null) {
@@ -66,7 +66,7 @@ public class PetController {
 			_mvo.setMid(mid);
 			
 			List<MemberVO> memberList = memberService.memberSelect(_mvo);
-			mno = memberList.get(0).getMno();
+			_mno = memberList.get(0).getMno();
 			MemberVO member = memberList.get(0);
 			model.addAttribute("member", member);
 		}
@@ -115,8 +115,24 @@ public class PetController {
 	}
 	//선택조회----------------------------------------------------------------
 	@GetMapping("petSelect")
-	public String petSelect(PetVO pvo, MemberVO member,Model model, HttpServletRequest req) {
+	public String petSelect(Principal principal, PetVO pvo, MemberVO member, Model model, HttpServletRequest req) {
 		logger.info("PetController.petSelect 시작 >>>>>");
+		
+		String _mno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			_mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			model.addAttribute("member", mvo);
+		}
 		
 		pvo.setMno(req.getParameter("mno"));
 		pvo.setPno(req.getParameter("pno"));
@@ -137,8 +153,25 @@ public class PetController {
 	}
 	//추가하기----------------------------------------------------------------
 	@PostMapping("petInsert")
-	public String petInsert(HttpServletRequest req, MemberVO member, PetVO pvo, Model model) {
+	public String petInsert(Principal principal, HttpServletRequest req, MemberVO member, PetVO pvo, Model model) {
 		logger.info("PetController.petInsert 시작 >>>>>");
+		
+		String _mno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			_mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			model.addAttribute("member", mvo);
+		}
+		
 		pvo.setMno(req.getParameter("mno"));
 		
 		//채번 구하기

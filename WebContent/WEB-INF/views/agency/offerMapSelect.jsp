@@ -26,6 +26,12 @@
 				location.href=`/chatPaymentResult2.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
 			}
 			
+			function conditionInsertForm(tno, mno) {
+				console.log("tno >>> : " + tno);
+				console.log("mno >>> : " + mno);
+				
+				location.href=`/conditionInsertForm.wd?tno=${"${tno}"}&mno=${"${mno}"}`;
+			}
 		</script>
 	</head>
 	<!-- /헤드 -->
@@ -240,7 +246,7 @@
                                	 } else {
                                %>
 	                               	<div>
-	                               	    <button class="btn btn-primary" type="button">조건제시 작성</button>
+	                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">조건제시 작성</div>
 	                               	</div>
                                <%
                                	 }

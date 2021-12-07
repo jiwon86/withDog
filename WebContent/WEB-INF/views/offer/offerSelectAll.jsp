@@ -150,16 +150,16 @@
 			                                <div class="col-auto card-icon-aside bg-cyan"><i class="text-white-50" data-feather="wifi"></i></div>
 			                                <div class="col">
 			                                    <div class="card-body py-4">
-			                                        <span class="card-title text-cyan mb-2 " style="font-size:20px; font-weight:bold;">
-			                                        	<%= ovo.getTno() %>
+			                                        <span class="card-title hahmlet" style="font-size:20px; font-weight:bold;">
+			                                        	<span><%=ovo.getMid()%> 돌봄신청</span> <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
-			                                        
-			                                         
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-cyan"></i>
 			                                       		<span class="hahmlet" style="font-size:13px; color:#4cc1c1; font-weight:bold;">준비중</span>
 			                                        </span>
-			                                        <p class="card-text mb-1 hahmlet">
+			                                        <hr>
+			                                        
+			                                        <p class="card-text mt-3 mb-1 hahmlet">
 			                                        	<i class="fas fa-user"></i> &nbsp;
 			                                        	<span><%= ovo.getMname() %> (<%= ovo.getMid() %>)</span>
 			                                        </p>
@@ -196,14 +196,16 @@
 			                                <div class="col-auto card-icon-aside bg-teal"><i class="text-white-50" data-feather="activity"></i></div>
 			                                <div class="col">
 			                                    <div class="card-body py-4">
-			                                        <span class="card-title text-teal mb-2 " style="font-size:20px; font-weight:bold;">
-			                                        	<%= ovo.getTno() %>	
+			                                        <span class="card-title mb-2 hahmlet" style="font-size:20px; font-weight:bold;">
+			                                        	<span><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-teal"></i>
 			                                       		<span class="hahmlet" style="font-size:13px; color:#13a4a4; font-weight:bold;">진행중</span>
 			                                        </span>
-			                                        <p class="card-text mb-1 hahmlet">
+			                                        <hr>
+			                                        
+			                                        <p class="card-text mt-3 mb-1 hahmlet">
 			                                        	<i class="fas fa-user"></i> &nbsp;
 			                                        	<span><%= ovo.getMname() %> (<%= ovo.getMid() %>)</span>
 			                                        </p>
@@ -240,14 +242,16 @@
 			                                <div class="col-auto card-icon-aside bg-red"><i class="text-white-50" data-feather="wifi-off"></i></div>
 			                                <div class="col">
 			                                    <div class="card-body py-4">
-			                                        <span class="card-title text-red mb-2 " style="font-size:20px; font-weight:bold;">
-			                                        	<%= ovo.getTno() %>
+			                                        <span class="card-title mb-2 hahmlet" style="font-size:20px; font-weight:bold;">
+			                                        	<span><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-red"></i>
 			                                       		<span class="hahmlet" style="font-size:13px; color:red; font-weight:bold;">종&nbsp;료</span>
 			                                        </span>
-			                                       	<p class="card-text mb-1 hahmlet">
+			                                        <hr>
+			                                        
+			                                        <p class="card-text mt-3 mb-1 hahmlet">
 			                                        	<i class="fas fa-user"></i> &nbsp;
 			                                        	<span><%= ovo.getMname() %> (<%= ovo.getMid() %>)</span>
 			                                        </p>

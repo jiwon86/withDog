@@ -18,6 +18,7 @@ import a.b.c.com.member.vo.Member;
 import a.b.c.com.review.vo.ReviewVO;
 
 import a.b.c.com.park.vo.ParkVO;
+import a.b.c.com.park.vo.RparkVO;
 
 
 import a.b.c.com.notice.vo.NoticeVO;
@@ -99,6 +100,14 @@ public class ChabunDAOImpl implements ChabunDAO {
 		
 		return sqlSession.selectOne("getParkChabun");
 	}
+
+	@Override
+	public RparkVO getRparkChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunDAOImpl.getRparkChabun() 함수 진입");
+		return sqlSession.selectOne("getRparkChabun");
+	}
+
 	
 	// review
 	@Override
@@ -122,7 +131,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getNoticeChabun");
 
-
 	}
 	
 	@Override
@@ -136,4 +144,5 @@ public class ChabunDAOImpl implements ChabunDAO {
 		logger.info("ChabunDAOImpl.getRqnaChabun() 함수 진입");
 		return sqlSession.selectOne("getRqnaChabun");
 	}
+	
 }

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
 	c:import : 외부 jsp 파일 접근 가능
 --%>
 <!DOCTYPE html>
 <html lang="ko">
+<<<<<<< HEAD
 <head>
 <meta charset="utf-8">
 <title>with Dog</title>
@@ -16,15 +17,31 @@
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/motion.js"></script>
 <script>
+=======
+<!-- 헤드 -->
+<jsp:include page="/head.wd" />
+<!-- /헤드 -->
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
+<<<<<<< HEAD
 	$( document ).ready( function() {
 		AOS.init();
 	} );
+=======
+<body class="nav-fixed">
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
+<<<<<<< HEAD
 </script>
 </head>
 <body>
+=======
+	<!-- 헤더 -->
+	<jsp:include page="/header.wd" />
+	<!-- /헤더 -->
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
+<<<<<<< HEAD
 	<div class="wrap">
 		
 		<nav>
@@ -34,7 +51,10 @@
 				<li><button class="slide_button3"><img src="image/index/button_1.png" alt="버튼"></button></li>
 			</ul>
 		</nav>
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
+<<<<<<< HEAD
 		<div class="container_visual1">
 			
 			<div class="container_inner1">
@@ -115,6 +135,33 @@
 		</div>
 
  -->
+=======
+	<div id="layoutSidenav">
+		<!-- 사이드바 -->
+		<jsp:include page="/sidebar.wd" />
+		<!-- /사이드바 -->
+
+		<!-- 콘텐츠 -->
+		<div id="layoutSidenav_content">
+			<main></main>
+			<!--  
+					===================================
+					<main> 내용 </main> 부분을 복사해서 
+
+					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
+					===================================
+				-->
+			<!-- ** 주요 내용 **  -->
+
+			<!-- ** /주요 내용 ** -->
+
+			<!-- 바닥글 -->
+			<jsp:include page="/footer.wd" />
+			<!-- /바닥글 -->
+
+		</div>
+		<!-- /콘텐츠 -->
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	</div>
 
 </body>

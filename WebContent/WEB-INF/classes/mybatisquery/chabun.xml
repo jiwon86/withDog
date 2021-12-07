@@ -12,7 +12,6 @@
 		SELECT NVL(MAX(SUBSTR(A.RQNANUM, -4)), 0) + 1 RQNANUM FROM RQNA A
 	</select>
 	
-
 	<!--  
 	<select id="getBoardChabun" resultType="boardVO">
 		SELECT NVL(MAX(SUBSTR(A.SBNUM, -4)), 0) + 1 SBNUM FROM SPRING_BOARD A
@@ -40,6 +39,7 @@
 	</select>
 
 
+<<<<<<< HEAD
 	
 	<!-- Review 채번 시작-->
 	<select id="getReviewCrnumChabun" resultType="ReviewVO">
@@ -52,10 +52,18 @@
 	
 	<!-- Review 채번 끝-->
 	
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 	<select id="getParkChabun" resultType="ParkVO">
 		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 
 	</select>
+
+	
+	<select id="getRparkChabun" resultType="RparkVO">
+		SELECT NVL(MAX(SUBSTR(A.RINUM, -4)),0) + 1 RINUM FROM DOG_RPARK A 
+	</select>
+
 
 	<select id="getNoticeChabun" resultType="NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNUM, -4)), 0) + 1 NNUM FROM NOTICE A

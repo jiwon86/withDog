@@ -14,6 +14,8 @@ import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
 import a.b.c.com.review.vo.ReviewVO;
 import a.b.c.com.park.vo.ParkVO;
+import a.b.c.com.park.vo.RparkVO;
+
 import a.b.c.com.notice.vo.NoticeVO;
 
 
@@ -106,6 +108,13 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getParkChabun();
 	}
 	
+	@Override
+	public RparkVO getRparkChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunServiceImplt.getRparkChabun() 함수 진입");
+		return chabunDAO.getRparkChabun();
+	}
+	
 
 	@Override
 	public NoticeVO getNoticeChabun() {
@@ -114,8 +123,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getNoticeChabun();
 	}
 
-
-	
 	
 	@Override
 	public QnaVO getQnaChabun() {
@@ -128,6 +135,5 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("ChabunServiceImpl.getRqnaChabun() 함수 진입");
 		return chabunDAO.getRqnaChabun();
 	}
-	
 
 }

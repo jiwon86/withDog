@@ -1,5 +1,9 @@
 /a/
+<<<<<<< HEAD
 /log4j.properties
 /log4j.xml
 /mybatisconfig/
 /mybatisquery/
+=======
+/mybatisconfig/
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog

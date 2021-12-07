@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 			};
 			
 			dataParam = $("#rqnaForm").serialize();
-			alert("dataParam >>> : " + dataParam);
+			//alert("dataParam >>> : " + dataParam);
 			
 			$.ajax({
 				url : insertURL,
@@ -36,7 +37,7 @@
 			});
 			
 			function whenSuccess(resData){
-				alert("resData >>> :" +resData);
+				//alert("resData >>> :" +resData);
 				if("GOOD" == resData){
 					rqnaFormData();
 					location.reload();
@@ -72,10 +73,10 @@
 				//alert("resData >>> : " + resData);
 				let v = resData.split(",");
 				for(let i=0; i <v.length; i++){
-					console.log("v[0]" + v[0]);
-					console.log("v[1]" + v[1]);
-					console.log("v[2]" + v[2]);
-					console.log("v[3]" + v[3]);
+					console.log("v[0]" + v[0]); // 번호
+					console.log("v[1]" + v[1]); // 이름
+					console.log("v[2]" + v[2]); // 내용
+					console.log("v[3]" + v[3]); // 날짜
 					addNewItem(v[0], v[1], v[2], v[3]);
 				}
 				
@@ -87,16 +88,16 @@
 		
 		//댓글 삭제
 		$(document).on("click", ".deleteBtn", function(){
-			//alert("D >>> : ");
+			alert("댓글을 삭제하시겠습니까? ");
 			
-			var rsbnum = $(this).parents("li").attr("dataNum");
+			var rqnanum = $(this).parents("li").attr("dataNum");
 			var target = $(this).parents(".rbmemoItem");
 			console.log("target >>> : " + target);
 			
-			let selectURL = "rqnaDelete.kmj";
+			let selectURL = "rqnaDelete.wd";
 			let method="POST";
 			let dataParam = {
-					rsbnum : rsbnum,
+					rqnanum : rqnanum,
 			};
 			
 			//dataParam = $("#jsonTestForm").serialize();
@@ -119,7 +120,7 @@
 				}
 			}
 			function whenError(e){
-				//alert("e >>> : " + e.responseText);
+				alert("e >>> : " + e.responseText);
 			}
 		});
 	});
@@ -175,6 +176,7 @@
 	//새로운 글 화면에 추가
 	function addNewItem(num, writer, con, datetime){
 		
+	
 		//데이터 체크
 		if(isEmpty(num)) return false;
 		
@@ -207,7 +209,7 @@
 	}
 	
 	//댓글길이 체크--------------------------------------
-	//한글 포함 문자열 실이
+	//한글 포함 문자열 길이
 	function getTextLength(s){
 		var len =0;
 		for(var i=0; i<s.length; i++){
@@ -247,7 +249,7 @@
 </script>
 </head>
 <body>
-rqnaForm : 댓글
+<div class="card-header">답변</div>
 <hr>
 <%request.setCharacterEncoding("UTF-8"); %>
 <%
@@ -257,25 +259,28 @@ rqnaForm : 댓글
 <div id="rqnawriterdiv">
 <form name="rqnaForm" id="rqnaForm">
 <table>
+<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
 <tr>
 	<td>작성자</td>
 	<td>
 		<input type="text" name="rqnatitle" id="rqnatitle"/>
-		<input type="hidden" name="qnanum" id="qnanum" value="<%=qnanum %>">
-		<input type="hidden" name="rqnanum" id="rqnanum">
+		<input type="hidden" name="qnanum" id="qnanum" value="<%= qnanum %>" />
+		<input type="hidden" name="rqnanum" id="rqnanum" />
 	</td>
 </tr>
-
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
 <tr>
 	<td>덧글내용</td>
 	<td>
 		<textarea name="rqnacon" id="rqnacon" rows=5 cols="50" style="resize: none"></textarea>
-		<div><span class="bytes">0</span>bytes</div>
+		<!-- <div><span class="bytes">0</span>bytes</div> -->
 		<div style="text-align:right">
             <button class="btn btn-primary" type="button" align="right" id="SAVEbtn" name="SAVEbtn">SAVE</button>
          </div>
 		</td>
 	</tr>
+</sec:authorize>
 </table>
 <hr>
 <ul name="rqnalist" id="rqnalist">

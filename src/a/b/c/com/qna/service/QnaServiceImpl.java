@@ -34,11 +34,10 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 
-	@Override
-	public List<QnaVO> qnaSelectAll(QnaVO qvo) {
-		// TODO Auto-generated method stub
-		return qnaDAO.qnaSelectAll(qvo);
-	}
+	 @Override 
+	 public List<QnaVO> qnaSelectAll(QnaVO qvo) { 
+		 // TODO Auto-generated method stub 
+		 return qnaDAO.qnaSelectAll(qvo); }
 
 	@Override
 	public int qnaInsert(QnaVO qvo) {
@@ -60,9 +59,9 @@ public class QnaServiceImpl implements QnaService {
 	
 	//페이징
 	@Override
-	public List<QnaVO> qnaSelectPaging(QnaVO qvo) {
+	public List<QnaVO> qnaSelectAllPaging(QnaVO qvo) {
 		// TODO Auto-generated method stub
-		return qnaDAO.qnaSelectPaging(qvo);
+		return qnaDAO.qnaSelectAllPaging(qvo);
 	}
 	
 	//selectAll에서 수정
@@ -77,5 +76,10 @@ public class QnaServiceImpl implements QnaService {
 	public int qnaMyDelete(QnaVO qvo) {
 		// TODO Auto-generated method stub
 		return qnaDAO.qnaMyDelete(qvo);
+	}
+	
+	@Override
+	public List<QnaVO> qnaanswer(QnaVO qvo){
+		return qnaDAO.qnaanswer(qvo);
 	}
 }

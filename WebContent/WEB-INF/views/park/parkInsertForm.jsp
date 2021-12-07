@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="java.util.List" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -73,11 +74,14 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				<main>
+				<main style="width:960px; margin:0 auto;">
+
 				<div style="width:760px; margin:0 auto;">
 					
 					</div>
+
 					<!-- 사진업로드 버튼성공(테이블만들기) -->
+					
 				</main>
 				<!--  
 					===================================
@@ -130,10 +134,12 @@
                             </div>
                         <input class="btn btn-warning mt-2" id="upload" type="button" value="업로드 완성하기">
                     </form>
+
                 </div>
             	</div>
 				<!-- ** /주요 내용 ** -->
-				
+				 <!-- url붙여서 댓글 가져오기 -->
+
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->

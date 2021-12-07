@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 // 멤버 VO객체
-public class Member implements Serializable{
+public class MemberVO implements Serializable{
 	
 	private static final long serialVersionUID = -4346265086625051741L;
 	
@@ -24,7 +24,7 @@ public class Member implements Serializable{
 	private String insertdate;
 	private String updatedate;
 	
-	private List<MemberAuth> authList;
+	private List<MemberAuthVO> authList;
 	
 	@Override
 	public String toString() {
@@ -34,15 +34,15 @@ public class Member implements Serializable{
 				+ insertdate + ", updatedate=" + updatedate + ", authList=" + authList + "]";
 	}
 
-	public Member() {
+	public MemberVO() {
 		
 	}
 	
-	public Member(String mno, String mid, String mpw, 
+	public MemberVO(String mno, String mid, String mpw, 
 				  String memail, String mname, String mphoto, 
 				  String mzonecode, String mroadaddress, String mjibunaddress, 
 				  String deleteyn, String insertdate, String updatedate,
-				  List<MemberAuth> authList) {
+				  List<MemberAuthVO> authList) {
 		this.mno = mno;
 		this.mid = mid;
 		this.mpw = mpw;
@@ -162,11 +162,11 @@ public class Member implements Serializable{
 		this.updatedate = updatedate;
 	}
 
-	public List<MemberAuth> getAuthList() {
+	public List<MemberAuthVO> getAuthList() {
 		return authList;
 	}
 
-	public void setAuthList(List<MemberAuth> authList) {
+	public void setAuthList(List<MemberAuthVO> authList) {
 		this.authList = authList;
 	}	
 	

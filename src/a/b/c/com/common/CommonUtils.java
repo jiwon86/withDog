@@ -8,17 +8,20 @@ public abstract class CommonUtils {
 
 	//public static final String WorkSpace = "el_withdog_work";
 	// 박상혁 : withdog_work
+<<<<<<< HEAD
 
 	
 	
 
+=======
+<<<<<<< HEAD
+	
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	
 
+	public static final String WorkSpace = "withdog_work";
 	//public static final String WorkSpace = "pr_work";
-
 	//public static final String WorkSpace = "project_work";
-
-
 	public static final String WorkSpace_pr = "pr_work";
 
 	public static final String WorkSpace_project = "project_work";
@@ -64,7 +67,19 @@ public abstract class CommonUtils {
 	public static final int BOARD_GROUP_SIZE = 5;
 	public static final int BOARD_CUR_PAGE = 1;
 	public static final int BOARD_TOTAL_COUNT = 0;
-
+	
+	// 돌봄신청 페이징 사이즈 초기회
+	public static final int OFFER_PAGE_SIZE = 3;
+	public static final int OFFER_GROUP_SIZE = 5;
+	public static final int OFFER_CUR_PAGE = 1;
+	public static final int OFFER_TOTAL_COUNT = 0;		
+	
+	// 조건제시 페이징 사이즈 초기회
+	public static final int CONDITION_PAGE_SIZE = 5;
+	public static final int CONDITION_GROUP_SIZE = 5;
+	public static final int CONDITION_CUR_PAGE = 1;
+	public static final int CONDITION_TOTAL_COUNT = 0;	
+	
 	// 맵관련
 	public static final String JSON_FILE_PATH 
 	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\";

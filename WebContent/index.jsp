@@ -43,7 +43,25 @@
 
 				<a href="withmap.wd"><button ani_type="bounce">돌봄 시작하기</button></a>
 
+<<<<<<< HEAD
 			</div>
+=======
+<<<<<<< HEAD
+					Test1
+
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
+					===================================
+				-->
+			<!-- ** 주요 내용 **  -->
+
+			<!-- ** /주요 내용 ** -->
+
+			<!-- 바닥글 -->
+			<jsp:include page="/footer.wd" />
+			<!-- /바닥글 -->
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 		</div>
 		<div class="container_visual2">

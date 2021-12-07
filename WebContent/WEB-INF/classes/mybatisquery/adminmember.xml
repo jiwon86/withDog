@@ -4,7 +4,7 @@
 		  
 <mapper namespace="a.b.c.com.adminmember.dao.AdminMemberDAO">
 
-<resultMap type="Member" id="memberMap">
+<resultMap type="MemberVO" id="memberMap">
 		<id property="mno" column="MNO" />
 		
 		<result property="mno" column="MNO" />
@@ -24,12 +24,12 @@
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
 	
-	<resultMap type="MemberAuth" id="authMap">
+	<resultMap type="MemberAuthVO" id="authMap">
 		<result property="mno" column="MNO" />
 		<result property="mauth" column="MAUTH" />
 	</resultMap>
 
-<select id="AdminMemberSelect" resultMap="memberMap" parameterType="Member">
+<select id="AdminMemberSelect" resultMap="memberMap" parameterType="MemberVO">
 		SELECT 
 			M.MNO            MNO,
 			M.MID            MID,
@@ -53,7 +53,7 @@
 		AND M.MNO = #{mno, jdbcType=VARCHAR}
 	</select>
 	
-	<select id="AdminMemberSelectAll" resultMap="memberMap" parameterType="Member">
+	<select id="AdminMemberSelectAll" resultMap="memberMap" parameterType="MemberVO">
 		SELECT 
 			M.MNO            MNO,
 			M.MID            MID,
@@ -77,7 +77,7 @@
 		ORDER BY 1 DESC
 	</select>
 	
-	<update id="AdminMemberUpdate" parameterType="Member">
+	<update id="AdminMemberUpdate" parameterType="MemberVO">
 		UPDATE MEMBER
 		SET
 			  MNAME      = #{mname, jdbcType=VARCHAR}
@@ -92,7 +92,7 @@
 		AND   MNO = #{mno, jdbcType=VARCHAR}
 	</update>
 	
-	<update id="AdminMemberDelete" parameterType="Member">
+	<update id="AdminMemberDelete" parameterType="MemberVO">
 	UPDATE 	 MEMBER 
 	SET 	 DELETEYN = 'N'
 			,UPDATEDATE = SYSDATE

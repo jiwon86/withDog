@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.agency.dao.OfferDAO">
+	
+	<select id="offerSelectAll" parameterType="OfferVO" resultType="OfferVO">
+		SELECT * FROM (
+			SELECT
+				   T.TNO       TNO
+				 , T.TCONTENT  TCONTENT
+				 , T.TPRICE    TPRICE
+				 , T.TLAT      TLAT
+				 , T.TLNG      TLNG
+				 , T.TADDRESS   TADDRESS
+				 , T.TPHOTO    TPHOTO
+				 , T.MNO       MNO
+				 , T.PNO       PNO
+				 , TO_CHAR(T.STARTDATE, 'YYYY-MM-DD HH24:MI')  STARTDATE
+				 , TO_CHAR(T.ENDDATE, 'YYYY-MM-DD HH24:MI')    ENDDATE
+				 , T.DELETEYN  DELETEYN
+				 , TO_CHAR(T.INSERTDATE, 'YYYY-MM-DD')         INSERTDATE
+				 , TO_CHAR(T.UPDATEDATE, 'YYYY-MM-DD')         UPDATEDATE
+				 , M.MID       MID
+				 , M.MNAME     MNAME
+				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.TNO = T.TNO) conditionCount
+		 		 <!-- ? : 페이지 사이즈 : pageSize -->
+			     , CEIL(ROW_NUMBER() OVER(ORDER BY T.TNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
+			     , COUNT(T.TNO) OVER() AS totalCount
+			FROM   TRADEMAP T, MEMBER M
+			WHERE  T.MNO = M.MNO 
+			AND    T.MNO = #{mno, jdbcType=VARCHAR}
+			ORDER BY T.TNO DESC
+		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="offerSelect" parameterType="OfferVO" resultType="OfferVO">
+		SELECT 
+			   T.TNO       TNO
+			 , T.TCONTENT  TCONTENT
+			 , T.TPRICE    TPRICE
+			 , T.TLAT      TLAT
+			 , T.TLNG      TLNG
+			 , T.TADDRESS  TADDRESS
+			 , T.TPHOTO    TPHOTO
+			 , T.MNO       MNO
+			 , T.PNO       PNO
+			 , TO_CHAR(T.STARTDATE, 'YYYY-MM-DD HH24:MI')  STARTDATE
+			 , TO_CHAR(T.ENDDATE, 'YYYY-MM-DD HH24:MI')    ENDDATE
+			 , T.DELETEYN  DELETEYN
+			 , TO_CHAR(TO_DATE(T.INSERTDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')         INSERTDATE
+			 , TO_CHAR(TO_DATE(T.UPDATEDATE, 'YYYY-MM-DD'), 'YYYY-MM-DD')         UPDATEDATE
+			 , M.MID       MID
+			 , M.MNAME     MNAME
+		FROM   TRADEMAP T, MEMBER M
+		WHERE  T.MNO = M.MNO 
+		AND    T.MNO = #{mno, jdbcType=VARCHAR}	
+		AND    T.TNO = #{tno, jdbcType=VARCHAR}	
+	</select>
+	
+	<select id="petSelectAll" parameterType="java.util.HashMap" resultType="Pet">
+		SELECT 
+			  P.PNO PNO
+			, P.PNAME PNAME
+			, P.PTYPE PTYPE
+			, P.PGENDER PGENDER
+			, P.PNEUTRAL PNEUTRAL
+			, P.PPHOTO PPHOTO
+			, P.PWEIGHT PWEIGHT
+			, P.PHOSPITAL PHOSPITAL
+			, P.PMEMO PMEMO
+			, P.PAGES PAGES
+			, P.MNO MNO
+			, P.DELETEYN DELETEYN
+			, P.INSERTDATE INSERTDATE
+			, P.UPDATEDATE UPDATEDATE
+		FROM MEMBER M, PET P 
+		WHERE M.MNO = P.MNO 
+		AND M.MNO = #{mno, jdbcType=VARCHAR} 
+		AND P.PNO IN
+		<foreach collection="pnoArr" index="index" item="pno" open="(" close=")" separator=",">
+			#{pno, jdbcType=VARCHAR}
+		</foreach>
+	</select>
+
+	<update id="offerUpdatePropose" parameterType="OfferVO">
+		UPDATE TRADEMAP SET PROPOSE = '1'
+		WHERE TNO = #{tno, jdbcType=VARCHAR}
+	</update>
+
+</mapper>

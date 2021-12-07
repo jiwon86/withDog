@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.agency.dao.ConditionDAO">
+	
+	<select id="conditionSelectAll" parameterType="ConditionVO" resultType="ConditionVO">
+		SELECT * FROM (
+			SELECT 
+				  C.CNO CNO
+				, C.MNO MNO
+				, C.TNO TNO
+				, C.CPRICE CPRICE
+				, C.CADDRESS CADDRESS
+				, C.CCONTENT CCONTENT
+				, C.DELETEYN DELETEYN
+				, C.INSERTDATE INSERTDATE
+				, C.UPDATEDATE UPDATEDATE
+				, M.MID MID
+				, M.MNAME MNAME
+			    , CEIL(ROW_NUMBER() OVER(ORDER BY C.CNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
+				, COUNT(C.CNO) OVER() AS totalCount
+			FROM CONDITION C, MEMBER M
+			WHERE C.MNO = M.MNO
+			AND C.TNO = #{tno, jdbcType=VARCHAR}
+			ORDER BY C.CNO DESC
+		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="conditionSelect" parameterType="ConditionVO" resultType="ConditionVO">
+		SELECT 
+			  C.CNO CNO
+			, C.MNO MNO
+			, C.TNO TNO
+			, C.CPRICE CPRICE
+			, C.CADDRESS CADDRESS
+			, C.CCONTENT CCONTENT
+			, C.DELETEYN DELETEYN
+			, C.INSERTDATE INSERTDATE
+			, C.UPDATEDATE UPDATEDATE
+			, M.MID
+			, M.MNAME
+		FROM CONDITION C, MEMBER M
+		WHERE C.MNO = M.MNO
+		AND C.CNO = #{cno, jdbcType=VARCHAR}
+	</select>	
+
+	<select id="myConditionSelectAll" parameterType="ConditionVO" resultType="ConditionVO">
+		SELECT * FROM (
+			SELECT 
+				  C.CNO CNO
+				, C.MNO MNO
+				, C.TNO TNO
+				, C.CPRICE CPRICE
+				, C.CADDRESS CADDRESS
+				, C.CCONTENT CCONTENT
+				, C.DELETEYN DELETEYN
+				, C.INSERTDATE INSERTDATE
+				, C.UPDATEDATE UPDATEDATE
+				, M.MID MID
+				, M.MNAME MNAME
+			    , CEIL(ROW_NUMBER() OVER(ORDER BY C.CNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
+				, COUNT(C.CNO) OVER() AS totalCount
+			FROM CONDITION C, MEMBER M
+			WHERE C.MNO = M.MNO
+			AND C.MNO = #{mno, jdbcType=VARCHAR}
+			ORDER BY C.CNO DESC
+		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="myConditionSelect" parameterType="ConditionVO" resultType="ConditionVO">
+		SELECT 
+			  C.CNO CNO
+			, C.MNO MNO
+			, C.TNO TNO
+			, C.CPRICE CPRICE
+			, C.CADDRESS CADDRESS
+			, C.CCONTENT CCONTENT
+			, C.DELETEYN DELETEYN
+			, C.INSERTDATE INSERTDATE
+			, C.UPDATEDATE UPDATEDATE
+			, M.MID MID
+			, M.MNAME MNAME
+		FROM CONDITION C, MEMBER M
+		WHERE C.MNO = M.MNO
+		AND C.MNO = #{mno, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="offerSelectAjax" parameterType="OfferVO" resultType="OfferVO">
+			SELECT 
+				   T.TNO       TNO
+				 , T.TCONTENT  TCONTENT
+				 , T.TPRICE    TPRICE
+				 , T.TLAT      TLAT
+				 , T.TLNG      TLNG
+				 , T.TADDRESS  TADDRESS
+				 , T.TPHOTO    TPHOTO
+				 , T.MNO       MNO
+				 , T.PNO       PNO
+				 , TO_CHAR(T.STARTDATE, 'YYYY-MM-DD HH24:MI')  STARTDATE
+				 , TO_CHAR(T.ENDDATE, 'YYYY-MM-DD HH24:MI')    ENDDATE
+				 , T.DELETEYN  DELETEYN
+				 , TO_CHAR(T.INSERTDATE, 'YYYY-MM-DD')         INSERTDATE
+				 , TO_CHAR(T.UPDATEDATE, 'YYYY-MM-DD')         UPDATEDATE
+				 , M.MID       MID
+				 , M.MNAME     MNAME
+			FROM   TRADEMAP T, MEMBER M
+			WHERE  T.MNO = M.MNO 
+			AND    T.TNO = #{tno, jdbcType=VARCHAR}	
+	</select>
+
+	<select id="petSelect" parameterType="java.util.HashMap" resultType="Pet">
+		SELECT 
+			  P.PNO PNO
+			, P.PNAME PNAME
+			, P.PTYPE PTYPE
+			, P.PGENDER PGENDER
+			, P.PNEUTRAL PNEUTRAL
+			, P.PPHOTO PPHOTO
+			, P.PWEIGHT PWEIGHT
+			, P.PHOSPITAL PHOSPITAL
+			, P.PMEMO PMEMO
+			, P.PAGES PAGES
+			, P.MNO MNO
+			, P.DELETEYN DELETEYN
+			, P.INSERTDATE INSERTDATE
+			, P.UPDATEDATE UPDATEDATE
+		FROM MEMBER M, PET P 
+		WHERE M.MNO = P.MNO 
+		AND M.MNO = #{mno, jdbcType=VARCHAR} 
+		AND P.PNO IN
+		<foreach collection="pnoArr" index="index" item="pno" open="(" close=")" separator=",">
+			#{pno, jdbcType=VARCHAR}
+		</foreach>
+	</select>
+
+	<select id="conditionMapSelect" parameterType="ConditionVO" resultType="ConditionVO">
+		SELECT 
+		      C.CNO CNO
+		    , C.MNO MNO
+		    , C.TNO TNO
+		    , C.CPRICE CPRICE
+		    , C.CADDRESS CADDRESS
+		    , C.CCONTENT CCONTENT
+		    , C.DELETEYN DELETEYN
+		    , C.INSERTDATE INSERTDATE
+		    , C.UPDATEDATE UPDATEDATE
+		    , M.MID MID
+		    , M.MNAME MNAME
+		FROM CONDITION C, MEMBER M
+		WHERE C.MNO = M.MNO
+		AND C.MNO = #{mno, jdbcType=VARCHAR}
+		AND C.TNO = #{tno, jdbcType=VARCHAR}
+		ORDER BY C.CNO DESC	
+	</select>
+	
+	<insert id="conditionInsert" parameterType="ConditionVO">
+		INSERT INTO CONDITION (
+			  CNO
+			, MNO
+			, TNO
+			, CPRICE
+			, CADDRESS
+			, CCONTENT
+			, DELETEYN
+			, INSERTDATE
+			, UPDATEDATE
+		) VALUES(
+			  #{cno, jdbcType=VARCHAR}
+			, #{mno, jdbcType=VARCHAR}
+			, #{tno, jdbcType=VARCHAR}
+			, #{cprice, jdbcType=VARCHAR}
+			, #{caddress, jdbcType=VARCHAR}
+			, #{ccontent, jdbcType=VARCHAR}
+			, 'Y'
+			, SYSDATE
+			, SYSDATE
+		)		
+	</insert>
+
+</mapper>

@@ -23,8 +23,8 @@ import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.service.MemberService;
-import a.b.c.com.member.vo.Member;
-import a.b.c.com.member.vo.MemberAuth;
+import a.b.c.com.member.vo.MemberVO;
+import a.b.c.com.member.vo.MemberAuthVO;
 
 @Controller
 public class MemberController {
@@ -79,7 +79,15 @@ public class MemberController {
 		
 		if(principal != null) {
 			String mid = principal.getName();
+<<<<<<< HEAD
 			Member member = memberService.memberSelect(mid);
+=======
+			MemberVO _mvo = new MemberVO();
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			MemberVO member = memberList.get(0);
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 			model.addAttribute("member", member);
 		}
 		
@@ -100,9 +108,11 @@ public class MemberController {
 	public String profile(Principal principal, Model model) {
 		logger.info("MemberController.profile() 함수 진입");
 		String mid = principal.getName();
-		logger.info("member 아이디 >>> : " + mid);
+		MemberVO _mvo = new MemberVO();
+		_mvo.setMid(mid);
 		
-		Member member = memberService.memberSelect(mid);
+		List<MemberVO> memberList = memberService.memberSelect(_mvo);
+		MemberVO member = memberList.get(0);
 		model.addAttribute("member", member);
 
 		return "member/profile";
@@ -112,10 +122,12 @@ public class MemberController {
 	@RequestMapping("/adminpro")
 	public String profile2(HttpServletRequest req, Model model) {
 		logger.info("MemberController.profile2() 함수 진입");
+		MemberVO mvo = new MemberVO();
 		String mid = req.getParameter("mid");
+		mvo.setMid(mid);
 		logger.info("member 아이디 >>> : " + mid);
 		
-		Member member = memberService.memberSelect(mid);
+		List<MemberVO> member = memberService.memberSelect(mvo);
 		model.addAttribute("member", member);
 
 		return "member/profile";
@@ -135,8 +147,8 @@ public class MemberController {
 		ArrayList<String> aFileName = fu.getFileNames();
 		String mphoto = aFileName.get(0);
 		
-		Member mvo = null;
-		mvo = new Member();
+		MemberVO mvo = null;
+		mvo = new MemberVO();
 		
 		mvo.setMno(fu.getParameter("mno"));
 		mvo.setMname(fu.getParameter("mname"));
@@ -216,8 +228,8 @@ public class MemberController {
 			String detailroad = fu.getParameter("detailroad");
 			mroadaddress = mroadaddress.concat("@").concat(detailroad);
 			
-			Member member = null;
-			member = new Member();
+			MemberVO member = null;
+			member = new MemberVO();
 			
 			// 넘버
 			member.setMno(mno);
@@ -247,7 +259,7 @@ public class MemberController {
 			int nCnt = memberService.memberInsert(member);
 			
 			if(nCnt > 0 ) {
-				MemberAuth memberAuth = new MemberAuth();
+				MemberAuthVO memberAuth = new MemberAuthVO();
 				
 				memberAuth.setMno(mno);
 				
@@ -261,11 +273,11 @@ public class MemberController {
 		// 회원 아이디 체크 하는 방법
 		@RequestMapping("memIdCheck")
 		@ResponseBody
-		public Object memIdCheck(Member member) {
+		public Object memIdCheck(MemberVO member) {
 			logger.info("회원 아이디 중복 확인 컨트롤러 >>>> ");
 			logger.info("id check .getid() >>> : " + member.getMid());
 			
-			List<Member> list = memberService.memberIdCheck(member);
+			List<MemberVO> list = memberService.memberIdCheck(member);
 			logger.info("list.size() >>> : " + list.size());
 			
 			String msg="";

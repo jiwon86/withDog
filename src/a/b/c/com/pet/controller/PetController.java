@@ -1,5 +1,6 @@
 package a.b.c.com.pet.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,8 @@ import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.service.MemberService;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.pet.service.PetService;
 import a.b.c.com.pet.vo.PetVO;
 
@@ -31,12 +33,14 @@ public class PetController {
 	//서비스연결
 	private PetService petService;
 	private ChabunService chabunService;
+	private MemberService memberService;
 	
 	//의존성 주입
 	@Autowired(required=false)
-	public PetController(PetService petService, ChabunService chabunService) {
+	public PetController(PetService petService, ChabunService chabunService, MemberService memberService) {
 		this.chabunService = chabunService;
 		this.petService = petService;
+		this.memberService = memberService;
 	}
 	
 	//반려동물 프로필 진입---------------------------------------------------
@@ -47,23 +51,55 @@ public class PetController {
 	}
 	
 	//반려동물 프로필 진입---------------------------------------------------
-		@GetMapping("petInsertForm")
-		public String petInsertForm(HttpServletRequest req,PetVO pvo, Member mvo) {
-			logger.info("PetController.petInsertForm 시작 >>>>>");
+	@GetMapping("petInsertForm")
+	public String petInsertForm(Principal principal, Model model, HttpServletRequest req,PetVO pvo, MemberVO mvo) {
+		logger.info("PetController.petInsertForm 시작 >>>>>");
+		
+		String mno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
 			
-			//pvo.setMno(mvo.getMno());
-			pvo.setMno(req.getParameter("mno"));
-			logger.info("mno >>>>" + req.getParameter("mno"));
+			_mvo.setMid(mid);
 			
-			return "pet/petInsertForm";
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO member = memberList.get(0);
+			model.addAttribute("member", member);
 		}
+		
+		//pvo.setMno(mvo.getMno());
+		pvo.setMno(req.getParameter("mno"));
+		logger.info("mno >>>>" + req.getParameter("mno"));
+		
+		return "pet/petInsertForm";
+	}
 	//전체조회----------------------------------------------------------------
-	@RequestMapping(value="petSelectAll",method=RequestMethod.GET)
-	public String petSelectAll(PetVO pvo, Member mvo, Model model) {
+	@RequestMapping(value="petSelectAll",method=RequestMethod.POST)
+	public String petSelectAll(Principal principal, PetVO pvo, MemberVO mvo, Model model) {
 		logger.info("PetController.petSelectAll 시작 >>>>>");
-		 
+		
+		String mno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO member = memberList.get(0);
+			model.addAttribute("member", member);
+		}
+		
 		logger.info("mvo.getMno() >>>> " + mvo.getMno());
-		pvo.setMno(mvo.getMno());
+		pvo.setMno(mno);
 		//서비스 연결
 		List<PetVO> listAll = petService.petSelectAll(pvo);
 		logger.info("PetController.petSelectAll listAll.size() >>>>>" + listAll.size());
@@ -79,7 +115,7 @@ public class PetController {
 	}
 	//선택조회----------------------------------------------------------------
 	@GetMapping("petSelect")
-	public String petSelect(PetVO pvo, Member member,Model model, HttpServletRequest req) {
+	public String petSelect(PetVO pvo, MemberVO member,Model model, HttpServletRequest req) {
 		logger.info("PetController.petSelect 시작 >>>>>");
 		
 		pvo.setMno(req.getParameter("mno"));
@@ -101,7 +137,7 @@ public class PetController {
 	}
 	//추가하기----------------------------------------------------------------
 	@PostMapping("petInsert")
-	public String petInsert(HttpServletRequest req, Member member, PetVO pvo, Model model) {
+	public String petInsert(HttpServletRequest req, MemberVO member, PetVO pvo, Model model) {
 		logger.info("PetController.petInsert 시작 >>>>>");
 		pvo.setMno(req.getParameter("mno"));
 		
@@ -159,7 +195,7 @@ public class PetController {
 	
 	//수정하기---------------------------------------------------------------
 	@PostMapping("petUpdate")
-	public String petUpdate(HttpServletRequest req, Member member, PetVO pvo, Model model) {
+	public String petUpdate(HttpServletRequest req, MemberVO member, PetVO pvo, Model model) {
 		logger.info("PetController.petUpdate 시작 >>>> ");
 		
 		//회원정보 받아옴
@@ -176,9 +212,6 @@ public class PetController {
 		
 		boolean bool = fu.imgfileUploadSize(req);
 		logger.info("PetController.petUpdate bool >>>>>"+ bool);
-		
-		
-		
 		
 		//반려동물이름
 		pvo.setPname(fu.getParameter("pname"));
@@ -229,7 +262,7 @@ public class PetController {
 	
 	//삭제하기----------------------------------------------------------------
 	@PostMapping("petDelete")
-	public String petDelete(PetVO pvo, Member member,Model model, HttpServletRequest req) {
+	public String petDelete(PetVO pvo, MemberVO member,Model model, HttpServletRequest req) {
 		logger.info("PetController.petDelete 시작 >>>>>");
 		
 		//회원정보 받아옴
@@ -271,11 +304,6 @@ public class PetController {
 			return "pet/petDelete";
 		}
 		return "pet/myPetList";
-		
-		//========================================================================
-		
-		
-		
 		
 	}
 }
@@ -376,5 +404,105 @@ public class PetController {
 	//삭제하기----------------------------------------------------------------
 }
 >>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
+<<<<<<< HEAD
+/*
+package a.b.c.com.pet.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import a.b.c.com.common.ChabunUtil;
+import a.b.c.com.common.CommonUtils;
+import a.b.c.com.common.FileUploadUtil;
+import a.b.c.com.common.service.ChabunService;
+import a.b.c.com.pet.service.PetService;
+import a.b.c.com.pet.vo.PetVO;
+
+@Controller
+public class PetController {
+
+	//로거
+	Logger logger = Logger.getLogger(PetController.class);
+	
+	//서비스연결
+	private PetService petService;
+	private ChabunService chabunService;
+	
+	//의존성 주입
+	@Autowired(required=false)
+	public PetController(PetService petService, ChabunService chabunService) {
+		this.chabunService = chabunService;
+		this.petService = petService;
+	}
+	
+	//반려동물 프로필 진입---------------------------------------------------
+	@GetMapping("myPetList")
+	public String myPetList() {
+		logger.info("PetController.myPetList 시작 >>>>>");
+		return "pet/myPetList";
+	}
+	//전체조회----------------------------------------------------------------
+	@RequestMapping(value="petSelectAll",method=RequestMethod.GET)
+	public String petSelectAll(PetVO pvo, Model model) {
+		logger.info("PetController.petSelectAll 시작 >>>>>");
+		
+		//서비스 연결
+		List<PetVO> listAll = petService.petSelectAll(pvo);
+		logger.info("PetController.petSelectAll listAll.size() >>>>>" + listAll.size());
+		
+		//nullpoint check : size = 0이면 조회 안 된 것임
+		if(listAll.size()>0) {
+			//조회가 잘 되었다면 listAll에 담긴 값을 SelectAll로 보냄
+			return "pet/petSelectAll";
+		}
+		
+		return "pet/myPetList";
+	}
+	//선택조회----------------------------------------------------------------
+	
+	//추가하기----------------------------------------------------------------
+	@PostMapping("petInsert")
+	public String petInsert(HttpServletRequest req) {
+		logger.info("PetController.petInsert 시작 >>>>>");
+		
+		//채번 구하기
+		//String pno = "P202111170002";
+		
+		//String pno = ChabunUtil.getBoardChabun("P", chabunService.getPetChabun().getPnum());
+		
+		//이미지 업로드
+		FileUploadUtil fu = new FileUploadUtil(CommonUtils.MEMBER_IMG_UPLOAD_PATH, CommonUtils.MEMBER_IMG_FILE_SIZE, CommonUtils.NOTICE_EN_CODE);
+		boolean bool = fu.imgfileUpload(req);
+		logger.info("PetController.petInsert bool >>>>>"+ bool);
+		
+		PetVO pvo =null;
+		pvo = new PetVO();
+		
+		
+		int nCnt = petService.petInsert(pvo);
+		
+		if(nCnt>0) {
+			return "pet/petInsert";
+		}
+		
+		return "pet/myPetList";
+	}
+	
+	//삭제하기----------------------------------------------------------------
+}
+
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 */

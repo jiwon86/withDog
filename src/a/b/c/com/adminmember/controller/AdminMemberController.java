@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import a.b.c.com.adminmember.service.AdminMemberService;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 
 @Controller
 public class AdminMemberController {
@@ -29,10 +29,10 @@ public class AdminMemberController {
 	Logger logger = Logger.getLogger(AdminMemberController.class);
 
 	@RequestMapping("AdminMemberSelectAll")
-	public String memberSelect1(@ModelAttribute Member member, Model model) {
+	public String memberSelect1(@ModelAttribute MemberVO member, Model model) {
 		logger.info("관리자페이지 Member 전체조회로 넘기기");
 		
-		List<Member> listAll = adminMemberService.AdminMemberSelectAll(member);
+		List<MemberVO> listAll = adminMemberService.AdminMemberSelectAll(member);
 		
 		logger.info("member.toString() >>> : " + member.toString());
 		logger.info("listAll.size() >>> : " + listAll.size());
@@ -76,7 +76,7 @@ public class AdminMemberController {
 	*/
 	
 	@RequestMapping("AdminDelete")
-	public String AdminDelete(Member member, Model model) {
+	public String AdminDelete(MemberVO member, Model model) {
 		logger.info("AdminDelete 컨트롤러 함수 진입 >>> : ");
 		int nCnt = adminMemberService.AdminMemberDelete(member);
 		

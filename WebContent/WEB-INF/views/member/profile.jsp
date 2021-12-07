@@ -1,4 +1,5 @@
-<%@page import="a.b.c.com.member.vo.Member"%>
+<%@page import="java.util.List"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,7 +17,7 @@
 				
 				$("#Mypet").click(function(){
 					//alert("mno >>>" + memberUpdateForm.mno.value);
-					$("#memberUpdateForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+					$("#memberUpdateForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 				});
 				
 				$("#zonecode").click(function() {
@@ -28,7 +29,7 @@
 						}
 					}).open();
 				});
-				
+/* 				
 				$("#mbirth").datepicker({
 			        dateFormat: 'yy-mm-dd' //달력 날짜 형태
 	               ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
@@ -42,7 +43,7 @@
 	               ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
 	               ,maxDate: "+0y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 				});
-								
+						 */		
 				$("#inputImage").change(function(){
 					readURL(this);
 				});
@@ -150,12 +151,17 @@
 				--> 
 				<!-- ** 주요 내용 **  -->
 				<%
+<<<<<<< HEAD
 					Member member = (Member)request.getAttribute("member");
+=======
+					MemberVO member = (MemberVO)request.getAttribute("member");
+				
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 					String mroadaddress = member.getMroadaddress();
 					String[] mroadaddressArr = mroadaddress.split("@");
 					String mphoto = member.getMphoto();
 				%>
-                <main>
+                <main style="width:960px; margin:0 auto;">
                     <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
                         <div class="container-xl px-4">
                             <div class="page-header-content">
@@ -175,9 +181,13 @@
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
                             <a class="nav-link active ms-0" href="/profile.wd">Profile</a>
+<<<<<<< HEAD
                             <a class="nav-link" href="myPetList.wd">MyPet</a>
                             <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
                             <a class="nav-link" href="#" id="Mypet">MyPet</a>
+=======
+                            <a class="nav-link" id="Mypet" href="#">MyPet</a>
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                             <a class="nav-link" href="myReviewList.wd">MyReview</a>
@@ -242,11 +252,11 @@
 	                                            <div class="row gx-3 mb-3">
 	                                                <div class="col-md-6">
 	                                                    <label class="small mb-1" for="insertdate">계정 생성일</label>
-	                                                    <input class="form-control" id="insertdate" type="text" value="<%=member.getInsertdate()%>" disabled />
+	                                                    <input class="form-control" id="insertdate" type="date" value="<%=member.getInsertdate()%>" disabled />
 	                                                </div>
 	                                                <div class="col-md-6">
 	                                                    <label class="small mb-1" for="mbirth">생년월일</label>
-	                                                    <input class="form-control" id="mbirth" type="text" name="mbirth" 
+	                                                    <input class="form-control" id="mbirth" type="date" name="mbirth" 
 	                                                           placeholder="생년월일 입력" value="<%=member.getMbirth()%>" />
 	                                                </div>
 	                                            </div>

@@ -8,15 +8,29 @@
 		<!-- Member -->
 		<typeAlias type="a.b.c.com.member.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="a.b.c.com.member.vo.MemberAuthVO" alias="MemberAuthVO" />
+
 		
 		<!-- Qna -->
+
+
+
+		<typeAlias type="a.b.c.com.review.vo.ReviewVO" alias="ReviewVO"/>
+
+		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
+
 		<typeAlias type="a.b.c.com.qna.vo.QnaVO" alias="QnaVO" />	
 		<typeAlias type="a.b.c.com.qna.vo.RqnaVO" alias="RqnaVO" />
 		
 		<!-- Map -->
 		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
-		
+
+		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />
+
+
+		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
+
 		<!-- Notice -->
+
 		<typeAlias type="a.b.c.com.notice.vo.NoticeVO" alias="NoticeVO" />
 		
 		<!-- Pet -->
@@ -30,7 +44,12 @@
 		<typeAlias type="a.b.c.com.agency.vo.OfferVO" alias="OfferVO" />
 		<typeAlias type="a.b.c.com.agency.vo.ConditionVO" alias="ConditionVO" />
 		<typeAlias type="a.b.c.com.agency.vo.AgencyVO" alias="AgencyVO" />
+
+		<typeAlias type="a.b.c.com.park.vo.ParkVO" alias="ParkVO"/>
+
 		<typeAlias type="a.b.c.com.agency.vo.PayVO" alias="PayVO"/>
+
+		<typeAlias type="a.b.c.com.park.vo.RparkVO" alias="RparkVO"/>
 
 	</typeAliases>
 </configuration>

@@ -11,24 +11,27 @@ public abstract class CommonUtils {
 
 	// 이미지 업로드
 	public static final String BOARD_IMG_UPLOAD_PATH 
-	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\board";
+	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\board";
 	public static final int BOARD_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String BOARD_EN_CODE = "UTF-8";
 
 	// 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH 
-	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
+	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
 	public static final int MEMBER_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String MEMBER_EN_CODE = "UTF-8";
 
 	// 이미지 업로드
 	public static final String NOTICE_IMG_UPLOAD_PATH 
-	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\notice";
+	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\notice";
 	public static final int NOTICE_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String NOTICE_EN_CODE = "UTF-8";
 
 	// 한태준 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH1
+
+
+	//= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\member";
 
 	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
 
@@ -62,13 +65,19 @@ public abstract class CommonUtils {
 	
 	// 맵관련
 	public static final String JSON_FILE_PATH 
-	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\";
+	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\";
+	
 
 	public static final String MAPTRADE_IMG_UPLOAD_PATH 
-	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\map\\";
+	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\map\\";
 	public static final int MAPTRADE_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String MAPTRADE_EN_CODE = "UTF-8";
 	
+	// 게시판 페이징 사이즈 초기화
+	public static final int REVIEW_PAGE_SIZE = 4;
+	public static final int REVIEW_GROUP_SIZE = 4;
+	public static final int REVIEW_CUR_PAGE = 1;
+	public static final int REVIEW_TOTAL_COUNT = 0;
 
 
 	//Pet 이미지 업로드 패스

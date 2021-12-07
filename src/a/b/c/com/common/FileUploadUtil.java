@@ -62,6 +62,7 @@ public class FileUploadUtil {
 	}
 	
 	public String getParameter(String s) {
+		System.out.println("getParameter>>> : " + mr.getParameter(s));
 		return mr.getParameter(s);
 	}
 	

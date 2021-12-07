@@ -1,13 +1,13 @@
 package a.b.c.com.common.dao;
 
-
+import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.ConditionVO;
+import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.pet.vo.PetVO;
 import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
-
 import a.b.c.com.map.vo.MapTradeVO;
-import a.b.c.com.member.vo.Member;
-
+import a.b.c.com.member.vo.MemberVO;
 
 import a.b.c.com.park.vo.ParkVO;
 
@@ -25,9 +25,13 @@ public interface ChabunDAO {
 	 */
 	public MapTradeVO getMapChabun();
 
+//	public Member getBoardChabun();
+//	public Member getRboardChabun();
+	public MemberVO getMemChabun();
+	public AgencyVO getAgencyChabun();
+
 	//	public Member getBoardChabun();
 	//	public Member getRboardChabun();
-	public Member getMemChabun();
 
 	public ParkVO getParkChabun();
 
@@ -43,6 +47,6 @@ public interface ChabunDAO {
 
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
-
-
+	public PayVO getPayChabun();
+	public ConditionVO getConditionChabun();
 }

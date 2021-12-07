@@ -1,4 +1,4 @@
-<%@page import="a.b.c.com.member.vo.Member"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -54,7 +54,7 @@
                     </header>
                        <%
                				Object obj = request.getAttribute("listAll");
-              				List<Member> listall = (List<Member>)obj;
+              				List<MemberVO> listall = (List<MemberVO>)obj;
                     				
                 			int nCnt = listall.size();
                     		System.out.println("list.size() >>> :" + listall.size());
@@ -82,7 +82,7 @@
                                     
                                     <%
                                     	for(int i=0; i<nCnt; i++){
-                                    		Member member = listall.get(i);
+                                    		MemberVO member = listall.get(i);
                                     		String mno = member.getMno();
                                     		String mphoto = member.getMphoto();
                                     		String mid = member.getMid();

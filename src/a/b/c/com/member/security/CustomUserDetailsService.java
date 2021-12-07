@@ -1,13 +1,15 @@
 package a.b.c.com.member.security;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import a.b.c.com.member.dao.MemberDAO;
-import a.b.c.com.member.vo.CustomUser;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.CustomUserVO;
+import a.b.c.com.member.vo.MemberVO;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -25,9 +27,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		
-		Member member = memberDAO.read(userName);
+		List<MemberVO> memberList = memberDAO.read(userName);
+		MemberVO _member = memberList.get(0);
 		
-		return member == null ? null : new CustomUser(member);
+		return _member == null ? null : new CustomUserVO(_member);
 	}
 
 }

@@ -27,7 +27,7 @@ import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.map.service.MapService;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.service.MemberService;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.pet.service.PetService;
 import a.b.c.com.pet.vo.PetVO;
 
@@ -51,13 +51,15 @@ public class MapController {
 	}
 	
 	@RequestMapping("/withmap")
-	public String withmap(Principal principal, Model model) {
+	public String withmap(Principal principal, Model model,MemberVO mvo) {
 		logger.info("MapController ------ withmap() ");
 
 		try {
 			
 			String mid = principal.getName();
-			Member member = memberService.memberSelect(mid);
+			mvo.setMid(mid);
+			List<MemberVO> memberList = memberService.memberSelect(mvo);
+			MemberVO member = memberList.get(0);
 			model.addAttribute("member", member);
 			
 			

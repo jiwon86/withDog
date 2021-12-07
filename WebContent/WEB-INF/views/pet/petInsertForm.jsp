@@ -1,4 +1,4 @@
-<%@page import="a.b.c.com.member.vo.Member"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -86,7 +86,7 @@
                         <hr class="mt-0 mb-4" />
 						  <form id="petInsertForm" name= "petInsertForm" action="petInsert.wd" method="POST" enctype="multipart/form-data">
                                                    <%
-                                                   	Member member = (Member)request.getAttribute("member");
+                                                   		MemberVO member = (MemberVO)request.getAttribute("member");
                                                    %>
                     								<input type="hidden" id="mno" name="mno" value="<%=member.getMno() %>">
                                                     <!-- 이름 -->

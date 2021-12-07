@@ -252,7 +252,7 @@ $(document).ready(function(){
             </div>
              <div class="mb-3">
                 <label class="text-gray-600 small" for="emailExample">Date of Birth</label>
-                <input class="form-control form-control-solid" type="text" placeholder="Ex)1993.05.08" 
+                <input class="form-control form-control-solid" type="date" placeholder="Ex)1993.05.08" 
                 aria-label="Birth Address" aria-describedby="birthExample" name="mbirth" required/>
             </div>
             <div class="mb-3">

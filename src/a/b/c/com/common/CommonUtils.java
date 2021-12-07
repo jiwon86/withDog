@@ -2,20 +2,16 @@ package a.b.c.com.common;
 
 public abstract class CommonUtils {
 
-<<<<<<< HEAD
 
 	public static final String WorkSpace = "el_web_withdog_work";
 
 
 	//public static final String WorkSpace = "el_withdog_work";
-=======
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	// 박상혁 : withdog_work
 
 	
 	
 
-	public static final String WorkSpace = "el_withdog_work";
 	
 	public static final String WorkSpace_pr = "pr_work";
 
@@ -40,15 +36,11 @@ public abstract class CommonUtils {
 	
 	// 한태준 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH1
-<<<<<<< HEAD
 
-	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
 
 	//= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\member";
 
-=======
 	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	public static final int MEMBER_IMG_FILE_SIZE1 = 2*1024*1024;
 	public static final String MEMBER_EN_CODE1="UTF-8";
 	
@@ -73,13 +65,11 @@ public abstract class CommonUtils {
 	public static final int MAPTRADE_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String MAPTRADE_EN_CODE = "UTF-8";
 	
-<<<<<<< HEAD
 	// 게시판 페이징 사이즈 초기화
 	public static final int REVIEW_PAGE_SIZE = 4;
 	public static final int REVIEW_GROUP_SIZE = 4;
 	public static final int REVIEW_CUR_PAGE = 1;
 	public static final int REVIEW_TOTAL_COUNT = 0;
-=======
 
 	//Pet 이미지 업로드 패스
 	public static final String PET_IMG_UPLOAD_PATH= 
@@ -106,6 +96,5 @@ public abstract class CommonUtils {
 	public static final int QnA_GROUP_SIZE = 5;
 	public static final int QnA_CUR_PAGE = 1;
 	public static final int QnA_TOTAL_COUNT = 0;
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	
 }

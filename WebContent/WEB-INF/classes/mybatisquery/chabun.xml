@@ -41,7 +41,6 @@
 
 
 	
-<<<<<<< HEAD
 	<!-- Review 채번 시작-->
 	<select id="getReviewCrnumChabun" resultType="ReviewVO">
 		SELECT NVL(MAX(SUBSTR(A.CRNUM, -4)),0) + 1 CRNUM FROM REVIEW A
@@ -53,7 +52,6 @@
 	
 	<!-- Review 채번 끝-->
 	
-=======
 
 	<select id="getParkChabun" resultType="ParkVO">
 		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 
@@ -65,5 +63,4 @@
 	</select>
 	
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 </mapper>

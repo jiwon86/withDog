@@ -8,14 +8,11 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
-<<<<<<< HEAD
 	public static final String BIZ_GUBUN_R = "R"; // 후기게시판 R 후기번호
-=======
 
 	public static final String BIZ_GUBUN_PE = "P"; //반려동물
 	public static final String BIZ_GUBUN_P = "P"; // 산책스타그램
 	
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
 	public static String numpad(String t, String c) {
@@ -67,14 +64,12 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
-<<<<<<< HEAD
 	// 후기게시판 후기번호
 	public static String getReviewCrnumChabun(String type, String memNum) {
 		return BIZ_GUBUN_R.concat(ChabunUtil.numpad(type, memNum));
 	}
 
 	 
-=======
 
 	//반려동물 번호
 	public static String getPetChabun(String type, String memNum) {
@@ -92,7 +87,6 @@ public abstract class ChabunUtil {
 		return ChabunUtil.numpad(type, memNum);
 	}
 	
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	public static void main(String[] args) {
 		String c = "1";
 		System.out.println(ChabunUtil.getMapTradeChabun("a", c));

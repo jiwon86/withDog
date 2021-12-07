@@ -32,11 +32,8 @@
                 <div class="collapse" id="collapseCareService" data-bs-parent="#accordionSidenavCareService">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCareServicePages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
-<<<<<<< HEAD
                         <a class="nav-link hahmlet" href="takerequest.wd">내돌봄현황</a>
-=======
                         <a class="nav-link hahmlet" href="selectTrade.wd">내돌봄현황</a>
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                     </nav>
                 </div>   
                  
@@ -48,14 +45,11 @@
                 </a>
                 <div class="collapse" id="collapseCustomerCenter" data-bs-parent="#accordionSidenavCustomerCenter">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
-<<<<<<< HEAD
                         <a class="nav-link hahmlet" href="reviewInsertForm.wd">돌봄후기</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
-=======
                         <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
                         <a class="nav-link hahmlet" href="noticeSelectPaging.wd">공지사항</a> 
                       <a class="nav-link hahmlet" href="qnaSelectAll.wd">Q&A</a>
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                     </nav>
                 </div>       
                 

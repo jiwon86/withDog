@@ -31,14 +31,12 @@ public interface ChabunDAO {
 //	public Member getBoardChabun();
 //	public Member getRboardChabun();
 	public Member getMemChabun();
-<<<<<<< HEAD
 	
 	
 	// review
 	public ReviewVO getReviewCrnumChabun();
 	public ReviewVO getReviewCnumChabun();
 	
-=======
 
 	public ParkVO getParkChabun();
 
@@ -51,5 +49,4 @@ public interface ChabunDAO {
 	public RqnaVO getRqnaChabun();
 
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 }

@@ -100,7 +100,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getParkChabun");
 	}
 	
-<<<<<<< HEAD
 	// review
 	@Override
 	public ReviewVO getReviewCrnumChabun() {
@@ -114,7 +113,9 @@ public class ChabunDAOImpl implements ChabunDAO {
 		logger.info("ChabunDAOImpl.getReviewCnumChabun() 함수 진입");
 		
 		return sqlSession.selectOne("getReviewCnumChabun");
-=======
+	}
+	
+	@Override	
 	public NoticeVO getNoticeChabun() {
 		logger.info("ChabunDAOImpl.getNoticeChabun() 함수 진입 : ");
 
@@ -122,7 +123,6 @@ public class ChabunDAOImpl implements ChabunDAO {
 		return sqlSession.selectOne("getNoticeChabun");
 
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	}
 	
 	@Override

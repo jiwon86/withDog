@@ -12,14 +12,11 @@ import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.Member;
-<<<<<<< HEAD
 import a.b.c.com.review.vo.ReviewVO;
-=======
 import a.b.c.com.park.vo.ParkVO;
 import a.b.c.com.notice.vo.NoticeVO;
 
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 @Service
 @Transactional
@@ -88,7 +85,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return null;
 	}
 	
-<<<<<<< HEAD
 	// review
 	@Override
 	public ReviewVO getReviewCrnumChabun() {
@@ -102,7 +98,6 @@ public class ChabunServiceImpl implements ChabunService {
 		return chabunDAO.getReviewCnumChabun();
 	}
 	
-=======
 
 	@Override
 	public ParkVO getParkChabun() {
@@ -133,7 +128,6 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("ChabunServiceImpl.getRqnaChabun() 함수 진입");
 		return chabunDAO.getRqnaChabun();
 	}
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	
 
 }

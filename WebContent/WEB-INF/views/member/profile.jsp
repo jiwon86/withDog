@@ -174,13 +174,10 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-<<<<<<< HEAD
                             <a class="nav-link active ms-0" href="/profile.wd">Profile</a>
                             <a class="nav-link" href="myPetList.wd">MyPet</a>
-=======
                             <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
                             <a class="nav-link" href="#" id="Mypet">MyPet</a>
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                             <a class="nav-link" href="account-security.html">Security</a>
                             <a class="nav-link" href="account-notifications.html">Notifications</a>
                             <a class="nav-link" href="myReviewList.wd">MyReview</a>

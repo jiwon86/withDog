@@ -8,21 +8,17 @@ public abstract class CommonUtils {
 
 	//public static final String WorkSpace = "el_withdog_work";
 	// 박상혁 : withdog_work
-<<<<<<< HEAD
 
 	
 	
 
 	
-=======
-	public static final String WorkSpace = "el_withdog_work";
 
 	//public static final String WorkSpace = "pr_work";
 
 	//public static final String WorkSpace = "project_work";
 
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	public static final String WorkSpace_pr = "pr_work";
 
 	public static final String WorkSpace_project = "project_work";
@@ -32,10 +28,7 @@ public abstract class CommonUtils {
 	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\board";
 	public static final int BOARD_IMG_FILE_SIZE = 2*1024*1024;
 	public static final String BOARD_EN_CODE = "UTF-8";
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	// 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH 
 	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
@@ -51,12 +44,9 @@ public abstract class CommonUtils {
 	// 한태준 이미지 업로드
 	public static final String MEMBER_IMG_UPLOAD_PATH1
 
-<<<<<<< HEAD
 
 	//= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\image\\member";
 
-=======
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\member";
 
 
@@ -77,13 +67,9 @@ public abstract class CommonUtils {
 
 	// 맵관련
 	public static final String JSON_FILE_PATH 
-<<<<<<< HEAD
 	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\";
 	
-=======
-	= "C:\\00.KOSMO93\\30.Web\\"+WorkSpace+"\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\";
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	public static final String MAPTRADE_IMG_UPLOAD_PATH 
 	= "C:\\00.KOSMO93\\30.Web\\" + WorkSpace + "\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WithDog\\img\\map\\";
 	public static final int MAPTRADE_IMG_FILE_SIZE = 2*1024*1024;

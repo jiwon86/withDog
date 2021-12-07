@@ -35,14 +35,11 @@ public interface ChabunService {
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
 	
-<<<<<<< HEAD
 	// review
 	public ReviewVO getReviewCrnumChabun();
 	public ReviewVO getReviewCnumChabun();
 	
 	
-=======
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	public NoticeVO getNoticeChabun();
 
 	

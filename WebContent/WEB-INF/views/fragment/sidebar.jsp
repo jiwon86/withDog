@@ -32,20 +32,11 @@
                 <div class="collapse" id="collapseCareService" data-bs-parent="#accordionSidenavCareService">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCareServicePages">
                         <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                         <a class="nav-link hahmlet" href="takerequest.wd">내돌봄현황</a>
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                         <a class="nav-link hahmlet" href="selectTrade.wd">내돌봄현황</a>
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
                     </nav>
                 </div>   
                  

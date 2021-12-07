@@ -25,11 +25,8 @@
 		
 
 		<typeAlias type="a.b.c.com.park.vo.ParkVO" alias="ParkVO"/>
-<<<<<<< HEAD
 		
-=======
 		<typeAlias type="a.b.c.com.park.vo.RparkVO" alias="RparkVO"/>
 
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	</typeAliases>
 </configuration>

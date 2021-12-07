@@ -8,12 +8,12 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
-<<<<<<< HEAD
+
 	public static final String BIZ_GUBUN_R = "R"; // 후기게시판 R 후기번호
 
-=======
+
 	public static final String BIZ_GUBUN_A = "A"; // 반려동물 관련 매칭
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 	public static final String BIZ_GUBUN_PE = "P"; //반려동물
 	public static final String BIZ_GUBUN_P = "P"; // 산책스타그램
 	public static final String BIZ_GUBUN_PAY = "PAY"; // 결제
@@ -79,7 +79,7 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
-<<<<<<< HEAD
+
 	// 후기게시판 후기번호
 	public static String getReviewCrnumChabun(String type, String memNum) {
 		return BIZ_GUBUN_R.concat(ChabunUtil.numpad(type, memNum));
@@ -87,13 +87,13 @@ public abstract class ChabunUtil {
 
 	 
 
-=======
+
 	// 반려동물 위탁 매칭 번호
 	public static String getAgencyChabun(String type, String agencyNum) {
 		return BIZ_GUBUN_A.concat(ChabunUtil.numpad(type, agencyNum));
 	}
 	
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
 	//반려동물 번호
 	public static String getPetChabun(String type, String memNum) {
 		return BIZ_GUBUN_PE.concat(ChabunUtil.numpad(type, memNum));

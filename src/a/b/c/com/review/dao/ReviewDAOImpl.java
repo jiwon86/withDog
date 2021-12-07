@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import a.b.c.com.member.controller.MemberController;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.review.vo.ReviewVO;
 
 @Repository
@@ -73,7 +73,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public List<Member> selectRwriter(ReviewVO rvo) {
+	public List<MemberVO> selectRwriter(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewServiceImpl selectRwriter() 함수진입 >>> ");
 		return null;

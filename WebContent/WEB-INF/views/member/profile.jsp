@@ -151,12 +151,8 @@
 				--> 
 				<!-- ** 주요 내용 **  -->
 				<%
-<<<<<<< HEAD
-					Member member = (Member)request.getAttribute("member");
-=======
+
 					MemberVO member = (MemberVO)request.getAttribute("member");
-				
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 					String mroadaddress = member.getMroadaddress();
 					String[] mroadaddressArr = mroadaddress.split("@");
 					String mphoto = member.getMphoto();

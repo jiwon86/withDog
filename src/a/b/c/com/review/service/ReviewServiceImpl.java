@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.review.dao.ReviewDAO;
 import a.b.c.com.review.dao.ReviewDAOImpl;
 import a.b.c.com.review.vo.ReviewVO;
@@ -81,7 +81,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<Member> selectRwriter(ReviewVO rvo) {
+	public List<MemberVO> selectRwriter(ReviewVO rvo) {
 		// TODO Auto-generated method stub
 		logger.info("ReviewServiceImpl selectRwriter() 함수진입 >>> ");
 		return reviewDAO.selectRwriter(rvo);

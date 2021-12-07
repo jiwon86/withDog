@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="a.b.c.com.review.vo.ReviewVO" %>
-<%@ page import="a.b.c.com.member.vo.Member" %>
+<%@ page import="a.b.c.com.member.vo.MemberVO" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
 		System.out.println(mid);
 	%>
 	<%
-		Member member = (Member)request.getAttribute("member");
+	MemberVO member = (MemberVO)request.getAttribute("member");
 	
 	%>
 	<style>

@@ -68,14 +68,9 @@
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
         	
         	<%
-<<<<<<< HEAD
-        	Member member = (Member)request.getAttribute("member");
-	        	
-        	%>
-=======
+
         	       MemberVO member = (MemberVO)request.getAttribute("member");
         	 %>
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
         	
         	<!-- 로그인 -->
         	<sec:authorize access="isAuthenticated()">

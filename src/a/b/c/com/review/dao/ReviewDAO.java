@@ -2,7 +2,7 @@ package a.b.c.com.review.dao;
 
 import java.util.List;
 
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.review.vo.ReviewVO;
 
 public interface ReviewDAO {
@@ -16,7 +16,7 @@ public interface ReviewDAO {
 	public List<ReviewVO> reviewSelectAllserch(ReviewVO rvo);
 	
 	// 해당 작성자만 수정 삭제
-	public List<Member> selectRwriter(ReviewVO rvo);
+	public List<MemberVO> selectRwriter(ReviewVO rvo);
 	
 	// 마이페이지 해당 아이디만 전체조회
 	public List<ReviewVO> reviewIDlist(ReviewVO rvo);

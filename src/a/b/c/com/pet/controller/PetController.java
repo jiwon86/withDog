@@ -137,7 +137,7 @@ public class PetController {
 	}
 	//추가하기----------------------------------------------------------------
 	@PostMapping("petInsert")
-	public String petInsert(HttpServletRequest req, MemberVO member, PetVO pvo, Model model) {
+	public String petInsert(HttpServletRequest req, MemberVO member, PetVO pvo, Model model,Principal principal) {
 		logger.info("PetController.petInsert 시작 >>>>>");
 		pvo.setMno(req.getParameter("mno"));
 		
@@ -195,7 +195,7 @@ public class PetController {
 	
 	//수정하기---------------------------------------------------------------
 	@PostMapping("petUpdate")
-	public String petUpdate(HttpServletRequest req, MemberVO member, PetVO pvo, Model model) {
+	public String petUpdate(HttpServletRequest req, MemberVO member, PetVO pvo, Model model,Principal principal) {
 		logger.info("PetController.petUpdate 시작 >>>> ");
 		
 		//회원정보 받아옴
@@ -245,6 +245,12 @@ public class PetController {
 		
 		logger.info("mno >>>>>" + fu.getParameter("mno"));
 		String mno = fu.getParameter("mno");
+		String mid = principal.getName();
+		
+		member.setMid(mid);
+		List<MemberVO> memberList = memberService.memberSelect(member);
+		member = memberList.get(0);
+		
 		
 		//적용될 반려동물 번호 확인
 		logger.info("PetController.petUpdate pvo.getPno() >>>>"+pvo.getPno());
@@ -254,6 +260,7 @@ public class PetController {
 		
 		
 		if(nCnt > 0) {
+			model.addAttribute("member", member);
 			model.addAttribute("mno", mno);
 			return "pet/petUpdate";
 		}

@@ -6,18 +6,22 @@
 
 <select id="setMarkers" parameterType="MapTradeVO" resultType="MapTradeVO">	
 	SELECT
-	    A.TNO       TNO
-	    ,A.TTITLE   TTITLE   
-	    ,A.TCONTENT TCONTENT
-	    ,A.TWRITER  TWRITER
-	    ,A.TPRICE   TPRICE 
-	    ,A.TPHOTO   TPHOTO 
-	    ,A.TLAT     TLAT 
-	    ,A.TLNG     TLNG 
+	    A.TNO       	TNO   
+	    ,A.TCONTENT 	TCONTENT
+	    ,A.TLAT     	TLAT 
+	    ,A.TLNG     	TLNG 
+	    ,A.TADDRESS		TADDRESS
+	    ,A.TPRICE   	TPRICE 
+	    ,A.TPHOTO  		TPHOTO 
+		,A.TWRITER 		TWRITER
+		,A.MNO			MNO
+		,A.PNO			PNO
 	    ,A.PROPOSE      PROPOSE 
-	    ,A.DELETEYN DELETEYN
-	    ,A.INSERTDATE INSERTDATE
-	    ,A.UPDATEDATE UPDATEDATE
+	    ,A.STARTDATE	STARTDATE
+	    ,A.ENDDATE		ENDDATE
+	    ,A.DELETEYN 	DELETEYN
+	    ,A.INSERTDATE 	INSERTDATE
+	    ,A.UPDATEDATE 	UPDATEDATE
 	    
 	FROM TRADEMAP A
 	
@@ -88,41 +92,50 @@
 	FROM TRADEMAP A
 	
 	WHERE 	A.DELETEYN = 'Y'
-	AND A.TWRITER = #{TWRITER, jdbcType=VARCHAR} 
-	OR  A.PROPOSE = #{TWRITER, jdbcType=VARCHAR} 
+	AND A.TWRITER = #{twriter, jdbcType=VARCHAR} 
+	OR  A.PROPOSE = #{twriter, jdbcType=VARCHAR} 
 </select>
 
 <insert id="mapTradeInsert" parameterType="MapTradeVO">
 
-	INSERT INTO TRADEMAP(
-		TNO
-		,TTITLE
-		,TCONTENT
-		,TWRITER
-		,TPRICE
-		,TPHOTO
-		,TLAT
-		,TLNG
-		,PROPOSE
-		, DELETEYN
-		, INSERTDATE
-		, UPDATEDATE
+	INSERT INTO TRADEMAP
+	(
+		  TNO
+	    , TCONTENT
+	    , TPRICE
+	    , TLAT
+	    , TLNG
+	    , TADDRESS
+	    , TPHOTO
+	    , TWRITER
+	    , MNO
+	    , PNO
+	    , PROPOSE
+	    , STARTDATE
+	    , ENDDATE
+	    , DELETEYN
+	    , INSERTDATE
+	    , UPDATEDATE
 	)
-	VALUES(
-	
-		#{TNO, jdbcType=VARCHAR} 				<!-- placeholer 1 -->
-		,#{TTITLE, jdbcType=VARCHAR} 			<!-- placeholer 2 -->
-		,#{TCONTENT, jdbcType=VARCHAR} 			<!-- placeholer 3 -->
-		,#{TWRITER, jdbcType=VARCHAR}  			<!-- placeholer 4 -->
-		,#{TPRICE, jdbcType=VARCHAR} 			<!-- placeholer 5 -->
-		,#{TPHOTO, jdbcType=VARCHAR}  			<!-- placeholer 6 -->
-		,#{TLAT, jdbcType=VARCHAR} 				<!-- placeholer 7 -->
-		,#{TLNG, jdbcType=VARCHAR} 				<!-- placeholer 8 -->
-		,#{PROPOSE, jdbcType=VARCHAR}  				<!-- placeholer 9 -->
-		,'Y'  									<!-- placeholer 10 -->
-		,SYSDATE  								<!-- placeholer 11 -->
-		,SYSDATE 								<!-- placeholer 12 -->
-	        ) 
+	VALUES
+	(
+		 #{tno, jdbcType=VARCHAR} 				<!-- placeholer 1 -->
+		,#{tcontent, jdbcType=VARCHAR} 			<!-- placeholer 2 -->
+		,#{tprice, jdbcType=VARCHAR} 			<!-- placeholer 3 -->
+		,#{tlat, jdbcType=VARCHAR} 				<!-- placeholer 4 -->
+		,#{tlng, jdbcType=VARCHAR} 				<!-- placeholer 5 -->
+		,#{taddress, jdbcType=VARCHAR}			<!-- placeholer 6 -->
+		,#{tphoto, jdbcType=VARCHAR}  			<!-- placeholer 7 -->
+		,#{twriter, jdbcType=VARCHAR}  			<!-- placeholer 8 -->	
+		,#{mno, jdbcType=VARCHAR}				<!-- placeholer 9 -->
+		,#{pno, jdbcType=VARCHAR}  				<!-- placeholer 10 -->
+		,#{propose, jdbcType=VARCHAR}  			<!-- placeholer 11 -->
+		,#{startdate, jdbcType=VARCHAR}  		<!-- placeholer 12 -->
+		,#{enddate, jdbcType=VARCHAR}  			<!-- placeholer 13 -->
+		,'Y'  									<!-- placeholer 14 -->
+		,SYSDATE  								<!-- placeholer 15 -->
+		,SYSDATE 								<!-- placeholer 16 -->
+	) 
 </insert>
 
 <update id="mapTradeUpdate" parameterType="MapTradeVO">

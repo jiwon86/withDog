@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="a.b.c.com.member.vo.Member"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -32,7 +32,7 @@
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f59b335fdce7811c29ddb73572e2a37b&libraries=services"></script>
 				<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <%
-	Member member = (Member)request.getAttribute("member");
+	MemberVO member = (MemberVO)request.getAttribute("member");
 %>
 
 						
@@ -47,9 +47,9 @@
 				const	map = new kakao.maps.Map(container, options);
 //-----------------------------------------------------------------------------------				
 // Set Value 기본적인 벨류 세팅
-	const	imageSrc = "image/map/marker.png", // 마커이미지의 주소입니다    
+	const	imageSrc = "image/map/dogmarker.png", // 마커이미지의 주소입니다    
 			imageSize = new kakao.maps.Size(60, 60), // 마커이미지의 크기입니다
-			imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			imageOption = {offset: new kakao.maps.Point(35, 30)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
 	const	gifSrc = "image/map/marker.gif", // 마커이미지의 주소입니다    
 			gifSize = new kakao.maps.Size(80, 80), // 마커이미지의 크기입니다
@@ -65,6 +65,7 @@
 	let 	jsonData;
 	let		load = 0; // JSON Data 로드 체크
 	let 	petinfo;
+	let		id = '${member.mid}';
 	
 		
 //-------------------------------------------------------------------------------------
@@ -113,6 +114,7 @@ let content ='<form id="popup" class="popup">'
 +'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
 +'			<input type="hidden" id="lng" name="lng" value=""></input>'	
 +'			<input type="hidden" id="pno" name="pno" value=""></input>'	
++'			<input type="hidden" id="addr" name="addr" value=""></input>'	
 +'</ul></div>'
 +'</div></form>';
 
@@ -189,14 +191,18 @@ $(document).ready(function(){
 	    const form = $('#popup')[0];  	          
 	    let Lat = latlng.getLat();
 	    let Lng = latlng.getLng();
+	    let addr_1 = document.getElementById("addr_1").value;
+	    let addr_2 = document.getElementById("addr_2").value;
 	    
 		document.getElementById("lat").value = Lat;
 		document.getElementById("lng").value = Lng;
+		document.getElementById("addr").value = addr_1 + " " +addr_2;
 		let formdata = new FormData(form);
     
 		console.log(Lat);
 		console.log(Lng);
-	
+		console.log(addr);
+		
 			$.ajax({			
 				url : 'mapTradeInsert.wd',		
 				type : 'post',
@@ -369,48 +375,58 @@ function markersLoad(x) {
 					   	jsonData = data;
 					   	let i;
 					    let size = jsonData.length;
-					    if (x == 1){
-					    	i = 0;
-					    } else {
-					    	i = size-1;
-					    }
 					    
-					    console.log(jsonData);
-   
-					    for (i; size > i; i++ ){
-					    	const tno = jsonData[i].tno;
-					    	const title = jsonData[i].title;
-					    	const photo = jsonData[i].photo;
-					    	const price = jsonData[i].price;
-					    	const writer = jsonData[i].writer;
-							const markLocation = new kakao.maps.LatLng(jsonData[i].lat, jsonData[i].lng);
-							// Set Marker
-							const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-							    
-							 // 지도를 클릭한 위치에 표출할 마커입니다
-						 	let marker = new kakao.maps.Marker({ 
-							    	position : markLocation,
-							    	image : markerImage
-							    }); 
-							 
-							//Map에 Marker를  세팅함
-							marker.setMap(map);
-							// Marker를 배열에 추가
-							markers.push(marker);
-							//
-							markerInfoSet(title,marker,photo,markLocation,price,tno,writer);
-							load = 1;
-					        }
+						    if (x == 1){
+						    	i = 0;
+						    } else {
+						    	i = size-1;
+						    }
+						    
+						    console.log(jsonData);
+	   						if (size != 0) {
+							    for (i; size > i; i++ ){
+							    	const propose = jsonData[i].propose;
+								    if (propose === "0") {
+								    	const tno = jsonData[i].tno;
+								    	const title = jsonData[i].title;
+								    	const photo = jsonData[i].photo;
+								    	const price = jsonData[i].price;
+								    	const writer = jsonData[i].writer;
+								    	const startdate = jsonData[i].startdate;
+								    	const enddate = jsonData[i].enddate;
+								    	const address = jsonData[i].address;
+								    	const mno = jsonData[i].mno;
+										const markLocation = new kakao.maps.LatLng(jsonData[i].lat, jsonData[i].lng);
+										// Set Marker
+										const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+										    
+										 // 지도를 클릭한 위치에 표출할 마커입니다
+									 	let marker = new kakao.maps.Marker({ 
+										    	position : markLocation,
+										    	image : markerImage
+										    }); 
+										 
+										//Map에 Marker를  세팅함
+										marker.setMap(map);
+										// Marker를 배열에 추가
+										markers.push(marker);
+										//
+										markerInfoSet(title,marker,photo,markLocation,price,tno,writer,startdate,enddate,address,mno);
+							        }
+							    }
+	   						}
+						    //로드 완료	
+						    load = 1;
+						    console.log("Marker Load");
+						 },
+						    error: function (error){
+						        alert("에러");
+						    }
 					
-
-					    },
-					    error: function (error){
-					        alert("에러");
-					    }
 				});
 	}
 
-function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
+function markerInfoSet (title,marker,photo,markLocation,price,tno,writer,startdate,enddate,address,mno) {
 	
 	let makerInfo;
 	
@@ -419,19 +435,20 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 		var iwContent = '<div class="tradeinfo" style="padding:5px;">'
 						+ '<img class="dogimg" src=/img/map/' + photo +'>'
 						+ '<div class="tradeinfo_2">'
-						+ '<ul class="tradelist"><li>'+ title + '</li>'
-						+ '<li>작성자 : '+ writer + '</li>'
-						+ '<li><i class="far fa-clock"></i>&nbsp;기간 : </li>'
+						+ '<ul class="tradelist">'
+						+ '<li><i class="fas fa-user-alt"></i>&nbsp;작성자 : '+ writer + '</li>'
+						+ '<li><i class="far fa-clock"></i>&nbsp;시작 기간 : ' + startdate + ' </li>'
+						+ '<li><i class="far fa-clock"></i>&nbsp;종료 기간 : ' + enddate + ' </li>'
 						+ '<li><i class="fas fa-coins"></i>&nbsp;돌봄 비용 : ' + price + '</li>'
-						+ '<li><i class="fas fa-map-marked-alt"></i>&nbsp;주소 : </li>'
+						+ '<li><i class="fas fa-map-marked-alt"></i>&nbsp;주소 : ' + address + ' </li>'
 						+'</ul></div></div>'; 
 
 	
 	makerInfo = new kakao.maps.CustomOverlay({
 		    position: markLocation,
 		    content: iwContent,
-		    xAnchor: 0.45,
-		    yAnchor : 1.25
+		    xAnchor: 0.5,
+		    yAnchor : 1.15
 	});	// end of event : mouseover
 
 	makerInfo.setMap(map);	
@@ -451,7 +468,14 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 	kakao.maps.event.addListener(marker, 'click', function() {
 		// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
 		console.log(tno);
-		location.href="/selectmarker.wd?tno=" + tno;
+		if (id === writer) {
+			// 자기 글
+			location.href="/offerSelect.wd?tno=" + tno;
+		} else {
+			// 신청자
+			location.href="/offerMapSelect.wd?tno=" + tno + "&mno=" + mno;
+		}
+		
 	}); // end of event : click
 		
 	

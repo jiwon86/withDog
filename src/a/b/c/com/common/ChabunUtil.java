@@ -8,9 +8,11 @@ public abstract class ChabunUtil {
 	public static final String BIZ_GUBUN_B = "B"; // 게시판
 	public static final String BIZ_GUBUN_RB = "RB"; // 게시판 댓글
 	public static final String BIZ_GUBUN_N = "NB"; // 공지사항
-
+	public static final String BIZ_GUBUN_A = "A"; // 반려동물 관련 매칭
 	public static final String BIZ_GUBUN_PE = "P"; //반려동물
 	public static final String BIZ_GUBUN_P = "P"; // 산책스타그램
+	public static final String BIZ_GUBUN_PAY = "PAY"; // 결제
+	public static final String BIZ_GUBUN_C = "C"; // 조건제시
 	public static final String BIZ_GUBUN_RP = "RP"; // 산책스타그램 댓글
 	
 	// type : D(20210001), M(YYYYMM), Y(YYYY)
@@ -62,7 +64,11 @@ public abstract class ChabunUtil {
 		return BIZ_GUBUN_N.concat(ChabunUtil.numpad(type, memNum));
 	}
 	
-
+	// 반려동물 위탁 매칭 번호
+	public static String getAgencyChabun(String type, String agencyNum) {
+		return BIZ_GUBUN_A.concat(ChabunUtil.numpad(type, agencyNum));
+	}
+	
 	//반려동물 번호
 	public static String getPetChabun(String type, String memNum) {
 		return BIZ_GUBUN_PE.concat(ChabunUtil.numpad(type, memNum));
@@ -83,6 +89,16 @@ public abstract class ChabunUtil {
 	public static String getMapTradeChabun(String type, String memNum) {
 		return ChabunUtil.numpad(type, memNum);
 	}
+
+	// 결제 번호
+	public static String getPayChabun(String type, String payNum) {
+		return BIZ_GUBUN_PAY.concat(ChabunUtil.numpad(type, payNum));
+	}
+	
+	// 조건제시 번호
+	public static String getConditionChabun(String type, String cNum) {
+		return BIZ_GUBUN_C.concat(ChabunUtil.numpad(type, cNum));
+	}
 	
 	public static void main(String[] args) {
 		String c = "1";
@@ -96,10 +112,11 @@ public abstract class ChabunUtil {
 		System.out.println("getRparkChabun(\"N\", c) >>> : " + ChabunUtil.getRparkChabun("N", c));
 
 		System.out.println(".getNoticeChabun(\"N\", c) >>> : " + ChabunUtil.getNoticeChabun("N", c));
+		System.out.println(".getAgencyChabun(\"N\", c) >>> : " + ChabunUtil.getAgencyChabun("m", c));
 		System.out.print("getPetChabun() >>>>>" + ChabunUtil.getPetChabun(BIZ_GUBUN_PE, c));
 		System.out.println(".getQnaChabun(\"N\", c) >>> : " + ChabunUtil.getQnaChabun("N", c));
-		
-
+		System.out.println("getPayChabun >>> : " + ChabunUtil.getPayChabun("m", c));
+		System.out.println("getConditionChabun >>> : " + ChabunUtil.getConditionChabun("m", c));
 	}
-	
+
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.adminmember.dao.AdminMemberDAO;
-import a.b.c.com.member.vo.Member;
+import a.b.c.com.member.vo.MemberVO;
 
 @Service
 @Transactional
@@ -23,25 +23,25 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 }
 
 	@Override
-	public List<Member> AdminMemberSelect(Member member) {
+	public List<MemberVO> AdminMemberSelect(MemberVO member) {
 		// TODO Auto-generated method stub
 		return adminMemberDAO.AdminMemberSelect(member);
 	}
 
 	@Override
-	public List<Member> AdminMemberSelectAll(Member member) {
+	public List<MemberVO> AdminMemberSelectAll(MemberVO member) {
 		// TODO Auto-generated method stub
 		return adminMemberDAO.AdminMemberSelectAll(member);
 	}
 
 	@Override
-	public int AdminMemberUpdate(Member member) {
+	public int AdminMemberUpdate(MemberVO member) {
 		// TODO Auto-generated method stub
 		return (Integer)adminMemberDAO.AdminMemberUpdate(member);
 	}
 
 	@Override
-	public int AdminMemberDelete(Member member) {
+	public int AdminMemberDelete(MemberVO member) {
 		// TODO Auto-generated method stub
 		return (Integer)adminMemberDAO.AdminMemberDelete(member);
 	}

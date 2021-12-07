@@ -1,4 +1,5 @@
-<%@page import="a.b.c.com.member.vo.Member"%>
+<%@page import="java.util.List"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -17,6 +18,7 @@
         <!-- Alerts Dropdown-->
         <sec:authorize access="isAuthenticated()">
         <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
+            
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             	<i data-feather="bell"></i>
             </a>
@@ -66,8 +68,8 @@
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
         	
         	<%
-        		Member member = (Member)request.getAttribute("member");
-        	%>
+        	       MemberVO member = (MemberVO)request.getAttribute("member");
+        	 %>
         	
         	<!-- 로그인 -->
         	<sec:authorize access="isAuthenticated()">
@@ -85,8 +87,8 @@
             
             <!-- 비로그인 -->
             <sec:authorize access="isAnonymous()">
-            	<a href="/register.wd" class="btn btn-primary">회원가입</a>
-            	<a href="/login.wd" class="btn btn-primary">로그인</button>
+            	<a href="/register.wd" class="btn btn-green btn-sm">회원가입</a>
+            	<a href="/login.wd" class="btn btn-indigo btn-sm">로그인</button>
             </sec:authorize>
             
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">

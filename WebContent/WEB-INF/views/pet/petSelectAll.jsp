@@ -1,4 +1,4 @@
-<%@page import="a.b.c.com.member.vo.Member"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="a.b.c.com.pet.vo.PetVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -96,7 +96,7 @@
 						Object obj = request.getAttribute("listAll");
 						System.out.println("obj >>>>>" + obj);
 						if (obj == null) return;
-						Member member = (Member)request.getAttribute("member");
+						MemberVO member = (MemberVO)request.getAttribute("member");
 						
 						ArrayList<PetVO> aList = (ArrayList<PetVO>)obj;
 						

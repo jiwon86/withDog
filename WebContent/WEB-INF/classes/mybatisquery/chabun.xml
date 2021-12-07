@@ -25,12 +25,12 @@
 		SELECT NVL(MAX(SUBSTR(A.MNUM, -4)), 0) + 1 MNUM FROM SPRING_MEMBER A
 	</select>
 	-->
-
+	
 	<select id="getPetChabun" resultType="Pet">
 		SELECT NVL(MAX(SUBSTR(A.PNO, -4)), 0) + 1 PNO FROM PET A
 	</select>
 
-	<select id="getMemChabun" resultType="Member">
+	<select id="getMemChabun" resultType="MemberVO">
 		SELECT NVL(MAX(SUBSTR(A.MNO, -4)),0) + 1 MNO FROM MEMBER A 
 	</select>
 	
@@ -38,7 +38,9 @@
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
 	</select>
 
-
+	<select id="getAgencyChabun" resultType="AgencyVO">
+		SELECT NVL(MAX(SUBSTR(A.ANO, -4)),0) + 1 ANO FROM AGENCY A
+	</select>
 
 	<select id="getParkChabun" resultType="ParkVO">
 		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 
@@ -52,8 +54,14 @@
 
 	<select id="getNoticeChabun" resultType="NoticeVO">
 		SELECT NVL(MAX(SUBSTR(A.NNUM, -4)), 0) + 1 NNUM FROM NOTICE A
-
 	</select>
 	
+	<select id="getPayChabun" resultType="PayVO">
+		SELECT NVL(MAX(SUBSTR(A.PAYNO, -4)), 0) + 1 PAYNO FROM PAY A
+	</select>
+	
+	<select id="getConditionChabun" resultType="ConditionVO">
+		SELECT NVL(MAX(SUBSTR(A.CNO, -4)), 0) + 1 CNO FROM CONDITION A
+	</select>
 
 </mapper>

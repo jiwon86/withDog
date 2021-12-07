@@ -4,7 +4,7 @@
 		  
 <mapper namespace="a.b.c.com.member.dao.MemberDAO">
 
-	<resultMap type="Member" id="memberMap">
+	<resultMap type="MemberVO" id="memberMap">
 		<id property="mno" column="MNO" />
 		
 		<result property="mno" column="MNO" />
@@ -24,12 +24,12 @@
 		<collection property="authList" resultMap="authMap"></collection>
 	</resultMap>
 	
-	<resultMap type="MemberAuth" id="authMap">
+	<resultMap type="MemberAuthVO" id="authMap">
 		<result property="mno" column="MNO" />
 		<result property="mauth" column="MAUTH" />
 	</resultMap>
 	
-	<insert id="memberInsert" parameterType="Member">
+	<insert id="memberInsert" parameterType="MemberVO">
 		 INSERT INTO MEMBER( 	 
 		     MNO      		<!-- COLUMN 1 -->
 			,MID 			<!-- COLUMN 2 -->
@@ -61,7 +61,7 @@
 	      ) 
 	</insert>
 
-	<insert id="memberAuthInsert" parameterType="MemberAuth">
+	<insert id="memberAuthInsert" parameterType="MemberAuthVO">
 		 INSERT INTO MEMBER_AUTH( 	 
 		      MNO      	
 			, MAUTH
@@ -95,6 +95,13 @@
 		WHERE M.MID = #{mid}
 	</select>
 	
+	<!-- 
+		  FROM  MEMBER M, MEMBER_AUTH A
+		  WHERE M.DELETEYN = 'Y' 
+		  AND M.MNO = A.MNO(+)
+		  AND   M.MID = #{mid}
+	-->
+	
 	<select id="memberSelect" resultMap="memberMap">
 		SELECT 
 			M.MNO            MNO,
@@ -117,8 +124,15 @@
 			  ON M.MNO = A.MNO
 		WHERE M.MID = #{mid}
 	</select>
+	<!-- 
+		  FROM  MEMBER M, MEMBER_AUTH A
+		  WHERE M.DELETEYN = 'Y' 
+		  AND M.MNO = A.MNO(+)
+		  AND M.MID = #{mid}
+	-->
 	
-	<update id="memberUpdate" parameterType="Member">
+	
+	<update id="memberUpdate" parameterType="MemberVO">
 		UPDATE MEMBER
 		SET
 			  MNAME      = #{mname, jdbcType=VARCHAR}
@@ -133,7 +147,7 @@
 		AND   MNO = #{mno, jdbcType=VARCHAR}
 	</update>
 	
-<select id="memberIdCheck" parameterType="Member" resultType="Member">
+<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
 	SELECT 	A.MID MID
 	FROM 	MEMBER A 
 	WHERE 	DELETEYN = 'Y'

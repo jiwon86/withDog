@@ -15,6 +15,7 @@ import a.b.c.com.map.vo.MapTradeVO;
 import a.b.c.com.member.vo.MemberVO;
 
 import a.b.c.com.park.vo.ParkVO;
+import a.b.c.com.park.vo.RparkVO;
 
 
 import a.b.c.com.notice.vo.NoticeVO;
@@ -102,6 +103,14 @@ public class ChabunDAOImpl implements ChabunDAO {
 		
 		return sqlSession.selectOne("getParkChabun");
 	}
+
+	@Override
+	public RparkVO getRparkChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunDAOImpl.getRparkChabun() 함수 진입");
+		return sqlSession.selectOne("getRparkChabun");
+	}
+
 	
 	@Override
 	public NoticeVO getNoticeChabun() {
@@ -136,4 +145,5 @@ public class ChabunDAOImpl implements ChabunDAO {
 		
 		return sqlSession.selectOne("getConditionChabun");
 	}
+	
 }

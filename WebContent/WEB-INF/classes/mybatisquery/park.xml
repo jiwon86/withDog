@@ -17,6 +17,7 @@
 		<result property="iinsert" column="IINSERT" />
 	</resultMap>
  -->
+ 
 	<insert id="parkInsert" parameterType="ParkVO">
 		 INSERT INTO DOG_PARK( 	 
 		 	 INUM			<!-- COLUMN 1 -->
@@ -82,4 +83,6 @@
 	UPDATE DOG_PARK SET DELETEYN = 'N', IUPDATE = SYSDATE
 	WHERE DELETEYN = 'Y' AND INUM = #{inum, jdbcType=VARCHAR}
 </update>
+
+
 </mapper>

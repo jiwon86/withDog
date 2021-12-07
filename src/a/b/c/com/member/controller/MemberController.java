@@ -79,11 +79,15 @@ public class MemberController {
 		
 		if(principal != null) {
 			String mid = principal.getName();
+<<<<<<< HEAD
+			Member member = memberService.memberSelect(mid);
+=======
 			MemberVO _mvo = new MemberVO();
 			_mvo.setMid(mid);
 			
 			List<MemberVO> memberList = memberService.memberSelect(_mvo);
 			MemberVO member = memberList.get(0);
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 			model.addAttribute("member", member);
 		}
 		

@@ -15,7 +15,12 @@ import a.b.c.com.pet.vo.PetVO;
 import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
+<<<<<<< HEAD
+import a.b.c.com.member.vo.Member;
+import a.b.c.com.review.vo.ReviewVO;
+=======
 import a.b.c.com.member.vo.MemberVO;
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 import a.b.c.com.park.vo.ParkVO;
 import a.b.c.com.park.vo.RparkVO;
 
@@ -91,6 +96,19 @@ public class ChabunServiceImpl implements ChabunService {
 	public MapTradeVO getMapChabun() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	// review
+	@Override
+	public ReviewVO getReviewCrnumChabun() {
+		logger.info("ChabunServiceImpl.getReviewCrnumChabun() 함수 진입");
+		return chabunDAO.getReviewCrnumChabun();
+	}
+	
+	@Override
+	public ReviewVO getReviewCnumChabun() {
+		logger.info("ChabunServiceImpl.getReviewCnumChabun() 함수 진입");
+		return chabunDAO.getReviewCnumChabun();
 	}
 	
 

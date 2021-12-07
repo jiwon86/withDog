@@ -12,7 +12,12 @@ import a.b.c.com.pet.vo.PetVO;
 import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
+<<<<<<< HEAD
+import a.b.c.com.member.vo.Member;
+import a.b.c.com.review.vo.ReviewVO;
+=======
 import a.b.c.com.member.vo.MemberVO;
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 import a.b.c.com.park.vo.ParkVO;
 import a.b.c.com.park.vo.RparkVO;
@@ -112,7 +117,26 @@ public class ChabunDAOImpl implements ChabunDAO {
 	}
 
 	
+<<<<<<< HEAD
+	// review
 	@Override
+	public ReviewVO getReviewCrnumChabun() {
+		logger.info("ChabunDAOImpl.getReviewCrnumChabun() 함수 진입");
+		
+		return sqlSession.selectOne("getReviewCrnumChabun");
+	}
+	
+	@Override
+	public ReviewVO getReviewCnumChabun() {
+		logger.info("ChabunDAOImpl.getReviewCnumChabun() 함수 진입");
+		
+		return sqlSession.selectOne("getReviewCnumChabun");
+	}
+	
+	@Override	
+=======
+	@Override
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	public NoticeVO getNoticeChabun() {
 		logger.info("ChabunDAOImpl.getNoticeChabun() 함수 진입 : ");
 

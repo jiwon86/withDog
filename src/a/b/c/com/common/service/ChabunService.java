@@ -13,6 +13,11 @@ import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 
 import a.b.c.com.map.vo.MapTradeVO;
+<<<<<<< HEAD
+import a.b.c.com.member.vo.Member;
+import a.b.c.com.review.vo.ReviewVO;
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 import a.b.c.com.park.vo.ParkVO;
 import a.b.c.com.park.vo.RparkVO;
 import a.b.c.com.notice.vo.NoticeVO;
@@ -39,6 +44,15 @@ public interface ChabunService {
 	
 	public QnaVO getQnaChabun();
 	public RqnaVO getRqnaChabun();
+<<<<<<< HEAD
+	
+	// review
+	public ReviewVO getReviewCrnumChabun();
+	public ReviewVO getReviewCnumChabun();
+	
+	
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 	public NoticeVO getNoticeChabun();
 	public PayVO getPayChabun();
 	public ConditionVO getConditionChabun();

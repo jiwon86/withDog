@@ -7,7 +7,13 @@ import a.b.c.com.pet.vo.PetVO;
 import a.b.c.com.qna.vo.QnaVO;
 import a.b.c.com.qna.vo.RqnaVO;
 import a.b.c.com.map.vo.MapTradeVO;
+<<<<<<< HEAD
+import a.b.c.com.member.vo.Member;
+import a.b.c.com.review.vo.ReviewVO;
+
+=======
 import a.b.c.com.member.vo.MemberVO;
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 import a.b.c.com.park.vo.ParkVO;
 
@@ -32,6 +38,16 @@ public interface ChabunDAO {
 
 	//	public Member getBoardChabun();
 	//	public Member getRboardChabun();
+<<<<<<< HEAD
+	public Member getMemChabun();
+	
+	
+	// review
+	public ReviewVO getReviewCrnumChabun();
+	public ReviewVO getReviewCnumChabun();
+	
+=======
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog
 
 	public ParkVO getParkChabun();
 

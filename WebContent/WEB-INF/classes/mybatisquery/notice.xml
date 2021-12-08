@@ -42,6 +42,7 @@
 		ORDER BY 1 DESC
 		
 		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+		
 </select>
 
 <select id ="noticeSelectAll" parameterType="NoticeVO" resultType="NoticeVO">

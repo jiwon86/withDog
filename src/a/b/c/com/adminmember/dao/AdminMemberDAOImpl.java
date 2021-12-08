@@ -19,25 +19,25 @@ public class AdminMemberDAOImpl implements AdminMemberDAO {
 
 	@Override
 	public List<Member> AdminMemberSelect(Member member) {
-		// TODO Auto-generated method stub
+		logger.info("dao자리~~~~~~~~");
 		return sqlSession.selectList("AdminMemberSelect",member);
 	}
 
 	@Override
 	public List<Member> AdminMemberSelectAll(Member member) {
-		// TODO Auto-generated method stub
+		logger.info("dao자리~~~~~~~~");
 		return sqlSession.selectList("AdminMemberSelectAll",member);
 	}
 
 	@Override
 	public int AdminMemberUpdate(Member member) {
-		// TODO Auto-generated method stub
+		logger.info("dao자리~~~~~~~~");
 		return (Integer)sqlSession.update("AdminMemberUpdate",member);
 	}
 
 	@Override
 	public int AdminMemberDelete(Member member) {
-		// TODO Auto-generated method stub
+		logger.info("dao자리~~~~~~~~");
 		return (Integer)sqlSession.delete("AdminMemberDelete", member);
 	}
 	

@@ -148,10 +148,7 @@
 		  SELECT
 				M.MNO            MNO,
 				M.MID            MID,
-				M.MPW            MPW,
-				M.MEMAIL         MEMAIL,
 				M.MNAME          MNAME,
-				M.MBIRTH         MBIRTH,
 				M.MPHOTO         MPHOTO,
 				M.MZONECODE      MZONECODE,
 				M.MROADADDRESS   MROADADDRESS,
@@ -159,16 +156,13 @@
 				M.DELETEYN       DELETEYN,
 				TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
 				TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
-				A.MAUTH          MAUTH,
                 CEIL(ROW_NUMBER() OVER(ORDER BY M.MNO) / 10 ) pageSize,		
                 COUNT(M.MNO) OVER() AS totalCount       
 			FROM  MEMBER M 
-			  LEFT OUTER JOIN 
-			  MEMBER_AUTH A 
-			  ON M.MNO = A.MNO
               WHERE M.DELETEYN = 'Y'
+              AND M.MID like '%' ||  #{keyword, jdbcType=VARCHAR} || '%'
               ORDER BY 1 DESC
-			) WHERE pageSize = 1
+			) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
 </select>
 
 		

@@ -9,7 +9,7 @@ public class RqnaVO {
 	private String rqnawriter;
 	private String rqnapw;
 	private String rqnadelyn;
-	private String rqnainsert;
+	private String rqnainsertdate;
 	private String rqnaupdatedate;
 	
 	public RqnaVO() {
@@ -18,7 +18,7 @@ public class RqnaVO {
 
 	public RqnaVO(String rqnanum, String qnanum, String rqnatitle, 
 				  String rqnacon, String rqnawriter, String rqnapw,
-				  String rqnadelyn, String rqnainsert, String rqnaupdatedate) {
+				  String rqnadelyn, String rqnainsertdate, String rqnaupdatedate) {
 		
 		this.rqnanum = rqnanum;
 		this.qnanum = qnanum;
@@ -27,10 +27,10 @@ public class RqnaVO {
 		this.rqnawriter = rqnawriter;
 		this.rqnapw = rqnapw;
 		this.rqnadelyn = rqnadelyn;
-		this.rqnainsert = rqnainsert;
+		this.rqnainsertdate = rqnainsertdate;
 		this.rqnaupdatedate = rqnaupdatedate;
 	}
-
+	
 	public String getRqnanum() {
 		return rqnanum;
 	}
@@ -59,10 +59,10 @@ public class RqnaVO {
 		return rqnadelyn;
 	}
 
-	public String getRqnainsert() {
-		return rqnainsert;
+	public String getRqnainsertdate() {
+		return rqnainsertdate;
 	}
-	
+
 	public String getRqnaupdatedate() {
 		return rqnaupdatedate;
 	}
@@ -95,8 +95,8 @@ public class RqnaVO {
 		this.rqnadelyn = rqnadelyn;
 	}
 
-	public void setRqnainsert(String rqnainsert) {
-		this.rqnainsert = rqnainsert;
+	public void setRqnainsertdate(String rqnainsertdate) {
+		this.rqnainsertdate = rqnainsertdate;
 	}
 
 	public void setRqnaupdatedate(String rqnaupdatedate) {
@@ -107,6 +107,6 @@ public class RqnaVO {
 	public String toString() {
 		return "RqnaVO [rqnanum=" + rqnanum + ", qnanum=" + qnanum + ", rqnatitle=" + rqnatitle + ", rqnacon=" + rqnacon
 				+ ", rqnawriter=" + rqnawriter + ", rqnapw=" + rqnapw + ", rqnadelyn=" + rqnadelyn + ", rqnainsert="
-				+ rqnainsert + ", rqnaupdatedate=" + rqnaupdatedate + "]";
+				+ rqnainsertdate + ", rqnaupdatedate=" + rqnaupdatedate + "]";
 	}
 }

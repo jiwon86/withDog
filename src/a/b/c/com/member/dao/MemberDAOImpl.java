@@ -66,5 +66,5 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Member> MemberSelectPaging(Member mvo){
 		return sqlSession.selectList("MemberSelectPaging", mvo);
 	}
-
+	
 }

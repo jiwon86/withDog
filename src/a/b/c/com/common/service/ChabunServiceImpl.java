@@ -114,6 +114,4 @@ public class ChabunServiceImpl implements ChabunService {
 		logger.info("ChabunServiceImpl.getRqnaChabun() 함수 진입");
 		return chabunDAO.getRqnaChabun();
 	}
-	
-
 }

@@ -12,7 +12,7 @@ Q&A UPDATE
 <script>
 	alert("수정되었습니다.");
 	console.log("수정되었습니다.");
-	location.href="qnaSelectAll.wd";
+	location.href="qnaSelectAllPaging.wd";
 </script>
 
 </body>

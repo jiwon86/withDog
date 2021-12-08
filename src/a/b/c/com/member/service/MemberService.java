@@ -17,5 +17,4 @@ public interface MemberService {
 	
 	// 페이징
 	public List<Member> MemberSelectPaging(Member member);
-	
 }

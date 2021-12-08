@@ -60,5 +60,5 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> MemberSelectPaging(Member member){
 		return memberDAO.MemberSelectPaging(member);
 	}
-
+	
 }

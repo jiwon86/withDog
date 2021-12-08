@@ -17,5 +17,6 @@ public interface MemberDAO {
 	public int memberAuthInsert(MemberAuth memberAuth);
 	// 페이징
 	public List<Member> MemberSelectPaging(Member member);
+	
 
 }

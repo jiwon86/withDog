@@ -64,7 +64,7 @@
                                                        placeholder="비밀번호 입력" aria-label="Password" aria-describedby="passwordExample" />
                                             </div>
                                             <!-- Form Group (forgot password link)-->
-                                            <div class="mb-3"><a class="small" href="auth-password-social.html">Forgot your password?</a></div>
+                                            <div class="mb-3"><a class="small" href="PwFinding.wd">Forgot your password?</a></div>
                                             <!-- Form Group (login box)-->
                                             <div class="d-flex align-items-center justify-content-between mb-0">
                                                 <div class="form-check">
@@ -78,12 +78,11 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <div class="small"><a href="register.wd">Need an account? Sign up!</a></div>
                                     <hr class="my-0" />
                                     <div class="card-body px-5 py-4">
                                         <div class="small text-center">
                                             New user?
-                                            <a href="auth-register-social.html">Create an account!</a>
+                                            <a href="register.wd">Create an account!</a>
                                         </div>
                                     </div>
                                 </div>

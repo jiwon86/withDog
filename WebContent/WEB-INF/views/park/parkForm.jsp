@@ -13,6 +13,7 @@
 <jsp:include page="/head.wd" />
 <!-- /헤드 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
 
 		//U
@@ -27,12 +28,33 @@
 			$(".movement").attr({ "method":"POST"
 				                  ,"action":"parkDelete.wd"}).submit();
 		});
-		 
-</script>
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-
+		
+		function emptyHeartBtn(e) {
+			alert("빈하트 클릭");
+			
+			let fullHeartTag = `
+	            <button class="btn btn-pink btn-icon mr-2  full-heart" onclick="fullHeartBtn(this)">
+	            	<i class="fas fa-heart"></i>
+	                <!--  <i data-feather="heart"></i> -->
+	            </button>			
+			`;
+			
+			$(e).parent().html(fullHeartTag);
+		}
+		
+		function fullHeartBtn(e) {
+			alert("풀하트 클릭");
+			
+			let emptyHeartTag = `
+	            <button class="btn btn-pink btn-icon mr-2 empty-heart" onclick="emptyHeartBtn(this)">
+	            	<i class="far fa-heart"></i>
+	                <!--  <i data-feather="heart"></i> -->
+	            </button>		
+			`;
+			
+			$(e).parent().html(emptyHeartTag);
+		}
+		
 	$(document).ready(function(){
 		
 		selectAll();
@@ -396,8 +418,9 @@
 					    	
 					    	<div class="float-end" style="margin-right:620px;">
 					    		
-					            <button class="btn btn-pink btn-icon mr-2">
-					                <i data-feather="heart"></i>
+					            <button class="btn btn-pink btn-icon mr-2 empty-heart" onclick="emptyHeartBtn(this)">
+					            	<i class="far fa-heart"></i>
+					                <!--  <i data-feather="heart"></i> -->
 					            </button>
 					            <!-- 저장하는 버튼 -->
 					            <!-- <button class="btn btn-teal btn-icon mr-2">

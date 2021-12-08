@@ -6,7 +6,8 @@ public abstract class CommonUtils {
 	
 	
 
-	public static final String WorkSpace = "el_withdog_work";
+	//public static final String WorkSpace = "el_withdog_work";
+	public static final String WorkSpace = "project_work";
 	
 	public static final String WorkSpace_pr = "pr_work";
 

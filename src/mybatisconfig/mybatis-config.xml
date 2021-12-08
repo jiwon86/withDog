@@ -11,14 +11,13 @@
 		<typeAlias type="a.b.c.com.qna.vo.RqnaVO" alias="RqnaVO" />
 
 		<typeAlias type="a.b.c.com.map.vo.MapTradeVO" alias="MapTradeVO" />
-		<typeAlias type="a.b.c.com.member.vo.MemberAuth" alias="MemberAuth" />
+
 		<typeAlias type="a.b.c.com.notice.vo.NoticeVO" alias="NoticeVO" />
 		<typeAlias type="a.b.c.com.pet.vo.PetVO" alias="Pet"/>	
 		
-<<<<<<< HEAD
+
 		<typeAlias type="a.b.c.com.park.vo.ParkVO" alias="ParkVO"/>
-=======
-		
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog
+
+
 	</typeAliases>
 </configuration>

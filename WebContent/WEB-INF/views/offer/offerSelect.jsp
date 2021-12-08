@@ -253,7 +253,9 @@
                                 <a class="btn btn-transparent-dark btn-icon" onclick="javascript:history.back();"><i data-feather="arrow-left"></i></a>
                                 <div class="ms-3">
                                 	<div class="my-3">
-                                		<% if(todayDate.before(startDate)) { %>
+                                		<% 
+                                			if(todayDate.before(startDate)) { 
+                                		%>
 	                                		<!-- 준비중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
@@ -267,7 +269,9 @@
 	                                        </span>
                                         <% } %>
                                         
-                                        <% if(todayDate.after(startDate) && todayDate.before(endDate)) { %>	
+                                        <% 
+                                        	if(todayDate.after(startDate) && todayDate.before(endDate)) { 
+                                        %>	
 	                                        <!-- 진행중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
@@ -281,7 +285,9 @@
 	                                        </span>
                                         <% } %>
                                         
-                                        <% if(todayDate.after(endDate)) { %>
+                                        <% 
+                                        	if(todayDate.after(endDate)) { 
+                                        %>
 	                                        <!-- 종료 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
@@ -352,13 +358,54 @@
 			                              <% 
 			                              	for(int i=0; i<petListSize; i++) {
 			                              		PetVO pvo = petList.get(i);
+
+			                              		String pneutral = pvo.getPneutral();
+			                              		String pneutraltext = "";
+			                              		String pgender = pvo.getPgender();
+			                              		String pgendertext = "";
+			                              		String ptype = pvo.getPtype();
+			                              		String ptypetext = "";
+			                              		
+			                              		if(pneutral.equals("Y")) {
+			                              			pneutraltext = "중성화 O";
+			                              		} else {
+			                              			pneutraltext = "중성화 X";
+			                              		}
+			                              		
+			                              		if(pgender.equals("01")) {
+			                              			pgendertext = "수컷";
+			                              		} else {
+			                              			pgendertext = "암컷";
+			                              		}
+			                              		
+			                              		if(ptype.equals("01")) {
+			                              			ptypetext = "쉽독";
+			                              		} else if(ptype.equals("02")) {
+			                              			ptypetext = "캐틀 독";
+			                              		} else if(ptype.equals("03")) {
+			                              			ptypetext = "테리어";
+			                              		} else if(ptype.equals("04")) {
+			                              			ptypetext = "닥스훈트";
+			                              		} else if(ptype.equals("05")) {
+			                              			ptypetext = "스피츠";
+			                              		} else if(ptype.equals("06")) {
+			                              			ptypetext = "센트하운드";
+			                              		} else if(ptype.equals("07")) {
+			                              			ptypetext = "포인팅독";
+			                              		} else if(ptype.equals("08")) {
+			                              			ptypetext = "리트리버";
+			                              		} else if(ptype.equals("09")) {
+			                              			ptypetext = "토이독";
+			                              		} else if(ptype.equals("10")) {
+			                              			ptypetext = "사이트 하운드";					
+			                              		}
 			                              %>
 				                               <div class="col-lg-4 mb-3">
 				                                   <div class="d-flex align-items-center">
 				                                       <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/img/pet/<%=pvo.getPphoto()%>"></div>
 				                                       <div class="ms-3">
-				                                           <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=pvo.getPtype()%>)</span></div>
-				                                           <div class="small text-muted">중형견(<%=pvo.getPweight()%>)/<%=pvo.getPages()%>살/중성화 x(<%=pvo.getPneutral()%>)</div>
+				                                           <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=ptypetext%>)</span></div>
+				                                           <div class="small text-muted"><%=pvo.getPweight()%>KG/<%=pvo.getPages()%>살/<%=pgendertext%></div>
 				                                       </div>
 				                                   </div>
 				                               </div>
@@ -461,29 +508,36 @@
 						                                    		</div>			                                    					
 				                                    <%		
 			                                    				} else {
+			                                    					if(todayDate.before(startDate)) {
+			                                    					
 			                                    	%>
-					                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-						                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-						                                    		</div>
-						                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
-						                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
-						                                    		</div>
+						                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+							                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+							                                    		</div>
+							                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
+							                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
+							                                    		</div>
 			                                    	<%
+			                                    					}
 			                                    				}
 				                                    		} else {
+				                                    			if(todayDate.before(startDate)) {
 				                                    %>
-					                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-																	<i class="far fa-check-circle"></i> &nbsp; 수락
-																</div>	 
+						                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+																		<i class="far fa-check-circle"></i> &nbsp; 수락
+																	</div>	 
 				                                    <%	
+				                                    			}
 				                                    		}
 			                                    			
 			                                    		} else {
+			                                    			if(todayDate.before(startDate)) {
 			                                    	%>
-					                                    	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-																<i class="far fa-check-circle"></i> &nbsp; 수락
-															</div>	                                    	
+						                                    	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+																	<i class="far fa-check-circle"></i> &nbsp; 수락
+																</div>	                                    	
 			                                    	<%
+			                                    			}
 			                                    		}
 			                                    	%>
 			                                    </div>
@@ -505,14 +559,16 @@
                         <% 
                         	if(conditionList.size() > 0) { 
                         %>
+                        		<%-- 
 			                    <jsp:include page="conditionPaging.jsp" flush="true">
-									<jsp:param name="url" value="offerSelect.psh"/>
+									<jsp:param name="url" value="offerSelect.wd"/>
 									<jsp:param name="str" value=""/>
 									<jsp:param name="pageSize" value="<%=pageSize%>"/>
 									<jsp:param name="groupSize" value="<%=groupSize%>"/>
 									<jsp:param name="curPage" value="<%=curPage%>"/>
 									<jsp:param name="totalCount" value="<%=totalCount%>"/>
 								</jsp:include>
+								--%>
                         <%
                         	} else {
                         %>

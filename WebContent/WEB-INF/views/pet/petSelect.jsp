@@ -19,12 +19,15 @@
 			compCheck();
 			
 			$("#Mypet").click(function(){
-				//alert("mno >>>" + petSelectForm.mno.value);
+
+				console.log("mno >>>" + petSelectForm.mno.value);
 				$("#petSelectForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			$("#Prev").click(function(){
-				//alert("mno >>>" + petSelectForm.mno.value);
+
+				console.log("mno >>>" + petSelectForm.mno.value);
+
 				$("#petSelectForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			

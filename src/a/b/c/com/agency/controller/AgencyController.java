@@ -25,6 +25,7 @@ import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.OfferVO;
 import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.common.ChabunUtil;
+import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.service.MemberService;
 import a.b.c.com.member.vo.MemberVO;
@@ -491,6 +492,50 @@ public class AgencyController {
 		model.addAttribute("cno", cno);
 		
 		return "agency/conditionInsert";
+	}
+	
+	@GetMapping("/mypay")
+	public String mypay(PayVO payvo, Principal principal, Model model) {
+		
+		String mno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			model.addAttribute("mvo", mvo);
+		}
+		
+		int pageSize = CommonUtils.PAY_PAGE_SIZE;
+		int groupSize = CommonUtils.PAY_GROUP_SIZE;
+		int curPage = CommonUtils.PAY_CUR_PAGE;
+		int totalCount = CommonUtils.PAY_TOTAL_COUNT;	
+		
+		if(payvo.getCurPage() != null) {
+			curPage = Integer.parseInt(payvo.getCurPage());
+		}
+		
+		payvo.setPageSize(String.valueOf(pageSize));
+		payvo.setGroupSize(String.valueOf(groupSize));
+		payvo.setCurPage(String.valueOf(curPage));
+		payvo.setTotalCount(String.valueOf(totalCount));
+		
+		payvo.setCmno(mno);
+		payvo.setTmno(mno);
+		
+		List<PayVO> payList = agencyService.paySelectAll(payvo);
+		
+		model.addAttribute("pagingPayvo", payvo);
+		model.addAttribute("payList", payList);
+		
+		return "agency/mypay";
 	}
 	
 }

@@ -86,5 +86,12 @@ public class AgencyServiceImpl implements AgencyService {
 		
 		return agencyDAO.paySelectPayno(pvo);
 	}
+
+	@Override
+	public List<PayVO> paySelectAll(PayVO pvo) {
+		logger.info("AgencyServiceImpl.paySelectAll() 함수 진입");
+		
+		return agencyDAO.paySelectAll(pvo);
+	}
 	
 }

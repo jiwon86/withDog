@@ -83,5 +83,32 @@
 		FROM PAY P
 		WHERE PAYNO = #{payno, jdbcType=VARCHAR}
 	</select>
-
+	
+	<select id="paySelectAll" parameterType="PayVO" resultType="PayVO">
+	SELECT * FROM (
+		SELECT
+			  P.PAYNO      PAYNO
+			, P.IMPID      IMPID
+			, P.TNO        TNO
+			, P.CNO        CNO
+			, P.MERCHANTID MERCHANTID
+			, P.APPLYNUM   APPLYNUM
+			, P.CARDNAME   CARDNAME
+			, P.PAYMETHOD  PAYMETHOD
+			, P.CARDNUMBER CARDNUMBER
+			, P.PAYAMOUNT  PAYAMOUNT
+			, P.PAYNAME    PAYNAME
+			, P.TMNO       TMNO
+			, P.CMNO       CMNO
+			, P.DELETEYN   DELETEYN
+			, P.INSERTDATE INSERTDATE
+			, P.UPDATEDATE UPDATEDATE
+			, (SELECT COUNT(*) FROM PAY P WHERE P.PAYNO = P.PAYNO) payCount
+		    , CEIL(ROW_NUMBER() OVER(ORDER BY P.PAYNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
+		    , COUNT(P.PAYNO) OVER() AS totalCount
+		FROM PAY P
+		WHERE TMNO=#{tmno, jdbcType=VARCHAR} OR CMNO=#{cmno, jdbcType=VARCHAR}
+		ORDER BY P.PAYNO DESC
+	) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+	</select>
 </mapper>

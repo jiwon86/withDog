@@ -78,5 +78,12 @@ public class AgencyDAOImpl implements AgencyDAO {
 		
 		return sqlSession.selectList("paySelectPayno", pvo);
 	}
+
+	@Override
+	public List<PayVO> paySelectAll(PayVO pvo) {
+		logger.info("AgencyDAOImpl.paySelectAll() 함수진입");
+		
+		return sqlSession.selectList("paySelectAll", pvo);
+	}
 	
 }

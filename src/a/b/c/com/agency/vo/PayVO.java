@@ -18,15 +18,21 @@ public class PayVO {
 	private String tmno;
 	private String cmno;
 	
+	// 페이징 이동 필드
+	private String pageSize;
+	private String groupSize;
+	private String curPage;
+	private String totalCount;	
+	
 	public PayVO() {
 		
 	}
 
-	public PayVO(String payno, String impid, String tno, 
-				 String cno, String merchantid, String applynum,
-				 String cardname, String paymethod, String cardnumber, 
-				 String payamount, String payname, String deleteyn,
-				 String insertdate, String updatedate, String tmno, String cmno) {
+	public PayVO(String payno, String impid, String tno, String cno, 
+			String merchantid, String applynum, String cardname, String paymethod, 
+			String cardnumber, String payamount, String payname, String deleteyn,
+			String insertdate, String updatedate, String tmno, String cmno, 
+			String pageSize, String groupSize, String curPage, String totalCount) {
 		this.payno = payno;
 		this.impid = impid;
 		this.tno = tno;
@@ -43,6 +49,10 @@ public class PayVO {
 		this.updatedate = updatedate;
 		this.tmno = tmno;
 		this.cmno = cmno;
+		this.pageSize = pageSize;
+		this.groupSize = groupSize;
+		this.curPage = curPage;
+		this.totalCount = totalCount;
 	}
 
 	public String getPayno() {
@@ -171,6 +181,38 @@ public class PayVO {
 
 	public void setCmno(String cmno) {
 		this.cmno = cmno;
+	}
+
+	public String getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getGroupSize() {
+		return groupSize;
+	}
+
+	public void setGroupSize(String groupSize) {
+		this.groupSize = groupSize;
+	}
+
+	public String getCurPage() {
+		return curPage;
+	}
+
+	public void setCurPage(String curPage) {
+		this.curPage = curPage;
+	}
+
+	public String getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(String totalCount) {
+		this.totalCount = totalCount;
 	}
 	
 }

@@ -63,17 +63,6 @@
                             <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-start">
-                                        <!-- Invoice branding-->
-                                        <img class="invoice-brand-img rounded-circle mb-4" src="assets/img/demo/demo-logo.svg" alt="" />
-                                        <div class="h2 text-white mb-0">Start Bootstrap</div>
-                                        Web Design &amp; Development
-                                    </div>
-                                    <div class="col-12 col-lg-auto text-center text-lg-end">
-                                        <!-- Invoice details-->
-                                        <div class="h3 text-white">Invoice</div>
-                                        #29301
-                                        <br />
-                                        January 1, 2021
                                     </div>
                                 </div>
                             </div>
@@ -155,12 +144,52 @@
 												 <% 
 													for(int i=0; i<petListSize; i++) {
 														PetVO pvo = petList.get(i);
+														String pneutral = pvo.getPneutral();
+														String pneutraltext = "";
+														String pgender = pvo.getPgender();
+														String pgendertext = "";
+														String ptype = pvo.getPtype();
+														String ptypetext = "";
+														
+														if(pneutral.equals("Y")) {
+															pneutraltext = "중성화 O";
+														} else {
+															pneutraltext = "중성화 X";
+														}
+														
+														if(pgender.equals("01")) {
+															pgendertext = "수컷";
+														} else {
+															pgendertext = "암컷";
+														}
+														
+														if(ptype.equals("01")) {
+															ptypetext = "쉽독";
+														} else if(ptype.equals("02")) {
+															ptypetext = "캐틀 독";
+														} else if(ptype.equals("03")) {
+															ptypetext = "테리어";
+														} else if(ptype.equals("04")) {
+															ptypetext = "닥스훈트";
+														} else if(ptype.equals("05")) {
+															ptypetext = "스피츠";
+														} else if(ptype.equals("06")) {
+															ptypetext = "센트하운드";
+														} else if(ptype.equals("07")) {
+															ptypetext = "포인팅독";
+														} else if(ptype.equals("08")) {
+															ptypetext = "리트리버";
+														} else if(ptype.equals("09")) {
+															ptypetext = "토이독";
+														} else if(ptype.equals("10")) {
+															ptypetext = "사이트 하운드";					
+														}														
 												  %>
 													   <div class="d-flex align-items-center">
-														   <div class="avatar avatar-sm"><img class="avatar-img img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png"></div>
+														   <div class="avatar avatar-sm"><img class="avatar-img img-fluid" src="/img/pet/<%=pvo.getPphoto()%>"></div>
 														   <div class="ms-3">
-															   <div class="text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:10px;">(<%=pvo.getPtype()%>)</span></div>
-															   <div class="small text-muted">중형견(<%=pvo.getPweight()%>)/<%=pvo.getPages()%>살/중성화 x(<%=pvo.getPneutral()%>)</div>
+															   <div class="text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:10px;">(<%=ptypetext%>)</span></div>
+															   <div class="small text-muted"><%=pvo.getPweight()%>KG/<%=pvo.getPages()%>살/<%=pneutraltext%>/<%=pgendertext%></div>
 														   </div>
 													   </div>
 												  <%

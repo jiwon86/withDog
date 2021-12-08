@@ -26,7 +26,11 @@
 			
 			
 			$("#Mypet").click(function(){
+<<<<<<< HEAD
 				console.log("mno >>>" + petSelectAllForm.mno.value);
+=======
+				//alert("mno >>>" + petSelectAllForm.mno.value);
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
 				$("#petSelectAllForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
@@ -34,14 +38,14 @@
 			$(document).on("click", "#pno", function(){
 				
 				var pno = $(this).attr('value');
-				alert("pno >>>>>" + pno);	
+				//alert("pno >>>>>" + pno);	
 				//$("#petSelectAllForm").attr({ "method":"GET","action":"petSelect.wd","value":pno}).submit();
 			});
 			
 				
 				
 			$(document).on("click", "#insert", function(){	
-				alert("mno >>>" + petSelectAllForm.mno.value);
+				//alert("mno >>>" + petSelectAllForm.mno.value);
 				
 				$("#petSelectAllForm").attr({ "method":"POST","action":"petInsertForm.wd"}).submit();
 			});
@@ -86,10 +90,10 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link" href="/profile.wd">Profile</a>
-                            <a class="nav-link active ms-0" id="Mypet" href="#myPetList.wd">MyPet</a>
-                            <a class="nav-link" href="account-security.html">Security</a>
-                            <a class="nav-link" href="account-notifications.html">Notifications</a>
+                            <a class="nav-link" href="/profile.wd">프로필정보</a>
+                            <a class="nav-link active ms-0" href="#" id="Mypet">동물정보</a>
+                            <a class="nav-link" href="/mypay.wd">포인트정보</a>
+                            <a class="nav-link" href="myReviewList.wd">리뷰정보</a>
                         </nav>
                         <hr class="mt-0 mb-4" />
             	<%

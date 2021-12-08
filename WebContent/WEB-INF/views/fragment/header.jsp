@@ -115,6 +115,11 @@
 	                        		<%=member.getMid()%>
 	                        	</sec:authorize>
 	                        </div>
+	                        <div class="dropdown-user-details-email">
+	                        	<sec:authorize access="isAuthenticated()">
+	                        		<%=member.getMpoint()%>&nbsp;포인트
+	                        	</sec:authorize>
+	                        </div>
                         </sec:authorize>
                     </div>
                 </h6>

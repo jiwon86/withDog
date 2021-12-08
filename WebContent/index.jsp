@@ -41,19 +41,30 @@
 				
 				<p class="container_top_text"><b>우리동네 반려동물 돌봄 서비스</b></p>
 
-				<a href="withmap.wd"><button ani_type="bounce">돌봄 시작하기</button></a>
+				<a href="withmap.wd"><button ani_type="bounce" class="mb-2">돌봄 시작하기</button></a>
 
 
 			</div>
 
+<<<<<<< HEAD
 	
+=======
+		<!-- 콘텐츠 -->
+		<div id="layoutSidenav_content">
+			<main></main>
+			<!--  
+					===================================
+					<main> 내용 </main> 부분을 복사해서 
+
+					Test1
+
+					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
+					===================================
+				-->
+>>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
 			<!-- ** 주요 내용 **  -->
 
 			<!-- ** /주요 내용 ** -->
-
-			<!-- 바닥글 -->
-			<jsp:include page="/footer.wd" />
-			<!-- /바닥글 -->
 
 		</div>
 		<div class="container_visual2">

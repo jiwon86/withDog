@@ -9,6 +9,7 @@ public class OfferVO {
 	private String tlng;
 	private String taddress;
 	private String tphoto;
+	private String twriter;
 	private String mno;
 	private String pno;
 	private String startdate;
@@ -33,10 +34,10 @@ public class OfferVO {
 
 	public OfferVO( String tno, String ttitle, String tcontent, String tprice, 
 					String tlat, String tlng, String taddress, String tphoto, 
-					String mno, String pno, String startdate, String enddate, 
-					String deleteyn, String insertdate, String updatedate, String mid, 
-					String mname, String pageSize, String groupSize, String curPage,
-					String totalCount, String conditionCount) {
+					String twriter, String mno, String pno, String startdate, 
+					String enddate, String deleteyn, String insertdate, String updatedate, 
+					String mid, String mname, String pageSize, String groupSize,
+					String curPage, String totalCount, String conditionCount) {
 		this.tno = tno;
 		this.ttitle = ttitle;
 		this.tcontent = tcontent;
@@ -45,6 +46,7 @@ public class OfferVO {
 		this.tlng = tlng;
 		this.taddress = taddress;
 		this.tphoto = tphoto;
+		this.twriter = twriter;
 		this.mno = mno;
 		this.pno = pno;
 		this.startdate = startdate;
@@ -123,6 +125,14 @@ public class OfferVO {
 
 	public void setTphoto(String tphoto) {
 		this.tphoto = tphoto;
+	}
+
+	public String getTwriter() {
+		return twriter;
+	}
+
+	public void setTwriter(String twriter) {
+		this.twriter = twriter;
 	}
 
 	public String getMno() {
@@ -235,6 +245,6 @@ public class OfferVO {
 
 	public void setConditionCount(String conditionCount) {
 		this.conditionCount = conditionCount;
-	}	
+	}
 	
 }

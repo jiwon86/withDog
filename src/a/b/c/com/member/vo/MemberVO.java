@@ -19,39 +19,33 @@ public class MemberVO implements Serializable{
 	private String mzonecode;
 	private String mroadaddress;
 	private String mjibunaddress;
+	private String mpoint;
 	
 	private String deleteyn;
 	private String insertdate;
 	private String updatedate;
 	
 	private List<MemberAuthVO> authList;
-	
-	@Override
-	public String toString() {
-		return "Member [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", mname=" + mname
-				+ ", mbirth=" + mbirth + ", mphoto=" + mphoto + ", mzonecode=" + mzonecode + ", mroadaddress="
-				+ mroadaddress + ", mjibunaddress=" + mjibunaddress + ", deleteyn=" + deleteyn + ", insertdate="
-				+ insertdate + ", updatedate=" + updatedate + ", authList=" + authList + "]";
-	}
 
 	public MemberVO() {
 		
 	}
-	
-	public MemberVO(String mno, String mid, String mpw, 
-				  String memail, String mname, String mphoto, 
-				  String mzonecode, String mroadaddress, String mjibunaddress, 
-				  String deleteyn, String insertdate, String updatedate,
-				  List<MemberAuthVO> authList) {
+
+	public MemberVO(String mno, String mid, String mpw, String memail, 
+					String mname, String mbirth, String mphoto, String mzonecode, 
+					String mroadaddress, String mjibunaddress, String mpoint, String deleteyn,
+					String insertdate, String updatedate, List<MemberAuthVO> authList) {
 		this.mno = mno;
 		this.mid = mid;
 		this.mpw = mpw;
 		this.memail = memail;
 		this.mname = mname;
+		this.mbirth = mbirth;
 		this.mphoto = mphoto;
 		this.mzonecode = mzonecode;
 		this.mroadaddress = mroadaddress;
 		this.mjibunaddress = mjibunaddress;
+		this.mpoint = mpoint;
 		this.deleteyn = deleteyn;
 		this.insertdate = insertdate;
 		this.updatedate = updatedate;
@@ -138,6 +132,14 @@ public class MemberVO implements Serializable{
 		this.mjibunaddress = mjibunaddress;
 	}
 
+	public String getMpoint() {
+		return mpoint;
+	}
+
+	public void setMpoint(String mpoint) {
+		this.mpoint = mpoint;
+	}
+
 	public String getDeleteyn() {
 		return deleteyn;
 	}
@@ -168,6 +170,6 @@ public class MemberVO implements Serializable{
 
 	public void setAuthList(List<MemberAuthVO> authList) {
 		this.authList = authList;
-	}	
+	}
 	
 }

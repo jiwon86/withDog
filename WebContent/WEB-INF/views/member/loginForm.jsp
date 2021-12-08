@@ -40,12 +40,10 @@
                                 <!-- Social login form-->
                                 <div class="card my-5">
                                     <div class="card-body p-5 text-center">
-                                        <div class="h3 fw-light mb-3">Sign In</div>
-                                        <!-- Social login links-->
-                                        <a class="btn btn-icon btn-facebook mx-1" href="#!"><i class="fab fa-facebook-f fa-fw fa-sm"></i></a>
-                                        <a class="btn btn-icon btn-github mx-1" href="#!"><i class="fab fa-github fa-fw fa-sm"></i></a>
-                                        <a class="btn btn-icon btn-google mx-1" href="#!"><i class="fab fa-google fa-fw fa-sm"></i></a>
-                                        <a class="btn btn-icon btn-twitter mx-1" href="#!"><i class="fab fa-twitter fa-fw fa-sm text-white"></i></a>
+                                        <div class="h3 fw-light mb-1">
+                                        	<div style="font-weight:bold;">WITH DOG</div> 
+                                        	<div class="mt-2" style="font-weight:bold; color:#496b5b;">로그인</div>
+                                        </div>
                                     </div>
                                     <hr class="my-0" />
                                     <div class="card-body p-5">
@@ -64,12 +62,10 @@
                                                        placeholder="비밀번호 입력" aria-label="Password" aria-describedby="passwordExample" />
                                             </div>
                                             <!-- Form Group (forgot password link)-->
-                                            <div class="mb-3"><a class="small" href="auth-password-social.html">Forgot your password?</a></div>
+                                            <div class="mb-3"><a class="small" href="auth-password-social.html">비밀번호 찾기</a> / <a class="small" href="register.wd">회원가입</a></div>
                                             <!-- Form Group (login box)-->
                                             <div class="d-flex align-items-center justify-content-between mb-0">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" id="checkRememberPassword" type="checkbox" value="" />
-                                                    <label class="form-check-label" for="checkRememberPassword">Remember password</label>
                                                 </div>
                                                 <input type="submit" class="btn btn-primary" value="로그인">
                                             </div>
@@ -78,15 +74,8 @@
                                         </form>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <div class="small"><a href="register.wd">Need an account? Sign up!</a></div>
-                                    <hr class="my-0" />
-                                    <div class="card-body px-5 py-4">
-                                        <div class="small text-center">
-                                            New user?
-                                            <a href="auth-register-social.html">Create an account!</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                        
+                                	</div>
                             </div>
                         </div>
                     </div>

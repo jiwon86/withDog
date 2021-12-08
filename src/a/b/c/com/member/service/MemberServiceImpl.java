@@ -64,4 +64,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.memberAuthInsert(memberAuth);
 	}
 
+	@Override
+	public int updatePoint(MemberVO mvo) {
+		logger.info("MemberServiceImpl.updatePoint() 함수 진입");
+		
+		return memberDAO.updatePoint(mvo);
+	}
+
 }

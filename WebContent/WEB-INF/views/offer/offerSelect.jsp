@@ -17,6 +17,7 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<head>
+		<link rel="stylesheet" href="css/offer/offer.css">
 		<script type="text/javascript">
 		
 			function chatPaymentResultBtnClick(e) {
@@ -237,6 +238,7 @@
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="layout"></i></div>
                                             <span>돌봄신청 상세정보</span>
+                                            <img src="/image/gif/dog-walking_2.gif" class="dogwalk">
                                         </h1>
                                         <div class="page-header-subtitle">The default page header layout with main content that overlaps the background of the page header</div>
                                     </div>

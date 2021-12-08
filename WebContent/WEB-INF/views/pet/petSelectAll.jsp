@@ -26,8 +26,8 @@
 			
 			
 			$("#Mypet").click(function(){
-				alert("mno >>>" + petSelectAllForm.mno.value);
-				$("#petSelectAllForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				console.log("mno >>>" + petSelectAllForm.mno.value);
+				$("#petSelectAllForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			
@@ -43,7 +43,7 @@
 			$(document).on("click", "#insert", function(){	
 				alert("mno >>>" + petSelectAllForm.mno.value);
 				
-				$("#petSelectAllForm").attr({ "method":"GET","action":"petInsertForm.wd"}).submit();
+				$("#petSelectAllForm").attr({ "method":"POST","action":"petInsertForm.wd"}).submit();
 			});
 			
 			

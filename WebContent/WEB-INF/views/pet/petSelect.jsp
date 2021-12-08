@@ -20,12 +20,12 @@
 			
 			$("#Mypet").click(function(){
 				alert("mno >>>" + petSelectForm.mno.value);
-				$("#petSelectForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				$("#petSelectForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			$("#Prev").click(function(){
 				alert("mno >>>" + petSelectForm.mno.value);
-				$("#petSelectForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				$("#petSelectForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			$("#Update").click(function(){

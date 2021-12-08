@@ -98,13 +98,14 @@ let content ='<form id="popup" class="popup">'
 +'</div>'
 +'<div class="area_1">'
 +	'<ul class="list">'	
-+		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
++		'<img src="/image/gif/dog-stand_2.gif" class="dogstand" id="dogstand">'
++		'<img src="/image/gif/hello.gif" class="doghello" id="doghello">'
 +		'<li id="dogs"><label for="dogs"><i class="fas fa-dog"></i>&nbsp;돌 볼 반려동물</label><br>&nbsp&nbsp'
 			
 +			'</li>'
 +		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when_1" name="when_1" placeholder="맡기실 기간을 입력해주세요.">'
 + 			' <i class="fas fa-bone fa-2x"></i><input type="datetime-local" class="form-control" id="when_2" name="when_2"></div></li>'
-+		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
++		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" step="1000" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
 +		'<li><label for="content"><i class="fas fa-envelope-open-text"></i>&nbsp;상세 사항</label><textarea class="form-control" id="content" name="content" rows="3" placeholder="돌봄 시 필요한 사항을 적어주세요."></textarea></li>'
 +		'<li><label for="photo"><i class="fas fa-images"></i>&nbsp;반려동물 사진</label><input type="file" class="form-control" id="photo" name="photo"></li>'
 +		'<li><label for="addr_2"><i class="fas fa-map-marked-alt"></i>&nbsp;주소 정보</label><div class="item_2"><input type="text" class="form-control addr" id="addr_1" name="addr_1" readonly>'
@@ -174,6 +175,37 @@ const when_1 = document.getElementById('when_1');
 const when_2 = document.getElementById('when_2');
 // 반려동물 리스트
 const dogs = document.getElementById('dogs');
+// 
+const dogGif = document.getElementById('dogstand');
+const dogHelloGif = document.getElementById('doghello');
+
+dogGif.addEventListener("mouseover", dogHello);
+
+dogHelloGif.addEventListener("animationend" ,dogHelloOut);
+dogHelloGif.classList.add("hidden");
+
+function dogHello () {
+	if (dogHelloGif.classList.contains("out") || dogHelloGif.classList.contains("in")) {
+		console.log("애니메이션 중입니다.");
+	} else {
+		dogHelloGif.classList.remove("hidden");
+		dogHelloGif.classList.add("in");	
+	}
+}
+
+
+function dogHelloOut() {
+	// In -> Out
+	if(this.classList.contains("in")) {
+	this.classList.remove("in");
+	this.classList.add("out");
+	}else // Out -> Out
+		if(this.classList.contains("out")) {
+			this.classList.remove("out");
+			this.classList.add("hidden");
+		}
+	}
+
 
 
 
@@ -252,6 +284,22 @@ $(document).ready(function(){
 	    }
 	}); // end of ajax()
 	
+	$('#price').on('change', function() {
+		     let price = $(this).val(); 
+		     if (price >= 0 && price < 1000) {
+		    	 if (price < 10) {price = price * 100;}
+		    	 if (price < 100) {price = price * 100;}
+		    	 else {price = price * 10;}
+		     }
+		     price = Math.floor(price/1000) * 1000; 
+		     //alert(n);  
+		     $(this).val(price);
+		     if (price <= 0) {
+		    	 alert("1000원 단위로 입력해주세요!");
+		    	 $(this).val(1000);
+		     }
+		  });
+
 });
 
 // 체크박스 이벤트

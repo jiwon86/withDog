@@ -25,7 +25,7 @@
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
                 <h6 class="dropdown-header dropdown-notifications-header">
                     <i class="me-2" data-feather="bell"></i>
-                    Alerts Center
+                    	알림
                 </h6>
                 <!-- Example Alert 1-->
                 <a class="dropdown-item dropdown-notifications-item" href="#!">
@@ -68,6 +68,7 @@
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
         	
         	<%
+
         	       MemberVO member = (MemberVO)request.getAttribute("member");
         	 %>
         	
@@ -112,6 +113,11 @@
 	                        <div class="dropdown-user-details-email">
 	                        	<sec:authorize access="isAuthenticated()">
 	                        		<%=member.getMid()%>
+	                        	</sec:authorize>
+	                        </div>
+	                        <div class="dropdown-user-details-email">
+	                        	<sec:authorize access="isAuthenticated()">
+	                        		<%=member.getMpoint()%>&nbsp;포인트
 	                        	</sec:authorize>
 	                        </div>
                         </sec:authorize>

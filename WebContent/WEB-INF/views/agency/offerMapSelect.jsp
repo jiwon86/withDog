@@ -123,7 +123,12 @@
                                 	<div class="my-3">
                                 		<% if(todayDate.before(startDate)) { %>
 	                                		<!-- 준비중 -->
-	                                		<span style="font-size:35px; font-weight:bold; color:#4cc1c1"><%=ovo.getTno()%></span> &nbsp;
+	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        	</span> &nbsp;
+	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
+	                                        </span> &nbsp;	                                		
 	                                	    <span class="me-3">
 	                                           	<i class="fas fa-circle fa-sm ms-3 text-cyan"></i>
 	                                       		<span class="hahmlet" style="font-size:13px; color:#4cc1c1; font-weight:bold;">준비중</span>
@@ -132,7 +137,12 @@
                                         
                                         <% if(todayDate.after(startDate) && todayDate.before(endDate)) { %>	
 	                                        <!-- 진행중 -->
-	                                        <span style="font-size:35px; font-weight:bold; color:#13a4a4;"><%=ovo.getTno()%></span> &nbsp;
+	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        	</span> &nbsp;
+	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
+	                                        </span> &nbsp;	                                        
 	                                        <span class="me-3">
 	                                           	<i class="fas fa-circle fa-sm ms-3 text-teal"></i>
 	                                       		<span class="hahmlet" style="font-size:13px; color:#13a4a4; font-weight:bold;">진행중</span>
@@ -141,7 +151,12 @@
                                         
                                         <% if(todayDate.after(endDate)) { %>
 	                                        <!-- 종료 -->
-	                                        <span style="font-size:35px; font-weight:bold; color:red;"><%=ovo.getTno()%></span> &nbsp;
+	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        	</span> &nbsp;
+	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
+	                                        </span> &nbsp;
 	                                        <span class="me-3">
 	                                           	<i class="fas fa-circle fa-sm ms-3 text-red"></i>
 	                                       		<span class="hahmlet" style="font-size:13px; color:red; font-weight:bold;">종료</span>
@@ -169,7 +184,7 @@
 	                                	<span>지역</span>
 	                                </h4>
 	                                <hr>
-	                                <p class="lead mb-4 ms-2"><%= ovo.getTlat() %>, <%= ovo.getTlng() %></p>
+	                                <p class="lead mb-4 ms-2"><%=ovo.getTaddress() %></p>
                                 </div>
                                 <br>
                                 
@@ -286,10 +301,13 @@
 			                                        <input type="hidden" class="tno" value="<%=ovo.getTno() %>" />
 			                                        <input type="hidden" class="paycount" value="<%=payCount%>" />
 			                                        
-			                                        <h5 class="card-title text-primary mb-2">
-			                                            <i class="me-2" data-feather="edit-2"></i>
-			                                            <%=cvo.getCno() %>
+			                                        <h5 class="card-title mb-2 hahmlet" style="font-weight:bold; font-size:20px; color:#7f7f7f;">
+			                                            <span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+			                                            	<%=cvo.getMid()%> 조건제시
+			                                            </span> &nbsp;
+			                                            <span style="color:gray; font-size:14px;">(<%= cvo.getTno() %>)</span>
 			                                        </h5>
+			                                        <hr>
 			                                        <p class="card-text mb-1 hahmlet">
 			                                        	<i class="fas fa-user"></i> &nbsp;
 			                                        	<span class="mAccount"><%= cvo.getMname() %> (<%= cvo.getMid() %>)</span>

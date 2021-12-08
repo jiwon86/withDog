@@ -231,7 +231,12 @@
                                 <a class="btn btn-transparent-dark btn-icon" onclick="javascript:history.back();"><i data-feather="arrow-left"></i></a>
                                 <div class="ms-3">
                                 	<div class="my-3">
-                                		<span style="font-size:35px; font-weight:bold;"><%=cvo.getCno() %></span> &nbsp;
+                                		<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+                                			<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+                                				<%=cvo.getMid()%> 조건제시
+                                			</span>
+                                		</span> &nbsp;
+                                		<span style="color:gray; font-size:14px;">(<%=cvo.getCno()%>)</span> &nbsp;
                                 	</div>	
                                 </div>
                             </div>

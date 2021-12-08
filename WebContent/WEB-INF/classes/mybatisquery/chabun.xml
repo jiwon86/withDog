@@ -11,6 +11,7 @@
 	<select id="getRqnaChabun" resultType="RqnaVO">
 		SELECT NVL(MAX(SUBSTR(A.RQNANUM, -4)), 0) + 1 RQNANUM FROM RQNA A
 	</select>
+
 	
 	<!--  
 	<select id="getBoardChabun" resultType="boardVO">
@@ -25,7 +26,7 @@
 		SELECT NVL(MAX(SUBSTR(A.MNUM, -4)), 0) + 1 MNUM FROM SPRING_MEMBER A
 	</select>
 	-->
-	
+
 	<select id="getPetChabun" resultType="Pet">
 		SELECT NVL(MAX(SUBSTR(A.PNO, -4)), 0) + 1 PNO FROM PET A
 	</select>
@@ -38,9 +39,25 @@
 		SELECT COUNT(A.TNO)+1 TNO FROM TRADEMAP A
 	</select>
 
+
+	
+	<!-- Review 채번 시작-->
+	<select id="getReviewCrnumChabun" resultType="ReviewVO">
+		SELECT NVL(MAX(SUBSTR(A.CRNUM, -4)),0) + 1 CRNUM FROM REVIEW A
+	</select>
+	
+	<select id="getReviewCnumChabun" resultType="ReviewVO">
+		SELECT NVL(MAX(SUBSTR(A.CNUM, -4)),0) + 1 CNUM FROM REVIEW A
+	</select>
+	
+	<!-- Review 채번 끝-->
+	
+
 	<select id="getAgencyChabun" resultType="AgencyVO">
 		SELECT NVL(MAX(SUBSTR(A.ANO, -4)),0) + 1 ANO FROM AGENCY A
 	</select>
+
+
 
 	<select id="getParkChabun" resultType="ParkVO">
 		SELECT NVL(MAX(SUBSTR(A.INUM, -4)),0) + 1 INUM FROM DOG_PARK A 

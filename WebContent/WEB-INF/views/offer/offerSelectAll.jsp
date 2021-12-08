@@ -150,8 +150,8 @@
 			                                <div class="col-auto card-icon-aside bg-cyan"><i class="text-white-50" data-feather="wifi"></i></div>
 			                                <div class="col">
 			                                    <div class="card-body py-4">
-			                                        <span class="card-title hahmlet" style="font-size:20px; font-weight:bold;">
-			                                        	<span><%=ovo.getMid()%> 돌봄신청</span> <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
+			                                        <span class="card-title hahmlet" style="font-size:20px; color:#7f7f7f; font-weight:bold;">
+			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%=ovo.getMid()%> 돌봄신청</span> <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-cyan"></i>
@@ -196,8 +196,8 @@
 			                                <div class="col-auto card-icon-aside bg-teal"><i class="text-white-50" data-feather="activity"></i></div>
 			                                <div class="col">
 			                                    <div class="card-body py-4">
-			                                        <span class="card-title mb-2 hahmlet" style="font-size:20px; font-weight:bold;">
-			                                        	<span><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
+			                                        <span class="card-title mb-2 hahmlet" style="font-size:20px; color:#7f7f7f; font-weight:bold;">
+			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-teal"></i>
@@ -243,7 +243,7 @@
 			                                <div class="col">
 			                                    <div class="card-body py-4">
 			                                        <span class="card-title mb-2 hahmlet" style="font-size:20px; font-weight:bold;">
-			                                        	<span><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
+			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; color:#7f7f7f; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-red"></i>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -30,7 +31,11 @@
 				<script type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f59b335fdce7811c29ddb73572e2a37b&libraries=services"></script>
 				<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-								
+<%
+	MemberVO member = (MemberVO)request.getAttribute("member");
+%>
+
+						
 				<script>
 				<!--MAP API SET-->
 				const container = document.getElementById('map');
@@ -42,9 +47,9 @@
 				const	map = new kakao.maps.Map(container, options);
 //-----------------------------------------------------------------------------------				
 // Set Value 기본적인 벨류 세팅
-	const	imageSrc = "image/map/marker.png", // 마커이미지의 주소입니다    
+	const	imageSrc = "image/map/dogmarker.png", // 마커이미지의 주소입니다    
 			imageSize = new kakao.maps.Size(60, 60), // 마커이미지의 크기입니다
-			imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			imageOption = {offset: new kakao.maps.Point(35, 30)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
 	const	gifSrc = "image/map/marker.gif", // 마커이미지의 주소입니다    
 			gifSize = new kakao.maps.Size(80, 80), // 마커이미지의 크기입니다
@@ -59,17 +64,10 @@
 	let		wmark;
 	let 	jsonData;
 	let		load = 0; // JSON Data 로드 체크
+	let 	petinfo;
+	let		id = '${member.mid}';
 	
-	
-	let date = new Date('YYYY-MM-DDTHH:MM:SS');
-	console.log(date);
-
-	
-	
-
-	
-	
-				
+		
 //-------------------------------------------------------------------------------------
 // Set Popup Overlay
 
@@ -101,9 +99,10 @@ let content ='<form id="popup" class="popup">'
 +'<div class="area_1">'
 +	'<ul class="list">'	
 +		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
-+		'<li><label for="dogs"><i class="fas fa-dog"></i></i>&nbsp;돌 볼 반려동물</label><select class="form-control" id="dogs">'
-+			'<option>등록된 반려동물 표시</option></select></li>'
-+		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when" name="when" placeholder="맡기실 기간을 입력해주세요.">'
++		'<li id="dogs"><label for="dogs"><i class="fas fa-dog"></i>&nbsp;돌 볼 반려동물</label><br>&nbsp&nbsp'
+			
++			'</li>'
++		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when_1" name="when_1" placeholder="맡기실 기간을 입력해주세요.">'
 + 			' <i class="fas fa-bone fa-2x"></i><input type="datetime-local" class="form-control" id="when_2" name="when_2"></div></li>'
 +		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
 +		'<li><label for="content"><i class="fas fa-envelope-open-text"></i>&nbsp;상세 사항</label><textarea class="form-control" id="content" name="content" rows="3" placeholder="돌봄 시 필요한 사항을 적어주세요."></textarea></li>'
@@ -114,7 +113,8 @@ let content ='<form id="popup" class="popup">'
 +		'<li><button class="btn btn-primary smit" type="button" id="submit">신청 하기</button></li>'
 +'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
 +'			<input type="hidden" id="lng" name="lng" value=""></input>'	
-
++'			<input type="hidden" id="pno" name="pno" value=""></input>'	
++'			<input type="hidden" id="addr" name="addr" value=""></input>'	
 +'</ul></div>'
 +'</div></form>';
 
@@ -124,6 +124,8 @@ const customOverlay = new kakao.maps.CustomOverlay({
     content: content  
 });
 
+
+
 // 커스텀 오버레이를 생성 한다.
 customOverlay.setMap(map);
 
@@ -132,9 +134,49 @@ customOverlay.setMap(map);
 const overlaybox = document.getElementById("overlaybox");
 overlaybox.classList.add("hidden");
 
+
+// 시간을 관리하는 함수
+function addTime (str, time) {
+	
+	// str = h 시간// m 분
+	// time 더 할 시간
+	let nowDate = new Date();
+	
+	let month = nowDate.getMonth() + 1;
+	
+	if (str == 'm') {
+		nowDate.setMinutes(nowDate.getMinutes() + time);
+	}
+	
+	if (str == 'h') {
+		nowDate.setHours(nowDate.getHours() + time);
+	}
+	
+	let year = nowDate.getFullYear();
+		month = month.toString().padStart(2, '0');
+	let date = nowDate.getDate().toString().padStart(2, '0');
+	let hours = nowDate.getHours().toString().padStart(2, '0');
+	let minutes = nowDate.getMinutes().toString().padStart(2, '0');
+
+	
+	nowDate =  year + '-' + month + '-' + date + 'T' + hours + ':' + minutes;
+	
+	console.log(nowDate);
+	
+	return nowDate;
+	
+}
+
+
+
 // 날짜 세팅
-const when_1 = document.getElementById('when');
-when_1.value = '';
+const when_1 = document.getElementById('when_1');
+const when_2 = document.getElementById('when_2');
+// 반려동물 리스트
+const dogs = document.getElementById('dogs');
+
+
+
 
 //----------------------------------------------------------------------------------
 $(document).ready(function(){
@@ -144,49 +186,90 @@ $(document).ready(function(){
 	// 위치 불러오기
 	getlocation();
 	
-	$('#submit').click(function(){
-	
-	// Create an FormData object 
-    const form = $('#popup')[0];  	    
-             
-   
-
-    let Lat = latlng.getLat();
-    let Lng = latlng.getLng();
+	$('#submit').click(function(){	
+		// 게시글 등록
+	    const form = $('#popup')[0];  	          
+	    let Lat = latlng.getLat();
+	    let Lng = latlng.getLng();
+	    let addr_1 = document.getElementById("addr_1").value;
+	    let addr_2 = document.getElementById("addr_2").value;
+	    
+		document.getElementById("lat").value = Lat;
+		document.getElementById("lng").value = Lng;
+		document.getElementById("addr").value = addr_1 + " " +addr_2;
+		let formdata = new FormData(form);
     
-	document.getElementById("lat").value = Lat;
-	document.getElementById("lng").value = Lng;
-	let formdata = new FormData(form);
-    
-	console.log(Lat);
-	console.log(Lng);
-
-		$.ajax({			
-			url : 'mapTradeInsert.wd',		
-			type : 'post',
-			enctype : "multipart/form-data",
-			processData: false,    
-	        contentType: false,
-			data : formdata,
-		    success: function (data){
-		        alert("데이터전송 성공");
-		        submitPopup();
-		    },
-		    error: function (error){
-		        alert("에러");
-		        hidePopup();
-		    }
-		}); // end of ajax()
+		console.log(Lat);
+		console.log(Lng);
+		console.log(addr);
+		
+			$.ajax({			
+				url : 'mapTradeInsert.wd',		
+				type : 'post',
+				enctype : "multipart/form-data",
+				processData: false,    
+		        contentType: false,
+				data : formdata,
+			    success: function (data){
+			        alert("데이터전송 성공");
+			        submitPopup();
+			    },
+			    error: function (error){
+			        alert("에러");
+			        hidePopup();
+			    }
+			}); // end of ajax()
 	});
+	
+	// 멤버 번호를 가져옴
+	let mno = "mno="+'${member.mno}';
+	// 펫정보 가져오기
+	$.ajax({			
+		url : 'petlist_id.wd',		
+		type : 'get',
+		data : mno,
+		
+		dataType : 'json',
+		contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+	    success: function (data){
+	    	console.log(data);
+	    	petinfo = data;
+	    	// 반려동물 리스트	
+	    	if (petinfo.length != 0) {
+		    	for (i=0; i < petinfo.length; i++) {
+		    		pname = petinfo[i].pname;
+		    		pno = petinfo[i].pno;
+		    		dogs.innerHTML +=  "<input class='form-check-input' id='"+ pno +"' type='checkbox'" + "value=" + pno + " OnClick='checkDog(this)'>&nbsp&nbsp"
+										+ "<label class='form-check-label' for='" +pno + "'>" + pname + "</label>&nbsp&nbsp&nbsp&nbsp"
+		    		//dogs.innerHTML += "<option>"+petinfo[i].pname+"</option>";
+		    	}
+	    	} else {
+	    		dogs.innerHTML +=  "<a href='/petSelectAll.wd?mno=${member.mno}'> 반려동물 등록 하기</a>";
+	    	}
+	    },
+	    error: function (error){
+	        alert(error);
+	    }
+	}); // end of ajax()
+	
 });
 
-$('#when').change(function(){
-	console.log($('#when').val);
-	console.log(when_1.value);
-});
+// 체크박스 이벤트
+function checkDog (box) {
+	
+	let pno = document.getElementById("pno");
+	let checkbox = box.value;
+	
+	if (box.checked == true) {
+		pno.value += checkbox+" ";
+	} else {
+		pno.value = pno.value.replace(checkbox, "");
+	}
+	console.log(pno.value);
+}
 
 
-
+// 마커의 대한 json data를 가져온다
 function markersjson (x) {
 	//MARKER DB -> JSON 최신화
 	// x = 1 처음 실행
@@ -194,9 +277,8 @@ function markersjson (x) {
 	$.ajax({			
 				url : 'setmarkers.wd',		
 				type : 'get',			
-				data : {},
 				success: function (data){
-					console.log("json data 동기화 ");
+					console.log("JSON DATA 동기화 : " + data);
 					setTimeout(function() {markersLoad(x);}, 500); // 0.5초 뒤에 함수를 실행 시킴
 				}
 				,error: function (error){ alert("에러"); }
@@ -290,51 +372,61 @@ function markersLoad(x) {
 					,contentType: "application/x-www-form-urlencoded; charset=UTF-8"		
 					,success: function (data){
 					    	
-					   	const jsonData = data;
+					   	jsonData = data;
 					   	let i;
 					    let size = jsonData.length;
-					    if (x == 1){
-					    	i = 0;
-					    } else {
-					    	i = size-1;
-					    }
 					    
-					    console.log(jsonData);
-   
-					    for (i; size > i; i++ ){
-					    	const tno = jsonData[i].tno;
-					    	const title = jsonData[i].title;
-					    	const photo = jsonData[i].photo;
-					    	const price = jsonData[i].price;
-					    	const writer = jsonData[i].writer;
-							const markLocation = new kakao.maps.LatLng(jsonData[i].lat, jsonData[i].lng);
-							// Set Marker
-							const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-							    
-							 // 지도를 클릭한 위치에 표출할 마커입니다
-						 	let marker = new kakao.maps.Marker({ 
-							    	position : markLocation,
-							    	image : markerImage
-							    }); 
-							 
-							//Map에 Marker를  세팅함
-							marker.setMap(map);
-							// Marker를 배열에 추가
-							markers.push(marker);
-							//
-							markerInfoSet(title,marker,photo,markLocation,price,tno,writer);
-							load = 1;
-					        }
+						    if (x == 1){
+						    	i = 0;
+						    } else {
+						    	i = size-1;
+						    }
+						    
+						    console.log(jsonData);
+	   						if (size != 0) {
+							    for (i; size > i; i++ ){
+							    	const propose = jsonData[i].propose;
+								    if (propose === "0") {
+								    	const tno = jsonData[i].tno;
+								    	const title = jsonData[i].title;
+								    	const photo = jsonData[i].photo;
+								    	const price = jsonData[i].price;
+								    	const writer = jsonData[i].writer;
+								    	const startdate = jsonData[i].startdate;
+								    	const enddate = jsonData[i].enddate;
+								    	const address = jsonData[i].address;
+								    	const mno = jsonData[i].mno;
+										const markLocation = new kakao.maps.LatLng(jsonData[i].lat, jsonData[i].lng);
+										// Set Marker
+										const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+										    
+										 // 지도를 클릭한 위치에 표출할 마커입니다
+									 	let marker = new kakao.maps.Marker({ 
+										    	position : markLocation,
+										    	image : markerImage
+										    }); 
+										 
+										//Map에 Marker를  세팅함
+										marker.setMap(map);
+										// Marker를 배열에 추가
+										markers.push(marker);
+										//
+										markerInfoSet(title,marker,photo,markLocation,price,tno,writer,startdate,enddate,address,mno);
+							        }
+							    }
+	   						}
+						    //로드 완료	
+						    load = 1;
+						    console.log("Marker Load");
+						 },
+						    error: function (error){
+						        alert("에러");
+						    }
 					
-
-					    },
-					    error: function (error){
-					        alert("에러");
-					    }
 				});
 	}
 
-function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
+function markerInfoSet (title,marker,photo,markLocation,price,tno,writer,startdate,enddate,address,mno) {
 	
 	let makerInfo;
 	
@@ -343,19 +435,20 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 		var iwContent = '<div class="tradeinfo" style="padding:5px;">'
 						+ '<img class="dogimg" src=/img/map/' + photo +'>'
 						+ '<div class="tradeinfo_2">'
-						+ '<ul class="tradelist"><li>'+ title + '</li>'
-						+ '<li>작성자 : '+ writer + '</li>'
-						+ '<li><i class="far fa-clock"></i>&nbsp;기간 : </li>'
+						+ '<ul class="tradelist">'
+						+ '<li><i class="fas fa-user-alt"></i>&nbsp;작성자 : '+ writer + '</li>'
+						+ '<li><i class="far fa-clock"></i>&nbsp;시작 기간 : ' + startdate + ' </li>'
+						+ '<li><i class="far fa-clock"></i>&nbsp;종료 기간 : ' + enddate + ' </li>'
 						+ '<li><i class="fas fa-coins"></i>&nbsp;돌봄 비용 : ' + price + '</li>'
-						+ '<li><i class="fas fa-map-marked-alt"></i>&nbsp;주소 : </li>'
+						+ '<li><i class="fas fa-map-marked-alt"></i>&nbsp;주소 : ' + address + ' </li>'
 						+'</ul></div></div>'; 
 
 	
 	makerInfo = new kakao.maps.CustomOverlay({
 		    position: markLocation,
 		    content: iwContent,
-		    xAnchor: 0.45,
-		    yAnchor : 1.25
+		    xAnchor: 0.5,
+		    yAnchor : 1.15
 	});	// end of event : mouseover
 
 	makerInfo.setMap(map);	
@@ -375,7 +468,14 @@ function markerInfoSet (title,marker,photo,markLocation,price,tno,writer) {
 	kakao.maps.event.addListener(marker, 'click', function() {
 		// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
 		console.log(tno);
-		location.href="/selectmarker.wd?tno=" + tno;
+		if (id === writer) {
+			// 자기 글
+			location.href="/offerSelect.wd?tno=" + tno;
+		} else {
+			// 신청자
+			location.href="/offerMapSelect.wd?tno=" + tno + "&mno=" + mno;
+		}
+		
 	}); // end of event : click
 		
 	
@@ -417,6 +517,14 @@ function searchAddrFromCoords(coords, callback) {
 				        message += '\n경도 : ' + latlng.getLng();
 				        
 				        console.log(message);
+				        
+				        // 시간 설정
+				        let startDate = addTime('m', 30); // 30분
+						let endDate = addTime('h', 3); // 3시간
+				        when_1.value = startDate;
+						when_1.setAttribute('min', startDate);
+						when_2.value = endDate;
+						when_2.setAttribute('min', endDate);
 				    	
 						 // 지도 이동 및 축소 제한
 				    	 moveable = false;
@@ -449,22 +557,15 @@ function searchAddrFromCoords(coords, callback) {
 						 const markerImage = new kakao.maps.MarkerImage(gifSrc, gifSize, gifOption);
 						    
 						 // 지도를 클릭한 위치에 표출할 마커입니다
-						    
 						 wmark = new kakao.maps.Marker({ 
 						    	position : latlng,
 						    	image : markerImage
 						    }); 
 						 wmark.setMap(map);
-
 						 pop = true;
-
-				    }
-				      
+				    }				      
 				});
-				
-
-
-				
+		
 				</script>			
 		</main>
 

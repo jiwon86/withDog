@@ -26,22 +26,22 @@
 			
 			
 			$("#Mypet").click(function(){
-				alert("mno >>>" + petSelectAllForm.mno.value);
-				$("#petSelectAllForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				//alert("mno >>>" + petSelectAllForm.mno.value);
+				$("#petSelectAllForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			
 			$(document).on("click", "#pno", function(){
 				
 				var pno = $(this).attr('value');
-				alert("pno >>>>>" + pno);	
+				//alert("pno >>>>>" + pno);	
 				//$("#petSelectAllForm").attr({ "method":"GET","action":"petSelect.wd","value":pno}).submit();
 			});
 			
 				
 				
 			$(document).on("click", "#insert", function(){	
-				alert("mno >>>" + petSelectAllForm.mno.value);
+				//alert("mno >>>" + petSelectAllForm.mno.value);
 				
 				$("#petSelectAllForm").attr({ "method":"GET","action":"petInsertForm.wd"}).submit();
 			});
@@ -86,10 +86,10 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link" href="/profile.wd">Profile</a>
-                            <a class="nav-link active ms-0" id="Mypet" href="#myPetList.wd">MyPet</a>
-                            <a class="nav-link" href="account-security.html">Security</a>
-                            <a class="nav-link" href="account-notifications.html">Notifications</a>
+                            <a class="nav-link" href="/profile.wd">프로필정보</a>
+                            <a class="nav-link active ms-0" href="#" id="Mypet">동물정보</a>
+                            <a class="nav-link" href="/mypay.wd">포인트정보</a>
+                            <a class="nav-link" href="myReviewList.wd">리뷰정보</a>
                         </nav>
                         <hr class="mt-0 mb-4" />
             	<%
@@ -136,12 +136,12 @@
 								<a class="bg-transparent" href="/petSelect.wd?mno=<%=member.getMno() %>&pno=<%=pvo.getPno()%>">
 								<% if(pvo.getPphoto() != null) { %>
                                  	<img id="select" 
-                                 	 src="/WithDog/img/pet/<%=pvo.getPphoto()%>" alt="댕댕이 사진"
+                                 	 src="/img/pet/<%=pvo.getPphoto()%>" alt="댕댕이 사진"
                                  	 style="border-radius:50%; width:300px; height:300px; margin :30px;"
                                  	  />
                                	<% } else { %>
                                		<img id="select"  
-                                 	 src="/WithDog/img/pet/default.jpg" alt="댕댕이 사진" 
+                                 	 src="/img/pet/default.jpg" alt="댕댕이 사진" 
                                  	 style="border-radius:50%; max-width:300px; max-height:300px; margin :30px;"
                                  	 />
                                	<% } %>

@@ -71,4 +71,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return (Integer)sqlSession.insert("memberAuthInsert", memberAuth);
 	}
 
+	@Override
+	public int updatePoint(MemberVO mvo) {
+		logger.info("MemberDAOImpl.updatePoint() 함수 실행");
+		
+		return (Integer)sqlSession.update("updatePoint", mvo);
+	}
+
 }

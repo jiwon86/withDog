@@ -201,6 +201,14 @@ public class AgencyController {
 			int updateResult = offerService.offerUpdatePropose(_ovo);
 			
 			if(updateResult > 0) {
+				MemberVO _mvo = new MemberVO();
+				_mvo.setMpoint(pvo.getPayamount());
+				_mvo.setMno(pvo.getCmno());
+				logger.info("*** 포인트 >>> : " + _mvo.getMpoint());
+				logger.info("*** mno >>> : " + _mvo.getMno());
+				
+				int updatePointResult = memberService.updatePoint(_mvo);
+				
 				return "success";
 			}
 		}

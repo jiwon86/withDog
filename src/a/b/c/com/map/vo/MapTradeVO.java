@@ -3,140 +3,176 @@ package a.b.c.com.map.vo;
 public class MapTradeVO {
 
 	// VO SET
-	private String TNO;
-    private String TTITLE;
-    private String TCONTENT;
-    private String TWRITER;
-    private String TPRICE;
-    private String TPHOTO;
-    private String TLAT;
-    private String TLNG;
-    private String PROPOSE;
-    private String DELETEYN;
-    private String INSERTDATE;
-    private String UPDATEDATE;
+	private String tno;
+    private String tcontent;
+    private String tprice;
+    private String tlat;
+    private String tlng;
+    private String taddress;
+    private String tphoto;
+    private String twriter;
+    private String mno;
+    private String pno;
+    private String propose;
+    private String startdate;
+    private String enddate;
+    private String deleteyn;
+    private String insertdate;
+    private String updatedate;
     
     public MapTradeVO () {}
-    
-    
 
-	public MapTradeVO(String tNO, String tTITLE, String tCONTENT, String tWRITER, String tPRICE, String tPHOTO,
-			String tLAT, String tLNG, String pROPOSE, String dELETEYN, String iNSERTDATE, String uPDATEDATE) {
+    public MapTradeVO(String tno, String tcontent, String tprice, String tlat, String tlng, String taddress,
+			String tphoto, String twriter, String mno, String pno, String propose, String startdate, String enddate,
+			String deleteyn, String insertdate, String updatedate) {
 		super();
-		TNO = tNO;
-		TTITLE = tTITLE;
-		TCONTENT = tCONTENT;
-		TWRITER = tWRITER;
-		TPRICE = tPRICE;
-		TPHOTO = tPHOTO;
-		TLAT = tLAT;
-		TLNG = tLNG;
-		PROPOSE = pROPOSE;
-		DELETEYN = dELETEYN;
-		INSERTDATE = iNSERTDATE;
-		UPDATEDATE = uPDATEDATE;
+		this.tno = tno;
+		this.tcontent = tcontent;
+		this.tprice = tprice;
+		this.tlat = tlat;
+		this.tlng = tlng;
+		this.taddress = taddress;
+		this.tphoto = tphoto;
+		this.twriter = twriter;
+		this.mno = mno;
+		this.pno = pno;
+		this.propose = propose;
+		this.startdate = startdate;
+		this.enddate = enddate;
+		this.deleteyn = deleteyn;
+		this.insertdate = insertdate;
+		this.updatedate = updatedate;
 	}
 
-
-
-	public String getTNO() {
-		return TNO;
+	// GET
+	public String getTno() {
+		return tno;
 	}
 
-	public String getTTITLE() {
-		return TTITLE;
+	public String getTcontent() {
+		return tcontent;
 	}
 
-	public String getTCONTENT() {
-		return TCONTENT;
+	public String getTprice() {
+		return tprice;
 	}
 
-	public String getTWRITER() {
-		return TWRITER;
+	public String getTlat() {
+		return tlat;
 	}
 
-	public String getTPRICE() {
-		return TPRICE;
+	public String getTlng() {
+		return tlng;
 	}
 
-	public String getTPHOTO() {
-		return TPHOTO;
+	public String getTaddress() {
+		return taddress;
 	}
 
-	public String getTLAT() {
-		return TLAT;
+	public String getTphoto() {
+		return tphoto;
 	}
 
-	public String getTLNG() {
-		return TLNG;
+	public String getTwriter() {
+		return twriter;
 	}
 
-	public String getPROPOSE() {
-		return PROPOSE;
+	public String getMno() {
+		return mno;
 	}
 
-	public String getDELETEYN() {
-		return DELETEYN;
+	public String getPno() {
+		return pno;
 	}
 
-	public String getINSERTDATE() {
-		return INSERTDATE;
+	public String getPropose() {
+		return propose;
 	}
 
-	public String getUPDATEDATE() {
-		return UPDATEDATE;
+	public String getStartdate() {
+		return startdate;
 	}
 
-	public void setTNO(String tNO) {
-		TNO = tNO;
+	public String getEnddate() {
+		return enddate;
 	}
 
-	public void setTTITLE(String tTITLE) {
-		TTITLE = tTITLE;
+	public String getDeleteyn() {
+		return deleteyn;
 	}
 
-	public void setTCONTENT(String tCONTENT) {
-		TCONTENT = tCONTENT;
+	public String getInsertdate() {
+		return insertdate;
 	}
 
-	public void setTWRITER(String tWRITER) {
-		TWRITER = tWRITER;
+	public String getUpdatedate() {
+		return updatedate;
+	}
+	
+	// SET
+	public void setTno(String tno) {
+		this.tno = tno;
 	}
 
-	public void setTPRICE(String tPRICE) {
-		TPRICE = tPRICE;
+	public void setTcontent(String tcontent) {
+		this.tcontent = tcontent;
 	}
 
-	public void setTPHOTO(String tPHOTO) {
-		TPHOTO = tPHOTO;
+	public void setTprice(String tprice) {
+		this.tprice = tprice;
 	}
 
-	public void setTLAT(String tLAT) {
-		TLAT = tLAT;
+	public void setTlat(String tlat) {
+		this.tlat = tlat;
 	}
 
-	public void setTLNG(String tLNG) {
-		TLNG = tLNG;
+	public void setTlng(String tlng) {
+		this.tlng = tlng;
 	}
 
-	public void setPROPOSE(String pROPOSE) {
-		PROPOSE = pROPOSE;
+	public void setTaddress(String taddress) {
+		this.taddress = taddress;
 	}
 
-	public void setDELETEYN(String dELETEYN) {
-		DELETEYN = dELETEYN;
+	public void setTphoto(String tphoto) {
+		this.tphoto = tphoto;
 	}
 
-	public void setINSERTDATE(String iNSERTDATE) {
-		INSERTDATE = iNSERTDATE;
+	public void setTwriter(String twriter) {
+		this.twriter = twriter;
 	}
 
-	public void setUPDATEDATE(String uPDATEDATE) {
-		UPDATEDATE = uPDATEDATE;
+	public void setMno(String mno) {
+		this.mno = mno;
 	}
-    
 
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
 
+	public void setPropose(String propose) {
+		this.propose = propose;
+	}
+
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+
+	public void setEnddate(String enddate) {
+		this.enddate = enddate;
+	}
+
+	public void setDeleteyn(String deleteyn) {
+		this.deleteyn = deleteyn;
+	}
+
+	public void setInsertdate(String insertdate) {
+		this.insertdate = insertdate;
+	}
+
+	public void setUpdatedate(String updatedate) {
+		this.updatedate = updatedate;
+	}
     
 	
 	

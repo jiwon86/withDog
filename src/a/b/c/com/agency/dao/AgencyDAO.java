@@ -15,4 +15,5 @@ public interface AgencyDAO {
 	public List<PayVO> paySelect(PayVO pvo);
 	public int payCount(PayVO pvo);
 	public List<PayVO> paySelectPayno(PayVO pvo);
+	public List<PayVO> paySelectAll(PayVO pvo);
 }

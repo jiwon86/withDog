@@ -127,9 +127,6 @@
 								Date startDate = todayFormat.parse(ovo.getStartdate());
 								Date endDate = todayFormat.parse(ovo.getEnddate());
 								
-								System.out.println("*** startDate >>> : " + ovo.getStartdate());
-								System.out.println("*** endDate >>> : " + ovo.getEnddate());
-								
 								Map<String, Object> petMap = (Map<String, Object>) request.getAttribute("petMap");
 								List<PetVO> pvo = (List<PetVO>) petMap.get(ovo.getTno());
 								

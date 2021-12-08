@@ -21,12 +21,10 @@
 		<!-- 자바스크립트 -->
 		<script type="text/javascript">
 		$(document).ready(function(){	
-			
-					
-			
-			
+
 			$("#Mypet").click(function(){
-				//alert("mno >>>" + petSelectAllForm.mno.value);
+
+				console.log("mno >>>" + petSelectAllForm.mno.value);
 				$("#petSelectAllForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			

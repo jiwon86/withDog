@@ -21,16 +21,10 @@
 		<!-- 자바스크립트 -->
 		<script type="text/javascript">
 		$(document).ready(function(){	
-			
-					
-			
-			
+
 			$("#Mypet").click(function(){
-<<<<<<< HEAD
+
 				console.log("mno >>>" + petSelectAllForm.mno.value);
-=======
-				//alert("mno >>>" + petSelectAllForm.mno.value);
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
 				$("#petSelectAllForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
@@ -47,7 +41,7 @@
 			$(document).on("click", "#insert", function(){	
 				//alert("mno >>>" + petSelectAllForm.mno.value);
 				
-				$("#petSelectAllForm").attr({ "method":"POST","action":"petInsertForm.wd"}).submit();
+				$("#petSelectAllForm").attr({ "method":"GET","action":"petInsertForm.wd"}).submit();
 			});
 			
 			

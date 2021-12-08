@@ -36,7 +36,7 @@
 <tr style="float:left;">
 	<td>
 		<!-- <textarea name="ricontent" id="ricontent" rows=5 cols="50" style="resize: none"></textarea>-->
-		<input type="text" name="ricontent" id="ricontent">
+		<input type="text" name="ricontent" id="<%=inum %>comment">
 		<!-- 
 		<div><span class="bytes">0</span>bytes</div>
 		 -->
@@ -50,7 +50,7 @@
 <div style="clear:both;"></div>
 </table>
 <hr>
-<ul name="rparklist" id="rparklist">
+<ul name="rparklist" id="<%=inum %>">
 	<!-- 동적 생성 요소가 들어오는 곳 -->
 </ul>
 <!-- </form> -->

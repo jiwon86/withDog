@@ -20,13 +20,9 @@
 		<script>
 		$(document).ready(function(){	
 			$("#SelectAll").click(function(){
-<<<<<<< HEAD
-			alert("mno >>>" + petinsert.mno.value);
-			$("#petinsert").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
-=======
 				//alert("mno >>>" + petinsert.mno.value);
 				$("#petinsert").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
+
 			});
 		});
 		</script>

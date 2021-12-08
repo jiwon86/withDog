@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>   
 <%@page import="a.b.c.com.park.vo.ParkVO"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
@@ -33,88 +34,13 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
+let commentList;
+let mid = "${member.mid}";
+
 	$(document).ready(function(){
-		
+
 		selectAll();
-		
-		//댓글등록
-		/*
-		$(document).on("click", "#SAVEbtn", function(e){
-			let inum = $(e);
-			console.log("inum >>> : " + inum);
-			
-			let insertURL = "rparkInsert.wd";
-			let method = "POST";
-			let dataParam = {
-					inum : $("#inum").val(),
-					ricontent : $("#ricontent").text(),
-					riname : $("#riname").val()
-			};
-			
-			//dataParam = $("#rparkForm").serialize();
-			//alert("dataParam >>> : " + dataParam);
-			
-			$.ajax({
-				url : insertURL,
-				type : method,
-				data : dataParam,
-				success : whenSuccess,
-				error : whenError
-			});
-			
-			function whenSuccess(resData){
-				alert("resData >>> :" +resData);
-				if("GOOD" == resData){
-					rparkFormData();
-					location.reload();
-				}
-			}
-			
-			function whenError(e){
-				alert("e >>> : " + e.responseText);
-				console.log("e >>> :  + e.responseText");
-			}
-		});
-		*/
-		
-		/*
-		//단건조회
-		$(document).on("click", "#S", function() {
-			//alert("S >>> : ");
-			
-			let selectURL = "rparkSelect.wd";
-			let method = "POST";
-			let dataParam = {
-					rinum :$("#rinum").val(),
-			};
-			System.out.println("dataParam >>> : " +dataParam);
-			
-			$.ajax({
-				url: selectURL,
-				type: method,
-				data: dataParam,
-				success : whenSuccess,
-				error : whenError
-			});
-			
-			function whenSuccess(resData){
-				//alert("resData >>> : " + resData);
-				let v = resData.split(",");
-				for(let i=0; i <v.length; i++){
-					console.log("v[0]" + v[0]);
-					console.log("v[1]" + v[1]);
-					console.log("v[2]" + v[2]);
-					console.log("v[3]" + v[3]);
-					addNewItem(v[0], v[1], v[2], v[3]);
-				}
-				
-			}
-			function whenError(e){
-				console.log("e >>> : " + e.responseText);
-			}
-		});
-		*/
-		
+
 		//댓글 삭제
 		$(document).on("click", ".deleteBtn", function(){
 			//alert("D >>> : ");
@@ -201,13 +127,14 @@
 	
 	function rparkInsert(e) {
 		let inum = $(e).parent().find(".inum").val();
+
 		
 		let insertURL = "rparkInsert.wd";
 		let method = "POST";
 		let dataParam = {
 				inum : inum,
-				ricontent : $("#ricontent").val(),
-				riname : $("#riname").val()
+				ricontent : $("#"+inum+"comment").val(),
+				riname : mid
 		};
 		
 		//dataParam = $("#rparkForm").serialize();
@@ -239,6 +166,7 @@
 	function addNewItem(num, writer, con, datetime, inum){
 		
 		console.log("inum >>> : " + inum);
+		console.log("writer" + writer);
 		
 		//데이터 체크
 		if(isEmpty(num)) return false;
@@ -270,7 +198,7 @@
 		writerP.append(nameSpan).append(dateSpan).append(delInput);
 		newLi.append(writerP).append(contentP);
 		
-		$("#rparklist").append(newLi);
+		$("#"+inum).append(newLi);
 	}
 	
 	//댓글길이 체크--------------------------------------

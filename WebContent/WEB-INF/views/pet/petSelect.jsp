@@ -19,20 +19,15 @@
 			compCheck();
 			
 			$("#Mypet").click(function(){
-<<<<<<< HEAD
-				alert("mno >>>" + petSelectForm.mno.value);
-=======
-				//alert("mno >>>" + petSelectForm.mno.value);
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
+
+				console.log("mno >>>" + petSelectForm.mno.value);
 				$("#petSelectForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			$("#Prev").click(function(){
-<<<<<<< HEAD
-				alert("mno >>>" + petSelectForm.mno.value);
-=======
-				//alert("mno >>>" + petSelectForm.mno.value);
->>>>>>> branch 'master' of https://github.com/jiwon86/withDog.git
+
+				console.log("mno >>>" + petSelectForm.mno.value);
+
 				$("#petSelectForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			

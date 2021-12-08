@@ -15,20 +15,20 @@
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 		$(document).ready(function(){
-			alert("mno >>>> " + document.petInsertForm.mno.value);
+			//alert("mno >>>> " + document.petInsertForm.mno.value);
 			
 			$("#Mypet").click(function(){
-				alert("mno >>>" + petInsertForm.mno.value);
-				$("#petInsertForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				//alert("mno >>>" + petInsertForm.mno.value);
+				$("#petInsertForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			$("#Prev").click(function(){
-				alert("mno >>>" + petInsertForm.mno.value);
-				$("#petInsertForm").attr({ "method":"GET","action":"petSelectAll.wd"}).submit();
+				//alert("mno >>>" + petInsertForm.mno.value);
+				$("#petInsertForm").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
 			});
 			
 			$("#Insert").click(function(){
-				alert("mno >>> : " + document.petInsertForm.mno.value);
+				//alert("mno >>> : " + document.petInsertForm.mno.value);
 				$("#petInsertForm")
 				.attr({
 						"action":"petInsert.wd",
@@ -78,10 +78,10 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                            <a class="nav-link" href="/profile.wd">Profile</a>
-                           	<a class="nav-link active ms-0" id="Mypet" href="#myPetList.wd">MyPet</a>
-                            <a class="nav-link" href="account-security.html">Security</a>
-                            <a class="nav-link" href="account-notifications.html">Notifications</a>
+                            <a class="nav-link" href="/profile.wd">프로필정보</a>
+                            <a class="nav-link active ms-0" href="#" id="Mypet">동물정보</a>
+                            <a class="nav-link" href="/mypay.wd">포인트정보</a>
+                            <a class="nav-link" href="myReviewList.wd">리뷰정보</a>
                         </nav>
                         <hr class="mt-0 mb-4" />
 						  <form id="petInsertForm" name= "petInsertForm" action="petInsert.wd" method="POST" enctype="multipart/form-data">
@@ -169,8 +169,7 @@
 						                          <br>
 						                          <div class="mb-0">
                                                    	<label for="exampleFormControlTextarea1">특이사항을 기입해주세요(1000Byte)</label>
-                                                   	<textarea class="form-control" name ="pmemo" id="pmemo" rows="10">
-                                                   	</textarea></div>
+                                                   	<textarea class="form-control" name ="pmemo" id="pmemo" rows="10"></textarea></div>
                                                    <!-- 반려견 사진 -->
                                                    <br>
                                                     <div class="col-xl-4">

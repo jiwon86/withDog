@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import a.b.c.com.agency.service.AgencyService;
+import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
@@ -33,6 +35,7 @@ public class MemberController {
 	
 	private MemberService memberService;
 	private ChabunService chabunService;
+	private AgencyService agencyService;
 	
 	
 	@Autowired(required=false)
@@ -85,6 +88,9 @@ public class MemberController {
 			List<MemberVO> memberList = memberService.memberSelect(_mvo);
 			MemberVO member = memberList.get(0);
 
+			PayVO payvo = new PayVO();
+			payvo.setCmno(member.getMno());
+			
 			model.addAttribute("member", member);
 		}
 		

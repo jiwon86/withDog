@@ -83,10 +83,12 @@
 					var pmemo = petArr["pmemo"];
 					var pages = petArr["pages"];
 					
+					var link = `/img/pet/${"${pphoto}"}`;
+					
 					let $petTag = `
                         <div class="col-lg-4 mb-3">
 	                        <div class="d-flex align-items-center">
-	                            <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png"></div>
+	                            <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src=${"${link}"}></div>
 	                            <div class="ms-3">
 	                                <div class="fs-4 text-dark fw-500">${"${pname}"}&nbsp;<span style="font-size:12px;">(${"${ptype}"})</span></div>
 	                                <div class="small text-muted">중형견(${"${pweight}"})/${"${pages}"}살/중성화 x(${"${pneutral}"})</div>
@@ -103,7 +105,12 @@
 				// 준비중
 				if(today < startdate) {
 					$stateTag = `
-						<span style="font-size:35px; font-weight:bold; color:#4cc1c1">${"${result.tno}"}</span> &nbsp;
+						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+								${"${result.mid}"} 돌봄신청
+							</span> &nbsp;
+							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
+						</span> &nbsp;
 						<span class="me-3">
 							<i class="fas fa-circle fa-sm ms-3 text-cyan"></i>
 							<span class="hahmlet" style="font-size:13px; color:#4cc1c1; font-weight:bold;">준비중</span>
@@ -114,7 +121,12 @@
 				// 진행중
 				if(today >= startdate && today < enddate) {
 					$stateTag = `
-						<span style="font-size:35px; font-weight:bold; color:#13a4a4;">${"${result.tno}"}</span> &nbsp;
+						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+								${"${result.mid}"} 돌봄신청
+							</span> &nbsp;
+							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
+						</span> &nbsp;
 						<span class="me-3">
 							<i class="fas fa-circle fa-sm ms-3 text-teal"></i>
 							<span class="hahmlet" style="font-size:13px; color::#13a4a4; font-weight:bold;">진행중</span>
@@ -125,7 +137,12 @@
 				// 종료
 				if(today > enddate) {
 					$stateTag = `
-						<span style="font-size:35px; font-weight:bold; color:red;">${"${result.tno}"}</span> &nbsp;
+						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+								${"${result.mid}"} 돌봄신청
+							</span> &nbsp;
+							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
+						</span> &nbsp;					
 						<span class="me-3">
 							<i class="fas fa-circle fa-sm ms-3 text-red"></i>
 							<span class="hahmlet" style="font-size:13px; color:red; font-weight:bold;">종료</span>
@@ -279,7 +296,12 @@
                                 <a class="btn btn-transparent-dark btn-icon" onclick="javascript:history.back();"><i data-feather="arrow-left"></i></a>
                                 <div class="ms-3">
                                 	<div class="my-3">
-                                		<span style="font-size:35px; font-weight:bold;"><%=cvo.getCno()%></span> &nbsp;
+                                		<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
+                                			<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
+                                				<%=cvo.getMid()%> 조건제시
+                                			</span>
+                                		</span> &nbsp;
+                                		<span style="color:gray; font-size:14px;">(<%=cvo.getCno()%>)</span> &nbsp;
                                 	</div>	
                                 </div>
                             </div>

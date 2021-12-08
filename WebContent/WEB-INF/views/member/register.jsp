@@ -175,124 +175,116 @@ $(document).ready(function(){
 
 <!-- 콘텐츠 -->
 <div id="layoutSidenav_content">
-
-  
-	<main width="1000px">
+	        <main width="1000px">
                 <div class="container-xl px-4">
                     <div class="row justify-content-center">
                         <div class="col-xl-8 col-lg-9">
-                            <!-- Social registration form-->
-
-
-
-			<div class="card my-5">
-                    <div class="card-body p-5 text-center" id="account">
-                        <div class="h3 fw-light mb-3">Create an Account</div>
-                        <div class="small text-muted mb-2">Sign in using...</div>
-                        <!-- Social registration links-->
-				        <a class="btn btn-icon btn-facebook mx-1" href="#!"><i class="fab fa-facebook-f fa-fw fa-sm"></i></a>
-				        <a class="btn btn-icon btn-github mx-1" href="#!"><i class="fab fa-github fa-fw fa-sm"></i></a>
-				        <a class="btn btn-icon btn-google mx-1" href="#!"><i class="fab fa-google fa-fw fa-sm"></i></a>
-				        <a class="btn btn-icon btn-twitter mx-1" href="#!"><i class="fab fa-twitter fa-fw fa-sm text-white"></i></a>
-    		</div>
-    <hr class="my-0" />
-    <div class="card-body p-5">
-        <!-- Login form-->
-        <form enctype="multipart/form-data" method="POST" action="login1.wd">
-            <!-- Form Row-->
-            <div class="row gx-3">
-                <div class="col-md-6">
-                    <!-- Form Group (first name)-->
-                    <div class="mb-3">
-                        <label class="text-gray-600 small" for="firstNameExample">Your Name</label>
-                        <input class="form-control form-control-solid" type="text" placeholder="이름을 입력해 주세요" 
-                        aria-label="First Name" aria-describedby="firstNameExample" name="mname" required />
-                    <!-- Form Group (last name)-->
-                         <label class="text-gray-600 small" for="lastNameExample">Your Id</label>
-                        <input class="form-control form-control-solid" type="text" placeholder="Id를 입력해 주세요" 
-                        aria-label="Last Name" aria-describedby="lastNameExample" name="mid" id="mid" required>
-                    <!-- 중복확인 버튼 -->
-                    </div>
-                </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                          <a class="btn btn-primary" id="idcheck" name="idcheck">Id Check</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Form Group (email address)-->
+                              <!-- Social registration form-->
+							  <div class="card my-5">
+				                 <div class="card-body p-5 text-center" id="account">
+					                <div class="h3 fw-light mb-3" style="margin:0 auto;">회원가입</div>
+					                <div class="small text-muted mb-2">자신의 계정을 만드세요.</div>
+					                <!-- Social registration links-->
+							        <a class="btn btn-icon btn-facebook mx-1" href="#!"><i class="fab fa-facebook-f fa-fw fa-sm"></i></a>
+							        <a class="btn btn-icon btn-github mx-1" href="#!"><i class="fab fa-github fa-fw fa-sm"></i></a>
+							        <a class="btn btn-icon btn-google mx-1" href="#!"><i class="fab fa-google fa-fw fa-sm"></i></a>
+							        <a class="btn btn-icon btn-twitter mx-1" href="#!"><i class="fab fa-twitter fa-fw fa-sm text-white"></i></a>
+			    		     	 </div>
+   								 <hr class="my-0" />
+							   	 <div class="card-body p-5">
+							     <!-- Login form-->
+        							<form enctype="multipart/form-data" method="POST" action="login1.wd">
+							            <!-- Form Row-->
+							            <div class="row gx-3">
+							                 <div class="col-md-6">
+							                    <!-- Form Group (first name)-->
+							                    <div class="mb-3">
+							                        <label class="text-gray-600 small" for="firstNameExample">이름</label>
+							                        <input class="form-control form-control-solid" type="text" placeholder="이름을 입력해 주세요" 
+							                        aria-label="First Name" aria-describedby="firstNameExample" name="mname" required />
+							                    <!-- Form Group (last name)-->
+							                         <label class="text-gray-600 small" for="lastNameExample">아이디</label>
+							                        <input class="form-control form-control-solid" type="text" placeholder="Id를 입력해 주세요" 
+							                        aria-label="Last Name" aria-describedby="lastNameExample" name="mid" id="mid" required>
+							                    <!-- 중복확인 버튼 -->
+							                    </div>
+							                 </div>
+							                  <div class="col-md-6">
+							                    <div class="mb-3">
+							                          <a class="btn btn-primary" id="idcheck" name="idcheck">Id Check</a>
+							                    </div>
+							                </div>
+							            </div>
+							            <!-- Form Group (email address)-->
             
-            <!-- Form Row-->
-            <div class="row gx-3" id="show">
-                <div class="col-md-6">
-                    <!-- Form Group (choose password)-->
-                    <div class="mb-3">
-                        <label class="text-gray-600 small" for="passwordExample">Password</label>
-                        <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
-                        aria-label="Password" aria-describedby="passwordExample" name="mpw"
-                        v-model="num01" required />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <!-- Form Group (confirm password)-->
-                    <div class="mb-3">
-                        <label class="text-gray-600 small" for="confirmPasswordExample">Confirm Password</label>
- 					 <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
- 					 aria-label="Confirm Password" aria-describedby="confirmPasswordExample" id="passcheck" 
- 					 v-model="num02" required /><b id="sumid">{{sum()}}</b>
- 					 
-   					<!-- <a class="btn btn-primary" href="auth-login-social.html" id="pwcheck" name="pwcheck">Pw Check</a> -->
-                    </div>
-                </div>
-                <div class="mb-3">
-                <label class="text-gray-600 small" for="emailExample">Email Address</label>
-                <input class="form-control form-control-solid" type="text" placeholder="Email을 입력해 주세요" 
-                aria-label="Email Address" aria-describedby="emailExample" name="memail" required/>
-            </div>
-            </div>
-             <div class="mb-3">
-                <label class="text-gray-600 small" for="emailExample">Date of Birth</label>
-                <input class="form-control form-control-solid" type="date" placeholder="Ex)1993.05.08" 
-                aria-label="Birth Address" aria-describedby="birthExample" name="mbirth" required/>
-            </div>
-            <div class="mb-3">
-                <label class="text-gray-600 small" for="emailExample">우편번호</label>
-                <input class="form-control form-control-solid" type="text" placeholder="Ex)10052" aria-label="Address" 
-                aria-describedby="addressExample" name="mzonecode" id="mzonecode" required readonly/>
-            </div>
-            <!--  우편번호 찾기 버튼 -->
-            <button class="btn btn-primary" type="button" id="addfinde" name="addfind">우편번호 찾기</button>
-            <div class="mb-3">
-                <label class="text-gray-600 small" for="emailExample"></label>
-                <input class="form-control form-control-solid" type="text" placeholder="도로명주소" 
-                aria-label="Address" aria-describedby="addressExample" id="mroadaddress" name="mroadaddress" required/>
-            </div>
-             <div class="mb-3">
-                <label class="text-gray-600 small" for="emailExample"></label>
-                <input class="form-control form-control-solid" type="text" placeholder="도로명 상세주소" 
-                aria-label="Address" aria-describedby="addressExample" id="detailroad" name="detailroad" required/>
-            </div>
-        <div class="mb-3">
-                <label class="text-gray-600 small" for="emailExample"></label>
-                <input class="form-control form-control-solid" type="text" placeholder="지번 주소" 
-                aria-label="Address" aria-describedby="addressExample" id="mjibunaddress" name="mjibunaddress" required/>
-            </div>
-            <br>
+							            <!-- Form Row-->
+							            <div class="row gx-3" id="show">
+							                <div class="col-md-6">
+							                    <!-- Form Group (choose password)-->
+							                    <div class="mb-3">
+							                        <label class="text-gray-600 small" for="passwordExample">비밀번호</label>
+							                        <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
+							                        aria-label="Password" aria-describedby="passwordExample" name="mpw"
+							                        v-model="num01" required />
+							                    </div>
+							                </div>
+							                <div class="col-md-6">
+							                    <!-- Form Group (confirm password)-->
+							                    <div class="mb-3">
+							                         <label class="text-gray-600 small" for="confirmPasswordExample">비밀번호 확인</label>
+								 					 <input class="form-control form-control-solid" type="password" placeholder="Password를 입력해 주세요" 
+								 					 aria-label="Confirm Password" aria-describedby="confirmPasswordExample" id="passcheck" 
+								 					 v-model="num02" required /><b id="sumid">{{sum()}}</b>
+							 					 
+							   					<!-- <a class="btn btn-primary" href="auth-login-social.html" id="pwcheck" name="pwcheck">Pw Check</a> -->
+							                    </div>
+							                </div>
+							                <div class="mb-3">
+								                <label class="text-gray-600 small" for="emailExample">이메일</label>
+								                <input class="form-control form-control-solid" type="text" placeholder="Email을 입력해 주세요" 
+								                	   aria-label="Email Address" aria-describedby="emailExample" name="memail" required/>
+							            	</div>
+							            </div>
+							            <div class="mb-3">
+							                <label class="text-gray-600 small" for="emailExample">생년월일</label>
+							                <input class="form-control form-control-solid" type="date" placeholder="Ex)1993.05.08" 
+							                aria-label="Birth Address" aria-describedby="birthExample" name="mbirth" required/>
+							            </div>
+							            <div class="mb-3">
+							                <label class="text-gray-600 small" for="emailExample">우편번호</label>
+							                <input class="form-control form-control-solid" type="text" placeholder="Ex)10052" aria-label="Address" 
+							                aria-describedby="addressExample" name="mzonecode" id="mzonecode" required readonly/>
+							            </div>
+							            <!--  우편번호 찾기 버튼 -->
+							            <button class="btn btn-primary" type="button" id="addfinde" name="addfind">우편번호 찾기</button>
+							            <div class="mb-3">
+							               <label class="text-gray-600 small" for="emailExample"></label>
+							               <input class="form-control form-control-solid" type="text" placeholder="도로명주소" 
+							                      aria-label="Address" aria-describedby="addressExample" id="mroadaddress" name="mroadaddress" required/>
+							            </div>
+						                <div class="mb-3">
+						                   <label class="text-gray-600 small" for="emailExample"></label>
+						                   <input class="form-control form-control-solid" type="text" placeholder="도로명 상세주소" 
+						                        aria-label="Address" aria-describedby="addressExample" id="detailroad" name="detailroad" required/>
+						                </div>
+							        	<div class="mb-3">
+							                <label class="text-gray-600 small" for="emailExample"></label>
+							                <input class="form-control form-control-solid" type="text" placeholder="지번 주소" 
+							                aria-label="Address" aria-describedby="addressExample" id="mjibunaddress" name="mjibunaddress" required/>
+							            </div>
+							            <br>
             
-            <input class="btn btn-primary" id="btnMphoto" type="button" value="프로필 사진 선택">
+            							<input class="btn btn-primary" id="btnMphoto" type="button" value="프로필 사진 선택">
 	                                       
-             <input type="file" name="mphoto" id="inputImage" style="display:none;" />
-            <!-- Form Group (form submission)-->
+							            <input type="file" name="mphoto" id="inputImage" style="display:none;" />
+							            <!-- Form Group (form submission)-->
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="form-check">
-                                                <input class="form-check-input" id="checkTerms" type="checkbox" value="" />
                                                 <label class="form-check-label" for="checkTerms">
-                                                    I accept the
-                                                    <a href="#!">terms &amp; conditions</a>
-                                                    .
+                                                    
                                                 </label>
                                             </div>
-                                            <input type="submit" class="btn btn-primary" value="Create Account" name="submitbtn" id="submitbtn">
+                                            <input type="submit" class="btn btn-primary" value="회원가입 완료" name="submitbtn" id="submitbtn">
                                         </div>
                                         <sec:csrfInput/>
                                     </form>

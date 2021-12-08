@@ -17,6 +17,7 @@
 		<result property="mzonecode" column="MZONECODE" />
 		<result property="mroadaddress" column="MROADADDRESS" />
 		<result property="mjibunaddress" column="MJIBUNADDRESS" />
+		<result property="mpoint" column="MPOINT" />
 		<result property="deleteyn" column="DELETEYN" />
 		<result property="insertdate" column="INSERTDATE" />
 		<result property="updatedate" column="UPDATEDATE" />
@@ -41,6 +42,7 @@
 	      	,MZONECODE  	<!-- COLUMN 10 -->
 	      	,MROADADDRESS 	<!-- COLUMN 11 -->
 	      	,MJIBUNADDRESS 	<!-- COLUMN 12 -->
+	      	,MPOINT
 	      	,DELETEYN		<!-- COLUMN 17 -->
 	      	,INSERTDATE	 	<!-- COLUMN 18 -->
 	      	,UPDATEDATE		<!-- COLUMN 19 -->
@@ -55,6 +57,7 @@
 	       	,#{mzonecode, jdbcType=VARCHAR} 		<!-- placeholer 10 -->
 	       	,#{mroadaddress, jdbcType=VARCHAR}  	<!-- placeholer 11 -->
 			,#{mjibunaddress, jdbcType=VARCHAR} 	<!-- placeholer 12 -->
+			,'0'
 	       	,'Y'  									<!-- placeholer 17 -->
 	       	,SYSDATE  								<!-- placeholer 18 -->
 	       	,SYSDATE 								<!-- placeholer 19 -->
@@ -84,6 +87,7 @@
 			M.MZONECODE      MZONECODE,
 			M.MROADADDRESS   MROADADDRESS,
 			M.MJIBUNADDRESS  MJIBUNADDRESS,
+			M.MPOINT 		 MPOINT,
 			M.DELETEYN       DELETEYN,
 			TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
 			TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
@@ -114,6 +118,7 @@
 			M.MZONECODE      MZONECODE,
 			M.MROADADDRESS   MROADADDRESS,
 			M.MJIBUNADDRESS  MJIBUNADDRESS,
+			M.MPOINT		 MPOINT,
 			M.DELETEYN       DELETEYN,
 			TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
 			TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
@@ -147,11 +152,16 @@
 		AND   MNO = #{mno, jdbcType=VARCHAR}
 	</update>
 	
-<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
-	SELECT 	A.MID MID
-	FROM 	MEMBER A 
-	WHERE 	DELETEYN = 'Y'
-	AND     A.MID = #{mid, jdbcType=VARCHAR}
-</select>
+	<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
+		SELECT 	A.MID MID
+		FROM 	MEMBER A 
+		WHERE 	DELETEYN = 'Y'
+		AND     A.MID = #{mid, jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updatePoint" parameterType="MemberVO">
+		UPDATE MEMBER SET MPOINT = (TO_NUMBER(MPOINT) + TO_NUMBER(#{mpoint, jdbcType=VARCHAR})) 
+		WHERE  MNO = #{mno, jdbcType=VARCHAR}
+	</update>
 
 </mapper>

@@ -79,5 +79,4 @@ public class AgencyDAOImpl implements AgencyDAO {
 		return sqlSession.selectList("paySelectPayno", pvo);
 	}
 	
-	
 }

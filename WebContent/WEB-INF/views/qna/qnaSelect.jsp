@@ -141,11 +141,11 @@
              <label class="small mb-1" for="qnatitle">글 제목</label>
              <input class="form-control" id="qnatitle" name="qnatitle" type="text" value=<%=qvo.getQnatitle()%> placeholder="Please enter title" />
          </div>
-         <!-- Form Group (qnawriter)-->
+         <!-- Form Group (qnawriter)
          <div class="mb-3">
              <label class="small mb-1" for="qnawriter">작성자</label>
              <input class="form-control" id="qnawriter" name="qnawriter" type="text" value=<%=qvo.getQnawriter()%> placeholder="Please enter your name" />
-         </div>
+         </div>-->
          <!-- Form Group (qnacon)-->
          <div class="mb-3">
              <label class="small mb-1" for="qnacon">글 내용</label>
@@ -156,11 +156,6 @@
          	 <input class="form-control" id="qnafile" name="qnafile" type="file" value=<%=qvo.getQnafile()%> >
          </div>
          
-         <input type="radio" name="qnaanswer" id="qnaanswer" value="01" checked /> 예정
-         <input type="radio" name="qnaanswer" id="qnaanswer" value="02"/> 완료
-         <div id="answer01"><p>예쩡</p></div>
-         
-         <div id="answer02"><p>완려</p></div>
 
          <br> 
          

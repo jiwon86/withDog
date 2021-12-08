@@ -107,7 +107,7 @@
 	<div class="card-header">로그인 후 문의사항을 남겨주시면 친절하게 답변해드립니다.
 	
 	<sec:authorize access="isAuthenticated()">
-	<button class="btn btn-primary" id="I">글쓰기</button> 
+	<button class="btn btn-primary" id="I" style="float:right;">글쓰기</button> 
 	</sec:authorize>
 	</div>
 	
@@ -131,7 +131,6 @@
 					</tr>
 				</thead>
 <%
-	//String qnaanswer = "";
 
    for(int i=0; i<nCnt; i++){
 	   QnaVO qvo = list.get(i);
@@ -142,16 +141,14 @@
 	   String qnafile = qvo.getQnafile();
 	   String qnainsertdate = qvo.getQnainsertdate();
 	   String qnaupdatedate = qvo.getQnaupdatedate();
-	   //String qnaanswer = qvo.getQnaanswer();
-	   //String qnaanswer = CodeUtil.answer(qvo.getQnaanswer());
 	   
-	   System.out.println("qvo.getQnanum >>>> : " + qvo.getQnanum());
+	  System.out.println("qvo.getQnanum >>>> : " + qvo.getQnanum());
 	   System.out.println("qvo.getQnatitle >>>> : " + qvo.getQnatitle());
 	   System.out.println("qvo.getQnawriter >>>> : " + qvo.getQnawriter());
 	   System.out.println("qvo.getQnacon >>>> : " + qvo.getQnacon());
 	   System.out.println("qvo.getQnafile >>>> : " + qvo.getQnafile());
 	   System.out.println("qvo.getQnaanswer >>>> : " + qvo.getQnaanswer());
-	   System.out.println("qvo.getQnainsertdate >>>> : " + qvo.getQnainsertdate());
+	   System.out.println("qvo.getQnainsertdate >>>> : " + qvo.getQnainsertdate()); 
 	   
 /* 	   System.out.println("pagingQVO.getPageSize >>> : " + pagingQVO.getPageSize());
 	   System.out.println("pagingQVO.getGroupSize >>> : " + pagingQVO.getGroupSize());
@@ -176,17 +173,11 @@
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnacon() %></a></td>
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnainsertdate() %></a></td>
 		
-		<td class="tt"><!-- <span class="badge bg-success">예정</span> -->
-		<%=qvo.getQnaanswer() %>
+		<td class="tt"><span class="badge bg-success">예정</span>
+		
 		</td>	
 		
 <sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
-<!-- <td>
-		<select name="qnaanswer" id="qnaanswer" >
-			<option value="1">예정</option>
-			<option value="2">완료</option>
-		</select>
-</td>	 -->
 
 <td><a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="qnaSelect.wd?qnanum=<%=qvo.getQnanum() %>"> <i data-feather="edit"></i></a>
 </td>            					

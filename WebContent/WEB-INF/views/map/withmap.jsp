@@ -587,9 +587,9 @@ function searchAddrFromCoords(coords, callback) {
 				        let startDate = addTime('m', 30); // 30분
 						let endDate = addTime('h', 3); // 3시간
 				        when_1.value = startDate;
-						when_1.setAttribute('min', startDate+":00");
+						when_1.setAttribute('min', startDate + ":00");
 						when_2.value = endDate;
-						when_2.setAttribute('min', endDate+":00");
+						when_2.setAttribute('min', endDate + ":00");
 				    	
 						 // 지도 이동 및 축소 제한
 				    	 moveable = false;

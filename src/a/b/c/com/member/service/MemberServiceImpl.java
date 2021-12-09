@@ -65,10 +65,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int updatePoint(MemberVO mvo) {
+	public int updateAddPoint(MemberVO mvo) {
 		logger.info("MemberServiceImpl.updatePoint() 함수 진입");
 		
-		return memberDAO.updatePoint(mvo);
+		return memberDAO.updateAddPoint(mvo);
+	}
+
+	@Override
+	public int updateMinusPoint(MemberVO mvo) {
+		logger.info("MemberServiceImpl.updateMinusPoint() 함수 진입");
+		
+		return memberDAO.updateMinusPoint(mvo);
 	}
 
 }

@@ -220,13 +220,54 @@
 			                              <% 
 			                              	for(int i=0; i<petListSize; i++) {
 			                              		PetVO pvo = petList.get(i);
+			                              		
+			                              		String pneutral = pvo.getPneutral();
+			                              		String pneutraltext = "";
+			                              		String pgender = pvo.getPgender();
+			                              		String pgendertext = "";
+			                              		String ptype = pvo.getPtype();
+			                              		String ptypetext = "";
+			                              		
+			                              		if(pneutral.equals("Y")) {
+			                              			pneutraltext = "중성화 O";
+			                              		} else {
+			                              			pneutraltext = "중성화 X";
+			                              		}
+			                              		
+			                              		if(pgender.equals("01")) {
+			                              			pgendertext = "수컷";
+			                              		} else {
+			                              			pgendertext = "암컷";
+			                              		}
+			                              		
+			                              		if(ptype.equals("01")) {
+			                              			ptypetext = "쉽독";
+			                              		} else if(ptype.equals("02")) {
+			                              			ptypetext = "캐틀 독";
+			                              		} else if(ptype.equals("03")) {
+			                              			ptypetext = "테리어";
+			                              		} else if(ptype.equals("04")) {
+			                              			ptypetext = "닥스훈트";
+			                              		} else if(ptype.equals("05")) {
+			                              			ptypetext = "스피츠";
+			                              		} else if(ptype.equals("06")) {
+			                              			ptypetext = "센트하운드";
+			                              		} else if(ptype.equals("07")) {
+			                              			ptypetext = "포인팅독";
+			                              		} else if(ptype.equals("08")) {
+			                              			ptypetext = "리트리버";
+			                              		} else if(ptype.equals("09")) {
+			                              			ptypetext = "토이독";
+			                              		} else if(ptype.equals("10")) {
+			                              			ptypetext = "사이트 하운드";					
+			                              		}
 			                              %>
 				                               <div class="col-lg-4 mb-3">
 				                                   <div class="d-flex align-items-center">
-				                                       <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png"></div>
+				                                       <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/img/pet/<%=pvo.getPphoto()%>"></div>
 				                                       <div class="ms-3">
-				                                           <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=pvo.getPtype()%>)</span></div>
-				                                           <div class="small text-muted">중형견(<%=pvo.getPweight()%>)/<%=pvo.getPages()%>살/중성화 x(<%=pvo.getPneutral()%>)</div>
+				                                           <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=ptypetext%>)</span></div>
+				                                           <div class="small text-muted"><%=pvo.getPweight()%>KG/<%=pvo.getPages()%>살/<%=pneutraltext%>/<%=pgendertext%></div>
 				                                       </div>
 				                                   </div>
 				                               </div>
@@ -259,11 +300,19 @@
 									</div>
                                <%
                                	 } else {
+                               		if(todayDate.before(startDate)) { 
                                %>
-	                               	<div>
-	                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">조건제시 작성</div>
-	                               	</div>
+		                               	<div>
+		                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">조건제시 작성</div>
+		                               	</div>
                                <%
+                               		} else {
+                               %>
+										<div class="alert alert-danger" role="alert">
+										  <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp; 시간이 지나 조건제시를 신청할 수 없습니다.
+										</div>
+                               <%			
+                               		}
                                	 }
                                %>
                             </div>

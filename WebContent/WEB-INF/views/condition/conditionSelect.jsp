@@ -85,13 +85,54 @@
 					
 					var link = `/img/pet/${"${pphoto}"}`;
 					
+					// 반려동물 정보 바꾸기
+					var pneutraltext = '';
+
+					if(pneutral == 'Y') {
+						pneutraltext = '중성화 O';
+					} else {
+						pneutraltext = '중성화 X';
+					}
+
+					var pgendertext = '';
+
+					if(pgender == '01') {
+						pgendertext = '수컷';
+					} else {
+						pgendertext = '암컷';
+					}
+
+					var ptypetext = '';
+
+					if(ptype == '01') {
+						ptypetext = '쉽독';
+					} else if(ptype == '02') {
+						ptypetext = '캐틀 독';
+					} else if(ptype == '03') {
+						ptypetext = '테리어';
+					} else if(ptype == '04') {
+						ptypetext = '닥스훈트';
+					} else if(ptype == '05') {
+						ptypetext = '스피츠';
+					} else if(ptype == '06') {
+						ptypetext = '센트하운드';
+					} else if(ptype == '07') {
+						ptypetext = '포인팅독';
+					} else if(ptype == '08') {
+						ptypetext = '리트리버';
+					} else if(ptype == '09') {
+						ptypetext = '토이독';
+					} else if(ptype == '10') {
+						ptypetext = '사이트 하운드';					
+					}
+					
 					let $petTag = `
                         <div class="col-lg-4 mb-3">
 	                        <div class="d-flex align-items-center">
 	                            <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src=${"${link}"}></div>
 	                            <div class="ms-3">
-	                                <div class="fs-4 text-dark fw-500">${"${pname}"}&nbsp;<span style="font-size:12px;">(${"${ptype}"})</span></div>
-	                                <div class="small text-muted">중형견(${"${pweight}"})/${"${pages}"}살/중성화 x(${"${pneutral}"})</div>
+	                                <div class="fs-4 text-dark fw-500">${"${pname}"}&nbsp;<span style="font-size:12px;">(${"${ptypetext}"})</span></div>
+	                                <div class="small text-muted">${"${pweight}"}KG/${"${pneutraltext}"}살/${"${pneutraltext}"}/${"${pgendertext}"}</div>
 	                            </div>
 	                        </div>
 	                    </div>					

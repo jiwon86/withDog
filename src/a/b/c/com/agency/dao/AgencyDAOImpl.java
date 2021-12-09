@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.PayVO;
 
 @Repository
@@ -77,6 +78,20 @@ public class AgencyDAOImpl implements AgencyDAO {
 		logger.info("AgencyDAOImpl.paySelectPayno() 함수진입");
 		
 		return sqlSession.selectList("paySelectPayno", pvo);
+	}
+
+	@Override
+	public List<PayVO> paySelectAll(PayVO pvo) {
+		logger.info("AgencyDAOImpl.paySelectAll() 함수진입");
+		
+		return sqlSession.selectList("paySelectAll", pvo);
+	}
+
+	@Override
+	public int deleteCondition(ConditionVO cvo) {
+		logger.info("AgencyDAOImpl.deleteCondition() 함수진입");
+		
+		return sqlSession.update("deleteCondition", cvo);
 	}
 	
 }

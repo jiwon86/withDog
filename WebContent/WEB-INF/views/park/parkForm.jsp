@@ -11,7 +11,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 헤드 -->
+<head>
+<link rel="stylesheet" href="css/park/park.css">
 <jsp:include page="/head.wd" />
+</head>
 <!-- /헤드 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">

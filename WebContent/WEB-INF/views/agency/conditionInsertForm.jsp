@@ -27,10 +27,10 @@
 				$("#zonecode").click(function() {
 					new daum.Postcode({
 						oncomplete: function(data) {
-							$("#mzonecode").val(data.zonecode);
-							$("#mroadaddress").val(data.roadAddress);
-							$("#mjibunaddress").val(data.jibunAddress);		
-							$("#mroadaddressdetail").val("");
+							$("#czonecode").val(data.zonecode);
+							$("#croadaddress").val(data.roadAddress);
+							$("#cjibunaddress").val(data.jibunAddress);		
+							$("#croadaddressdetail").val("");
 						}
 					}).open();
 				});
@@ -81,9 +81,9 @@
 		                                    <div class="col-auto mt-4">
 		                                        <h1 class="page-header-title">
 		                                            <div class="page-header-icon"><i class="fas fa-pencil-alt"></i></div>
-		                                                                                 조건제시 신청
+		                                                                                                반려동물 대리돌보미 신청
 		                                        </h1>
-		                                        <div class="page-header-subtitle">돌봄신청 내용을 보고 원하는 조건제시를 신청해주세요.</div>
+		                                        <div class="page-header-subtitle" style="font-size:15px;">대리돌봄 서비스 신청정보를 확인하시고, 반려동물 대리돌보미 신청내용을 작성해주세요.</div>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -96,7 +96,7 @@
 		                            <div class="col-lg-12 mb-4">
 		                                <div class="card card-collapsable">
 										    <a class="card-header" href="#collapseCardExample1" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-										    	<span style="font-size:18px; color:black;"><%= ovo.getMname() %> (<%= ovo.getMid() %>) 님의 돌봄 신청 내용</span>
+										    	<span style="font-size:18px; color:black;"><%= ovo.getMname() %> (<%= ovo.getMid() %>) 님의 대리돌봄 서비스 내용</span>
 										        <div class="card-collapsable-arrow">
 										            <i class="fas fa-chevron-down"></i>
 										        </div>
@@ -109,17 +109,60 @@
 													<span><i class="far fa-edit"></i> &nbsp; <%= ovo.getTcontent() %></span> <br><br>
 													 
 													 <div style="background:#ededed; padding:10px;">
-										 	 		<span>돌봄 반려동물 정보</span> <br>
+										 	 		<span>맡길 반려동물 정보</span> <br>
 											 	 	<span class="badge badge-xs mt-2 mb-2" style="background:blue;">반려동물 <span class="ms-1 badge bg-white text-dark"><%=petListSize%></span></span>
 													 <% 
 														for(int i=0; i<petListSize; i++) {
 															PetVO pvo = petList.get(i);
+															
+															String pneutral = pvo.getPneutral();
+															String pneutraltext = "";
+															String pgender = pvo.getPgender();
+															String pgendertext = "";
+															String ptype = pvo.getPtype();
+															String ptypetext = "";
+															
+															if(pneutral.equals("Y")) {
+																pneutraltext = "중성화 O";
+															} else {
+																pneutraltext = "중성화 X";
+															}
+															
+															if(pgender.equals("01")) {
+																pgendertext = "수컷";
+															} else {
+																pgendertext = "암컷";
+															}
+															
+															if(ptype.equals("01")) {
+																ptypetext = "쉽독";
+															} else if(ptype.equals("02")) {
+																ptypetext = "캐틀 독";
+															} else if(ptype.equals("03")) {
+																ptypetext = "테리어";
+															} else if(ptype.equals("04")) {
+																ptypetext = "닥스훈트";
+															} else if(ptype.equals("05")) {
+																ptypetext = "스피츠";
+															} else if(ptype.equals("06")) {
+																ptypetext = "센트하운드";
+															} else if(ptype.equals("07")) {
+																ptypetext = "포인팅독";
+															} else if(ptype.equals("08")) {
+																ptypetext = "리트리버";
+															} else if(ptype.equals("09")) {
+																ptypetext = "토이독";
+															} else if(ptype.equals("10")) {
+																ptypetext = "사이트 하운드";					
+															}															
 													  %>
-														   <div class="d-flex align-items-center">
-															   <div class="avatar avatar-sm"><img class="avatar-img img-fluid" src="/template/assets/img/illustrations/profiles/profile-1.png"></div>
-															   <div class="ms-3">
-																   <div class="text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:10px;">(<%=pvo.getPtype()%>)</span></div>
-																   <div class="small text-muted">중형견(<%=pvo.getPweight()%>)/<%=pvo.getPages()%>살/중성화 x(<%=pvo.getPneutral()%>)</div>
+														   <div class="col-lg-4 mb-3">
+															   <div class="d-flex align-items-center">
+																   <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/img/pet/<%=pvo.getPphoto()%>"></div>
+																   <div class="ms-3">
+																	   <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=ptypetext%>)</span></div>
+																	   <div class="small text-muted"><%=pvo.getPweight()%>KG/<%=pvo.getPages()%>살/<%=pneutraltext%>/<%=pgendertext%></div>
+																   </div>
 															   </div>
 														   </div>
 													  <%
@@ -133,7 +176,7 @@
 		                            </div>
 		                            
 		                            <div class="ms-2" style="margin-top:50px;">
-		                            	<h2>조건제시 내용 작성</h2>
+		                            	<h2>반려동물 대리돌보미 신청 내용 작성</h2>
 		                            	<hr>
 		                            	<form id="conditionInsertForm" name="conditionInsertForm" action="/conditionInsert.wd" method="post">
 		                            		<input type="hidden" id="tno" name="tno" value="<%=ovo.getTno()%>">
@@ -146,7 +189,7 @@
 			                            	
 			                            	<div class="mb-5">
 			                            		<label for="ccontent">요구 사항</label>
-			                            		<textarea class="form-control" id="ccontent" name="ccontent" rows="3" style="max-width:500px;"></textarea>
+			                            		<textarea class="form-control" id="ccontent" name="ccontent" rows="3" style="max-width:500px;" placeholder="예) 집이 넓어서 강아지가 편하게 지낼 수 있습니다."></textarea>
 			                            	</div>
 			                            	
                                             <!-- 우편번호, 우편번호 찾기 버튼 -->
@@ -189,7 +232,7 @@
                                             <hr>                            	
                                             
 			                            	<div class="mt-4">
-			                            		<input class="btn btn-primary lift" type="submit" value="작성 완료">
+			                            		<input class="btn btn-primary lift" type="submit" value="신청 완료">
 			                            	</div>
 			                            	
 			                            	

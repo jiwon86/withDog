@@ -11,8 +11,13 @@
                     <span class="hahmlet">돌봄찾기</span>
                 </a>
                 
+                <a class="nav-link" href="/offerSelectAllPaging.wd">
+                    <div class="nav-link-icon"><i class="fas fa-dog"></i></div>
+                    <span class="hahmlet">돌봄현황</span>
+                </a>                              
+                
                 <!-- 권한 테스트 -->
-                   <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUserService" aria-expanded="false" aria-controls="collapseUserService">
+                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUserService" aria-expanded="false" aria-controls="collapseUserService">
                     <div class="nav-link-icon"><i data-feather="lock"></i></div>
                     <span class="hahmlet">관리자 페이지</span>
                     <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -21,23 +26,9 @@
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
                         <a class="nav-link hahmlet" href="AdminMemberSelectAll.wd">회원리스트</a>
                         <a class="nav-link hahmlet" href="dashboard-2.html">마커리스트</a>
+                        <a class="nav-link hahmlet" href="dash.wd">대시보드</a>
                     </nav>
                 </div>                     
-       
-                <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCareService" aria-expanded="false" aria-controls="collapseCareService">
-                    <div class="nav-link-icon"><i data-feather="github"></i></div>
-                    <span class="hahmlet">돌봄서비스</span>
-                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseCareService" data-bs-parent="#accordionSidenavCareService">
-                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCareServicePages">
-                        <a class="nav-link hahmlet" href="dashboard-1.html">돌봄신청</a>
-
-                        <a class="nav-link hahmlet" href="/offerSelectAll.wd">내돌봄현황</a>
-                        <a class="nav-link hahmlet" href="/offerSelectAllPaging.wd">돌봄현황(돌봄신청현황, 조건제시현황)</a>
-
-                    </nav>
-                </div>   
                  
                 <div class="sidenav-menu-heading nanum">보조기능</div>
                 <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseCustomerCenter" aria-expanded="false" aria-controls="collapseCustomerCenter">

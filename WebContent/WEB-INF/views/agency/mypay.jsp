@@ -13,6 +13,7 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<head>
+		
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script type="text/javascript">
@@ -45,6 +46,21 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
+				<%
+					MemberVO member = (MemberVO)request.getAttribute("mvo");
+					String mroadaddress = member.getMroadaddress();
+					String[] mroadaddressArr = mroadaddress.split("@");
+					String mphoto = member.getMphoto();
+				%>
+				<form id="memberUpdateForm" name="memberUpdateForm">
+					<input id="mname" type="hidden" name="mname" value="<%=member.getMname()%>" />
+					<input id="memail" type="hidden" name="memail" value="<%=member.getMemail()%>" />
+	                <input id="mbirth" type="hidden" name="mbirth" value="<%=member.getMbirth()%>" />
+	                <input id="mzonecode" type="hidden" name="mzonecode" value="<%=member.getMzonecode()%>" />
+	                <input id="mroadaddress" type="hidden" name="mroadaddress" value="<%=mroadaddressArr[0]%>" />
+	                <input id="mroadaddressdetail" type="hidden" name="mroadaddressdetail" value="<%=mroadaddressArr[1]%>" />
+	                <input id="mjibunaddress" type="hidden" name="mjibunaddress" value="<%=member.getMjibunaddress()%>" />
+				</form>
 				
 				<!--  
 					===================================

@@ -197,7 +197,15 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button id="check_module" class="btn btn-primary btn-lg float-end mt-3" type="button">결제 하기</button>
+                      				
+                      				<div id="payBtn" class="mt-3">
+	                                    <div id="pointPayBtn" class="btn btn-warning btn-lg float-end mt-3 me-3">
+	                                    	<i class="fas fa-coins"></i> &nbsp;&nbsp; 포인트 결제
+	                                    </div>
+	                                    <div id="check_module" class="btn btn-primary btn-lg float-end mt-3 me-3">
+	                                    	<i class="fas fa-money-check-alt"></i>&nbsp; 일반 결제
+	                                    </div>
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -300,8 +308,8 @@
 									"tmno": tmnoVal,
 									"cmno": cmnoVal
 								},
-								success: whenSuccess,
-								error: whenError
+								success: whenSuccess1,
+								error: whenError1
 							})
 							
 						} else {
@@ -310,12 +318,73 @@
 					});
 			});
 			
-			function whenSuccess(result) {
-				alert("성공")	;
-				location.href=`/chatPaymentResult.wd?tno=${"${tnoVal}"}&cno=${"${cnoVal}"}`;
+			let urlVal = "/payAjax.wd";
+			let typeVal = "POST";
+			let paymethodVal = "mypoint";
+			let payamountVal = "<%= cvo.getCprice()%>";
+			let paynameVal = "위드독 결제";
+
+			
+			$("#pointPayBtn").on("click", function() {
+				
+				Swal.fire({
+					title: "정말로 포인트 결제를 하시겠습니까?",
+					text: "확실하다면 확인을 눌러주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '확인',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {				
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"paymethod": paymethodVal,
+								"payname": paynameVal,
+								"payamount": payamountVal,
+								"payname": paynameVal,
+								"tno": tnoVal,
+								"cno": cnoVal,
+								"tmno": tmnoVal,
+								"cmno": cmnoVal
+							},
+							success: whenSuccess2,
+							error: whenError2
+						});
+					}
+				})				
+			});
+			
+			// 일반 결제
+			function whenSuccess1(result) {
+				if(result == "success") {
+					alert("일반 결제에 성공하셨습니다.");
+					location.href=`/chatPaymentResult.wd?tno=${"${tnoVal}"}&cno=${"${cnoVal}"}`;
+				} else {
+					alert("일반 결제에 실패하셨습니다.");
+				}
 			}
 			
-			function whenError(result) {
+			function whenError1(result) {
+				alert("실패");
+			}
+			
+			// 포인트 결제
+			function whenSuccess2(result) {
+				if(result == "success") {
+					alert("포인트 결제에 성공하셨습니다.");
+					location.href=`/chatPaymentResult.wd?tno=${"${tnoVal}"}&cno=${"${cnoVal}"}`;
+				} else if(result == "lesspoint") {
+					alert("포인트가 결제금액보다 적습니다.");
+				} else {
+					alert("포인트 결제에 실패하셨습니다.");
+				}
+			}
+			
+			function whenError2(result) {
 				alert("실패");
 			}
 			

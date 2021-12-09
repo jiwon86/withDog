@@ -93,5 +93,12 @@ public class AgencyServiceImpl implements AgencyService {
 		
 		return agencyDAO.paySelectAll(pvo);
 	}
+
+	@Override
+	public int deleteCondition(ConditionVO cvo) {
+		logger.info("AgencyServiceImpl.deleteCondition() 함수 진입");
+		
+		return agencyDAO.deleteCondition(cvo);
+	}
 	
 }

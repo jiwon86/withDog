@@ -81,7 +81,8 @@
 		SELECT
 			P.TNO TNO
 		FROM PAY P
-		WHERE PAYNO = #{payno, jdbcType=VARCHAR}
+		WHERE  P.DELETEYN = 'Y'
+		AND    PAYNO = #{payno, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="paySelectAll" parameterType="PayVO" resultType="PayVO">
@@ -107,7 +108,8 @@
 		    , CEIL(ROW_NUMBER() OVER(ORDER BY P.PAYNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
 		    , COUNT(P.PAYNO) OVER() AS totalCount
 		FROM PAY P
-		WHERE TMNO=#{tmno, jdbcType=VARCHAR} OR CMNO=#{cmno, jdbcType=VARCHAR}
+		WHERE P.DELETEYN = 'Y'
+		AND   TMNO=#{tmno, jdbcType=VARCHAR} OR CMNO=#{cmno, jdbcType=VARCHAR}
 		ORDER BY P.PAYNO DESC
 	) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
 	</select>

@@ -8,8 +8,9 @@
 		SELECT 
 		    COUNT(A.ANO) 
 		FROM AGENCY A 
-		WHERE TNO = #{tno, jdbcType=VARCHAR}
-		AND CNO = #{cno, jdbcType=VARCHAR}
+		WHERE DELETEYN = 'Y'
+		AND   TNO = #{tno, jdbcType=VARCHAR}
+		AND   CNO = #{cno, jdbcType=VARCHAR}
 	</select>	
 	
 	<insert id="agencyInsert" parameterType="AgencyVO">
@@ -36,8 +37,9 @@
 		SELECT 
 		    A.MATCHYN MATCHYN
 		FROM AGENCY A 
-		WHERE TNO = #{tno, jdbcType=VARCHAR}
-		AND CNO = #{cno, jdbcType=VARCHAR}
+		WHERE DELETEYN = 'Y' 
+		AND   TNO = #{tno, jdbcType=VARCHAR}
+		AND   CNO = #{cno, jdbcType=VARCHAR}
 	</select>
 	
 	<!-- WHERE MATCHYN = 'Y' 추가하기 -->
@@ -45,8 +47,9 @@
 		UPDATE AGENCY SET
 			MATCHYN = 'N',
 			UPDATEDATE = SYSDATE
-		WHERE TNO = #{tno, jdbcType=VARCHAR}
-		AND CNO = #{cno, jdbcType=VARCHAR}
+		WHERE DELETEYN = 'Y' 
+		AND   TNO = #{tno, jdbcType=VARCHAR}
+		AND   CNO = #{cno, jdbcType=VARCHAR}
 	</update>
 
 	<!-- WHERE MATCHYN = 'N' 추가하기 -->
@@ -54,8 +57,17 @@
 		UPDATE AGENCY SET
 			MATCHYN = 'Y',
 			UPDATEDATE = SYSDATE
-		WHERE TNO = #{tno, jdbcType=VARCHAR}
-		AND CNO = #{cno, jdbcType=VARCHAR}
+		WHERE DELETEYN = 'Y' 
+		AND   TNO = #{tno, jdbcType=VARCHAR}
+		AND   CNO = #{cno, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="deleteCondition" parameterType="ConditionVO">
+		UPDATE CONDITION SET 
+			DELETEYN = 'N',
+			UPDATEDATE = SYSDATE
+		WHERE DELETEYN = 'Y'
+		AND   CNO = #{cno, jdbcType=VARCHAR}
 	</update>
 
 </mapper>

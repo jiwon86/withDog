@@ -3,6 +3,7 @@ package a.b.c.com.agency.dao;
 import java.util.List;
 
 import a.b.c.com.agency.vo.AgencyVO;
+import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.PayVO;
 
 public interface AgencyDAO {
@@ -16,4 +17,5 @@ public interface AgencyDAO {
 	public int payCount(PayVO pvo);
 	public List<PayVO> paySelectPayno(PayVO pvo);
 	public List<PayVO> paySelectAll(PayVO pvo);
+	public int deleteCondition(ConditionVO cvo);
 }

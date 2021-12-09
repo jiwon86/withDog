@@ -165,7 +165,25 @@ public class AgencyController {
 	
 	@PostMapping("/payAjax")
 	@ResponseBody
-	public String payAjax(PayVO pvo) {
+	public String payAjax(Principal principal, PayVO pvo) {
+		
+		String mno = null;
+		String mypoint = null;
+		int insertResult = 0;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			mypoint = mvo.getMpoint();
+		}
 		
 		// 결제 정보로 가져온 정보
 		logger.info("pvo.getImpid()       >>> : " + pvo.getImpid());
@@ -187,7 +205,26 @@ public class AgencyController {
 		
 		logger.info("payno >>> : " + payno);
 		
-		int insertResult = agencyService.payAjax(pvo);
+		int payAmount = Integer.valueOf(pvo.getPayamount());
+		int myPoint = Integer.valueOf(mypoint);	
+		
+		if(pvo.getPaymethod().equals("mypoint")) {
+			
+			if(payAmount > myPoint) {
+				return "lesspoint";
+			}
+			
+			insertResult = agencyService.payAjax(pvo);
+			// 포인트 감소
+			MemberVO _mvo = new MemberVO();
+			_mvo.setMpoint(pvo.getPayamount());
+			_mvo.setMno(pvo.getTmno());
+			
+			int updateMinusPointResult = memberService.updateMinusPoint(_mvo);
+			
+		} else {
+			insertResult = agencyService.payAjax(pvo);
+		}
 		
 		if(insertResult > 0) {
 			PayVO _pvo = new PayVO();
@@ -205,10 +242,8 @@ public class AgencyController {
 				MemberVO _mvo = new MemberVO();
 				_mvo.setMpoint(pvo.getPayamount());
 				_mvo.setMno(pvo.getCmno());
-				logger.info("*** 포인트 >>> : " + _mvo.getMpoint());
-				logger.info("*** mno >>> : " + _mvo.getMno());
 				
-				int updatePointResult = memberService.updatePoint(_mvo);
+				int updateAddPointResult = memberService.updateAddPoint(_mvo);
 				
 				return "success";
 			}
@@ -538,4 +573,59 @@ public class AgencyController {
 		return "agency/mypay";
 	}
 	
+	@PostMapping("/payChargeAjax")
+	@ResponseBody
+	public String payChargeAjax(Principal principal, PayVO pvo) {
+		String mno = null;
+		String mypoint = null;
+		int insertResult = 0;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			mypoint = mvo.getMpoint();
+		}
+		
+		// 채번 구하기
+		String payno = ChabunUtil.getAgencyChabun("m", chabunService.getPayChabun().getPayno());
+		pvo.setPayno(payno);
+		
+		insertResult = agencyService.payAjax(pvo);
+		
+		if(insertResult > 0) {
+			MemberVO _mvo = new MemberVO();
+			_mvo.setMpoint(pvo.getPayamount());
+			_mvo.setMno(pvo.getCmno());
+			
+			int updateAddPointResult = memberService.updateAddPoint(_mvo);
+			
+			return "success";
+		}
+		
+		return "fail";
+	}
+	
+	@GetMapping("/refuseCheckAjax")
+	@ResponseBody
+	public String refuseCheckAjax(ConditionVO cvo) {
+		
+		logger.info("** condition tno >>> : " + cvo.getTno());
+		logger.info("** condition cno >>> : " + cvo.getCno());
+		
+		int deleteResult = agencyService.deleteCondition(cvo); 
+		
+		if(deleteResult > 0) {
+			return "success";
+		}
+		
+		return "fail";
+	}
 }

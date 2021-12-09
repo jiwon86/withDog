@@ -17,4 +17,5 @@ public interface AgencyService {
 	public int payCount(PayVO pvo);
 	public List<PayVO> paySelectPayno(PayVO pvo);
 	public List<PayVO> paySelectAll(PayVO pvo);
+	public int deleteCondition(ConditionVO cvo);
 }

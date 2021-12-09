@@ -39,10 +39,10 @@
                             <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
                                 <!-- Social login form-->
                                 <div class="card my-5">
-                                    <div class="card-body p-5 text-center">
+                                    <div class="card-body p-5 text-center border-bottom-0 bg-gradient-primary-to-secondary">
                                         <div class="h3 fw-light mb-1">
-                                        	<div style="font-weight:bold;">WITH DOG</div> 
-                                        	<div class="mt-2" style="font-weight:bold; color:#496b5b;">로그인</div>
+                                        	<div style="font-weight:bold; color:#b43f3f;">WITH DOG</div> 
+                                        	<div class="mt-2" style="font-weight:bold; color:white;">로그인</div>
                                         </div>
                                     </div>
                                     <hr class="my-0" />

@@ -300,11 +300,19 @@
 									</div>
                                <%
                                	 } else {
+                               		if(todayDate.before(startDate)) { 
                                %>
-	                               	<div>
-	                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">조건제시 작성</div>
-	                               	</div>
+		                               	<div>
+		                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">조건제시 작성</div>
+		                               	</div>
                                <%
+                               		} else {
+                               %>
+										<div class="alert alert-danger" role="alert">
+										  <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp; 시간이 지나 조건제시를 신청할 수 없습니다.
+										</div>
+                               <%			
+                               		}
                                	 }
                                %>
                             </div>

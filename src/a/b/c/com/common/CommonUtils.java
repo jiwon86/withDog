@@ -67,7 +67,7 @@ public abstract class CommonUtils {
 	public static final int CONDITION_TOTAL_COUNT = 0;	
 
 	// 조건제시 페이징 사이즈 초기회
-	public static final int PAY_PAGE_SIZE = 1;
+	public static final int PAY_PAGE_SIZE = 5;
 	public static final int PAY_GROUP_SIZE = 5;
 	public static final int PAY_CUR_PAGE = 1;
 	public static final int PAY_TOTAL_COUNT = 0;	

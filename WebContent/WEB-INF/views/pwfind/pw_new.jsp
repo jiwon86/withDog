@@ -22,6 +22,36 @@
 		<!-- 사이드바 -->
 		<jsp:include page="/sidebar.wd" />
 		<!-- /사이드바 -->
+		<script type="text/javascript">
+		let mpw = document.getElementById("mpw").value;
+		let mpw1 = document.getElementById("mpw1").value;
+		
+		   function isSame() {
+		       var pw = $("#pass").val();
+		       var confirmPW = $("#passcheck").val();
+		       
+		       if(pw !='' && confirmPW !='') {
+		           if(pw == confirmPW) {
+		               $('#passcheck').css({"border":"5px solid #81c147"});
+		               $('#pass').css({"border":"5px solid #81c147"});
+		           }
+		           else {
+		               $('#passcheck').css({"border":"5px solid #cd5c5c"});
+		               $('#pass').css({"border":"5px solid #cd5c5c"});
+		           }
+		       }
+		   }
+		   
+		   function submit(event){
+			   
+			   if(mpw != mpw1){
+				   event.preventDefault();
+				   alert("비밀번호가 같지 않습니다");
+			   }
+			   
+		   }
+		
+		</script>
 
 		<!-- 콘텐츠 -->
 		<div id="layoutSidenav_content">
@@ -40,12 +70,12 @@
                                             <!-- Form Group (email address)-->
                                             <div class="mb-3">
                                                 <label class="text-gray-600 small" for="Examplepw">비밀번호</label>
-                                                <input class="form-control form-control-solid" type="text" name="mpw" placeholder="비밀번호를 입력해 주세요(6~12자)" 
-                                                aria-label="Email Address" aria-describedby="Examplepw" required minlength="6" maxlength="12"/><br>
+                                                <input class="form-control form-control-solid" type="text" id="mpw" name="mpw" placeholder="비밀번호를 입력해 주세요(6~12자)" 
+                                                aria-label="Email Address" aria-describedby="Examplepw" required minlength="6" maxlength="12" onchange="isSame()"/><br>
                                                 
                                                 <label class="text-gray-600 small" for="Examplepw1">비밀번호 확인</label>
-                                                <input class="form-control form-control-solid" type="text" placeholder="비밀번호를 입력해 주세요(6~12자)" 
-                                                aria-label="Email Address" aria-describedby="Examplepw1" required minlength="6" maxlength="12"/><br>
+                                                <input class="form-control form-control-solid" type="text" id="mpw1" placeholder="비밀번호를 입력해 주세요(6~12자)" 
+                                                aria-label="Email Address" aria-describedby="Examplepw1" required minlength="6" maxlength="12" onchange="isSame()"/><br>
                                                 
                                             </div>
                                             <%
@@ -54,7 +84,7 @@
                                             %>
                                             <!-- Form Group (reset password button)    -->
                                             <input type="hidden" name="memail" value=<%=memail %>>
-                                            <input type="submit" class="btn btn-primary" value="Reset Password"></a>
+                                            <input type="button" class="btn btn-primary" value="Reset Password" onclick="submit()"></a>
                                         </form>
                                     </div>
                                     <hr class="my-0" />

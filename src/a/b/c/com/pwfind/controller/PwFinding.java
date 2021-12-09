@@ -82,7 +82,7 @@ public class PwFinding {
 				String tomail = memail;
 				String title = "비밀번호 변경 인증 이메일 입니다.";
 				String content = System.getProperty("line.separator")+"안녕하세요 회원님" + System.getProperty("line.separator")
-				+"비밀번호 찾기 인증번호는" + num + "입니다" + System.getProperty("line.separator");
+				+"비밀번호 찾기 인증번호는" + System.getProperty("line.separator") + num + "입니다" + System.getProperty("line.separator");
 				
 				try {
 					MimeMessage message = mailSender.createMimeMessage();

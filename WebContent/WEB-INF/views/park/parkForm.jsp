@@ -2,20 +2,34 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>   
 <%@page import="a.b.c.com.park.vo.ParkVO"%>
+<%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
 	c:import : 외부 jsp 파일 접근 가능
 --%>
 <!DOCTYPE html>
 <html lang="ko">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+$( document ).ready( function() {
+    AOS.init();
+ } );
+</script>
 <!-- 헤드 -->
+<head>
+<link rel="stylesheet" href="css/park/park.css">
 <jsp:include page="/head.wd" />
+</head>
 <!-- /헤드 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
 
+let mid = "${member.mid}";
+console.log(mid);
 		//U
 		$(document).on("click", "#U", function(){
 			 $(".movement").attr({ "method":"GET"
@@ -33,21 +47,28 @@
 			alert("빈하트 클릭");
 			
 			let fullHeartTag = `
-	            <button class="btn btn-pink btn-icon mr-2  full-heart" onclick="fullHeartBtn(this)">
-	            	<i class="fas fa-heart"></i>
+	            <button class="btn btn-pink btn-icon mr-2  full-heart" style="margin-right:50px;" onclick="fullHeartBtn(this)">
+	            
 	                <!--  <i data-feather="heart"></i> -->
-	            </button>			
+	            </button>
+	            <div style="width:30px;position:relative" class="like" id="like">
+	            	<div style="position:absolute;top:-500px; left:-80px;">
+	            		<img src="../../image/park/like.gif">
+	            	</div>
+	            </div>
 			`;
-			
 			$(e).parent().html(fullHeartTag);
+			let likeg = document.getElementById("like");
+			likeg.addEventListener("animationend" ,likeend);
+			
 		}
 		
 		function fullHeartBtn(e) {
 			alert("풀하트 클릭");
 			
 			let emptyHeartTag = `
-	            <button class="btn btn-pink btn-icon mr-2 empty-heart" onclick="emptyHeartBtn(this)">
-	            	<i class="far fa-heart"></i>
+	            <button class="btn btn-pink btn-icon mr-2 empty-heart " style="margin-right:50px;" onclick="emptyHeartBtn(this)">
+	            	
 	                <!--  <i data-feather="heart"></i> -->
 	            </button>		
 			`;
@@ -55,87 +76,13 @@
 			$(e).parent().html(emptyHeartTag);
 		}
 		
+		function likeend () {
+			this.classList.add("hidden");
+		}
+		
 	$(document).ready(function(){
 		
 		selectAll();
-		
-		//댓글등록
-		/*
-		$(document).on("click", "#SAVEbtn", function(e){
-			let inum = $(e);
-			console.log("inum >>> : " + inum);
-			
-			let insertURL = "rparkInsert.wd";
-			let method = "POST";
-			let dataParam = {
-					inum : $("#inum").val(),
-					ricontent : $("#ricontent").text(),
-					riname : $("#riname").val()
-			};
-			
-			//dataParam = $("#rparkForm").serialize();
-			//alert("dataParam >>> : " + dataParam);
-			
-			$.ajax({
-				url : insertURL,
-				type : method,
-				data : dataParam,
-				success : whenSuccess,
-				error : whenError
-			});
-			
-			function whenSuccess(resData){
-				alert("resData >>> :" +resData);
-				if("GOOD" == resData){
-					rparkFormData();
-					location.reload();
-				}
-			}
-			
-			function whenError(e){
-				alert("e >>> : " + e.responseText);
-				console.log("e >>> :  + e.responseText");
-			}
-		});
-		*/
-		
-		/*
-		//단건조회
-		$(document).on("click", "#S", function() {
-			//alert("S >>> : ");
-			
-			let selectURL = "rparkSelect.wd";
-			let method = "POST";
-			let dataParam = {
-					rinum :$("#rinum").val(),
-			};
-			System.out.println("dataParam >>> : " +dataParam);
-			
-			$.ajax({
-				url: selectURL,
-				type: method,
-				data: dataParam,
-				success : whenSuccess,
-				error : whenError
-			});
-			
-			function whenSuccess(resData){
-				//alert("resData >>> : " + resData);
-				let v = resData.split(",");
-				for(let i=0; i <v.length; i++){
-					console.log("v[0]" + v[0]);
-					console.log("v[1]" + v[1]);
-					console.log("v[2]" + v[2]);
-					console.log("v[3]" + v[3]);
-					addNewItem(v[0], v[1], v[2], v[3]);
-				}
-				
-			}
-			function whenError(e){
-				console.log("e >>> : " + e.responseText);
-			}
-		});
-		*/
 		
 		//댓글 삭제
 		$(document).on("click", ".deleteBtn", function(){
@@ -223,13 +170,14 @@
 	
 	function rparkInsert(e) {
 		let inum = $(e).parent().find(".inum").val();
+		console.log(e);
 		
 		let insertURL = "rparkInsert.wd";
 		let method = "POST";
 		let dataParam = {
 				inum : inum,
-				ricontent : $("#ricontent").val(),
-				riname : $("#riname").val()
+	            ricontent : $("#"+inum+"comment").val(),
+	            riname : mid
 		};
 		
 		//dataParam = $("#rparkForm").serialize();
@@ -292,7 +240,7 @@
 		writerP.append(nameSpan).append(dateSpan).append(delInput);
 		newLi.append(writerP).append(contentP);
 		
-		$("#rparklist").append(newLi);
+		 $("#"+inum).append(newLi);
 	}
 	
 	//댓글길이 체크--------------------------------------
@@ -384,7 +332,7 @@
 					<div class="card card-header-actions mx-auto mb-3 mt-3" style="clear:both;">
 					    <div class="card-header">
 					    	<div class="avatar avatar-xl" style="margin-left:330px;">
-								<img class="avatar-img img-fluid me-2" src="image/park/<%= svo.getIphoto() %>">
+								<img class="avatar-img img-fluid me-2" src="img/park/<%= svo.getIphoto() %>">
 								<!--<img class="avatar-img img-fluid me-2" >-->
 								<span class="tt mr-4"><%= svo.getIid() %> </span>
 								<!-- 수정/삭제 -->
@@ -418,15 +366,10 @@
 					    	
 					    	<div class="float-end" style="margin-right:620px;">
 					    		
-					            <button class="btn btn-pink btn-icon mr-2 empty-heart" onclick="emptyHeartBtn(this)">
+					            <button class="btn btn-pink btn-icon mr-2 empty-heart" style="margin-right:50px;" onclick="emptyHeartBtn(this)">
 					            	<i class="far fa-heart"></i>
 					                <!--  <i data-feather="heart"></i> -->
 					            </button>
-					            <!-- 저장하는 버튼 -->
-					            <!-- <button class="btn btn-teal btn-icon mr-2">
-					                <i data-feather="bookmark"></i>
-					            </button> -->
-					            
 					        </div>
 					        <!-- 아이디/내용들어가는 곳 -->
 					        <div style="margin-top:60px;">

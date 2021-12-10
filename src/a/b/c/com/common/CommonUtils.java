@@ -4,7 +4,9 @@ public abstract class CommonUtils {
 
 	// 박상혁 : withdog_work
 	
-	public static final String WorkSpace = "el_withdog_work";
+
+	public static final String WorkSpace = "pr_work";
+
 	//public static final String WorkSpace = "pr_work";
 	//public static final String WorkSpace = "project_work";
 

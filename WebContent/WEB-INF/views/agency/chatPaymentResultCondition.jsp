@@ -60,7 +60,7 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Invoice-->
                         <div class="card invoice">
-                            <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
+                            <div class="card-header p-4 p-md-5 border-bottom-0 bg-withcolor text-white-50" style="background-image : url('/image/header/dog-footprint.png');">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-12 col-lg-auto mb-5 mb-lg-0 text-center text-lg-start">
                                     </div>
@@ -72,7 +72,8 @@
 		                        <div class="tab-pane py-5 py-xl-10 " id="wizard4" role="tabpanel" aria-labelledby="wizard4-tab">
 		                            <div class="row justify-content-center">
 		                                <div class="col-xxl-8 col-xl-8 col-8 p-5 bg-img-repeat bg-light" 
-		                                	 style="background-image: url('/template/assets/img/backgrounds/bg-pattern-shapes.png'); border:4px dashed #657d89;">
+		                                	 style="background-image: url('/template/assets/img/backgrounds/bg-pattern-shapes.png');
+		                                	 		border:4px dashed #657d89;">
 		                                    <h3 class="text-primary text-center">
 		                                    	<i class="fas fa-check-circle" style="color:#0091EA; font-size:3em;"></i>
 		                                    </h3>

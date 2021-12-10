@@ -77,40 +77,42 @@ let center = map.getCenter();
 let content ='<form id="popup" class="popup">'
 +'<div class="overlaybox" id="overlaybox">'
 +'<div class="title-header">'
-	+'<header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">'
-	+	'<div class="container-xl px-4">'
-	+       '<div class="page-header-content pt-4">'
-	+            '<div class="row align-items-center justify-content-between">'
-	+                '<div class="col-auto mt-4">'
-	+                   '<h1 class="page-header-title">'
-	+                        '<div class="page-header-icon"><i data-feather="edit-3"></i></div>'
-	+                       	'돌봄 신청 작성하기'
-	+							'<button class="btn btn-red btn-icon cancle" type="button" id="cancle">'
-	+					    	'<i class="fas fa-times-circle fa-3x"></i>'
-	+					'</button>'
-	+                   '</h1>'
-	+                  '<div class="page-header-subtitle">돌봄 시 필요한 사항들을 적어주세요.</div>'
-	+                '</div>'
-	+            '</div>'
-	+        '</div>'
-	+   '</div>'
-	+'</header>'
++'<header class="page-header page-header-light bg-withcolor pb-10">'
++	'<div class="container-xl px-4">'
++       '<div class="page-header-content pt-4">'
++		'<img src="/image/header_dog.png" class="headerdog">'
++            '<div class="row align-items-center justify-content-between">'
++                '<div class="col-auto mt-4">'
++                   '<h1 class="page-header-title"  style="color:dark;">'
++                        '<div class="page-header-icon"><i data-feather="edit-3"></i></div>'
++                       	'돌봄 신청 작성하기'
++							'<button class="btn btn-red btn-icon cancle" type="button" id="cancle">'
++					    	'<i class="fas fa-times-circle fa-3x"></i>'
++					'</button>'
++                   '</h1>'
++                  '<div class="page-header-subtitle">돌봄 시 필요한 사항들을 적어주세요.</div>'
++                '</div>'
++            '</div>'
++        '</div>'
++   '</div>'
++'</header>'
 +'</div>'
 +'<div class="area_1">'
 +	'<ul class="list">'	
-+		'<li><label for="title">asd</label><input type="text" id="title" name="title" class="form-control"></li>'
+//+		'<img src="/image/gif/dog-stand_2.gif" class="dogstand" id="dogstand">'
+//+		'<img src="/image/gif/hello.gif" class="doghello" id="doghello">'
 +		'<li id="dogs"><label for="dogs"><i class="fas fa-dog"></i>&nbsp;돌 볼 반려동물</label><br>&nbsp&nbsp'
 			
 +			'</li>'
 +		'<li><label for="when"><i class="far fa-clock"></i>&nbsp;기간</label><div class="item_2"><input type="datetime-local" class="form-control" id="when_1" name="when_1" placeholder="맡기실 기간을 입력해주세요.">'
 + 			' <i class="fas fa-bone fa-2x"></i><input type="datetime-local" class="form-control" id="when_2" name="when_2"></div></li>'
-+		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
++		'<li><label for="price"><i class="fas fa-coins"></i>&nbsp;돌봄 비용</label><input type="number" class="form-control" id="price" name="price" step="1000" placeholder="돌봄이 에게 지급할 금액입니다."></li>'
 +		'<li><label for="content"><i class="fas fa-envelope-open-text"></i>&nbsp;상세 사항</label><textarea class="form-control" id="content" name="content" rows="3" placeholder="돌봄 시 필요한 사항을 적어주세요."></textarea></li>'
 +		'<li><label for="photo"><i class="fas fa-images"></i>&nbsp;반려동물 사진</label><input type="file" class="form-control" id="photo" name="photo"></li>'
 +		'<li><label for="addr_2"><i class="fas fa-map-marked-alt"></i>&nbsp;주소 정보</label><div class="item_2"><input type="text" class="form-control addr" id="addr_1" name="addr_1" readonly>'
 +			'<i class="fas fa-bone fa-2x"></i><input type="text" class="form-control addr" id="addr_2" name="addr_2">'
 +			'</div></li>'
-+		'<li><button class="btn btn-primary smit" type="button" id="submit">신청 하기</button></li>'
++		'<li><button class="btn btn-withcolor smit" type="button" id="submit">신청 하기</button></li>'
 +'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
 +'			<input type="hidden" id="lng" name="lng" value=""></input>'	
 +'			<input type="hidden" id="pno" name="pno" value=""></input>'	
@@ -144,13 +146,21 @@ function addTime (str, time) {
 	
 	let month = nowDate.getMonth() + 1;
 	
-	if (str == 'm') {
-		nowDate.setMinutes(nowDate.getMinutes() + time);
+	if (str == 'n') {
+		
+	} else {
+		
+		if (str == 'm') {
+			nowDate.setMinutes(nowDate.getMinutes() + time);
+		}
+		
+		if (str == 'h') {
+			nowDate.setHours(nowDate.getHours() + time);
+		}
 	}
 	
-	if (str == 'h') {
-		nowDate.setHours(nowDate.getHours() + time);
-	}
+	
+
 	
 	let year = nowDate.getFullYear();
 		month = month.toString().padStart(2, '0');
@@ -176,6 +186,40 @@ const when_2 = document.getElementById('when_2');
 const dogs = document.getElementById('dogs');
 
 
+/*
+	애니메이션 미사용
+const dogGif = document.getElementById('dogstand');
+const dogHelloGif = document.getElementById('doghello');
+
+dogGif.addEventListener("mouseover", dogHello);
+
+dogHelloGif.addEventListener("animationend" ,dogHelloOut);
+dogHelloGif.classList.add("hidden");
+
+function dogHello () {
+	if (dogHelloGif.classList.contains("out") || dogHelloGif.classList.contains("in")) {
+		console.log("애니메이션 중입니다.");
+	} else {
+		dogHelloGif.classList.remove("hidden");
+		dogHelloGif.classList.add("in");	
+	}
+}
+
+
+function dogHelloOut() {
+	// In -> Out
+	if(this.classList.contains("in")) {
+	this.classList.remove("in");
+	this.classList.add("out");
+	}else // Out -> Out
+		if(this.classList.contains("out")) {
+			this.classList.remove("out");
+			this.classList.add("hidden");
+		}
+	}
+
+ */
+
 
 
 //----------------------------------------------------------------------------------
@@ -197,28 +241,33 @@ $(document).ready(function(){
 		document.getElementById("lat").value = Lat;
 		document.getElementById("lng").value = Lng;
 		document.getElementById("addr").value = addr_1 + " " +addr_2;
-		let formdata = new FormData(form);
-    
-		console.log(Lat);
-		console.log(Lng);
-		console.log(addr);
-		
-			$.ajax({			
-				url : 'mapTradeInsert.wd',		
-				type : 'post',
-				enctype : "multipart/form-data",
-				processData: false,    
-		        contentType: false,
-				data : formdata,
-			    success: function (data){
-			        alert("데이터전송 성공");
-			        submitPopup();
-			    },
-			    error: function (error){
-			        alert("에러");
-			        hidePopup();
-			    }
-			}); // end of ajax()
+		let pno = document.getElementById("pno").value;
+		if (pno != ""){
+			let formdata = new FormData(form);
+	    
+			console.log(Lat);
+			console.log(Lng);
+			console.log(addr);
+			
+				$.ajax({			
+					url : 'mapTradeInsert.wd',		
+					type : 'post',
+					enctype : "multipart/form-data",
+					processData: false,    
+			        contentType: false,
+					data : formdata,
+				    success: function (data){
+				        alert("데이터전송 성공");
+				        submitPopup();
+				    },
+				    error: function (error){
+				        alert("에러");
+				        hidePopup();
+				    }
+				}); // end of ajax()
+		} else {
+			alert("반려동물을 먼저 등록해주세요!");
+		}
 	});
 	
 	// 멤버 번호를 가져옴
@@ -244,7 +293,7 @@ $(document).ready(function(){
 		    		//dogs.innerHTML += "<option>"+petinfo[i].pname+"</option>";
 		    	}
 	    	} else {
-	    		dogs.innerHTML +=  "<a href='/petSelectAll.wd?mno=${member.mno}'> 반려동물 등록 하기</a>";
+	    		dogs.innerHTML +=  "<a href='/petInsertForm.wd?mno=${member.mno}'> 반려동물 등록 하기</a>";
 	    	}
 	    },
 	    error: function (error){
@@ -252,6 +301,22 @@ $(document).ready(function(){
 	    }
 	}); // end of ajax()
 	
+	$('#price').on('change', function() {
+		     let price = $(this).val(); 
+		     if (price >= 0 && price < 1000) {
+		    	 if (price < 10) {price = price * 100;}
+		    	 if (price < 100) {price = price * 100;}
+		    	 else {price = price * 10;}
+		     }
+		     price = Math.floor(price/1000) * 1000; 
+		     //alert(n);  
+		     $(this).val(price);
+		     if (price <= 0) {
+		    	 alert("1000원 단위로 입력해주세요!");
+		    	 $(this).val(1000);
+		     }
+		  });
+
 });
 
 // 체크박스 이벤트
@@ -263,7 +328,7 @@ function checkDog (box) {
 	if (box.checked == true) {
 		pno.value += checkbox+" ";
 	} else {
-		pno.value = pno.value.replace(checkbox, "");
+		pno.value = pno.value.replace(checkbox+" ", "");
 	}
 	console.log(pno.value);
 }
@@ -375,6 +440,7 @@ function markersLoad(x) {
 					   	jsonData = data;
 					   	let i;
 					    let size = jsonData.length;
+					    let nowDate = addTime('n',0);
 					    
 						    if (x == 1){
 						    	i = 0;
@@ -386,7 +452,10 @@ function markersLoad(x) {
 	   						if (size != 0) {
 							    for (i; size > i; i++ ){
 							    	const propose = jsonData[i].propose;
-								    if (propose === "0") {
+							    	let enddate_1 = jsonData[i].enddate;
+									enddate_1 = enddate_1.replace(" ", "T");
+
+								    if (propose === "0" && nowDate < enddate_1) {
 								    	const tno = jsonData[i].tno;
 								    	const title = jsonData[i].title;
 								    	const photo = jsonData[i].photo;
@@ -522,9 +591,9 @@ function searchAddrFromCoords(coords, callback) {
 				        let startDate = addTime('m', 30); // 30분
 						let endDate = addTime('h', 3); // 3시간
 				        when_1.value = startDate;
-						when_1.setAttribute('min', startDate);
+						when_1.setAttribute('min', startDate + ":00");
 						when_2.value = endDate;
-						when_2.setAttribute('min', endDate);
+						when_2.setAttribute('min', endDate + ":00");
 				    	
 						 // 지도 이동 및 축소 제한
 				    	 moveable = false;

@@ -59,16 +59,7 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				<main>
-					
-				</main>
-				<!--  
-					===================================
-					<main> 내용 </main> 부분을 복사해서 
 
-					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
-					===================================
-				--> 
 				<!-- ** 주요 내용 **  -->
 <main style="width:960px; margin:0 auto;">
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -106,20 +97,25 @@
 
 </script>
 
- <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-     <div class="container-xl px-4">
-         <div class="page-header-content">
-             <div class="row align-items-center justify-content-between pt-3" >
-                 <div class="col-auto mb-3">
-                     <h1 class="page-header-title">
-                         <div class="page-header-icon"><i data-feather="user"></i>&nbsp&nbsp<h2>Q&A</h2></div>
-                     </h1>
-                 </div>
-             </div>
-         </div>
-     </div>
- </header>
-<div class="container-xl px-4 mt-4">
+<!-- Main page content-->
+<main style="width:960px; margin:0 auto;">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_qna_2.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										Q & A 수정하기
+									</h1>
+						<div class="page-header-subtitle">운영시간  - 09:00 ~ 18:00 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container-xl px-4 mt-n10">	
 <nav class="nav nav-borders">
     <a class="nav-link active" href="account-security.html">sd</a>
 </nav>
@@ -179,7 +175,10 @@
 	<c:param name="qnanum" value="<%=qvo.getQnanum()%>"></c:param>
 </c:import>	
 </sec:authorize>       
-           
+         </div>  
+         </div>
+         </main>
+         
 </main>				
 			<!-- ** /주요 내용 ** -->
 				

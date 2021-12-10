@@ -45,6 +45,13 @@
 	
 	.trcon:hover{background:#d3d3d3;}
 	
+	.headerdog  {
+		position : absolute;
+		width : 15%;
+		height : 200px;
+		left : 65%
+}
+	
 	</style>
 	
 	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -84,9 +91,10 @@
 				<main style="margin:0 auto; width:960px;height:900px;background:#fff;">
 				<form name="RevieList" id="RevieList">
 				
-                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                    <header class="page-header page-header-light bg-withcolor pb-10">
                         <div class="container-xl px-4">
                             <div class="page-header-content pt-4">
+                            	<img src="/image/header_dog_2.png" class="headerdog">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title"><div class="page-header-icon"><i data-feather="filter"></i></div>후기 게시판</h1>
@@ -106,12 +114,12 @@
                                 <table id="datatablesSimple" style="width:100%;text-align:center;border:1px solid #d3d3d3;border-radius: 100px;">
 
                                     <thead>
-                                        <tr style="background:#194ae8;">
-                                            <th  style="color:#fff;">글번호</th>
-                                            <th  style="color:#fff;">제목</th>
-                                            <th  style="color:#fff;">돌봄이</th>
-                                            <th  style="color:#fff;">후기 작성자</th>
-                                            <th  style="color:#fff;">작성일</th>
+                                        <tr style="background:#FFE082;">
+                                            <th  style="color:black;">글번호</th>
+                                            <th  style="color:black;">제목</th>
+                                            <th  style="color:black;">돌봄이</th>
+                                            <th  style="color:black;">후기 작성자</th>
+                                            <th  style="color:black;">작성일</th>
                                         </tr>
                                     </thead>
                                    <%
@@ -164,8 +172,8 @@
                         </div>
                        
                         <div style="float:right;">
-							<a href="reviewInsertForm.wd"><button class="btn btn-primary me-2 my-1" type="button" id="I" style="float:right;">글쓰기</button></a>
-                        	<button type="button" id="searchBtn" class="btn btn-primary me-2 my-1" style=" float:right;margin-left:10px;">검색</button>
+							<!--  <a href="reviewInsertForm.wd"><button class="btn btn-primary me-2 my-1" type="button" id="I" style="float:right;">글쓰기</button></a>-->
+                        	<button type="button" id="searchBtn" class="btn btn-withcolor me-2 my-1" style=" float:right;margin-left:10px;">검색</button>
                         	<input type="text" id="keyword" name="keyword" class="dataTable-input" placeholder="돌봄이 찾기" style="width:50%; float:right;margin-top:3px;">
                         </div>
                         <div>

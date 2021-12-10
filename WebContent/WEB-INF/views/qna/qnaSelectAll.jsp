@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 헤드 -->
-<jsp:include page="/head.wd" />
+
 <!-- /헤드 -->
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -81,7 +81,7 @@
 						<div class="page-header-icon">
 							<i data-feather="user"></i>
 						</div>
-						Q&A
+						Q&As
 					</h1>
 				</div>
 			</div>

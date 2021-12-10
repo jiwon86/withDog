@@ -17,6 +17,15 @@
 .fileimg {
 	width : 500px;
 }
+
+	
+.headerdog  {
+				position : absolute;
+				width : 17%;
+				height : 200px;
+				left : 63%
+	}
+	
 		
 	</style>
 
@@ -36,28 +45,28 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				<main style="width:960px; margin:0 auto;">
-                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-                        <div class="container-fluid px-4">
-                            <div class="page-header-content">
-                                <div class="row align-items-center justify-content-between pt-3">
-                                    <div class="col-auto mb-3">
-                                        <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="file-text"></i></div>
-                                            	공지사항
-                                        </h1>
-                                    </div>
-                                    <div class="col-12 col-xl-auto mb-3">
-                                        <a class="btn btn-sm btn-light text-primary" href="noticeSelectPaging.wd">
-                                            <i class="me-1" data-feather="arrow-left"></i>
-                                          	  공지사항 전체목록
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </header>
+<!-- Main page content-->
+<main style="width:960px; margin:0 auto;">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_dog_8.png" class="headerdog">
+					 <a class="btn btn-sm btn-light text-primary" href="noticeSelectPaging.wd">
+                        <i class="me-1" data-feather="arrow-left"></i>공지사항 전체목록 </a>
+                                  
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										공지 사항
+									</h1>
+						<div class="page-header-subtitle">서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다! </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container-xl px-4 mt-n10">	
 
 <%
 List<NoticeVO> listS = (List<NoticeVO>)request.getAttribute("listS");
@@ -69,7 +78,6 @@ for(int i=0; i<nCnt; i++){
                  
                     
                     <!-- Main page content-->
-                    <div class="container-fluid px-4">
                         <div class="row gx-4">
                             <div class="col-lg-8">
                                <div class="card mb-4" style="width:900px;">
@@ -94,20 +102,22 @@ for(int i=0; i<nCnt; i++){
                                     	</sec:authorize>
                                     </div>
                                 </div>
-                            </div>
+                                
+                          
 <%
 						}
 %>
                             <div class="col-lg-4">
                                     <div class="card-body"></div>
                             </div>
-                        </div>
-                    </div>
+                       
+                  
                 </main>
+                 </div>
 				<!-- ** 주요 내용 **  -->
 				
 				<!-- ** /주요 내용 ** -->
-				
+				</div>
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->

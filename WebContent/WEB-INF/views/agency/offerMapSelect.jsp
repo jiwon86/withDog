@@ -351,6 +351,7 @@
                                %>
 		                               	<div>
 		                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">반려동물 대리돌보미 신청</div>
+
 		                               	</div>
                                <%
                                		} else {

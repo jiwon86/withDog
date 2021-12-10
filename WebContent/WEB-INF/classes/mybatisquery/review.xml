@@ -125,7 +125,7 @@
 			  ,TO_CHAR(A.INSERTDATE, 'YYYY-MM-DD') INSERTDATE
 	       	  ,TO_CHAR(A.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE	
 		FROM 	REVIEW A
-		WHERE 	A.MID LIKE '%' ||#{mid, jdbcType=VARCHAR}
+		WHERE 	A.MID	= #{mid, jdbcType=VARCHAR}
 		AND 	A.DELYN = 'Y'
 		ORDER BY 1
 	</select>

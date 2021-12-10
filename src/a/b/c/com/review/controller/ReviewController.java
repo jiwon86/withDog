@@ -42,9 +42,19 @@ public class ReviewController {
 	
 	// 게시판 글 입력 폼
 	@RequestMapping(value="reviewInsertForm", method=RequestMethod.GET)
-	public String reviewInsertForm(ReviewVO rvo, Model model) {		
-
+	public String reviewInsertForm(ReviewVO rvo, Model model,Principal principal, HttpServletRequest req) {		
 		logger.info("reviewInsertForm() 함수 진입 ");
+		
+		try {
+			String mid = principal.getName();
+			String did = req.getParameter("did");
+			model.addAttribute("mid", mid); // 로그인한 사람
+			model.addAttribute("did", did); // 돌보미
+		}catch(Exception e) {
+			return "member/loginForm";
+		}
+
+		
 		
 		
 		return "review/reviewInsertForm";
@@ -54,38 +64,46 @@ public class ReviewController {
 
 	// 후기입력하기 버튼을 눌렀을 때
 	@RequestMapping(value="reviewInsert", method=RequestMethod.POST)
-	public String reviewInsert(ReviewVO rvo, Model model) {
+	public String reviewInsert(ReviewVO rvo, Model model, Principal principal) {
 		
-		logger.info("ReviewInsert() 함수 진입 >>> : ");
-		logger.info("crsubject : " + rvo.getCrsubject());
-		logger.info("rwriter : " + rvo.getRwriter());
-		logger.info("crscore : " + rvo.getCrscore());
-		logger.info("crmemo : " + rvo.getCrmemo());
-		logger.info("crreport : " + rvo.getCrreport());
-		
-		// 채번쿼리
-		String crnum = ChabunUtil.getReviewCrnumChabun("D", chabunService.getReviewCrnumChabun().getCrnum());
-		logger.info("ReviewController reviewInsert crnum >>> : " + crnum);
-		
-		rvo.setCrnum(crnum);
-		rvo.setMid(rvo.getMid());
-		rvo.setRwriter(rvo.getRwriter());
-		rvo.setCrsubject(rvo.getCrsubject());
-		rvo.setCrscore(rvo.getCrscore());
-		rvo.setCrmemo(rvo.getCrmemo());
-		rvo.setCrreport(rvo.getCrreport());
-		
-		logger.info("crnum" + crnum);
-		logger.info("mid : " + rvo.getMid());
-		logger.info("rwriter : " + rvo.getRwriter());
-		logger.info("crsubject : " + rvo.getCrsubject());
-		logger.info("crscore : " + rvo.getCrscore());
-		logger.info("crmemo : " + rvo.getCrmemo());
-		logger.info("crreport : " + rvo.getCrreport());
-		
-		int nCnt = reviewService.insertReview(rvo);
-		
-		if (nCnt > 0) {return "review/reviewInsert";}
+		try {
+			String mid = principal.getName();
+			
+			logger.info("ReviewInsert() 함수 진입 >>> : ");
+			logger.info("crsubject : " + rvo.getCrsubject());
+			logger.info("rwriter : " + rvo.getRwriter());
+			logger.info("crscore : " + rvo.getCrscore());
+			logger.info("crmemo : " + rvo.getCrmemo());
+			logger.info("crreport : " + rvo.getCrreport());
+			
+			// 채번쿼리
+			String crnum = ChabunUtil.getReviewCrnumChabun("D", chabunService.getReviewCrnumChabun().getCrnum());
+			logger.info("ReviewController reviewInsert crnum >>> : " + crnum);
+			
+			rvo.setCrnum(crnum);
+			rvo.setMid(rvo.getMid());
+			rvo.setRwriter(rvo.getRwriter());
+			rvo.setCrsubject(rvo.getCrsubject());
+			rvo.setCrscore(rvo.getCrscore());
+			rvo.setCrmemo(rvo.getCrmemo());
+			rvo.setCrreport(rvo.getCrreport());
+			
+			logger.info("crnum" + crnum);
+			logger.info("mid : " + rvo.getMid());
+			logger.info("rwriter : " + rvo.getRwriter());
+			logger.info("crsubject : " + rvo.getCrsubject());
+			logger.info("crscore : " + rvo.getCrscore());
+			logger.info("crmemo : " + rvo.getCrmemo());
+			logger.info("crreport : " + rvo.getCrreport());
+			
+			int nCnt = reviewService.insertReview(rvo);
+			
+			if (nCnt > 0) {return "review/reviewInsert";}
+			
+		}
+		catch (Exception e) {
+			return "member/loginForm";
+		}
 		
 		return "review/reviewInsertForm";
 		
@@ -93,39 +111,25 @@ public class ReviewController {
 	
 	// 마이 리뷰 프로필
 	@RequestMapping(value="myReviewList", method=RequestMethod.GET)
-	public String myReviewList(Model model, ReviewVO rvo, Principal principal) {
+	public String myReviewList(Model model, ReviewVO rvo, Principal principal, HttpServletRequest req) {
 		
+		String mid = req.getParameter("mid");
 		logger.info("ReviewController.myReviewList() 함수 진입");
-		
-		String rmid = null;
-		String mid = principal.getName();
-		
-		rmid = rvo.getMid();
-		MemberVO member = new MemberVO();
-		List<MemberVO> memberList = memberService.memberSelect(member);
-		member = memberList.get(0);
-
-		List<ReviewVO> listAll = reviewService.selectAllReview(rvo);
-		logger.info("listAll.size() >>> " + listAll.size());
-		
-		if(listAll.size() > 0) {
-			
-			model.addAttribute("member", member);
-			model.addAttribute("listAll", listAll);
-			
-			List<ReviewVO> listId = reviewService.reviewIDlist(rvo);
-			logger.info("listId.size() >>> " + listId.size());
-			
-			if(rmid != rvo.getMid()) {
-				
-			}else {
-				
-				model.addAttribute("listId", listId);
-				return "review/reviewSelectAll";
+		try {
+					
+			if (mid == null) {
+				mid = principal.getName();
 			}
-						
+			rvo.setMid(mid);
+			List<ReviewVO> listId = reviewService.reviewIDlist(rvo);
+			System.out.println(mid);
+			logger.info("listAll.size() >>> " + listId.size());
+			model.addAttribute("mid", mid);	
+			model.addAttribute("listAll", listId);	
+
+		}catch (Exception e) {
+			
 		}
-		
 		return "review/myReviewList";
 	}
 	
@@ -147,7 +151,12 @@ public class ReviewController {
 		int totalCount = CommonUtils.REVIEW_TOTAL_COUNT;
 		
 		if (rvo.getCurPage() !=null) {
-			curPage = Integer.parseInt(rvo.getCurPage());
+			if (rvo.getCurPage().equals("0")) {
+				curPage = Integer.parseInt(rvo.getCurPage()) + 1;
+			}
+			else {
+				curPage = Integer.parseInt(rvo.getCurPage());
+			}
 		}
 		
 		logger.info("rvo.getKeyword >>> : " + rvo.getKeyword());
@@ -238,19 +247,16 @@ public class ReviewController {
 	public String reviewSelect(Principal principal, ReviewVO rvo, Model model, HttpSession session) {
 		
 		logger.info("ReviewController reviewSelect() 함수진입 >>> : ");
-//		
-//		String mid = principal.getName();
-//		
-//		logger.info("mid >>> " + mid);
-//		
-//		List<Member> listR = reviewService.selectRwriter(rvo);
-//		logger.info("ReviewController review`	Select listR.size() >>> : " + listR.size());
-//		
+		
+		String mid = principal.getName();
+	
+
 		List<ReviewVO> listS = reviewService.selectReview(rvo);
 		logger.info("ReviewController reviewSelect listS.size() >>> : " + listS.size());
 		
 		if (listS.size() == 1) {
 			model.addAttribute("listS", listS);
+			model.addAttribute("mid", mid);
 			return "review/reviewSelect";
 		}
 		

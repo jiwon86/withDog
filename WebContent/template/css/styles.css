@@ -3217,6 +3217,12 @@ textarea.form-control-lg {
   background-color: #0061f2;
   border-color: #0061f2;
 }
+
+.btn-withcolor {
+  color: black;
+  background-color: #FFE082;
+  border-color: #FFE082;
+}
 .btn-primary:hover {
   color: #fff;
   background-color: #0052ce;
@@ -16459,6 +16465,11 @@ body {
 .bg-gradient-primary-to-secondary {
   background-color: #0061f2 !important;
   background-image: linear-gradient(135deg, #0061f2 0%, rgba(105, 0, 199, 0.8) 100%) !important;
+}
+
+.bg-withcolor {
+  background-color: #FFE082;
+  
 }
 
 .bg-transparent-light {

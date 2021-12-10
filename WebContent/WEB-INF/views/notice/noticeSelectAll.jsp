@@ -12,7 +12,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
-	<jsp:include page="/head.wd" />
+		<head>
+		<style>
+			.headerdog  {
+				position : absolute;
+				width : 17%;
+				height : 200px;
+				left : 63%
+			}
+		</style>
+
+		<jsp:include page="/head.wd" />
+	</head>
 	<!-- /헤드 -->
 	
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -40,27 +51,30 @@
 			<!-- /사이드바 -->
 
 			<!-- 콘텐츠 -->
-<form name="boardList" id="boardList">
+
 			
             <div id="layoutSidenav_content">
+<!-- Main page content-->
 <main style="width:960px; margin:0 auto;">
-    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-        <div class="container-xl px-4">
-            <div class="page-header-content pt-4">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-auto mt-4">
-                        <h1 class="page-header-title">
-                            <div class="page-header-icon"></div>
-                            	공지사항
-                        </h1>
-                        <div class="page-header-subtitle">신규회원 및 기존회원 가족분들은 서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Main page content-->
-    <div class="container-xl px-4 mt-n10">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_dog_8.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										공지 사항
+									</h1>
+						<div class="page-header-subtitle">서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다! </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container-xl px-4 mt-n10">	
+
+
         <div class="card mb-4">
             <div class="card-header">공지사항 전체목록</div>
             <div class="card-body">
@@ -84,22 +98,24 @@
 <%
 	Object obj = request.getAttribute("listAll");
 	List<NoticeVO> list = (List) obj;
-	
-	int nCnt = list.size();
-	System.out.println("nCnt >>> : " + nCnt);
+	int nCnt = 0;
+	if (list != null) {
+		nCnt = list.size();
+		System.out.println("nCnt >>> : " + nCnt);
+	}
 %>
                  <form action="/notice/search" method="GET">
                  <!-- <form id="keyfilter" name="keyfilter"> -->
                  		<!-- <input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br> -->
-                 		<button class="btn btn-primary" style="float:right" id="searchBtn">검색하기</button>
+                 		<button class="btn btn-withcolor" style="float:right" id="searchBtn">검색하기</button>
 				    <div style="float:right">
-				        <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">
+				        <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">&nbsp;&nbsp;&nbsp;
 				    </div>
 				   
 				    <br><br>
 				</form>
                  <br>
-               
+               <form name="boardList" id="boardList">
                 <div class="dataTable-container">
                 <table id="datatablesSimple" class="dataTable-table">
                     <thead>
@@ -123,6 +139,7 @@
                        </thead>
                        
 <%
+if (nCnt > 0) {
 for(int i=0; i<nCnt; i++){
 	NoticeVO nvo = list.get(i);
 %>
@@ -132,7 +149,8 @@ for(int i=0; i<nCnt; i++){
                                <td><%= nvo.getNsubject() %></td>
                                <td><%= nvo.getNwriter() %></td>
                                <td>
-                               	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-primary text-white rounded-pill">상세조회</div></a>
+                               
+                               	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-withcolor text-white rounded-pill">상세조회</div></a>
                                </td>
                                <sec:authorize access="hasRole('ROLE_ADMIN')">
                                <td>
@@ -143,7 +161,8 @@ for(int i=0; i<nCnt; i++){
                            </tr>                          
 					  </tbody>				  
 <%
-						}
+					} // end if
+				} // end for
 %>
                    </table>
                    </div>
@@ -164,7 +183,7 @@ for(int i=0; i<nCnt; i++){
                     </div>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
 	                    <a href="noticeInsertForm.wd">
-	                    	<button class="btn btn-primary me-2 my-1 float-end" type="button">작성하기</button>
+	                    	<button class="btn btn-withcolor me-2 my-1 float-end" type="button">작성하기</button>
 	                    </a>
                     </sec:authorize>
                    </div>
@@ -172,7 +191,7 @@ for(int i=0; i<nCnt; i++){
            </div>
            <div class="card card-icon mb-4">
                <div class="row g-0">
-                   <div class="col-auto card-icon-aside bg-primary">
+                   <div class="col-auto card-icon-aside bg-withcolor">
                   
                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                    <line x1="12" y1="9" x2="12" y2="13"></line>
@@ -188,14 +207,19 @@ for(int i=0; i<nCnt; i++){
                </div>
            </div>
        </div>
-</main>
+       </div>
+	</form>
+       </main>
+
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->
                 
             </div>
 			<!-- /콘텐츠 -->
+			
         </div>
-		</form>
+	
+
     </body>
 </html>

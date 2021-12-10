@@ -17,6 +17,15 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<head>
+	<style>
+		.headerdog  {
+			position : absolute;
+			width : 15%;
+			height : 250px;
+			left : 65%
+		}
+	</style>
+		<link rel="stylesheet" href="css/offer/offer.css">
 		<script type="text/javascript">
 		
 			function chatPaymentResultBtnClick(e) {
@@ -235,6 +244,11 @@
 				}
 			}
 			
+			// 돌보미 리뷰 확인
+			function reviewBtn(did) {
+				location.href=`/myReviewList.wd?did=${"${did}"}`;
+			}
+			
 			function whenError3() {
 				console.log("실패");
 			}
@@ -294,21 +308,22 @@
 				%>
 				
                <main style="width:960px; margin:0 auto;">
-                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-                        <div class="container-xl px-4">
-                            <div class="page-header-content pt-4">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-auto mt-4">
-                                        <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>반려동물 대리돌봄 서비스 상세정보</span>
-                                        </h1>
-                                        <div class="page-header-subtitle"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_dog_10.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="search"></i></div>
+										반려동물 대리돌봄 서비스 상세정보
+									</h1>
+						<div class="page-header-subtitle">대리돌봄 서비스 상세정보 입니다. </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
                     <!-- 상세 돌봄신청 정보 -->
                     <div class="container-xl px-4 mt-n10">
 
@@ -606,7 +621,10 @@
 																</div>	                                    	
 						                                    	<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
 																	<i class="fas fa-handshake-slash"></i> &nbsp; 거절
-																</div>	                                    	
+																</div>
+																<div class="btn btn-teal" onclick="reviewBtn('<%= cvo.getMid() %>')">
+																	<i class="fas fa-search"></i>&nbsp; 돌보미에 대한 후기
+																</div>	    	                                    	
 			                                    	<%
 			                                    			}
 			                                    		}

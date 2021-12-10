@@ -34,6 +34,7 @@
 		<input type="text" name="ricontent"  id="<%=inum %>comment">
 		
 		<div style="text-align:right;">
+
 			<input type="hidden" name="inum" class="inum" id="inum" value="<%=inum %>">
 			<input type="hidden" name="riname" class="riname" id="riname" value="<%=rinum%>">
 			<div style="position:relative;">

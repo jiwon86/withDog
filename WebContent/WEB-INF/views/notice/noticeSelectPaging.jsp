@@ -15,9 +15,20 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
+	<head>
+	<style>
+			.headerdog  {
+				position : absolute;
+				width : 17%;
+				height : 200px;
+				left : 63%
+			}
+	</style>
 	<jsp:include page="/head.wd" />
-	<!-- /헤드 -->
-	
+	</head>
+
+<body class="nav-fixed">
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 
@@ -27,21 +38,19 @@
 			$("#noticeList").attr({ "method":"GET"
 		        					,"action":"noticeSelectAll.wd"}).submit();
 		});
-</script>
+</script>	
 
-    <body class="nav-fixed">
-
-		<!-- 헤더 -->
+	<!-- 헤더 -->
 		<jsp:include page="/header.wd" />
 		<!-- /헤더 -->
-
-		
+	
         <div id="layoutSidenav">
 			<!-- 사이드바 -->
 			<jsp:include page="/sidebar.wd" />
 			<!-- /사이드바 -->
 
 			<!-- 콘텐츠 -->
+			          <div id="layoutSidenav_content">
 <!--  <form name="boardList" id="boardList"> -->
 <% request.setCharacterEncoding("UTF-8");%> 
 <%
@@ -59,24 +68,24 @@
 	List<NoticeVO> list = (List)obj;
 	
 %>			
-<div id="layoutSidenav_content">
+<!-- Main page content-->
 <main style="width:960px; margin:0 auto;">
-    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-        <div class="container-xl px-4">
-            <div class="page-header-content pt-4">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-auto mt-4">
-                        <h1 class="page-header-title">
-                            <div class="page-header-icon"></div>
-                            	공지사항
-                        </h1>
-                        <div class="page-header-subtitle">신규회원 및 기존회원 가족분들은 서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Main page content-->
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_dog_8.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										공지 사항
+									</h1>
+						<div class="page-header-subtitle">서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다! </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
     <div class="container-xl px-4 mt-n10">
         <div class="card mb-4">
             <div class="card-header">공지사항 전체목록</div>
@@ -84,24 +93,10 @@
                 <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                 <div class="dataTable-top">
                                   
-                 	<!-- 
-                 	<tr>
-						<td colspan="10" align="left">
-						<button class="btn btn-primary me-2 my-1 float-end" type="button" id="searchBtn" >검색</button>
-						<input class="dataTable-search float-end" style="width:300px; height:48px; border-radius: 15px;" type="text" id="keyword" name="keyword" placeholder="검색어 입력"  align="right" >   
-						<select class="dataTable-search float-end" id="keyfilter" name="keyfilter" style="height:48px; border-radius: 15px;">
-							<option value="key1">제목</option>
-							<option value="key2">작성자</option>
-						</select>
-						</td>
-					</tr> 
-                </div>
-                 -->
-                 <!--  <form action="/notice/search" method="GET"> -->
                  <form id="keyfilter" name="keyfilter">
                  		<!-- <input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br> -->
                  		<div style="float:right">
-                 		<button class="btn btn-primary" style="float:right" id="SBtn">검색하기</button>
+                 		<button class="btn btn-withcolor" style="float:right" id="SBtn">검색하기</button>
 				       <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;font-size:15px;width:280px;text-align:center;margin-right:10px;">
 				    </div>
 				    <br>
@@ -152,7 +147,7 @@
                                <td><%= nvo.getNsubject() %></td>
                                <td><%= nvo.getNwriter() %></td>
                                <td>
-                               	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-primary text-white rounded-pill">상세조회</div></a>
+                               	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-withcolor text-white rounded-pill">상세조회</div></a>
                                </td>
                                <sec:authorize access="hasRole('ROLE_ADMIN')">
                                <td>
@@ -168,26 +163,6 @@
 					  </tbody>				  
                    </table>
                    </div>
-                   <!--  
-                    <div class="dataTable-bottom">
-	                    <div class="dataTable-info">
-	                      <nav class="dataTable-pagination">
-	                       <ul class="dataTable-pagination-list">
-	                        <li class="pager"><a href="#" data-page="2">‹‹</a></li>
-	                        <li class="pager"><a href="#" data-page="2">‹</a></li>
-	                        <li class="active"><a href="#" data-page="1">1</a></li>
-	                        <li class=""><a href="#" data-page="2">2</a></li>
-	                        <li class=""><a href="#" data-page="3">3</a></li>
-	                        <li class=""><a href="#" data-page="4">4</a></li>
-	                        <li class=""><a href="#" data-page="5">5</a></li>
-	                        <li class="pager"><a href="#" data-page="2">›</a></li>
-	                        <li class="pager"><a href="#" data-page="2">››</a></li>
-	                       </ul>
-	                      </nav>
-	                    </div>
-                    </div>
-                    -->
-                    
                     <jsp:include page="noticePaging.jsp" flush="true">
 						<jsp:param name="url" value="noticeSelectPaging.wd" />
 						<jsp:param name="str" value="" />
@@ -199,7 +174,7 @@
 					
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
 	                    <a href="noticeInsertForm.wd">
-	                    	<button class="btn btn-primary me-2 my-1 float-end" type="button">작성하기</button>
+	                    	<button class="btn btn-withcolor me-2 my-1 float-end" type="button">작성하기</button>
 	                    </a>
                     </sec:authorize>
                    </div>
@@ -207,7 +182,7 @@
            </div>
            <div class="card card-icon mb-4">
                <div class="row g-0">
-                   <div class="col-auto card-icon-aside bg-primary">
+                   <div class="col-auto card-icon-aside bg-withcolor">
                   
                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                    <line x1="12" y1="9" x2="12" y2="13"></line>
@@ -223,13 +198,16 @@
                </div>
            </div>
        </div>
-</main>
+       </div>
+ 
+</main> 
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->
-                
+               </div>
             </div>
 			<!-- /콘텐츠 -->
-        </div>
+		
+     
     </body>
 </html>

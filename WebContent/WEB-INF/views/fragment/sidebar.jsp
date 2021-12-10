@@ -8,12 +8,12 @@
             	<div class="sidenav-menu-heading nanum">메인기능</div>
                 <a class="nav-link" href="withmap.wd">
                     <div class="nav-link-icon"><i data-feather="map-pin"></i></div>
-                    <span class="hahmlet">돌봄찾기</span>
+                    <span class="hahmlet">돌봄 찾기</span>
                 </a>
                 
                 <a class="nav-link" href="/offerSelectAllPaging.wd">
                     <div class="nav-link-icon"><i class="fas fa-dog"></i></div>
-                    <span class="hahmlet">돌봄현황</span>
+                    <span class="hahmlet">돌봄 현황</span>
                 </a>                              
                 
                 <!-- 권한 테스트 -->
@@ -38,11 +38,12 @@
                 </a>
                 <div class="collapse" id="collapseCustomerCenter" data-bs-parent="#accordionSidenavCustomerCenter">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
-                        <a class="nav-link hahmlet" href="reviewInsertForm.wd">돌봄후기</a>
-                        <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
-                        <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
-                        <a class="nav-link hahmlet" href="noticeSelectPaging.wd">공지사항</a> 
-                      <a class="nav-link hahmlet" href="qnaSelectAll.wd">Q&A</a>
+                       
+                        <a class="nav-link hahmlet" href="noticeSelectPaging.wd">공지사항</a>
+                        <a class="nav-link hahmlet" href="qnaSelectAllPaging.wd">Q&A</a> 
+                        <a class="nav-link hahmlet" href="reviewSelectAll.wd">이용 후기</a>
+                      
+                     
                     </nav>
                 </div>       
                 

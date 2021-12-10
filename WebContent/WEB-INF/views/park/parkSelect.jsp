@@ -71,7 +71,7 @@
 					<div class="card card-header-actions mx-auto mb-3 mt-3" style="clear:both;">
 					    <div class="card-header">
 					    	<div class="avatar avatar-xl" style="margin-left:305px;">
-								<img class="avatar-img img-fluid me-2" src="image/park/<%= svo.getIphoto() %>">
+								<img class="avatar-img img-fluid me-2" src="img/park/<%= svo.getIphoto() %>">
 								<!--<img class="avatar-img img-fluid me-2" >-->
 								<span class="tt mr-4"><%= svo.getIid() %> </span>
 								<!-- 수정/삭제 -->
@@ -79,27 +79,7 @@
 								
 								<div class="float-end" style="margin-left:570px;">
 									<div class="dropdown">
-								    	<%-- <button class="btn btn-transparent-dark" id="dropdownMenuButton" class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical text-primary">
-												<circle cx="12" cy="12" r="1"></circle>
-												<circle cx="12" cy="5" r="1"></circle>
-												<circle cx="12" cy="19" r="1"></circle>
-											</svg>
-								    	</button> --%>
 									    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									        <!-- <a class="dropdown-item" href="parkUpdate.wd">수정</a> -->
-									    
-									        <!-- 버튼으로 수정만들고 -> form으로 이동해주기 -->
-										      <!--  <input type="submit" class="dropdown-item" value="사진업로드바꾸기" id='file'>
-										       
-										       
-										        <div class="mb-3">
-			                                		<input class="btn btn-warning mb-1" id="puppy" type="button" value="댕댕이 사진선택"><br>
-			                                    	<img id="iupload1" class="img-account-profile mb-3 mt-3" 
-			                                      	 src="/img/park/default.jpg" alt="사진을 꼭 선택해 주세요" 
-			                                      	 style="max-width:300px; max-height:300px;" />
-			                                		<input type="file" id="iupload" name="iupload" style="display:none;" />
-				                                </div> -->
 									    </div>
 									</div>
 								</div>
@@ -113,13 +93,9 @@
 					    	
 					    	<div class="float-end" style="margin-right:620px;">
 					    		
-					            <button class="btn btn-pink btn-icon mr-2">
+					            <button class="btn btn-pink btn-icon mr-2 mb-2"  style="margin-right:50px;">
 					                <i data-feather="heart"></i>
 					            </button>
-					            <button class="btn btn-teal btn-icon mr-2">
-					                <i data-feather="bookmark"></i>
-					            </button>
-					            
 					        </div>
 					        <!-- 내용들어가는 곳 -->
 					         <!-- 내용-->
@@ -130,12 +106,6 @@
                                     <input class="form-control" id="icontent" name="icontent" type="text" value="<%= svo.getIcontent() %>" placeholder="<%= svo.getIcontent() %>">
                                 </div>
                               </form>
-                                <!-- 원래있던거 -->
-					       <%--  <div style="margin-top:60px;">
-					        	<div class="form-control" id="inputEmailAddress">
-					        		<%= svo.getIcontent() %>
-					        	</div>	  	
-					        </div> --%>
 					        <!-- 오른쪽으로 옮기기 -->
 					     	<span style="margin-left:620px;"><%= svo.getIinsert()%> </span>
 					    </div>

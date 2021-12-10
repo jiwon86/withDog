@@ -1,5 +1,6 @@
 package a.b.c.com.park.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import a.b.c.com.common.ChabunUtil;
 import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.FileUploadUtil;
 import a.b.c.com.common.service.ChabunService;
+import a.b.c.com.member.service.MemberService;
+import a.b.c.com.member.vo.MemberVO;
 import a.b.c.com.park.service.ParkService;
 import a.b.c.com.park.service.ParkServiceImpl;
 import a.b.c.com.park.vo.ParkVO;
@@ -27,36 +30,46 @@ public class ParkController {
 	
 	private ParkService parkService;
 	private ChabunService ChabunService;
+	private MemberService memberService;
 	
 	//생성자 오토와이어드
 	@Autowired(required=false)
 	public ParkController(ParkService parkService
-						 ,ChabunService ChabunService) {
+						 ,ChabunService ChabunService, MemberService memberService) {
 		this.parkService = parkService;
 		this.ChabunService = ChabunService;
+		this.memberService = memberService;
 	}
 	
-	@GetMapping("/parkForm")
-	//@RequestMapping(value="parkForm", method=RequestMethod.POST)
-	public String parkForm(Model model) {
-		
-		logger.info("ParkController parkForm 함수 진입 >>> : ");
-		
-		logger.info("ParkController parkForm svo.getIid");
-		logger.info("ParkController parkForm svo.getIphoto");
-		logger.info("ParkController parkForm svo.getIupload");
-		logger.info("ParkController parkForm svo.getIcontent");
-		
-		List<ParkVO> listAll = parkService.parkSelectAll();
-		logger.info("ParkController parkSelectAll listAll.size() >>> : "+ listAll.size());
-		
-		model.addAttribute("listAll", listAll);
-		
-		return "park/parkForm";
-		
-	}
+	   @GetMapping("/parkForm")
+	   public String parkForm(Model model, Principal principal) {
+	      
+		  String mid = principal.getName();
+		  if (mid != null) {
+		  
+		      MemberVO memvo = new MemberVO();
+		      memvo.setMid(principal.getName());
+		      List<MemberVO> member = memberService.memberSelect(memvo);
+		      memvo = member.get(0);
+		      
+		      logger.info("ParkController parkForm 함수 진입 >>> : ");
+		      
+		      logger.info("ParkController parkForm svo.getIid");
+		      logger.info("ParkController parkForm svo.getIphoto");
+		      logger.info("ParkController parkForm svo.getIupload");
+		      logger.info("ParkController parkForm svo.getIcontent");
+		      
+		      List<ParkVO> listAll = parkService.parkSelectAll();
+		      logger.info("ParkController parkSelectAll listAll.size() >>> : "+ listAll.size());
+		      
+		      model.addAttribute("listAll", listAll);
+		      model.addAttribute("member", memvo);
+		  }
+	      return "park/parkForm";
+	      
+	   }
 
-	@GetMapping("parkInsert") //jsp에서 매핑
+	@GetMapping("parkInsert") 
 	public String parkInsertForm() {
 		logger.info("ParkController parkInsertForm() 함수 진입 >>> :");
 		

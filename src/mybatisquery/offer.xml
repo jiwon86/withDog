@@ -23,7 +23,7 @@
 				 , TO_CHAR(T.UPDATEDATE, 'YYYY-MM-DD')         UPDATEDATE
 				 , M.MID       MID
 				 , M.MNAME     MNAME
-				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.TNO = T.TNO) conditionCount
+				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.DELETEYN = 'Y' AND C.TNO = T.TNO) conditionCount
 		 		 <!-- ? : 페이지 사이즈 : pageSize -->
 			     , CEIL(ROW_NUMBER() OVER(ORDER BY T.TNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
 			     , COUNT(T.TNO) OVER() AS totalCount

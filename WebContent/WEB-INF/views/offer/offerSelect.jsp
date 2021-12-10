@@ -301,9 +301,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>돌봄신청 상세정보</span>
+                                            <span>반려동물 대리돌봄 서비스 상세정보</span>
                                         </h1>
-                                        <div class="page-header-subtitle">The default page header layout with main content that overlaps the background of the page header</div>
+                                        <div class="page-header-subtitle"></div>
                                     </div>
                                 </div>
                             </div>
@@ -324,7 +324,7 @@
 	                                		<!-- 준비중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 대리돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;
@@ -340,7 +340,7 @@
 	                                        <!-- 진행중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 대리돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;
@@ -356,7 +356,7 @@
 	                                        <!-- 종료 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 대리돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;
@@ -414,7 +414,7 @@
                                 <div>
 	                                <h4 class="ms-1">
 	                                	<i class="fas fa-paw"></i> &nbsp; 
-	                                	<span>맡기는 동물</span>
+	                                	<span>맡기는 반려동물</span>
 	                                </h4>
 			                        <hr>
 			                        <div class="card-body bg-light">
@@ -498,7 +498,7 @@
                         </div>
                         <!-- /신청정보 카드 -->
 
-						<h4 class="mb-0 mt-5">조건제시 정보</h4>
+						<h4 class="mb-0 mt-5">반려동물 대리돌보미 신청정보</h4>
                         <hr class="mt-2 mb-4" />
                         <!-- 조건제시 정보 -->
                         <div class="row">
@@ -534,7 +534,7 @@
 			                                        
 			                                        <h5 class="card-title mb-2 hahmlet" style="font-weight:bold; font-size:20px; color:#7f7f7f;">
 			                                            <span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-			                                            	<%=cvo.getMid()%> 조건제시
+			                                            	<%=cvo.getMid()%> 반려동물 대리돌보미 신청
 			                                            </span> &nbsp;
 			                                            <span style="color:gray; font-size:14px;">(<%= cvo.getTno() %>)</span>
 			                                        </h5>
@@ -619,7 +619,7 @@
                         			}
                     			} else {
                     		%>
-                    				<h2>현재 조건제시가 없습니다.</h2>
+                    				<h4 style="color:gray;">현재 반려동물 대리돌보미 신청정보가 없습니다.</h4>
                     		<%
                     			}
                             %>

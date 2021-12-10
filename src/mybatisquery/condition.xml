@@ -115,7 +115,7 @@
 			FROM   TRADEMAP T, MEMBER M
 			WHERE  T.DELETEYN = 'Y'
 		    AND    M.DELETEYN = 'Y'
-			AND  T.MNO = M.MNO 
+			AND    T.MNO = M.MNO 
 			AND    T.TNO = #{tno, jdbcType=VARCHAR}	
 	</select>
 
@@ -191,5 +191,12 @@
 			, SYSDATE
 		)		
 	</insert>
+	
+	<delete id="conditionDelete" parameterType="ConditionVO">
+		UPDATE CONDITION SET 
+			DELETEYN = 'N',
+			UPDATEDATE = SYSDATE
+		WHERE CNO = #{cno, jdbcType=VARCHAR}
+	</delete>
 
 </mapper>

@@ -73,5 +73,12 @@ public class ConditionDAOImpl implements ConditionDAO {
 		
 		return (Integer)sqlSession.insert("conditionInsert", conditionVO);
 	}
+
+	@Override
+	public int conditionDelete(ConditionVO conditionVO) {
+		logger.info("ConditionDAOImpl.conditionDelete() 함수 진입");
+		
+		return (Integer)sqlSession.delete("conditionDelete", conditionVO);
+	}
 	
 }

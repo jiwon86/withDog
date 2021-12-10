@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
 	c:import : 외부 jsp 파일 접근 가능
@@ -61,6 +62,7 @@
                         <div class="card invoice">
                             <div class="card-header p-4 p-md-5 border-bottom-0 bg-gradient-primary-to-secondary text-white-50">
                                 <div class="row justify-content-between align-items-center">
+                                	<h1 class="mt-3" style="font-weight:bold; color:white;">대리돌봄 매칭서비스 결제하기</h1>
                                 </div>
                             </div>
                             <div class="card-body p-4 p-md-5">
@@ -70,7 +72,7 @@
 		                            <div class="col-lg-6 mb-4">
 		                                <div class="card card-collapsable">
 										    <a class="card-header" href="#collapseCardExample1" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-										    	<span style="font-size:18px; color:black;"><%= ovo.getMname() %> (<%= ovo.getMid() %>) 님의 신청 내용</span>
+										    	<span style="font-size:18px; color:black;"><%= ovo.getMname() %> (<%= ovo.getMid() %>) 님의 돌봄 신청 내용</span>
 										        <div class="card-collapsable-arrow">
 										            <i class="fas fa-chevron-down"></i>
 										        </div>
@@ -79,7 +81,7 @@
 										        <div class="card-body">
 										            <span><i class="fas fa-map-marked-alt"></i> &nbsp; <%= ovo.getTaddress() %></span> <br>
 										            <span><i class="far fa-clock"></i> &nbsp; <%= ovo.getStartdate() %> ~ <%= ovo.getEnddate() %></span> <br>
-										            <span><i class="fas fa-coins"></i> &nbsp; <del><%= ovo.getTprice() %></del> 원</span> <br>
+										            <span><i class="fas fa-coins"></i> &nbsp; <del><fmt:formatNumber value="<%=ovo.getTprice()%>" pattern="#,###,###"/></del> 원</span> <br>
 													<span><i class="far fa-edit"></i> &nbsp; <%= ovo.getTcontent() %></span> <br><br>
 													 
 													 <div style="background:#ededed; padding:10px;">
@@ -157,7 +159,7 @@
 										    <div class="collapse show" id="collapseCardExample2">
 										        <div class="card-body">
 										            <span><i class="fas fa-map-marked-alt"></i> &nbsp; <%= cvo.getCaddress() %></span> <br>
-										            <span><i class="fas fa-coins"></i> &nbsp; <%= cvo.getCprice() %> 원</span> <br>
+										            <span><i class="fas fa-coins"></i> &nbsp; <fmt:formatNumber value="<%= cvo.getCprice() %>" pattern="#,###,###"/> 원</span> <br>
 										            <span><i class="far fa-edit"></i> &nbsp; <%= cvo.getCcontent() %></span>
 										        </div>
 										    </div>
@@ -188,12 +190,12 @@
                                                 </td>
                                                 <td class="text-end fw-bold">1</td>
                                                 <td class="text-end fw-bold"><%=petListSize%> 마리</td>
-                                                <td class="text-end fw-bold"><%= cvo.getCprice() %> 원</td>
+                                                <td class="text-end fw-bold"><fmt:formatNumber value="<%= cvo.getCprice() %>" pattern="#,###,###"/> 원</td>
                                             </tr>
 
                                             <tr>
                                                 <td class="text-end pb-0" colspan="3"><div class="text-uppercase small fw-700 text-muted">결제 금액:</div></td>
-                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700 text-green"><%= cvo.getCprice() %> 원</div></td>
+                                                <td class="text-end pb-0"><div class="h5 mb-0 fw-700 text-green"><fmt:formatNumber value="<%= cvo.getCprice() %>" pattern="#,###,###"/> 원</div></td>
                                             </tr>
                                         </tbody>
                                     </table>

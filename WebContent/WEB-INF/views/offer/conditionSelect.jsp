@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="a.b.c.com.agency.vo.ConditionVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -136,7 +138,10 @@
 						let acceptBtn = `
 		                	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
 								<i class="far fa-check-circle"></i> &nbsp; 수락
-							</div>	                      				
+							</div>	          
+                      		<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
+                      		<i class="fas fa-handshake-slash"></i> &nbsp; 거절
+							</div>									
 						`;
 						
 						$(e).parent().html(acceptBtn);
@@ -145,14 +150,55 @@
 						
 			}
 			
+			// 거절버튼 누를 때 이벤트 함수
+			function refuseBtnClick(e) {
+				let paycount = $(e).parent().parent().find(".paycount").val();
+				console.log("paycount >>> : " + paycount);
+				
+				var mAccount = $(e).parent().parent().find(".mAccount").text();
+				
+				Swal.fire({
+					title: "정말로 " + mAccount + "님의 조건제시를 거절하시겠습니까?",
+					text: "다시 한번 조건제시을 확인해 주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '거절',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
+
+						// ajax로 insert 혹은 update문이 실행되야 한다.
+						let cnoVal = $(e).parent().parent().find(".cno").val();
+						let tnoVal = $(e).parent().parent().find(".tno").val();
+						
+						let typeVal = "GET";
+						let urlVal = "/refuseCheckAjax.wd";
+						
+						console.log("cnoVal >>> : " + cnoVal);
+						console.log("tnoVal >>> : " + tnoVal);
+						
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+								"tno": tnoVal
+							},
+							success: whenSuccess3,
+							error: whenError3
+						});
+				
+					}
+				})
+				
+			}				
+			
+			// 수락버튼
 			function whenSuccess1(resData) {
 				console.log("성공");
 				$("#liveToast1").toast("show");
-			}
-			
-			function whenSuccess2(resData) {
-				console.log("성공");
-				$("#liveToast3").toast("show");
 			}
 			
 			function whenError1() {
@@ -160,11 +206,31 @@
 				$("#liveToast2").toast("show");
 			}
 			
+			// 수락해제 버튼
+			function whenSuccess2(resData) {
+				console.log("성공");
+				$("#liveToast3").toast("show");
+			}
+			
 			function whenError2() {
 				console.log("실패");
 				$("#liveToast4").toast("show");
 			}
+
+			// 거절 버튼
+			function whenSuccess3(resData) {
+				if(resData == 'success') {
+					alert("거절을 성공하셨습니다.");
+					window.history.back();
+				} else {
+					alert("거절을 실패하셨습니다.");
+					return;
+				}
+			}
 			
+			function whenError3() {
+				console.log("실패");
+			}
 		</script>
 	</head>
 	<!-- /헤드 -->
@@ -202,9 +268,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>조건제시 상세정보</span>
+                                            <span>반려동물 대리돌보미 상세정보</span>
                                         </h1>
-                                        <div class="page-header-subtitle">The default page header layout with main content that overlaps the background of the page header</div>
+                                        <div class="page-header-subtitle"></div>
                                     </div>
                                 </div>
                             </div>
@@ -224,6 +290,23 @@
             			int anoCount = agencyListAnoCount.get(0);
             			String matchyn = agencyListMatchyn.get(0);
             			int payCount = payListCount.get(0);
+            			
+            			
+    					// 오늘 날짜 구하기
+    					String startdate = (String)request.getAttribute("startdate");
+    					String enddate = (String)request.getAttribute("enddate");
+    					
+            			System.out.println("startdate >>> : " + startdate);
+            			System.out.println("enddate >>> : " + enddate);
+
+            			Date today = new Date();
+    					SimpleDateFormat todayFormat = new SimpleDateFormat("yyyy-MM-dd H:m");
+    					
+    					String todayString = todayFormat.format(today);
+    					Date todayDate = todayFormat.parse(todayString);
+    					
+    					Date startDate = todayFormat.parse(startdate);
+    					Date endDate = todayFormat.parse(enddate);
 					%>
 					
                         <div class="card mb-4 mt-4">
@@ -233,7 +316,7 @@
                                 	<div class="my-3">
                                 		<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
                                 			<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-                                				<%=cvo.getMid()%> 조건제시
+                                				<%=cvo.getMid()%> 반려동물 대리돌보미 신청
                                 			</span>
                                 		</span> &nbsp;
                                 		<span style="color:gray; font-size:14px;">(<%=cvo.getCno()%>)</span> &nbsp;
@@ -300,29 +383,41 @@
 		                                    		</div>	
                                     <%		
                                    				} else {
+                                   					if(todayDate.before(startDate)) {
                                    	%>
-	                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-		                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-		                                    		</div>
-		                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
-		                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
-		                                    		</div>
+		                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+			                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+			                                    		</div>
+			                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
+			                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
+			                                    		</div>
 		                            <%
+                                   					}
                                    				}
                                     		} else {
+                                    			if(todayDate.before(startDate)) {
                                     %>
-	                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-													<i class="far fa-check-circle"></i> &nbsp; 수락
-												</div>	 
+		                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+														<i class="far fa-check-circle"></i> &nbsp; 수락
+													</div>	 
+													<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
+														<i class="fas fa-handshake-slash"></i> &nbsp; 거절
+													</div>	   
                                     <%	
+                                    			}
                                     		}
                                    			
                                    		} else {
+                                   			if(todayDate.before(startDate)) {
                                    	%>
-	                                    	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-												<i class="far fa-check-circle"></i> &nbsp; 수락
-											</div>	                                    	
+		                                    	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+													<i class="far fa-check-circle"></i> &nbsp; 수락
+												</div>	       
+												<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
+													<i class="fas fa-handshake-slash"></i> &nbsp; 거절
+												</div>	                                	
                                    	<%
+                                   			}
                                    		}
                                    	%>
 		                       	</div>

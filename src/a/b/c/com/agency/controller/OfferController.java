@@ -286,12 +286,11 @@ public class OfferController {
 	}
 	
 	@GetMapping("/conditionSelect")
-	public String conditionSelect(ConditionVO cvo, Model model) {
+	public String conditionSelect(ConditionVO cvo, String startdate, String enddate, Model model) {
 		ConditionVO conditionVO = new ConditionVO();
 		
 		String cno = cvo.getCno();
 		conditionVO.setCno(cno);
-
 		
 		List<ConditionVO> conditionList = conditionService.conditionSelect(conditionVO);
 		List<Integer> agencyListAnoCount = new ArrayList<>();
@@ -329,6 +328,8 @@ public class OfferController {
 		model.addAttribute("agencyListAnoCount", agencyListAnoCount);
 		model.addAttribute("conditionList", conditionList);
 		model.addAttribute("payListCount", payListCount);
+		model.addAttribute("startdate", startdate);
+		model.addAttribute("enddate", enddate);
 		
 		return "offer/conditionSelect";
 	}

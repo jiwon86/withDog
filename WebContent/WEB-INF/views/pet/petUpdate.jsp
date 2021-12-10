@@ -20,8 +20,10 @@
 		<script>
 		$(document).ready(function(){	
 			$("#SelectAll").click(function(){
-				alert("mno >>>" + petinsert.mno.value);
-				$("#petinsert").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
+
+			alert("mno >>>" + petinsert.mno.value);
+			$("#petinsert").attr({ "method":"POST","action":"petSelectAll.wd"}).submit();
+
 			});
 		});
 		</script>

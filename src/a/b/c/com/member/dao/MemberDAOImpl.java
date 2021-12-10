@@ -72,10 +72,17 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int updatePoint(MemberVO mvo) {
+	public int updateAddPoint(MemberVO mvo) {
 		logger.info("MemberDAOImpl.updatePoint() 함수 실행");
 		
-		return (Integer)sqlSession.update("updatePoint", mvo);
+		return (Integer)sqlSession.update("updateAddPoint", mvo);
+	}
+
+	@Override
+	public int updateMinusPoint(MemberVO mvo) {
+		logger.info("MemberDAOImpl.updateMinusPoint() 함수 실행");
+		
+		return (Integer)sqlSession.update("updateMinusPoint", mvo);
 	}
 
 }

@@ -92,11 +92,10 @@
 			TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
 			TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
 			A.MAUTH          MAUTH
-		FROM  MEMBER M 
-			  LEFT OUTER JOIN 
-			  MEMBER_AUTH A 
-			  ON M.MNO = A.MNO
-		WHERE M.MID = #{mid}
+	    FROM  MEMBER M, MEMBER_AUTH A
+	    WHERE M.DELETEYN = 'Y' 
+	    AND M.MNO = A.MNO(+)
+	    AND   M.MID = #{mid}
 	</select>
 	
 	<!-- 
@@ -123,11 +122,10 @@
 			TO_CHAR(M.INSERTDATE, 'YYYY-MM-DD') INSERTDATE,
 			TO_CHAR(M.UPDATEDATE, 'YYYY-MM-DD') UPDATEDATE,
 			A.MAUTH          MAUTH
-		FROM  MEMBER M 
-			  LEFT OUTER JOIN 
-			  MEMBER_AUTH A 
-			  ON M.MNO = A.MNO
-		WHERE M.MID = #{mid}
+		FROM  MEMBER M, MEMBER_AUTH A
+		WHERE M.DELETEYN = 'Y' 
+		AND M.MNO = A.MNO(+)
+		AND M.MID = #{mid}
 	</select>
 	<!-- 
 		  FROM  MEMBER M, MEMBER_AUTH A
@@ -159,9 +157,16 @@
 		AND     A.MID = #{mid, jdbcType=VARCHAR}
 	</select>
 	
-	<update id="updatePoint" parameterType="MemberVO">
+	<update id="updateAddPoint" parameterType="MemberVO">
 		UPDATE MEMBER SET MPOINT = (TO_NUMBER(MPOINT) + TO_NUMBER(#{mpoint, jdbcType=VARCHAR})) 
-		WHERE  MNO = #{mno, jdbcType=VARCHAR}
+		WHERE  DELETEYN = 'Y'
+		AND    MNO = #{mno, jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateMinusPoint" parameterType="MemberVO">
+		UPDATE MEMBER SET MPOINT = (TO_NUMBER(MPOINT) - TO_NUMBER(#{mpoint, jdbcType=VARCHAR})) 
+		WHERE  DELETEYN = 'Y'
+		AND    MNO = #{mno, jdbcType=VARCHAR}
 	</update>
 
 </mapper>

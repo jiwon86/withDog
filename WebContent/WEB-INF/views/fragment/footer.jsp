@@ -3,6 +3,7 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+	/*
 	var info = "<h2>웹 브라우저 정보 확인</h2><br>"; 
 	info += "<p>브라우저 이름 : " + navigator.appName + "</p>"; 
 	info += "<p>브라우저 코드명 : " + navigator.appCodeName + "</p>"; 
@@ -57,14 +58,14 @@
 			return 'Internet Explorer '+rv
 		} 
 	}
-	
+	*/
 </script>
 <footer class="footer-admin mt-auto footer-light">
     <div class="container-xl px-4">
         <div class="row">
             <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
-            <div class="col-md-6 text-md-end small" id="browser">
-                           브라우저 체크
+            <div class="col-md-6 text-md-end small" id="browser2">
+            WITH DOG
             </div>
         </div>
     </div>

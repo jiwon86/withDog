@@ -85,13 +85,54 @@
 					
 					var link = `/img/pet/${"${pphoto}"}`;
 					
+					// 반려동물 정보 바꾸기
+					var pneutraltext = '';
+
+					if(pneutral == 'Y') {
+						pneutraltext = '중성화 O';
+					} else {
+						pneutraltext = '중성화 X';
+					}
+
+					var pgendertext = '';
+
+					if(pgender == '01') {
+						pgendertext = '수컷';
+					} else {
+						pgendertext = '암컷';
+					}
+
+					var ptypetext = '';
+
+					if(ptype == '01') {
+						ptypetext = '쉽독';
+					} else if(ptype == '02') {
+						ptypetext = '캐틀 독';
+					} else if(ptype == '03') {
+						ptypetext = '테리어';
+					} else if(ptype == '04') {
+						ptypetext = '닥스훈트';
+					} else if(ptype == '05') {
+						ptypetext = '스피츠';
+					} else if(ptype == '06') {
+						ptypetext = '센트하운드';
+					} else if(ptype == '07') {
+						ptypetext = '포인팅독';
+					} else if(ptype == '08') {
+						ptypetext = '리트리버';
+					} else if(ptype == '09') {
+						ptypetext = '토이독';
+					} else if(ptype == '10') {
+						ptypetext = '사이트 하운드';					
+					}
+					
 					let $petTag = `
                         <div class="col-lg-4 mb-3">
 	                        <div class="d-flex align-items-center">
 	                            <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src=${"${link}"}></div>
 	                            <div class="ms-3">
-	                                <div class="fs-4 text-dark fw-500">${"${pname}"}&nbsp;<span style="font-size:12px;">(${"${ptype}"})</span></div>
-	                                <div class="small text-muted">중형견(${"${pweight}"})/${"${pages}"}살/중성화 x(${"${pneutral}"})</div>
+	                                <div class="fs-4 text-dark fw-500">${"${pname}"}&nbsp;<span style="font-size:12px;">(${"${ptypetext}"})</span></div>
+	                                <div class="small text-muted">${"${pweight}"}KG/${"${pneutraltext}"}살/${"${pneutraltext}"}/${"${pgendertext}"}</div>
 	                            </div>
 	                        </div>
 	                    </div>					
@@ -107,7 +148,7 @@
 					$stateTag = `
 						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-								${"${result.mid}"} 돌봄신청
+								${"${result.mid}"} 반려동물 대리돌봄 서비스 신청
 							</span> &nbsp;
 							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
 						</span> &nbsp;
@@ -123,7 +164,7 @@
 					$stateTag = `
 						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-								${"${result.mid}"} 돌봄신청
+								${"${result.mid}"} 반려동물 대리돌봄 서비스 신청
 							</span> &nbsp;
 							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
 						</span> &nbsp;
@@ -139,7 +180,7 @@
 					$stateTag = `
 						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-								${"${result.mid}"} 돌봄신청
+								${"${result.mid}"} 반려동물 대리돌봄 서비스 신청
 							</span> &nbsp;
 							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
 						</span> &nbsp;					
@@ -218,6 +259,53 @@
 				
 				location.href=`/chatPaymentResult2.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
 			}
+
+			function deleteConditionBtn(cno) {
+				
+				Swal.fire({
+					title: "대리돌보미 신청을 삭제하시겠습니까?",
+					text: "대리돌보미 신청을 다시 확인해주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '삭제',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
+						
+						let urlVal = "/conditionDelete.wd";
+						let typeVal = "POST";
+						let cnoVal = cno;
+	
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+							},
+							success: whenSuccess1,
+							error: whenError1
+						});
+				
+					}
+				})
+			}
+			
+			// 거절버튼
+			function whenSuccess1(resData) {
+				if(resData == 'success') {
+					alert("대리돌봄 신청을 삭제하였습니다.");
+					location.href="/myConditionSelectAllPaging.wd";
+				} else {
+					alert("대리돌봄 신청 삭제를 실패하였습니다.");
+					return;
+				}
+			}
+			
+			function whenError1() {
+				console.log("실패");
+			}			
 			
 		</script>		
 	</head>
@@ -256,9 +344,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>조건제시 상세정보</span>
+                                            <span>반려동물 대리돌보미 신청 상세정보</span>
                                         </h1>
-                                        <div class="page-header-subtitle">The default page header layout with main content that overlaps the background of the page header</div>
+                                        <div class="page-header-subtitle"></div>
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +386,7 @@
                                 	<div class="my-3">
                                 		<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
                                 			<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-                                				<%=cvo.getMid()%> 조건제시
+                                				<%=cvo.getMid()%> 반려동물 대리돌보미 신청
                                 			</span>
                                 		</span> &nbsp;
                                 		<span style="color:gray; font-size:14px;">(<%=cvo.getCno()%>)</span> &nbsp;
@@ -378,13 +466,17 @@
 											  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 											  &nbsp;&nbsp;조건수락 대기중..
 											</button>
+											<div class="btn btn-danger" onclick="deleteConditionBtn('<%=cvo.getCno()%>')">
+											  <i class="fas fa-trash-alt"></i>
+											  &nbsp;&nbsp;삭제
+											</div>											
 									<%
                                   		}
 									%>
 								</span>
 								
                    				<div class="btn btn-info hahmlet offerInfoBtn" data-bs-toggle="modal" data-bs-target="#offerModel">
-                               		<i class="far fa-file-alt"></i> &nbsp; 신청정보
+                               		<i class="far fa-file-alt"></i> &nbsp; 돌봄신청정보
                         			<input type="hidden" class="mnoVal" value="<%=cvo.getMno()%>"/>
                         			<input type="hidden" class="tnoVal" value="<%=cvo.getTno()%>"/>
                                	</div>

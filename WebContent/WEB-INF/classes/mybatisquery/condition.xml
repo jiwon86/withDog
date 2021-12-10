@@ -21,8 +21,10 @@
 			    , CEIL(ROW_NUMBER() OVER(ORDER BY C.CNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
 				, COUNT(C.CNO) OVER() AS totalCount
 			FROM CONDITION C, MEMBER M
-			WHERE C.MNO = M.MNO
-			AND C.TNO = #{tno, jdbcType=VARCHAR}
+			WHERE C.DELETEYN = 'Y'
+			AND   M.DELETEYN = 'Y'
+			AND   C.MNO = M.MNO
+			AND   C.TNO = #{tno, jdbcType=VARCHAR}
 			ORDER BY C.CNO DESC
 		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
 	</select>
@@ -41,7 +43,9 @@
 			, M.MID
 			, M.MNAME
 		FROM CONDITION C, MEMBER M
-		WHERE C.MNO = M.MNO
+		WHERE C.DELETEYN = 'Y'
+		AND   M.DELETEYN = 'Y'
+		AND C.MNO = M.MNO
 		AND C.CNO = #{cno, jdbcType=VARCHAR}
 	</select>	
 
@@ -62,8 +66,10 @@
 			    , CEIL(ROW_NUMBER() OVER(ORDER BY C.CNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
 				, COUNT(C.CNO) OVER() AS totalCount
 			FROM CONDITION C, MEMBER M
-			WHERE C.MNO = M.MNO
-			AND C.MNO = #{mno, jdbcType=VARCHAR}
+			WHERE C.DELETEYN = 'Y'
+			AND   M.DELETEYN = 'Y'
+			AND   C.MNO = M.MNO
+			AND   C.MNO = #{mno, jdbcType=VARCHAR}
 			ORDER BY C.CNO DESC
 		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
 	</select>
@@ -82,8 +88,10 @@
 			, M.MID MID
 			, M.MNAME MNAME
 		FROM CONDITION C, MEMBER M
-		WHERE C.MNO = M.MNO
-		AND C.MNO = #{mno, jdbcType=VARCHAR}
+		WHERE C.DELETEYN = 'Y'
+		AND   M.DELETEYN = 'Y'
+		AND   C.MNO = M.MNO
+		AND   C.MNO = #{mno, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="offerSelectAjax" parameterType="OfferVO" resultType="OfferVO">
@@ -105,7 +113,9 @@
 				 , M.MID       MID
 				 , M.MNAME     MNAME
 			FROM   TRADEMAP T, MEMBER M
-			WHERE  T.MNO = M.MNO 
+			WHERE  T.DELETEYN = 'Y'
+		    AND    M.DELETEYN = 'Y'
+			AND    T.MNO = M.MNO 
 			AND    T.TNO = #{tno, jdbcType=VARCHAR}	
 	</select>
 
@@ -126,9 +136,11 @@
 			, P.INSERTDATE INSERTDATE
 			, P.UPDATEDATE UPDATEDATE
 		FROM MEMBER M, PET P 
-		WHERE M.MNO = P.MNO 
-		AND M.MNO = #{mno, jdbcType=VARCHAR} 
-		AND P.PNO IN
+		WHERE M.DELETEYN = 'Y'
+		AND   P.DELETEYN = 'Y'
+		AND   M.MNO = P.MNO 
+		AND   M.MNO = #{mno, jdbcType=VARCHAR} 
+		AND   P.PNO IN
 		<foreach collection="pnoArr" index="index" item="pno" open="(" close=")" separator=",">
 			#{pno, jdbcType=VARCHAR}
 		</foreach>
@@ -147,10 +159,12 @@
 		    , C.UPDATEDATE UPDATEDATE
 		    , M.MID MID
 		    , M.MNAME MNAME
-		FROM CONDITION C, MEMBER M
-		WHERE C.MNO = M.MNO
-		AND C.MNO = #{mno, jdbcType=VARCHAR}
-		AND C.TNO = #{tno, jdbcType=VARCHAR}
+		FROM  CONDITION C, MEMBER M
+		WHERE C.DELETEYN = 'Y'
+		AND   M.DELETEYN = 'Y' 
+		AND   C.MNO = M.MNO
+		AND   C.MNO = #{mno, jdbcType=VARCHAR}
+		AND   C.TNO = #{tno, jdbcType=VARCHAR}
 		ORDER BY C.CNO DESC	
 	</select>
 	
@@ -177,5 +191,12 @@
 			, SYSDATE
 		)		
 	</insert>
+	
+	<delete id="conditionDelete" parameterType="ConditionVO">
+		UPDATE CONDITION SET 
+			DELETEYN = 'N',
+			UPDATEDATE = SYSDATE
+		WHERE CNO = #{cno, jdbcType=VARCHAR}
+	</delete>
 
 </mapper>

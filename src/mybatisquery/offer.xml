@@ -23,12 +23,14 @@
 				 , TO_CHAR(T.UPDATEDATE, 'YYYY-MM-DD')         UPDATEDATE
 				 , M.MID       MID
 				 , M.MNAME     MNAME
-				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.TNO = T.TNO) conditionCount
+				 , (SELECT COUNT(*) FROM CONDITION C WHERE C.DELETEYN = 'Y' AND C.TNO = T.TNO) conditionCount
 		 		 <!-- ? : 페이지 사이즈 : pageSize -->
 			     , CEIL(ROW_NUMBER() OVER(ORDER BY T.TNO DESC)/ #{pageSize, jdbcType=VARCHAR}) pageSize
 			     , COUNT(T.TNO) OVER() AS totalCount
 			FROM   TRADEMAP T, MEMBER M
-			WHERE  T.MNO = M.MNO 
+			WHERE  T.DELETEYN = 'Y'
+			AND    M.DELETEYN = 'Y'
+			AND    T.MNO = M.MNO 
 			AND    T.MNO = #{mno, jdbcType=VARCHAR}
 			ORDER BY T.TNO DESC
 		) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
@@ -53,7 +55,9 @@
 			 , M.MID       MID
 			 , M.MNAME     MNAME
 		FROM   TRADEMAP T, MEMBER M
-		WHERE  T.MNO = M.MNO 
+		WHERE  T.DELETEYN = 'Y'
+		AND    M.DELETEYN = 'Y' 
+		AND    T.MNO = M.MNO 
 		AND    T.MNO = #{mno, jdbcType=VARCHAR}	
 		AND    T.TNO = #{tno, jdbcType=VARCHAR}	
 	</select>
@@ -75,9 +79,11 @@
 			, P.INSERTDATE INSERTDATE
 			, P.UPDATEDATE UPDATEDATE
 		FROM MEMBER M, PET P 
-		WHERE M.MNO = P.MNO 
-		AND M.MNO = #{mno, jdbcType=VARCHAR} 
-		AND P.PNO IN
+		WHERE  M.DELETEYN = 'Y'
+		AND    P.DELETEYN = 'Y' 
+		AND    M.MNO = P.MNO 
+		AND    M.MNO = #{mno, jdbcType=VARCHAR} 
+		AND    P.PNO IN
 		<foreach collection="pnoArr" index="index" item="pno" open="(" close=")" separator=",">
 			#{pno, jdbcType=VARCHAR}
 		</foreach>
@@ -85,7 +91,8 @@
 
 	<update id="offerUpdatePropose" parameterType="OfferVO">
 		UPDATE TRADEMAP SET PROPOSE = '1'
-		WHERE TNO = #{tno, jdbcType=VARCHAR}
+		WHERE DELETEYN = 'Y' 
+		AND   TNO = #{tno, jdbcType=VARCHAR}
 	</update>
 
 </mapper>

@@ -274,7 +274,7 @@ public class PetController {
    
    //삭제하기----------------------------------------------------------------
    @PostMapping("petDelete")
-   public String petDelete(PetVO pvo, MemberVO member,Model model, HttpServletRequest req) {
+   public String petDelete(PetVO pvo, MemberVO member,Model model, HttpServletRequest req,Principal principal) {
       logger.info("PetController.petDelete 시작 >>>>>");
       
       //회원정보 받아옴
@@ -303,6 +303,11 @@ public class PetController {
       //회원번호
       pvo.setMno(fu.getParameter("mno"));
       member.setMno(fu.getParameter("mno"));
+      String mid = principal.getName();
+      
+      member.setMid(mid);
+      List<MemberVO> memberList = memberService.memberSelect(member);
+      member = memberList.get(0);
       
       logger.info("mno >>>>>" + fu.getParameter("mno"));
       
@@ -313,9 +318,17 @@ public class PetController {
       logger.info("PetController.petDelete nCnt>>>>" + nCnt);
       
       if(nCnt > 0) {
+    	  model.addAttribute("member", member);
          return "pet/petDelete";
       }
       return "pet/myPetList";
       
    }
+   
+   @GetMapping("/dash.wd")
+   public String dash() {
+	   
+	   return "pet/dash";
+   }
 }
+

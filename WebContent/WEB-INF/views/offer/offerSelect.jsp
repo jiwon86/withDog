@@ -144,7 +144,10 @@
 						let acceptBtn = `
 		                	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
 								<i class="far fa-check-circle"></i> &nbsp; 수락
-							</div>	                      				
+							</div>	                      			
+                      		<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
+                      		<i class="fas fa-handshake-slash"></i> &nbsp; 거절
+							</div>				
 						`;
 						
 						$(e).parent().html(acceptBtn);						
@@ -153,15 +156,56 @@
 				})
 
 			}
+
+			// 거절버튼 누를 때 이벤트 함수
+			function refuseBtnClick(e) {
+				let paycount = $(e).parent().prev().find(".paycount").val();
+				console.log("paycount >>> : " + paycount);
+				
+				var mAccount = $(e).parent().prev().find(".mAccount").text();
+				
+				Swal.fire({
+					title: "정말로 " + mAccount + "님의 조건제시를 거절하시겠습니까?",
+					text: "다시 한번 조건제시을 확인해 주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '거절',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
+
+						// ajax로 insert 혹은 update문이 실행되야 한다.
+						let cnoVal = $(e).parent().prev().find(".cno").val();
+						let tnoVal = $(e).parent().prev().find(".tno").val();
+						
+						let typeVal = "GET";
+						let urlVal = "/refuseCheckAjax.wd";
+						
+						console.log("cnoVal >>> : " + cnoVal);
+						console.log("tnoVal >>> : " + tnoVal);
+						
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+								"tno": tnoVal
+							},
+							success: whenSuccess3,
+							error: whenError3
+						});
+				
+					}
+				})
+				
+			}			
 			
+			// 수락 버튼
 			function whenSuccess1(resData) {
 				console.log("성공");
 				$("#liveToast1").toast("show");
-			}
-			
-			function whenSuccess2(resData) {
-				console.log("성공");
-				$("#liveToast3").toast("show");
 			}
 			
 			function whenError1() {
@@ -169,9 +213,30 @@
 				$("#liveToast2").toast("show");
 			}
 			
+			// 취소버튼
+			function whenSuccess2(resData) {
+				console.log("성공");
+				$("#liveToast3").toast("show");
+			}
+			
 			function whenError2() {
 				console.log("실패");
 				$("#liveToast4").toast("show");
+			}
+
+			// 거절버튼
+			function whenSuccess3(resData) {
+				if(resData == 'success') {
+					alert("거절을 성공하셨습니다.");
+					location.reload();
+				} else {
+					alert("거절을 실패하셨습니다.");
+					return;
+				}
+			}
+			
+			function whenError3() {
+				console.log("실패");
 			}
 			
 		</script>
@@ -236,9 +301,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>돌봄신청 상세정보</span>
+                                            <span>반려동물 대리돌봄 서비스 상세정보</span>
                                         </h1>
-                                        <div class="page-header-subtitle">The default page header layout with main content that overlaps the background of the page header</div>
+                                        <div class="page-header-subtitle"></div>
                                     </div>
                                 </div>
                             </div>
@@ -253,11 +318,13 @@
                                 <a class="btn btn-transparent-dark btn-icon" onclick="javascript:history.back();"><i data-feather="arrow-left"></i></a>
                                 <div class="ms-3">
                                 	<div class="my-3">
-                                		<% if(todayDate.before(startDate)) { %>
+                                		<% 
+                                			if(todayDate.before(startDate)) { 
+                                		%>
 	                                		<!-- 준비중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 대리돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;
@@ -267,11 +334,13 @@
 	                                        </span>
                                         <% } %>
                                         
-                                        <% if(todayDate.after(startDate) && todayDate.before(endDate)) { %>	
+                                        <% 
+                                        	if(todayDate.after(startDate) && todayDate.before(endDate)) { 
+                                        %>	
 	                                        <!-- 진행중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 대리돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;
@@ -281,11 +350,13 @@
 	                                        </span>
                                         <% } %>
                                         
-                                        <% if(todayDate.after(endDate)) { %>
+                                        <% 
+                                        	if(todayDate.after(endDate)) { 
+                                        %>
 	                                        <!-- 종료 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 대리돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;
@@ -343,7 +414,7 @@
                                 <div>
 	                                <h4 class="ms-1">
 	                                	<i class="fas fa-paw"></i> &nbsp; 
-	                                	<span>맡기는 동물</span>
+	                                	<span>맡기는 반려동물</span>
 	                                </h4>
 			                        <hr>
 			                        <div class="card-body bg-light">
@@ -352,13 +423,54 @@
 			                              <% 
 			                              	for(int i=0; i<petListSize; i++) {
 			                              		PetVO pvo = petList.get(i);
+
+			                              		String pneutral = pvo.getPneutral();
+			                              		String pneutraltext = "";
+			                              		String pgender = pvo.getPgender();
+			                              		String pgendertext = "";
+			                              		String ptype = pvo.getPtype();
+			                              		String ptypetext = "";
+			                              		
+			                              		if(pneutral.equals("Y")) {
+			                              			pneutraltext = "중성화 O";
+			                              		} else {
+			                              			pneutraltext = "중성화 X";
+			                              		}
+			                              		
+			                              		if(pgender.equals("01")) {
+			                              			pgendertext = "수컷";
+			                              		} else {
+			                              			pgendertext = "암컷";
+			                              		}
+			                              		
+			                              		if(ptype.equals("01")) {
+			                              			ptypetext = "쉽독";
+			                              		} else if(ptype.equals("02")) {
+			                              			ptypetext = "캐틀 독";
+			                              		} else if(ptype.equals("03")) {
+			                              			ptypetext = "테리어";
+			                              		} else if(ptype.equals("04")) {
+			                              			ptypetext = "닥스훈트";
+			                              		} else if(ptype.equals("05")) {
+			                              			ptypetext = "스피츠";
+			                              		} else if(ptype.equals("06")) {
+			                              			ptypetext = "센트하운드";
+			                              		} else if(ptype.equals("07")) {
+			                              			ptypetext = "포인팅독";
+			                              		} else if(ptype.equals("08")) {
+			                              			ptypetext = "리트리버";
+			                              		} else if(ptype.equals("09")) {
+			                              			ptypetext = "토이독";
+			                              		} else if(ptype.equals("10")) {
+			                              			ptypetext = "사이트 하운드";					
+			                              		}
 			                              %>
 				                               <div class="col-lg-4 mb-3">
 				                                   <div class="d-flex align-items-center">
 				                                       <div class="avatar avatar-lg"><img class="avatar-img img-fluid" src="/img/pet/<%=pvo.getPphoto()%>"></div>
 				                                       <div class="ms-3">
-				                                           <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=pvo.getPtype()%>)</span></div>
-				                                           <div class="small text-muted">중형견(<%=pvo.getPweight()%>)/<%=pvo.getPages()%>살/중성화 x(<%=pvo.getPneutral()%>)</div>
+				                                           <div class="fs-4 text-dark fw-500"><%=pvo.getPname()%>&nbsp;<span style="font-size:12px;">(<%=ptypetext%>)</span></div>
+				                                           <div class="small text-muted"><%=pvo.getPweight()%>KG/<%=pvo.getPages()%>살/<%=pgendertext%></div>
 				                                       </div>
 				                                   </div>
 				                               </div>
@@ -386,7 +498,7 @@
                         </div>
                         <!-- /신청정보 카드 -->
 
-						<h4 class="mb-0 mt-5">조건제시 정보</h4>
+						<h4 class="mb-0 mt-5">반려동물 대리돌보미 신청정보</h4>
                         <hr class="mt-2 mb-4" />
                         <!-- 조건제시 정보 -->
                         <div class="row">
@@ -415,14 +527,14 @@
 			                        	<!-- 조건제시 정보 -->
 			                            <div class="col-lg-6 mb-4">
 			                                <div class="card lift lift-sm h-100">
-			                                    <div class="card-body" onclick="javascript:location.href='/conditionSelect.wd?cno=<%=cvo.getCno() %>'">
+			                                    <div class="card-body" onclick="javascript:location.href='/conditionSelect.wd?cno=<%=cvo.getCno()%>&startdate=<%=ovo.getStartdate()%>&enddate=<%=ovo.getEnddate()%>'">
 			                                        <input type="hidden" class="cno" value="<%=cvo.getCno() %>" />
 			                                        <input type="hidden" class="tno" value="<%=ovo.getTno() %>" />
 			                                        <input type="hidden" class="paycount" value="<%=payCount%>" />
 			                                        
 			                                        <h5 class="card-title mb-2 hahmlet" style="font-weight:bold; font-size:20px; color:#7f7f7f;">
 			                                            <span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-			                                            	<%=cvo.getMid()%> 조건제시
+			                                            	<%=cvo.getMid()%> 반려동물 대리돌보미 신청
 			                                            </span> &nbsp;
 			                                            <span style="color:gray; font-size:14px;">(<%= cvo.getTno() %>)</span>
 			                                        </h5>
@@ -461,29 +573,42 @@
 						                                    		</div>			                                    					
 				                                    <%		
 			                                    				} else {
+			                                    					if(todayDate.before(startDate)) {
+			                                    					
 			                                    	%>
-					                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
-						                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
-						                                    		</div>
-						                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
-						                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
-						                                    		</div>
+						                                    			<div class="btn btn-red hahmlet cancelBtn" onclick="cancelBtnClick(this)">
+							                                    			<i class="fas fa-check-circle"></i> &nbsp; 수락해제
+							                                    		</div>
+							                                    		<div class="btn btn-yellow hahmlet chatPaymentBtn" onclick="chatPaymentBtnClick(this)">
+							                                    			<i class="fas fa-check-circle"></i> &nbsp; 결제하기
+							                                    		</div>
 			                                    	<%
+			                                    					}
 			                                    				}
 				                                    		} else {
+				                                    			if(todayDate.before(startDate)) {
 				                                    %>
-					                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-																	<i class="far fa-check-circle"></i> &nbsp; 수락
-																</div>	 
+						                                  			<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+																		<i class="far fa-check-circle"></i> &nbsp; 수락
+																	</div>
+						                                  			<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
+																		<i class="fas fa-handshake-slash"></i> &nbsp; 거절
+																	</div>																		 
 				                                    <%	
+				                                    			}
 				                                    		}
 			                                    			
 			                                    		} else {
+			                                    			if(todayDate.before(startDate)) {
 			                                    	%>
-					                                    	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
-																<i class="far fa-check-circle"></i> &nbsp; 수락
-															</div>	                                    	
+						                                    	<div class="btn btn-primary hahmlet acceptBtn" onclick="acceptBtnClick(this)">
+																	<i class="far fa-check-circle"></i> &nbsp; 수락
+																</div>	                                    	
+						                                    	<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
+																	<i class="fas fa-handshake-slash"></i> &nbsp; 거절
+																</div>	                                    	
 			                                    	<%
+			                                    			}
 			                                    		}
 			                                    	%>
 			                                    </div>
@@ -494,7 +619,7 @@
                         			}
                     			} else {
                     		%>
-                    				<h2>현재 조건제시가 없습니다.</h2>
+                    				<h4 style="color:gray;">현재 반려동물 대리돌보미 신청정보가 없습니다.</h4>
                     		<%
                     			}
                             %>
@@ -505,14 +630,16 @@
                         <% 
                         	if(conditionList.size() > 0) { 
                         %>
+                        		<%-- 
 			                    <jsp:include page="conditionPaging.jsp" flush="true">
-									<jsp:param name="url" value="offerSelect.psh"/>
+									<jsp:param name="url" value="offerSelect.wd"/>
 									<jsp:param name="str" value=""/>
 									<jsp:param name="pageSize" value="<%=pageSize%>"/>
 									<jsp:param name="groupSize" value="<%=groupSize%>"/>
 									<jsp:param name="curPage" value="<%=curPage%>"/>
 									<jsp:param name="totalCount" value="<%=totalCount%>"/>
 								</jsp:include>
+								--%>
                         <%
                         	} else {
                         %>

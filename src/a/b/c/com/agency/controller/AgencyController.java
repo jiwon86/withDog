@@ -25,6 +25,7 @@ import a.b.c.com.agency.vo.ConditionVO;
 import a.b.c.com.agency.vo.OfferVO;
 import a.b.c.com.agency.vo.PayVO;
 import a.b.c.com.common.ChabunUtil;
+import a.b.c.com.common.CommonUtils;
 import a.b.c.com.common.service.ChabunService;
 import a.b.c.com.member.service.MemberService;
 import a.b.c.com.member.vo.MemberVO;
@@ -162,52 +163,80 @@ public class AgencyController {
 		return "agency/chatPayment";
 	}
 	
+	
+	// 일반 혹은 포인트결제하기
 	@PostMapping("/payAjax")
 	@ResponseBody
-	public String payAjax(PayVO pvo) {
+	public String payAjax(Principal principal, PayVO pvo) {
+		String mno = null;
+		String mypoint = null;
+		int insertResult = 0;
 		
-		// 결제 정보로 가져온 정보
-		logger.info("pvo.getImpid()       >>> : " + pvo.getImpid());
-		logger.info("pvo.getMerchantid()  >>> : " + pvo.getMerchantid());
-		logger.info("pvo.getApplynum()    >>> : " + pvo.getApplynum());
-		logger.info("pvo.getCardnumber()  >>> : " + pvo.getCardnumber());
-		logger.info("pvo.getPaymethod()   >>> : " + pvo.getPaymethod());
-		logger.info("pvo.getPayname()     >>> : " + pvo.getPayname());
-		logger.info("pvo.getPayamount()   >>> : " + pvo.getPayamount());
-		logger.info("pvo.getCardname()    >>> : " + pvo.getCardname());
-		logger.info("pvo.getTno()         >>> : " + pvo.getTno());
-		logger.info("pvo.getCno()		  >>> : " + pvo.getCno());	
-		logger.info("pvo.getTmno()		  >>> : " + pvo.getTmno());	
-		logger.info("pvo.getCmno()		  >>> : " + pvo.getCmno());	
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			mypoint = mvo.getMpoint();
+		}
 		
-		// 채번 구하기
+		// payno 채번 구하기
 		String payno = ChabunUtil.getAgencyChabun("m", chabunService.getPayChabun().getPayno());
 		pvo.setPayno(payno);
 		
-		logger.info("payno >>> : " + payno);
+		int payAmount = Integer.valueOf(pvo.getPayamount());
+		int myPoint = Integer.valueOf(mypoint);	
 		
-		int insertResult = agencyService.payAjax(pvo);
+		// 포인트 결제일 경우
+		if(pvo.getPaymethod().equals("mypoint")) {
+			
+			// 결제금액보다 자신의 포인트 금액이 적을 때
+			if(payAmount > myPoint) {
+				return "lesspoint";
+			}
+			
+			// 포인트결제 처리
+			insertResult = agencyService.payAjax(pvo);
+
+			MemberVO _mvo = new MemberVO();
+			_mvo.setMpoint(pvo.getPayamount());
+			_mvo.setMno(pvo.getTmno());
+			
+			// 대리돌봄 신청자 포인트 감소
+			int updateMinusPointResult = memberService.updateMinusPoint(_mvo);
 		
+		// 일반 결제일 경우
+		} else {
+			insertResult = agencyService.payAjax(pvo);
+		}
+		
+		// 결제처리 성공
 		if(insertResult > 0) {
 			PayVO _pvo = new PayVO();
 			_pvo.setPayno(payno);
 			
+			// 대리돌보미 신청자 정보 가져오기
 			List<PayVO> payList = agencyService.paySelectPayno(_pvo);
 			
 			OfferVO _ovo = new OfferVO();
 			String tno = payList.get(0).getTno();
 			_ovo.setTno(tno);
 			
+			// 결제처리 성공에 따른 마커제거를 위한 업데이트
 			int updateResult = offerService.offerUpdatePropose(_ovo);
 			
 			if(updateResult > 0) {
 				MemberVO _mvo = new MemberVO();
 				_mvo.setMpoint(pvo.getPayamount());
 				_mvo.setMno(pvo.getCmno());
-				logger.info("*** 포인트 >>> : " + _mvo.getMpoint());
-				logger.info("*** mno >>> : " + _mvo.getMno());
 				
-				int updatePointResult = memberService.updatePoint(_mvo);
+				// 대리돌보미 신청자 포인트 증가
+				int updateAddPointResult = memberService.updateAddPoint(_mvo);
 				
 				return "success";
 			}
@@ -461,7 +490,13 @@ public class AgencyController {
 		String cno = ChabunUtil.getConditionChabun("m",chabunService.getConditionChabun().getCno());
 		String tno = req.getParameter("tno");
 		String cprice = req.getParameter("cprice");
-		String ccontent = req.getParameter("ccontent");
+		
+		String ccontent = "";
+		if(req.getParameter("ccontent") == null) {
+			ccontent = "추가 요구사항을 작성하지 않았습니다.";
+		} else {
+			ccontent = req.getParameter("ccontent");			
+		}
 		String czonecode = req.getParameter("czonecode");
 		String croadaddress = req.getParameter("croadaddress");
 		String croadaddressdetail = req.getParameter("croadaddressdetail");
@@ -493,4 +528,103 @@ public class AgencyController {
 		return "agency/conditionInsert";
 	}
 	
+	@GetMapping("/mypay")
+	public String mypay(PayVO payvo, Principal principal, Model model) {
+		
+		String mno = null;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			model.addAttribute("mvo", mvo);
+		}
+		
+		int pageSize = CommonUtils.PAY_PAGE_SIZE;
+		int groupSize = CommonUtils.PAY_GROUP_SIZE;
+		int curPage = CommonUtils.PAY_CUR_PAGE;
+		int totalCount = CommonUtils.PAY_TOTAL_COUNT;	
+		
+		if(payvo.getCurPage() != null) {
+			curPage = Integer.parseInt(payvo.getCurPage());
+		}
+		
+		payvo.setPageSize(String.valueOf(pageSize));
+		payvo.setGroupSize(String.valueOf(groupSize));
+		payvo.setCurPage(String.valueOf(curPage));
+		payvo.setTotalCount(String.valueOf(totalCount));
+		
+		payvo.setCmno(mno);
+		payvo.setTmno(mno);
+		
+		List<PayVO> payList = agencyService.paySelectAll(payvo);
+		
+		model.addAttribute("pagingPayvo", payvo);
+		model.addAttribute("payList", payList);
+		
+		return "agency/mypay";
+	}
+	
+	@PostMapping("/payChargeAjax")
+	@ResponseBody
+	public String payChargeAjax(Principal principal, PayVO pvo) {
+		String mno = null;
+		String mypoint = null;
+		int insertResult = 0;
+		
+		// 세션을 통해 멤버번호를 가져오기
+		if(principal != null) {
+			String mid = principal.getName();
+			MemberVO _mvo = null;
+			_mvo = new MemberVO();
+			
+			_mvo.setMid(mid);
+			
+			List<MemberVO> memberList = memberService.memberSelect(_mvo);
+			mno = memberList.get(0).getMno();
+			MemberVO mvo = memberList.get(0);
+			mypoint = mvo.getMpoint();
+		}
+		
+		// 채번 구하기
+		String payno = ChabunUtil.getAgencyChabun("m", chabunService.getPayChabun().getPayno());
+		pvo.setPayno(payno);
+		
+		insertResult = agencyService.payAjax(pvo);
+		
+		if(insertResult > 0) {
+			MemberVO _mvo = new MemberVO();
+			_mvo.setMpoint(pvo.getPayamount());
+			_mvo.setMno(pvo.getCmno());
+			
+			int updateAddPointResult = memberService.updateAddPoint(_mvo);
+			
+			return "success";
+		}
+		
+		return "fail";
+	}
+	
+	@GetMapping("/refuseCheckAjax")
+	@ResponseBody
+	public String refuseCheckAjax(ConditionVO cvo) {
+		
+		logger.info("** condition tno >>> : " + cvo.getTno());
+		logger.info("** condition cno >>> : " + cvo.getCno());
+		
+		int deleteResult = agencyService.deleteCondition(cvo); 
+		
+		if(deleteResult > 0) {
+			return "success";
+		}
+		
+		return "fail";
+	}
 }

@@ -316,7 +316,10 @@ console.log(mid);
 			<main style="width: 960px; margin:0 auto;">
 				
 				<div style="width:760px; margin:0 auto;">
-					<h2 class="mt-4">댕댕스타그램</h2>
+					<!-- <h2 class="mt-4">댕댕스타그램</h2> -->
+					<div class="mt-4">
+						<img src="image/park/dang.png" style="width:50%;">
+					</div>
 					<div> 
 						<a href="parkInsert.wd" class="btn btn-warning float-end">사진업로드</a>
 					</div>
@@ -347,12 +350,10 @@ console.log(mid);
 											</svg>
 								    	</button>
 									    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									        <!-- <a class="dropdown-item" href="parkUpdate.wd">수정</a> -->
 									        <form name="movement" class="movement">
 									        	<input type="hidden" name="inum" value="<%= svo.getInum() %>">
 										        <input type="submit" class="dropdown-item" value="수정" id='U'>
 										        <input type="submit" class="dropdown-item" value="삭제" id='D'>
-									        <!-- <a class="dropdown-item" href="#!">삭제</a> -->
 									        </form>
 									    </div>
 									</div>
@@ -361,6 +362,7 @@ console.log(mid);
 					    </div>
 					    <div class="card-body">
 					        <img class="avatar-img img-fluid" src="img/park/<%= svo.getIupload() %>" style="width:100%;">
+					        
 					    </div>
 					    <div class="card-footer">
 					    	
@@ -368,7 +370,6 @@ console.log(mid);
 					    		
 					            <button class="btn btn-pink btn-icon mr-2 empty-heart" style="margin-right:50px;" onclick="emptyHeartBtn(this)">
 					            	<i class="far fa-heart"></i>
-					                <!--  <i data-feather="heart"></i> -->
 					            </button>
 					        </div>
 					        <!-- 아이디/내용들어가는 곳 -->

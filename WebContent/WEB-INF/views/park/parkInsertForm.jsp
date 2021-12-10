@@ -36,12 +36,12 @@
 
 	
 	function readURL(input) {
-		alert("readurl");
+		//alert("readurl");
 		if(input.value == "") {
-			//alert("사진을 업로드 하세요");
+			
 			return;
 		} else {
-			alert("readurl2");
+			//alert("readurl2");
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				//alert("readurl2"+e.target.result);

@@ -46,7 +46,6 @@ public class RparkController {
 		logger.info("RparkController rparkInsert rbvo.getInum() >>> : " + rsvo.getInum());
 		logger.info("RparkController rparkInsert rbvo.getRicontent() >>> : " + rsvo.getRicontent());
 		
-		//오류여기씀~!!!!!!!!!!!!!!!!!!
 		String rinum = ChabunUtil.getRparkChabun("N", chabunService.getRparkChabun().getRinum());
 		logger.info("RparkController rparkInsert rinum >>> : " + rinum);
 		logger.info("RparkController rparkInsert inum >>> : " + rsvo.getInum());
@@ -83,8 +82,7 @@ public class RparkController {
 	@ResponseBody
 	public String rparkSelectAll(RparkVO rsvo) {	
 		logger.info("RparkController rparkSelectAll() 함수진입 >>> : ");
-		// rbvo.setSbnum("B0001");
-		
+
 		logger.info("RparkController rparkSelectAll rsvo.getInum() >>> : " + rsvo.getInum());
 		
 		List<RparkVO> list  = rparkService.rparkSelectAll(rsvo);

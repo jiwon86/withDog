@@ -4,12 +4,20 @@
 <%@page import="a.b.c.com.park.vo.ParkVO"%>
 <%@page import="a.b.c.com.member.vo.MemberVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%-- 
 	jsp:include : 내 서버내의 jsp파일만 가능
 	c:import : 외부 jsp 파일 접근 가능
 --%>
 <!DOCTYPE html>
 <html lang="ko">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+$( document ).ready( function() {
+    AOS.init();
+ } );
+</script>
 <!-- 헤드 -->
 <head>
 <link rel="stylesheet" href="css/park/park.css">
@@ -17,8 +25,11 @@
 </head>
 <!-- /헤드 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
 
+let mid = "${member.mid}";
+console.log(mid);
 		//U
 		$(document).on("click", "#U", function(){
 			 $(".movement").attr({ "method":"GET"
@@ -31,15 +42,44 @@
 			$(".movement").attr({ "method":"POST"
 				                  ,"action":"parkDelete.wd"}).submit();
 		});
-		 
-</script>
-
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-
-let commentList;
-let mid = "${member.mid}";
-
+		
+		function emptyHeartBtn(e) {
+			alert("빈하트 클릭");
+			
+			let fullHeartTag = `
+	            <button class="btn btn-pink btn-icon mr-2  full-heart" style="margin-right:50px;" onclick="fullHeartBtn(this)">
+	            
+	                <!--  <i data-feather="heart"></i> -->
+	            </button>
+	            <div style="width:30px;position:relative" class="like" id="like">
+	            	<div style="position:absolute;top:-500px; left:-80px;">
+	            		<img src="../../image/park/like.gif">
+	            	</div>
+	            </div>
+			`;
+			$(e).parent().html(fullHeartTag);
+			let likeg = document.getElementById("like");
+			likeg.addEventListener("animationend" ,likeend);
+			
+		}
+		
+		function fullHeartBtn(e) {
+			alert("풀하트 클릭");
+			
+			let emptyHeartTag = `
+	            <button class="btn btn-pink btn-icon mr-2 empty-heart " style="margin-right:50px;" onclick="emptyHeartBtn(this)">
+	            	
+	                <!--  <i data-feather="heart"></i> -->
+	            </button>		
+			`;
+			
+			$(e).parent().html(emptyHeartTag);
+		}
+		
+		function likeend () {
+			this.classList.add("hidden");
+		}
+		
 	$(document).ready(function(){
 
 		selectAll();
@@ -131,13 +171,17 @@ let mid = "${member.mid}";
 	function rparkInsert(e) {
 		let inum = $(e).parent().find(".inum").val();
 
+		console.log(e);
+
 		
 		let insertURL = "rparkInsert.wd";
 		let method = "POST";
 		let dataParam = {
 				inum : inum,
-				ricontent : $("#"+inum+"comment").val(),
-				riname : mid
+
+	            ricontent : $("#"+inum+"comment").val(),
+	            riname : mid
+
 		};
 		
 		//dataParam = $("#rparkForm").serialize();
@@ -201,7 +245,8 @@ let mid = "${member.mid}";
 		writerP.append(nameSpan).append(dateSpan).append(delInput);
 		newLi.append(writerP).append(contentP);
 		
-		$("#"+inum).append(newLi);
+
+		 $("#"+inum).append(newLi);
 	}
 	
 	//댓글길이 체크--------------------------------------
@@ -277,7 +322,10 @@ let mid = "${member.mid}";
 			<main style="width: 960px; margin:0 auto;">
 				
 				<div style="width:760px; margin:0 auto;">
-					<h2 class="mt-4">댕댕스타그램</h2>
+					<!-- <h2 class="mt-4">댕댕스타그램</h2> -->
+					<div class="mt-4">
+						<img src="image/park/dang.png" style="width:50%;">
+					</div>
 					<div> 
 						<a href="parkInsert.wd" class="btn btn-warning float-end">사진업로드</a>
 					</div>
@@ -293,7 +341,7 @@ let mid = "${member.mid}";
 					<div class="card card-header-actions mx-auto mb-3 mt-3" style="clear:both;">
 					    <div class="card-header">
 					    	<div class="avatar avatar-xl" style="margin-left:330px;">
-								<img class="avatar-img img-fluid me-2" src="image/park/<%= svo.getIphoto() %>">
+								<img class="avatar-img img-fluid me-2" src="img/park/<%= svo.getIphoto() %>">
 								<!--<img class="avatar-img img-fluid me-2" >-->
 								<span class="tt mr-4"><%= svo.getIid() %> </span>
 								<!-- 수정/삭제 -->
@@ -308,12 +356,10 @@ let mid = "${member.mid}";
 											</svg>
 								    	</button>
 									    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									        <!-- <a class="dropdown-item" href="parkUpdate.wd">수정</a> -->
 									        <form name="movement" class="movement">
 									        	<input type="hidden" name="inum" value="<%= svo.getInum() %>">
 										        <input type="submit" class="dropdown-item" value="수정" id='U'>
 										        <input type="submit" class="dropdown-item" value="삭제" id='D'>
-									        <!-- <a class="dropdown-item" href="#!">삭제</a> -->
 									        </form>
 									    </div>
 									</div>
@@ -322,19 +368,15 @@ let mid = "${member.mid}";
 					    </div>
 					    <div class="card-body">
 					        <img class="avatar-img img-fluid" src="img/park/<%= svo.getIupload() %>" style="width:100%;">
+					        
 					    </div>
 					    <div class="card-footer">
 					    	
 					    	<div class="float-end" style="margin-right:620px;">
 					    		
-					            <button class="btn btn-pink btn-icon mr-2">
-					                <i data-feather="heart"></i>
+					            <button class="btn btn-pink btn-icon mr-2 empty-heart" style="margin-right:50px;" onclick="emptyHeartBtn(this)">
+					            	<i class="far fa-heart"></i>
 					            </button>
-					            <!-- 저장하는 버튼 -->
-					            <!-- <button class="btn btn-teal btn-icon mr-2">
-					                <i data-feather="bookmark"></i>
-					            </button> -->
-					            
 					        </div>
 					        <!-- 아이디/내용들어가는 곳 -->
 					        <div style="margin-top:60px;">

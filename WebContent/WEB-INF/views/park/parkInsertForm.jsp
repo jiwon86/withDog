@@ -36,12 +36,12 @@
 
 	
 	function readURL(input) {
-		alert("readurl");
+		//alert("readurl");
 		if(input.value == "") {
-			//alert("사진을 업로드 하세요");
+			
 			return;
 		} else {
-			alert("readurl2");
+			//alert("readurl2");
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				//alert("readurl2"+e.target.result);
@@ -92,13 +92,13 @@
 				--> 
 				<!-- ** 주요 내용 **  -->
 
-                <div class="card-body">
+                <div class="card-body" style="width:760px; margin:0 auto;">
                 <div style="width:760px; margin:0 auto;">
                 <h2 class="mt-4">댕댕스타그램</h2>
                     <!-- Registration form-->
                     <form name="parkinsertform" id="parkinsertform">
                         <!-- Form Row-->
-				         </div>
+				         
                                 <!-- 회원사진-->
                                 <div class="mb-3">
                                     <label class="small mb-1" for="inputFirstName">

@@ -109,9 +109,7 @@ public class ParkController {
 		_svo.setIcontent(fu.getParameter("icontent"));
 
 		int nCnt = parkService.parkInsert(_svo);
-		
 		logger.info("ParkController parkInsert nCnt >>> : " + nCnt);
-		
 		if (nCnt > 0) { return "park/parkInsert";}
 
 		return "park/parkForm";

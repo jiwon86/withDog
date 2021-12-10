@@ -13,7 +13,16 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<head>
+		<style type="text/css">
+				
+			.headerdog  {
+				position : absolute;
+				width : 15%;
+				height : 250px;
+				left : 65%
+			}
 		
+		</style>
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script type="text/javascript">
@@ -80,23 +89,24 @@
 	            	MemberVO mvo = (MemberVO) request.getAttribute("mvo");
 	            	PayVO pagingPayvo = (PayVO) request.getAttribute("pagingPayvo");  				
 				%>
-                <main style="width:960px; margin:0 auto;">
-                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-                        <div class="container-xl px-4">
-                            <div class="page-header-content">
-                                <div class="row align-items-center justify-content-between pt-3">
-                                    <div class="col-auto mb-3">
-                                        <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="user"></i></div>
-                                                                                  내 프로필
-                                        </h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
-                    <!-- Main page content-->
-                    <div class="container-xl px-4 mt-4">
+<main style="width:960px; margin:0 auto;">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_profile_4.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i i class="fas fa-coins"></i></div>
+										포인트
+									</h1>
+						<div class="page-header-subtitle">포인트의 충전내역을 확인 할 수 있어요. </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container-xl px-4 mt-n10">	
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
                             <a class="nav-link" href="/profile.wd">프로필정보</a>
@@ -112,7 +122,7 @@
                                 <div class="card-body">
                                     <div class="small text-muted mb-2">현재 내 포인트</div>
                                     <div class="h3"><i class="fas fa-coins text-yellow"></i> <%=mvo.getMpoint() %> P</div>
-                                	<div id="check_module" class="btn btn-sm text-arrow-icon small bg-green text-white lift">
+                                	<div id="check_module" class="btn btn-sm text-arrow-icon small bg-withcolor text-dark lift">
                                                                            포인트 충전하기
                                         <i data-feather="arrow-right"></i>
                                     </div>

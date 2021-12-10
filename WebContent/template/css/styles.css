@@ -21036,3 +21036,24 @@ pre[class*=language-] {
 .token.variable {
   color: #ff6666;
 }
+
+
+.dogwalk {
+    width  :auto;
+    height : 50px;
+    position : fixed;
+    top : 95%;
+    -webkit-animation: walk 10s;
+    animation-iteration-count : infinite;
+    animation-timing-function : ease-in-out;
+}
+
+
+@-webkit-keyframes walk { /* Safari and Chrome */
+  from {
+      left:100%;
+  }
+  to {
+      left:0%;
+  }
+}

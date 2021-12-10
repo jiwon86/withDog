@@ -209,10 +209,10 @@
                                     </div>
                                 </div>
                                 <div>
-                                	<button class="btn btn-primary" type="submit" id="subbtn" name="subbtn" style="width:100%;">작성완료</button>
+                                	<button class="btn btn-withcolor" type="submit" id="subbtn" name="subbtn" style="width:100%;">작성완료</button>
                                 </div>
                                 </form>
-                                <a href="reviewSelectAll.wd"><button class="btn btn-primary mt-2" type="button" style="width:100%;">목록보기</button></a>
+                                <a href="reviewSelectAll.wd"><button class="btn btn-withcolor mt-2" type="button" style="width:100%;">목록보기</button></a>
                             </div>
                 
                

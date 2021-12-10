@@ -8,6 +8,15 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
+	<head>
+	<style>
+	.headerdog {
+		position : realtive;
+		width : 100%;
+		height : 300px;
+	}
+	</style>
+	</head>
 	<jsp:include page="/head.wd" />
 	<!-- /헤드 -->
 
@@ -34,19 +43,24 @@
 				--> 
 				<!-- ** 주요 내용 **  -->
                 <main>
+                <br>
+                <br>
                     <div class="container-xl px-4">
                         <div class="row justify-content-center">
                             <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
                                 <!-- Social login form-->
                                 <div class="card my-5">
-                                    <div class="card-body p-5 text-center border-bottom-0 bg-gradient-primary-to-secondary">
+                                    <div class="card-body p-5 text-center border-bottom-0 bg-withcolor">
+                                    	<img src="/image/header/withdog_log.png" class="headerdog">
                                         <div class="h3 fw-light mb-1">
+                                        <!-- 
                                         	<div style="font-weight:bold; color:#b43f3f;">WITH DOG</div> 
                                         	<div class="mt-2" style="font-weight:bold; color:white;">로그인</div>
+                                         -->
                                         </div>
                                     </div>
                                     <hr class="my-0" />
-                                    <div class="card-body p-5">
+                                    <div class="card-body p-5 a">
                                         <!-- Login form-->
                                         <form method="post" action="/login">
                                             <!-- Form Group (email address)-->
@@ -62,12 +76,12 @@
                                                        placeholder="비밀번호 입력" aria-label="Password" aria-describedby="passwordExample" />
                                             </div>
                                             <!-- Form Group (forgot password link)-->
-                                            <div class="mb-3"><a class="small" href="auth-password-social.html">비밀번호 찾기</a> / <a class="small" href="register.wd">회원가입</a></div>
+                                            <div class="mb-3"><a class="small" href="PwFinding.wd">비밀번호 찾기</a> / <a class="small" href="register.wd">회원가입</a></div>
                                             <!-- Form Group (login box)-->
                                             <div class="d-flex align-items-center justify-content-between mb-0">
                                                 <div class="form-check">
                                                 </div>
-                                                <input type="submit" class="btn btn-primary" value="로그인">
+                                                <input type="submit" class="btn btn-withcolor" value="로그인">
                                             </div>
                                             
                                             <sec:csrfInput/>
@@ -78,6 +92,7 @@
                                 	</div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </main>		
 				<!-- ** /주요 내용 ** -->

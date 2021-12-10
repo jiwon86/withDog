@@ -43,28 +43,34 @@ public class ParkController {
 	
 	   @GetMapping("/parkForm")
 	   public String parkForm(Model model, Principal principal) {
+	      try {
+	    	  String mid = principal.getName();
+			  if (mid != null) {
+			  
+			      MemberVO memvo = new MemberVO();
+			      memvo.setMid(principal.getName());
+			      List<MemberVO> member = memberService.memberSelect(memvo);
+			      memvo = member.get(0);
+			      
+			      logger.info("ParkController parkForm 함수 진입 >>> : ");
+			      
+			      logger.info("ParkController parkForm svo.getIid");
+			      logger.info("ParkController parkForm svo.getIphoto");
+			      logger.info("ParkController parkForm svo.getIupload");
+			      logger.info("ParkController parkForm svo.getIcontent");
+			      
+			      List<ParkVO> listAll = parkService.parkSelectAll();
+			      logger.info("ParkController parkSelectAll listAll.size() >>> : "+ listAll.size());
+			      
+			      model.addAttribute("listAll", listAll);
+			      model.addAttribute("member", memvo);
+			  } 
+	      }
 	      
-		  String mid = principal.getName();
-		  if (mid != null) {
-		  
-		      MemberVO memvo = new MemberVO();
-		      memvo.setMid(principal.getName());
-		      List<MemberVO> member = memberService.memberSelect(memvo);
-		      memvo = member.get(0);
-		      
-		      logger.info("ParkController parkForm 함수 진입 >>> : ");
-		      
-		      logger.info("ParkController parkForm svo.getIid");
-		      logger.info("ParkController parkForm svo.getIphoto");
-		      logger.info("ParkController parkForm svo.getIupload");
-		      logger.info("ParkController parkForm svo.getIcontent");
-		      
-		      List<ParkVO> listAll = parkService.parkSelectAll();
-		      logger.info("ParkController parkSelectAll listAll.size() >>> : "+ listAll.size());
-		      
-		      model.addAttribute("listAll", listAll);
-		      model.addAttribute("member", memvo);
-		  }
+	      catch(Exception e) {
+	    	  return "member/loginForm";
+	      }
+		 
 	      return "park/parkForm";
 	      
 	   }

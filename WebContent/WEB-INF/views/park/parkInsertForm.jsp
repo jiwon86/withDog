@@ -6,91 +6,133 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-	<!-- 헤드 -->
-	<jsp:include page="/head.wd" />
-	<!-- /헤드 -->
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript">
-	
-	$(document).ready(function(){ 
-		$("#puppy").click(function() {
-		      $("#iupload").click();
-		});
+   <!-- 헤드 -->
+   <jsp:include page="/head.wd" />
+   <!-- /헤드 -->
+   <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+   <script type="text/javascript">
+   
+   $(document).ready(function(){ 
+      $("#puppy").click(function() {
+            $("#iupload").click();
+      });
 
-		$(document).on("click","#upload",function(){
-			console.log("upload >>> : ");
-			$('#parkinsertform').attr({
-				'action':'parkInsert.wd',
-				'method':'POST',
-				'enctype':'multipart/form-data'
-			}).submit();
-		});
-		
-		$("#iupload").change(function(){
-			//alert("change");
-			readURL(this);
-		});
+      $(document).on("click","#upload",function(){
+         console.log("upload >>> : ");
+         $('#parkinsertform').attr({
+            'action':'parkInsert.wd',
+            'method':'POST',
+            'enctype':'multipart/form-data'
+         }).submit();
+      });
+      
+      $("#iupload").change(function(){
+         //alert("change");
+         readURL(this);
+      });
 
-	});
-	
+   });
+   
 
-	
-	function readURL(input) {
-		//alert("readurl");
-		if(input.value == "") {
-			
-			return;
-		} else {
-			//alert("readurl2");
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				//alert("readurl2"+e.target.result);
-				$("#iupload1").attr("src", e.target.result);
-			}
-		}
-		
-		if(input.files[0] != null) {
-			console.log("input.files[0] : OK");
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
+   
+   function readURL(input) {
+      //alert("readurl");
+      if(input.value == "") {
+         //alert("사진을 업로드 하세요");
+         return;
+      } else {
+         //alert("readurl2");
+         var reader = new FileReader();
+         reader.onload = function(e) {
+            //alert("readurl2"+e.target.result);
+            $("#iupload1").attr("src", e.target.result);
+         }
+      }
+      
+      if(input.files[0] != null) {
+         console.log("input.files[0] : OK");
+         reader.readAsDataURL(input.files[0]);
+      }
+   }
 
 </script>
-	<head>
-	<meta charset="UTF-8">
-	<title>업로드성공</title>
-	</head>
+
+<style>
+		.headerdog2  {
+		position : absolute;
+		width : 10%;
+		height : 130px;
+		left : 62%;
+		top : 100px;	
+	}
+</style>
+
+<style>
+		.headerdog3  {
+		position : absolute;
+		width : 10%;
+		height : 130px;
+		left : 74%;
+		top : 100px;	
+	}
+</style>
+   <head>
+   <meta charset="UTF-8">
+   <title>업로드성공</title>
+   </head>
     <body class="nav-fixed">
 
-		<!-- 헤더 -->
-		<jsp:include page="/header.wd" />
-		<!-- /헤더 -->
+      <!-- 헤더 -->
+      <jsp:include page="/header.wd" />
+      <!-- /헤더 -->
 
-		
+      
         <div id="layoutSidenav">
-			<!-- 사이드바 -->
-			<jsp:include page="/sidebar.wd" />
-			<!-- /사이드바 -->
+         <!-- 사이드바 -->
+         <jsp:include page="/sidebar.wd" />
+         <!-- /사이드바 -->
 
-			<!-- 콘텐츠 -->
+         <!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				<main style="width:960px; margin:0 auto;">
+            <main style="width:960px; margin:0 auto;">
 
-				<div style="width:760px; margin:0 auto;">
-					
+				<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				 <img src="/image/header/header_dog_11.gif" class="headerdog2">
+				 <img src="/image/header/header_dog_11r.gif" class="headerdog3">
+				 
+
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="fab fa-instagram"></i></div>
+								
+								<img src="image/park/deng.png">
+                       
+						</h1>
 					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 
-					<!-- 사진업로드 버튼성공(테이블만들기) -->
-					
-				</main>
-				<!--  
-					===================================
-					<main> 내용 </main> 부분을 복사해서 
 
-					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
-					===================================
-				--> 
-				<!-- ** 주요 내용 **  -->
+            <div style="width:760px; margin:0 auto;">
+               
+               </div>
+
+               <!-- 사진업로드 버튼성공(테이블만들기) -->
+               
+            </main>
+            <!--  
+               ===================================
+               <main> 내용 </main> 부분을 복사해서 
+
+               [주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
+               ===================================
+            --> 
+            <!-- ** 주요 내용 **  -->
 
                 <div class="card-body" style="width:760px; margin:0 auto;">
                 <div style="width:760px; margin:0 auto;">
@@ -133,20 +175,21 @@
                                 </div>
                             </div>
                         <input class="btn btn-warning mt-2" id="upload" type="button" value="업로드 완성하기">
+                        
                     </form>
 
                 </div>
             	</div>
-				<!-- ** /주요 내용 ** -->
-				 <!-- url붙여서 댓글 가져오기 -->
+            <!-- ** /주요 내용 ** -->
+             <!-- url붙여서 댓글 가져오기 -->
 
-				<!-- 바닥글 -->
-				<jsp:include page="/footer.wd" />
+            <!-- 바닥글 -->
+            <jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->
                 
             </div>
-			<!-- /콘텐츠 -->
+         <!-- /콘텐츠 -->
         </div>
-		
+      
     </body>
 </html>

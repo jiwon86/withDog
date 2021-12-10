@@ -80,18 +80,18 @@ $(function(){
 	//3번째 컨텐츠 변화 이벤트
 	$(".side_button li:eq(0) button").click(function(){
         $(".side_txt li p:eq(0)").replaceWith("<p><span>여행 갈 때 반려동물을 맡길 때 가 없을 때</span><br>위드독으로 신뢰 같은 우리 이웃에게 돌봄 매칭하기</p>");
-		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img1.png'>");
+		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img1_1.png'>");
    });
    $(".side_button li:eq(1) button").click(function(){
         $(".side_txt li p:eq(0)").replaceWith("<p><span>매칭완료 후 원하는 날짜, 위치, 조건제시 후</span><br>조건이 맞다면 돌봄 매칭 시작</p>");
-		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img2.png'>");
+		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img2_1.png'>");
    });
    $(".side_button li:eq(2) button").click(function(){
         $(".side_txt li p:eq(0)").replaceWith("<p><span>사용자의 신청 조건을 선택 후</span><br>결제창으로 이동 후 원하는 방식으로 결제 진행</p>");
-		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img3.png'>");
+		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img3_1.png'>");
    });
    $(".side_button li:eq(3) button").click(function(){
         $(".side_txt li p:eq(0)").replaceWith("<p><span>돌봄 완료 후 해당 돌봄이의 대한 후기 작성!</span></p>");
-		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img4.png'>");
+		$(".side_img li img:eq(0)").replaceWith("<img src='image/index/side_img4_1.png'>");
    });
 });

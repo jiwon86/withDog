@@ -99,78 +99,80 @@ public class OfferController {
 	@GetMapping("/offerSelectAllPaging")
 	public String offerSelectAllPaging(OfferVO offerVO, Principal principal, Model model) {
 		
-		String mno = null;
-		Map<String, Object> petMap;
-		MemberVO mvo = null;
-		
-		// 세션을 통해 멤버번호를 가져오기
-		if(principal != null) {
-			mvo = new MemberVO();
+		try {
+			String mno = null;
+			Map<String, Object> petMap;
+			MemberVO mvo = null;
 			
+			
+			// 세션을 통해 멤버번호를 가져오기
+			mvo = new MemberVO();
 			String mid = principal.getName();
 			mvo.setMid(mid);
-			
 			List<MemberVO> member = memberService.memberSelect(mvo);
 			mvo = member.get(0);
-			
 			mno = mvo.getMno();
 			model.addAttribute("mno", mno);
-		}
 		
-		int pageSize = CommonUtils.OFFER_PAGE_SIZE;
-		int groupSize = CommonUtils.OFFER_GROUP_SIZE;
-		int curPage = CommonUtils.OFFER_CUR_PAGE;
-		int totalCount = CommonUtils.OFFER_TOTAL_COUNT;		
-		
-		if(offerVO.getCurPage() != null) {
-			curPage = Integer.parseInt(offerVO.getCurPage());
-		}
-		
-		offerVO.setPageSize(String.valueOf(pageSize));
-		offerVO.setGroupSize(String.valueOf(groupSize));
-		offerVO.setCurPage(String.valueOf(curPage));
-		offerVO.setTotalCount(String.valueOf(totalCount));
-		offerVO.setMno(String.valueOf(mno));
-		
-		logger.info("offerVO.getPageSize() >>> : " + offerVO.getPageSize());
-		logger.info("offerVO.getGroupSize() >>> : " + offerVO.getGroupSize());
-		logger.info("offerVO.getCurPage() >>> : " + offerVO.getCurPage());
-		logger.info("offerVO.getTotalCount() >>> : " + offerVO.getTotalCount());
-		logger.info("offerVO.getTotalCount() >>> : " + offerVO.getMno());
-		
-		if(mno != null) {
-			model.addAttribute("pagingOfferVO", offerVO);
-			// 신청 리스트
-			List<OfferVO> offerListAll = offerService.offerSelectAll(offerVO);
-			model.addAttribute("offerListAll", offerListAll);
-					
-			petMap = new HashMap<>();
 			
-			// 동물 리스트
-			for(int i=0; i<offerListAll.size(); i++) {
-				OfferVO ovo = offerListAll.get(i);
-				String pno = ovo.getPno();
-				String[] pnoArr = pno.split(" ");
-				
-				Map<String, Object> offerMap = new HashMap<>();
-				offerMap.put("pnoArr", pnoArr);
-				offerMap.put("mno", mno);
-				
-				List<PetVO> petListAll = offerService.petSelectAll(offerMap);
-				
-				List<PetVO> petList = new ArrayList<>();
-				
-				for(int j=0; j<petListAll.size(); j++) {
-					PetVO pvo = petListAll.get(j);					
-					
-					petList.add(pvo);
-				}
-				
-				petMap.put(ovo.getTno() , petList);
+			int pageSize = CommonUtils.OFFER_PAGE_SIZE;
+			int groupSize = CommonUtils.OFFER_GROUP_SIZE;
+			int curPage = CommonUtils.OFFER_CUR_PAGE;
+			int totalCount = CommonUtils.OFFER_TOTAL_COUNT;		
+			
+			if(offerVO.getCurPage() != null) {
+				curPage = Integer.parseInt(offerVO.getCurPage());
 			}
 			
-			model.addAttribute("petMap", petMap);
+			offerVO.setPageSize(String.valueOf(pageSize));
+			offerVO.setGroupSize(String.valueOf(groupSize));
+			offerVO.setCurPage(String.valueOf(curPage));
+			offerVO.setTotalCount(String.valueOf(totalCount));
+			offerVO.setMno(String.valueOf(mno));
+			
+			logger.info("offerVO.getPageSize() >>> : " + offerVO.getPageSize());
+			logger.info("offerVO.getGroupSize() >>> : " + offerVO.getGroupSize());
+			logger.info("offerVO.getCurPage() >>> : " + offerVO.getCurPage());
+			logger.info("offerVO.getTotalCount() >>> : " + offerVO.getTotalCount());
+			logger.info("offerVO.getTotalCount() >>> : " + offerVO.getMno());
+			
+			if(mno != null) {
+				model.addAttribute("pagingOfferVO", offerVO);
+				// 신청 리스트
+				List<OfferVO> offerListAll = offerService.offerSelectAll(offerVO);
+				model.addAttribute("offerListAll", offerListAll);
+						
+				petMap = new HashMap<>();
+				
+				// 동물 리스트
+				for(int i=0; i<offerListAll.size(); i++) {
+					OfferVO ovo = offerListAll.get(i);
+					String pno = ovo.getPno();
+					String[] pnoArr = pno.split(" ");
+					
+					Map<String, Object> offerMap = new HashMap<>();
+					offerMap.put("pnoArr", pnoArr);
+					offerMap.put("mno", mno);
+					
+					List<PetVO> petListAll = offerService.petSelectAll(offerMap);
+					
+					List<PetVO> petList = new ArrayList<>();
+					
+					for(int j=0; j<petListAll.size(); j++) {
+						PetVO pvo = petListAll.get(j);					
+						
+						petList.add(pvo);
+					}
+					
+					petMap.put(ovo.getTno() , petList);
+				}
+				
+				model.addAttribute("petMap", petMap);
+			}
+		}catch (Exception e) {
+			return "member/loginForm";
 		}
+		
 		
 		return "offer/offerSelectAll";
 	}	

@@ -25,7 +25,6 @@
 			left : 65%
 		}
 	</style>
-		<link rel="stylesheet" href="css/offer/offer.css">
 		<script type="text/javascript">
 		
 			function chatPaymentResultBtnClick(e) {

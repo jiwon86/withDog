@@ -10,13 +10,13 @@
 <head>
 <meta charset="utf-8">
 <title>with Dog</title>
+<link href="image/index/withdog_dog_title32.png" rel="shortcut icon" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="css/index/style.css">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/motion.js"></script>
 <script>
-
 
    $( document ).ready( function() {
       AOS.init();
@@ -30,9 +30,9 @@
       
       <nav>
          <ul class="button_wrap gnb_slider">
-            <li><button class="slide_button1"><img src="image/index/button_1.png" alt="버튼"></button></li>
-            <li><button class="slide_button2"><img src="image/index/button_1.png" alt="버튼"></button></li>
-            <li><button class="slide_button3"><img src="image/index/button_1.png" alt="버튼"></button></li>
+            <li><button class="slide_button1"><img src="image/index/button_2.png" alt="버튼"></button></li>
+            <li><button class="slide_button2"><img src="image/index/button_2.png" alt="버튼"></button></li>
+            <li><button class="slide_button3"><img src="image/index/button_2.png" alt="버튼"></button></li>
          </ul>
       </nav>
 
@@ -58,7 +58,7 @@
                   <p><span class="ml2">돌봄 마리 수</span>  <b class="con2_b">50,502건</b></p>
                </div>
                <div class="con2_1_imgwrap">
-                  <img class="con2_1_img" src="image/index/back.png" data-aos="zoom-in" alt="이미지">
+                  <img class="con2_1_img" src="image/index/back_1.png" data-aos="zoom-in" alt="이미지">
                </div>
             </div>
 
@@ -96,7 +96,7 @@
             <div class="right_con2">
                <ul class="side_img">
                   <li>
-                     <img src="image/index/side_img1.png">
+                     <img src="image/index/side_img1_1.png">
                   </li>
                </ul>
             </div>

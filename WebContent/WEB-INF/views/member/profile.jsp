@@ -12,6 +12,24 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<head>
+	<style>
+	.btn.btn-withcolor.lift {
+		width : 100%;
+	}
+	.btn.btn-withcolor.lift.zip {
+		position : realtive;
+		top : - 100px;
+		left : 50%;
+		width : 50%;
+	}
+	
+	.headerdog  {
+		position : absolute;
+		width : 15%;
+		height : 250px;
+		left : 65%
+	}
+	</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				
@@ -144,22 +162,24 @@
 					String mphoto = member.getMphoto();
 				%>
                 <main style="width:960px; margin:0 auto;">
-                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-                        <div class="container-xl px-4">
-                            <div class="page-header-content">
-                                <div class="row align-items-center justify-content-between pt-3">
-                                    <div class="col-auto mb-3">
-                                        <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="user"></i></div>
-                                                                                  내 프로필
-                                        </h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_profile.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										프로필
+									</h1>
+						<div class="page-header-subtitle">자신의 프로필을 수정 할 수 있습니다. </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
                     <!-- Main page content-->
-                    <div class="container-xl px-4 mt-4">
+                    <div class="container-xl px-4 mt-n10">	
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
                             <a class="nav-link active ms-0" href="/profile.wd">프로필정보</a>
@@ -189,7 +209,7 @@
                                         	
 	                                        <div class="small font-italic text-muted mb-4">이미지 용량의 제한이 있습니다.</div>
 	                                          
-	                                        <input class="btn btn-primary" id="btnMphoto" type="button" value="프로필 사진 선택">
+	                                        <input class="btn btn-withcolor" id="btnMphoto" type="button" value="프로필 사진 선택">
 	                                       
 	                                        <input type="file" name="mphoto" id="inputImage" style="display:none;" />
 	                                    </div>
@@ -237,20 +257,17 @@
 	                                            </div>
 	                                            
 	                                            <!-- 우편번호, 우편번호 찾기 버튼 -->
-	                                            <div class="row gx-3 mb-3">
+	                                           	<div style="width : 100%;">
+	                                           	<label class="small mb-1" for="mzonecode" style="width : 20%;">우편번호</label>
 	                                                <!-- Form Group (organization name)-->
-	                                                <div class="col-md-6">
-	                                                    <label class="small mb-1" for="mzonecode">우편번호</label>
+	                                                <div class="col-md-6" style="display : flex; width : 100%;">
+	                                                    
 	                                                    <input class="form-control" id="mzonecode" type="text" name="mzonecode" 
-	                                                    	   placeholder="우편번호 입력" value="<%=member.getMzonecode()%>" />
+	                                                    	   placeholder="우편번호 입력" value="<%=member.getMzonecode()%>" />&nbsp;
+	                                                    	   <button id="zonecode" class="btn btn-withcolor lift zip" type="button">우편번호 찾기</button>
 	                                                </div>
-	                                            </div>
-	                                            <div class="row gx-3 mb-3">
-	                                                <div class="col-md-6">
-	                                                 <label class="small mb-1" for="zonecode"></label>
-	                                                    <button id="zonecode" class="btn btn-success btn-sm lift" type="button">우편번호 찾기</button>
-	                                                </div>
-	                                            </div>
+	                                           </div>
+	             
 	                                            
 	                                            <!-- 도로명 주소, 도로명 상세주소 -->
 	                                            <div class="row gx-3 mb-3">
@@ -275,7 +292,7 @@
 	                                            <hr>
 	                                            
 	                                            <!-- 수정 하기 버튼 -->
-	                                            <a id="updateBtn" class="btn btn-primary lift">수정 하기</a>
+	                                            <a id="updateBtn" class="btn btn-withcolor lift">수정 하기</a>
 	                                    </div>
 	                                </div>
 	                            </div>

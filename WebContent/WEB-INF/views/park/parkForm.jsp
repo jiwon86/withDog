@@ -344,28 +344,24 @@ console.log(mid);
 	<header class="page-header page-header-light bg-withcolor pb-10">
 		<div class="container-xl px-4">
 			<div class="page-header-content pt-4">
-				<img src="/image/header/header_pe_1.png" class="headerdog">
-				<img src="/image/header/header_dog_11.gif" class="headerdog2">
+				<!-- <img src="/image/header/header_pe_1.png" class="headerdog"> -->
+				<!-- <img src="/image/header/header_dog_11.gif" class="headerdog2"> -->
 
 					<div class="row align-items-center justify-content-between">
 						<div class="col-auto mt-4">
 							<h1 class="page-header-title">
 								<div class="page-header-icon"><i data-feather="fab fa-instagram"></i></div>
-										산책 스타그램  <a class="btn btn-sm btn-light text-primary" href="parkInsert.wd">
-                       <i class="fas fa-arrow-circle-up"></i>&nbsp;&nbsp;사진 올리기</a>
-									</h1>	
-						<div class="page-header-subtitle">반려동물과의 소중한 추억들 공유하세요!
-						</div>
+								
+								<img src="image/park/deng.png">
+                       <a href="parkInsert.wd" style="text-decoration:none;"><button class="btn btn-warning" type="button" style="margin-left:380px;">사진 업로드</button></a>
+						</h1>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>	<div class="container-xl px-4 mt-n10">	
 				<div style="width:760px; margin:0 auto;">
-					<!-- <h2 class="mt-4">댕댕스타그램</h2> -->
-					<!--					<div class="mt-4">
-						<img src="image/park/dang.png" style="width:50%;">
-					</div>  -->
+				
 					<!-- 카드 -->
 					<% 
 						for(int i=0; i<nCnt; i++) {

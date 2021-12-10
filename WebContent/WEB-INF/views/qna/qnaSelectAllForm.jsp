@@ -190,10 +190,22 @@ if(nCnt > 0) {
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnacon() %></a></td>
 		<td><a class="tt" href="qnaSee.wd?qnanum=<%= qvo.getQnanum() %>"><%= qvo.getQnainsertdate() %></a></td>
 		
-		<td class="tt"><!-- <span class="badge bg-success">예정</span> -->
-		<%=qvo.getQnaanswer() %>
+	
+		<% if (qvo.getQnaanswer() == null) {
+		%>
+			<td class="tt"><span class="badge bg-success">대기중</span>
+		<%
+		}
 		
-		</td>	
+		else {
+		%>
+			<td class="tt"><span class="badge bg-withcolor">완료</span>
+		<%
+		}
+		%>
+	
+		
+		
 		
 <sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
 <!-- <td>

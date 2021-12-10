@@ -23,12 +23,12 @@ a{text-decoration:none;}
 /*메인 비주얼 영역*/
 
 .container_visual1{width:100%;height:100vh;background:url(../../image/index/main_cover.jpg)no-repeat center;}
-.container_visual2{width:100%;height:100vh;background-color:#efe3d8;}
-.container_visual3{width:100%;height:100vh;background-color:#f1efed;}
+.container_visual2{width:100%;height:100vh;background-color:#f5efd8;}
+.container_visual3{width:100%;height:100vh;background-color:#f4f1e5;}
 .container_visual4{width:100%;height:100vh;background:url(../../image/index/main_cover_4.jpg)no-repeat center;}
 
 /*메인 상단 버튼 부분*/
-.button_wrap{background:url(../../image/index/button_wrap_1.png)no-repeat center;width:50px;height:150px;position:fixed;left:95%;top:42vh;}
+.button_wrap{background:url(../../image/index/button_wrap_2.png)no-repeat center;width:50px;height:150px;position:fixed;left:95%;top:42vh;}
 .button_wrap>li:nth-of-type(1){margin-top:22px;margin-bottom:23px;}
 .button_wrap>li:nth-of-type(2){margin-bottom:23px;}
 .button_wrap>li:nth-of-type(3){}
@@ -39,7 +39,7 @@ a{text-decoration:none;}
 .container_top_text{text-align:center;padding-top:67vh;}
 .container_top_text>b{font-size:55px;color:#fff;}
 .container_inner1>a>button{margin:5vh auto 0 auto;display:block;border:7px solid #ffffff;border-radius:50px;width:350px;height:100px;background:rgb(0,0,0,0.2);font-size:26px;color:#fff;box-shadow: 0 4px 4px -4px black;}
-.container_inner1>a>button:hover{border:7px solid #cfb69d;background:rgb(0,0,0,0.4)}
+.container_inner1>a>button:hover{border:7px solid #f5e086;background:rgb(0,0,0,0.4)}
 
 /*메인 콘텐츠 2번째 왼쪽*/
 .con2_1{float:left;position:relative;z-index:1;left:-100px;top:-100px;}
@@ -47,7 +47,7 @@ a{text-decoration:none;}
 .con2_1_img{margin-left:-210px;width:800px;float:left;}
 .con_text{position:absolute;left:100px;top:43vh; z-index:-1;margin-left:55px;width:610px;}
 
-.con_text>p:nth-of-type(1){color:#ed7e40;margin-bottom:35px;font-weight:lighter;}
+.con_text>p:nth-of-type(1){color:#eccb3e;margin-bottom:35px;font-weight:lighter;}
 .con_text>p:nth-of-type(2){margin-bottom:15px;font-weight:lighter;color:#7c7c7c;}
 .con_text>p:nth-of-type(3){margin-bottom:15px;font-weight:lighter;color:#7c7c7c;}
 .con_text>p:nth-of-type(4){font-weight:lighter;color:#7c7c7c;}
@@ -63,11 +63,11 @@ a{text-decoration:none;}
 
 /*메인 콘텐츠 3번째*/
 .side_writer{font-size:44px;color:#7c7c7c;text-align:left;}
-.side_writer>b{font-size:48px;color:#f19460;}
+.side_writer>b{font-size:48px;color:#eccb3e;}
 .content_txt2{float:left;width:375px;margin-top:30vh;margin-bottom:10vh;}
 .side_button{width:375px;}
 .side_button>li{float:left;}
-.side_button>li:hover{border-bottom:3px solid #f19460;}
+.side_button>li:hover{border-bottom:3px solid #eccb3e;}
 .side_button>li:nth-of-type(1){margin-right:40px;}
 .side_button>li:nth-of-type(2){margin-right:40px;}
 .side_button>li:nth-of-type(3){margin-right:40px;}

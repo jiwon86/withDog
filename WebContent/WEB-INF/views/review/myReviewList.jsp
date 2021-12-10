@@ -83,7 +83,7 @@
                             	<img src="/image/header/header_dog_7.png" class="headerdog">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
-                                        <h1 class="page-header-title"><div class="page-header-icon"><i data-feather="filter"></i></div><%=mid %> 님의 돌보미 활동 후기</h1>
+                                        <h1 class="page-header-title"><div class="page-header-icon"><i class="fas fa-id-card-alt"></i></div><%=mid %> 님의 돌보미 활동 후기</h1>
                                         <div class="page-header-subtitle">소중한 반려동물을 위해 후기를 작성해보세요</div>
                                     </div>
                                 </div>

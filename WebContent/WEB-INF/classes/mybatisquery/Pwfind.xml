@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		  
+<mapper namespace="a.b.c.com.pwfind.dao.PwfindDAO">
+
+<resultMap type="MemberVO" id="memberMap">
+		<id property="mno" column="MNO" />
+		
+		<result property="mno" column="MNO" />
+		<result property="mid" column="MID" />
+		<result property="mpw" column="MPW" />
+		<result property="memail" column="MEMAIL" />
+		<result property="mname" column="MNAME" />
+		<result property="mbirth" column="MBIRTH" />
+		<result property="mphoto" column="MPHOTO" />
+		<result property="mzonecode" column="MZONECODE" />
+		<result property="mroadaddress" column="MROADADDRESS" />
+		<result property="mjibunaddress" column="MJIBUNADDRESS" />
+		<result property="deleteyn" column="DELETEYN" />
+		<result property="insertdate" column="INSERTDATE" />
+		<result property="updatedate" column="UPDATEDATE" />
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	
+	<resultMap type="MemberAuthVO" id="authMap">
+		<result property="mno" column="MNO" />
+		<result property="mauth" column="MAUTH" />
+	</resultMap>
+
+
+	<select id="pwfinding" parameterType="String" resultMap="memberMap">
+		SELECT * FROM MEMBER WHERE MEMAIL = #{memail}
+	</select>
+
+	<update id="pwupdate" parameterType="MemberVO">
+		UPDATE MEMBER SET MPW= #{mpw} WHERE MEMAIL = #{memail}
+	</update>
+
+</mapper>

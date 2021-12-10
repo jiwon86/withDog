@@ -12,6 +12,14 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<head>
+	<style>
+	.headerdog  {
+				position : absolute;
+				width : 15%;
+				height : 280px;
+				left : 65%
+			}
+	</style>
 		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script>
 		$(document).ready(function(){
@@ -73,21 +81,23 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				 <main>
-                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-                        <div class="container-xl px-4">
-                            <div class="page-header-content">
-                                <div class="row align-items-center justify-content-between pt-3">
-                                    <div class="col-auto mb-3">
-                                        <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="user"></i></div>
-                                                                                  내 프로필
-                                        </h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
+<main style="width:960px; margin:0 auto;">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_profile_2.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i class="fas fa-paw"></i></div>
+										반려동물 프로필 수정하기
+									</h1>
+						<div class="page-header-subtitle">반려동물의 프로필을 수정 할 수 있습니다. </div>
+					</div>
+				</div>
+			</div>
+		</div>
+</header>
                     <!-- Main page content-->
                     <%
                     	Object obj = request.getAttribute("listS");
@@ -169,7 +179,7 @@
                    
                     
                     </script>
-                    <div class="container-xl px-4 mt-4">
+                 <div class="container-xl px-4 mt-n10">	
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
                             <a class="nav-link" href="/profile.wd">프로필정보</a>
@@ -179,7 +189,7 @@
                         </nav>
                         <hr class="mt-0 mb-4" />
                         <form id="petSelectForm" name= "petSelectForm">
-                        <div class="card-header text-primary">나의 댕댕이 수정</div>
+                        
                         <div class="card-body bg-white">
 						  
                               <!-- 반려견 번호 -->
@@ -298,6 +308,7 @@
                                 <button class="btn btn-red" type="button" id="Delete" name="Delete" >삭제</button>
                             </div>
                             </form>
+                            </div>
 				</main>
 				<!--  
 					===================================

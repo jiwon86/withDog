@@ -43,8 +43,32 @@
 
 		<!-- 콘텐츠 -->
 		<div id="layoutSidenav_content">
-			<main>
-		</main>
+			<main style="width: 960px; margin:0 auto;">
+			
+			<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<!-- <img src="/image/header/header_pe_1.png" class="headerdog"> -->
+				<!-- <img src="/image/header/header_dog_11.gif" class="headerdog2"> -->
+
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="fab fa-instagram"></i></div>
+						
+								<img src="image/park/deng.png">
+									<button class="btn btn-warning" style="margin-left:380px;"type="button" id="icontentbtn">수정완성</button>
+                    
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+				<div class="container-xl px-4 mt-n10" >	
+				
+			
+		
 			<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 
@@ -56,14 +80,14 @@
 		<div>
 		
 			<!-- <form name="move" id="move"> -->
-					<main style="width: 960px; margin:0 auto;">
+					
 				
-				<div style="width:760px; margin:0 auto;">
-					<h2 class="mt-4">댕댕스타그램</h2>
+				<div style="width:760px; margin:0 auto; margin-top:-130px;"">
+					
 					
 					 <form name="move" id="move">
 					<div> 
-						<button class="btn btn-primary float-end" type="button" id="icontentbtn">수정완성</button>
+					
 						<!-- <a href="parkForm.wd" class="btn btn-primary float-end">수정완성</a> -->
 					</div>
 					<br><br>
@@ -115,9 +139,10 @@
 					<!-- /카드 -->
 				</div>
 				
-			</main>
-		
+			
 		</div>
+		</div>
+		</main>
 			<!-- ** /주요 내용 ** -->
 
 			<!-- 바닥글 -->

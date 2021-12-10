@@ -93,17 +93,15 @@ public class MapController {
 	@RequestMapping("/setmarkers")
 	@ResponseBody
 	public String setmarkers(MapTradeVO mvo) {
-		
 		List<MapTradeVO> listall = mapService.setMarkers(mvo);
 		logger.info("MapController ------ setmarkers() " + listall.size());	
 		//JSON SET
 		JSONObject jObj = null;
 		JSONArray jArr = new JSONArray();
-
 		try {
 			for(int i=0; listall.size() > i ;  i++) {
 				jObj = new JSONObject();
-
+				//  MapTrade DB Data Json
 				MapTradeVO mvo_ = listall.get(i);
 				jObj.put("tno", mvo_.getTno());
 				jObj.put("content", mvo_.getTcontent());
@@ -124,7 +122,6 @@ public class MapController {
 				jArr.add(jObj);
 				
 			}
-			
 			// JOSN FILE IO SET
 			String josnStr = jArr.toString();
 			BufferedWriter bw = new BufferedWriter(
@@ -134,14 +131,12 @@ public class MapController {
 			bw.close(); //
 			
 			File f = new File(CommonUtils.JSON_FILE_PATH +"/" + "mapdata" + ".json");
-
-			logger.info("a " + josnStr);
+			logger.info("MapData : " + josnStr);
 		}
 		catch(Exception e) {
 			System.out.println("에러" + e.getMessage());
 		}
-		
-		
+
 		return "success";
 	}
 	

@@ -12,7 +12,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
-	<jsp:include page="/head.wd" />
+		<head>
+		<style>
+			.headerdog  {
+				position : absolute;
+				width : 17%;
+				height : 200px;
+				left : 63%
+			}
+		</style>
+
+		<jsp:include page="/head.wd" />
+	</head>
 	<!-- /헤드 -->
 	
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -40,27 +51,30 @@
 			<!-- /사이드바 -->
 
 			<!-- 콘텐츠 -->
-<form name="boardList" id="boardList">
+
 			
             <div id="layoutSidenav_content">
+<!-- Main page content-->
 <main style="width:960px; margin:0 auto;">
-    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-        <div class="container-xl px-4">
-            <div class="page-header-content pt-4">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-auto mt-4">
-                        <h1 class="page-header-title">
-                            <div class="page-header-icon"></div>
-                            	공지사항
-                        </h1>
-                        <div class="page-header-subtitle">신규회원 및 기존회원 가족분들은 서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Main page content-->
-    <div class="container-xl px-4 mt-n10">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_dog_8.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										공지 사항
+									</h1>
+						<div class="page-header-subtitle">서비스이용에 불편함이 없도록 항시 공지사항 확인을 부탁드립니다! </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container-xl px-4 mt-n10">	
+
+
         <div class="card mb-4">
             <div class="card-header">공지사항 전체목록</div>
             <div class="card-body">
@@ -84,9 +98,11 @@
 <%
 	Object obj = request.getAttribute("listAll");
 	List<NoticeVO> list = (List) obj;
-	
-	int nCnt = list.size();
-	System.out.println("nCnt >>> : " + nCnt);
+	int nCnt = 0;
+	if (list != null) {
+		nCnt = list.size();
+		System.out.println("nCnt >>> : " + nCnt);
+	}
 %>
                  <form action="/notice/search" method="GET">
                  <!-- <form id="keyfilter" name="keyfilter"> -->
@@ -99,7 +115,7 @@
 				    <br><br>
 				</form>
                  <br>
-               
+               <form name="boardList" id="boardList">
                 <div class="dataTable-container">
                 <table id="datatablesSimple" class="dataTable-table">
                     <thead>
@@ -123,6 +139,7 @@
                        </thead>
                        
 <%
+if (nCnt > 0) {
 for(int i=0; i<nCnt; i++){
 	NoticeVO nvo = list.get(i);
 %>
@@ -143,7 +160,8 @@ for(int i=0; i<nCnt; i++){
                            </tr>                          
 					  </tbody>				  
 <%
-						}
+					} // end if
+				} // end for
 %>
                    </table>
                    </div>
@@ -188,14 +206,19 @@ for(int i=0; i<nCnt; i++){
                </div>
            </div>
        </div>
-</main>
+       </div>
+	</form>
+       </main>
+
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->
                 
             </div>
 			<!-- /콘텐츠 -->
+			
         </div>
-		</form>
+	
+
     </body>
 </html>

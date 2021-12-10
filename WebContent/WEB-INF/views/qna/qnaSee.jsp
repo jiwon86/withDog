@@ -11,7 +11,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
-	<jsp:include page="/head.wd" />
+	<head>
+		<style>
+			.headerdog  {
+				position : absolute;
+				width : 17%;
+				height : 200px;
+				left : 63%
+			}
+		</style>
+
+		<jsp:include page="/head.wd" />
+	</head>
 	<!-- /헤드 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -41,16 +52,7 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				<main>
-					
-				</main>
-				<!--  
-					===================================
-					<main> 내용 </main> 부분을 복사해서 
 
-					[주요내용 주석] 안에 붙혀넣기 하면 됩니다. 
-					===================================
-				--> 
 				<!-- ** 주요 내용 **  -->
 <main style="width:960px; margin:0 auto;">
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -65,32 +67,34 @@
 	
 %>
 
- <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-     <div class="container-xl px-4">
-         <div class="page-header-content">
-             <div class="row align-items-center justify-content-between pt-3" >
-                 <div class="col-auto mb-3">
-                     <h1 class="page-header-title">
-                         <div class="page-header-icon"><i data-feather="user"></i>&nbsp&nbsp<h2>Q&A</h2></div>
-                     </h1>
-                 </div>
-             </div>
-         </div>
-     </div>
- </header>
- <!-- Main page content-->
-<div class="container-xl px-4 mt-4">
+<!-- Main page content-->
+<main style="width:960px; margin:0 auto;">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_qna_3.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										Q & A 수정하기
+									</h1>
+						<div class="page-header-subtitle">운영시간  - 09:00 ~ 18:00 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container-xl px-4 mt-n10">	
 
 <!-- <nav class="nav nav-borders">
     <a class="nav-link active" href="account-security.html">sd</a>
 </nav> -->
 
-<hr class="mt-0 mb-4" />
-
 <div class="row" style="margin:0 auto;">
    
 <div class="card mb-4" style="margin:0 auto;">
- <div class="card-header">Q&A 글수정</div>
+ <div class="card-header">Q & A 수정하기</div>
  <div class="card-body">
 
      <form name="qnaSeeForm" id="qnaSeeForm" name="qnaSeeForm">
@@ -135,7 +139,8 @@
 	<c:param name="qnanum" value="<%=qvo.getQnanum()%>"></c:param>
 </c:import>	
 
-
+</div>
+</div>
 </div>
 </main>				
 			<!-- ** /주요 내용 ** -->

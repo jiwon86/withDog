@@ -236,6 +236,11 @@
 				}
 			}
 			
+			// 돌보미 리뷰 확인
+			function reviewBtn(did) {
+				location.href=`/myReviewList.wd?did=${"${did}"}`;
+			}
+			
 			function whenError3() {
 				console.log("실패");
 			}
@@ -608,7 +613,10 @@
 																</div>	                                    	
 						                                    	<div class="btn btn-danger hahmlet refuseBtn" onclick="refuseBtnClick(this)">
 																	<i class="fas fa-handshake-slash"></i> &nbsp; 거절
-																</div>	                                    	
+																</div>
+																<div class="btn btn-teal" onclick="reviewBtn('<%= cvo.getMid() %>')">
+																	<i class="fas fa-search"></i>&nbsp; 돌보미에 대한 후기
+																</div>	    	                                    	
 			                                    	<%
 			                                    			}
 			                                    		}

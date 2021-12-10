@@ -8,7 +8,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<!-- 헤드 -->
-	<jsp:include page="/head.wd" />
+	<head>
+		<style>
+			.headerdog  {
+				position : absolute;
+				width : 15%;
+				height : 250px;
+				left : 65%
+			}
+		</style>
+
+		<jsp:include page="/head.wd" />
+	</head>
+
 	<!-- /헤드 -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -41,9 +53,6 @@
 
 			<!-- 콘텐츠 -->
             <div id="layoutSidenav_content">
-				<main>
-					
-				</main>
 				<!--  
 					===================================
 					<main> 내용 </main> 부분을 복사해서 
@@ -52,25 +61,28 @@
 					===================================
 				--> 
 				<!-- ** 주요 내용 **  -->
+
+<!-- Main page content-->
 <main style="width:960px; margin:0 auto;">
- <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-     <div class="container-xl px-4">
-         <div class="page-header-content">
-             <div class="row align-items-center justify-content-between pt-3">
-                 <div class="col-auto mb-3">
-                     <h1 class="page-header-title">
-                         <div class="page-header-icon"><i data-feather="user"></i>&nbsp&nbsp<h2>Q&A</h2></div>
-                     </h1>
-                 </div>
-             </div>
-         </div>
-     </div>
- </header>
-<div class="container-xl px-4 mt-4">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_qna_2.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										Q & A 작성 하기
+									</h1>
+						<div class="page-header-subtitle">운영시간  - 09:00 ~ 18:00 </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+<div class="container-xl px-4 mt-n10">	
 <nav class="nav nav-borders">
-    <a class="nav-link active" href="account-security.html">sd</a>
 </nav>
-<hr class="mt-0 mb-4" />
 <div class="row" style="margin:0 auto;">
    
 <div class="card mb-4" style="margin:0 auto;">
@@ -105,13 +117,14 @@
          <br> 
          
          <div style="text-align:right">
-            <button class="btn btn-primary" type="button" align="right" id="savebtn">Save</button>
+            <button class="btn btn-withcolor" type="button" align="right" id="savebtn">글쓰기</button>
          </div>
         
         </form>
     </div>
 </div>
-                
+</div>      
+</div> 
 </main>				
 			<!-- ** /주요 내용 ** -->
 				

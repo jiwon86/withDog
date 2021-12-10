@@ -81,7 +81,7 @@
 						<div class="page-header-icon">
 							<i data-feather="user"></i>
 						</div>
-						Q&A
+						Q&As
 					</h1>
 				</div>
 			</div>

@@ -108,15 +108,17 @@ public class QnaController {
 		qvo.setTotalCount(String.valueOf(totalCount));
 		
 		List<QnaVO> listAll = qnaService.qnaSelectAllPaging(qvo);
-		QnaVO sqsvo = (QnaVO)listAll.get(0);
+		//QnaVO sqsvo = (QnaVO)listAll.get(0);
 		logger.info("QnaController qnaSelectAllPaging listAll.size() >>> : " + listAll.size());
 		
-		if(listAll.size()>0) {
+		if(listAll.size() >= 0) {
 			
+			/*
 			for(int i=0; i<listAll.size(); i++) {
 				QnaVO sqvo = (QnaVO)listAll.get(i);
 				System.out.println(sqvo.getQnanum());
 			}
+			*/
 			
 			model.addAttribute("pagingQVO", qvo);
 			model.addAttribute("listAll", listAll);

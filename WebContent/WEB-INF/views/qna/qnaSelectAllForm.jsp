@@ -14,7 +14,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 헤드 -->
+<head>
+	<style>
+		.headerdog  {
+			position : absolute;
+			width : 20%;
+			height : 250px;
+			left : 60%
+		}
+	</style>
 <jsp:include page="/head.wd" />
+</head>
+
 <!-- /헤드 -->
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -52,7 +63,7 @@
 		<!-- 콘텐츠 -->
 		<div id="layoutSidenav_content">
 
-			<main>
+			
 <% request.setCharacterEncoding("UTF-8"); %>
 <%
 	//페이징 변수 세팅
@@ -72,27 +83,28 @@
 	
 %>
 
-<header
-	class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-	<div class="container-xl px-4">
-		<div class="page-header-content">
-			<div class="row align-items-center justify-content-between pt-3">
-				<div class="col-auto mb-3">
-					<h1 class="page-header-title">
-						<div class="page-header-icon">
-							<i data-feather="user"></i>
-						</div>
-						Q&A
-					</h1>
+
+
+<!-- Main page content-->
+<main style="width:960px; margin:0 auto;">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_qna_1.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="user"></i></div>
+										Q & A
+									</h1>
+						<div class="page-header-subtitle">운영시간  - 09:00 ~ 18:00 </div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</header>
-<!-- Main page content-->
-<div class="container-xl px-4 mt-4">
+	</header>
+<div class="container-xl px-4 mt-n10">	
 
-<hr class="mt-0 mb-4" />
 <div class="row">
 	<div class="col-lg-4 mb-4" align="right">
 
@@ -107,7 +119,7 @@
 	<div class="card-header">로그인 후 문의사항을 남겨주시면 친절하게 답변해드립니다.
 	
 	<sec:authorize access="isAuthenticated()">
-	<button class="btn btn-primary" id="I">글쓰기</button> 
+	<button class="btn btn-withcolor" id="I" style=" float:right;">글쓰기</button> 
 	</sec:authorize>
 	</div>
 	
@@ -132,7 +144,9 @@
 				</thead>
 <%
 	//String qnaanswer = "";
+	
 
+if(nCnt > 0) {
    for(int i=0; i<nCnt; i++){
 	   QnaVO qvo = list.get(i);
 	   String qnanum = qvo.getQnanum();
@@ -178,6 +192,7 @@
 		
 		<td class="tt"><!-- <span class="badge bg-success">예정</span> -->
 		<%=qvo.getQnaanswer() %>
+		
 		</td>	
 		
 <sec:authorize access="hasRole('ROLE_ADMIN')"> <!-- 관리자 이외 수정, 삭제x -->
@@ -196,9 +211,11 @@
 </sec:authorize>          					
 </tr>
 <%
+   		} // end of if
    }//end of for
 %>
 <tr>
+<% if (nCnt > 0) { %>
 	 <td colspan="7"> 
 	<jsp:include page="qnaPaging.jsp" flush="true">
 		<jsp:param name="url" value="qnaSelectAllPaging.wd"/>
@@ -208,6 +225,7 @@
 		<jsp:param name="curPage" value="<%=curPage %>"/>
 		<jsp:param name="totalCount" value="<%=totalCount %>"/>
 	</jsp:include>
+	<% } %>
 	</td>
 </tr>
 </tbody>
@@ -216,6 +234,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </main>
 <!-- ** /주요 내용 ** -->
 

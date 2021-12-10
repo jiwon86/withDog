@@ -47,11 +47,11 @@
                 </a>
                 <div class="collapse" id="collapseCustomerCenter" data-bs-parent="#accordionSidenavCustomerCenter">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavCustomerCenterPages">
-                        <a class="nav-link hahmlet" href="reviewInsertForm.wd">돌봄후기</a>
+                       
                         <a class="nav-link hahmlet" href="dashboard-2.html">공지사항</a>
-                        <a class="nav-link hahmlet" href="dashboard-1.html">이용후기</a>
+                        <a class="nav-link hahmlet" href="reviewSelectAll.wd">이용 후기</a>
                         <a class="nav-link hahmlet" href="noticeSelectPaging.wd">공지사항</a> 
-                      <a class="nav-link hahmlet" href="qnaSelectAll.wd">Q&A</a>
+                      <a class="nav-link hahmlet" href="qnaSelectAllPaging.wd">Q&A</a>
                     </nav>
                 </div>       
                 

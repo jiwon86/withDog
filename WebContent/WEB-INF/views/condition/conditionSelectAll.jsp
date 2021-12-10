@@ -12,6 +12,14 @@
 	<!-- 헤드 -->
 	<jsp:include page="/head.wd" />
 	<head>
+	<style>
+	.headerdog  {
+		position : absolute;
+		width : 20%;
+		height : 200px;
+		left : 60%
+	}
+	</style>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -288,9 +296,10 @@
 				--> 
 				<!-- ** 주요 내용 **  -->
                 <main style="width:960px; margin:0 auto;">
-                    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+                    <header class="page-header page-header-light bg-withcolor pb-10">
                         <div class="container-xl px-4">
                             <div class="page-header-content pt-4">
+                            	<img src="/image/header_dog_4.png" class="headerdog">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">

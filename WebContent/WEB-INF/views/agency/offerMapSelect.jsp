@@ -303,7 +303,7 @@
                                		if(todayDate.before(startDate)) { 
                                %>
 		                               	<div>
-		                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">조건제시 작성</div>
+		                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">돌보미 신청</div>
 		                               	</div>
                                <%
                                		} else {

@@ -25,6 +25,11 @@
 				function offerLocationBtn(tno) {
 					location.href=`/offerSelect.wd?tno=${"${tno}"}`;
 				}
+				
+				function reviewBtn(did) {
+					location.href=`/reviewInsertForm.wd?did=${"${did}"}`;
+				}
+				
 			</script>
 		<!-- /헤더 -->
 
@@ -200,6 +205,7 @@
 		                                    <hr class="my-4" />
 		                                    <div class="d-flex justify-content-between">
 		                                        <button class="btn btn-primary btn-lg" style="margin:0 auto;" type="button" onclick="offerLocationBtn('<%=ovo.getTno()%>')">확인</button>
+		                                        <button class="btn btn-primary btn-lg" style="margin:0 auto;" type="button" onclick="reviewBtn('<%=cvo.getMid() %>')">돌보미(<%=cvo.getMid() %>) 님에 대한 후기 작성</button>
 		                                    </div>
 		                                </div>
 		                            </div>

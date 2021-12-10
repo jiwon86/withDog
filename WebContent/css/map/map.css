@@ -94,7 +94,7 @@ ul {
 	width : 93%
 }
 
-.btn.btn-primary.smit {
+.btn.btn-withcolor.smit {
 	position:relative;
 	width : 100%;
 	top : 20px;
@@ -109,6 +109,15 @@ ul {
 	left : 35%;
 }
 
+.page-header.page-header-light.pb-10 {
+	background-image :url("/image/backgroundimg.jpg");
+}
+.headerdog  {
+	position : absolute;
+	width : 50%;
+	height : 175%;
+	left : 90%
+}
 .dogstand{
 	position:absolute;
 	width : 100%;

@@ -77,29 +77,30 @@ let center = map.getCenter();
 let content ='<form id="popup" class="popup">'
 +'<div class="overlaybox" id="overlaybox">'
 +'<div class="title-header">'
-	+'<header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">'
-	+	'<div class="container-xl px-4">'
-	+       '<div class="page-header-content pt-4">'
-	+            '<div class="row align-items-center justify-content-between">'
-	+                '<div class="col-auto mt-4">'
-	+                   '<h1 class="page-header-title">'
-	+                        '<div class="page-header-icon"><i data-feather="edit-3"></i></div>'
-	+                       	'돌봄 신청 작성하기'
-	+							'<button class="btn btn-red btn-icon cancle" type="button" id="cancle">'
-	+					    	'<i class="fas fa-times-circle fa-3x"></i>'
-	+					'</button>'
-	+                   '</h1>'
-	+                  '<div class="page-header-subtitle">돌봄 시 필요한 사항들을 적어주세요.</div>'
-	+                '</div>'
-	+            '</div>'
-	+        '</div>'
-	+   '</div>'
-	+'</header>'
++'<header class="page-header page-header-light bg-withcolor pb-10">'
++	'<div class="container-xl px-4">'
++       '<div class="page-header-content pt-4">'
++		'<img src="/image/header_dog.png" class="headerdog">'
++            '<div class="row align-items-center justify-content-between">'
++                '<div class="col-auto mt-4">'
++                   '<h1 class="page-header-title"  style="color:dark;">'
++                        '<div class="page-header-icon"><i data-feather="edit-3"></i></div>'
++                       	'돌봄 신청 작성하기'
++							'<button class="btn btn-red btn-icon cancle" type="button" id="cancle">'
++					    	'<i class="fas fa-times-circle fa-3x"></i>'
++					'</button>'
++                   '</h1>'
++                  '<div class="page-header-subtitle">돌봄 시 필요한 사항들을 적어주세요.</div>'
++                '</div>'
++            '</div>'
++        '</div>'
++   '</div>'
++'</header>'
 +'</div>'
 +'<div class="area_1">'
 +	'<ul class="list">'	
-+		'<img src="/image/gif/dog-stand_2.gif" class="dogstand" id="dogstand">'
-+		'<img src="/image/gif/hello.gif" class="doghello" id="doghello">'
+//+		'<img src="/image/gif/dog-stand_2.gif" class="dogstand" id="dogstand">'
+//+		'<img src="/image/gif/hello.gif" class="doghello" id="doghello">'
 +		'<li id="dogs"><label for="dogs"><i class="fas fa-dog"></i>&nbsp;돌 볼 반려동물</label><br>&nbsp&nbsp'
 			
 +			'</li>'
@@ -111,7 +112,7 @@ let content ='<form id="popup" class="popup">'
 +		'<li><label for="addr_2"><i class="fas fa-map-marked-alt"></i>&nbsp;주소 정보</label><div class="item_2"><input type="text" class="form-control addr" id="addr_1" name="addr_1" readonly>'
 +			'<i class="fas fa-bone fa-2x"></i><input type="text" class="form-control addr" id="addr_2" name="addr_2">'
 +			'</div></li>'
-+		'<li><button class="btn btn-primary smit" type="button" id="submit">신청 하기</button></li>'
++		'<li><button class="btn btn-withcolor smit" type="button" id="submit">신청 하기</button></li>'
 +'			<input type="hidden" id="lat" name="lat" value=""></input>	' 
 +'			<input type="hidden" id="lng" name="lng" value=""></input>'	
 +'			<input type="hidden" id="pno" name="pno" value=""></input>'	
@@ -183,7 +184,10 @@ const when_1 = document.getElementById('when_1');
 const when_2 = document.getElementById('when_2');
 // 반려동물 리스트
 const dogs = document.getElementById('dogs');
-// 
+
+
+/*
+	애니메이션 미사용
 const dogGif = document.getElementById('dogstand');
 const dogHelloGif = document.getElementById('doghello');
 
@@ -214,7 +218,7 @@ function dogHelloOut() {
 		}
 	}
 
-
+ */
 
 
 

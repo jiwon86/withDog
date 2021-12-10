@@ -15,6 +15,15 @@
 	<jsp:include page="/head.wd" />
 	
 	<head>
+	
+	<style>
+	.headerdog  {
+		position : absolute;
+		width : 15%;
+		height : 250px;
+		left : 65%
+	}
+	</style>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -336,22 +345,25 @@
 					===================================
 				--> 
 				<!-- ** 주요 내용 **  -->
-               <main style="width:960px; margin:0 auto;">
-                     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-                        <div class="container-xl px-4">
-                            <div class="page-header-content pt-4">
-                                <div class="row align-items-center justify-content-between">
-                                    <div class="col-auto mt-4">
-                                        <h1 class="page-header-title">
-                                            <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>반려동물 대리돌보미 신청 상세정보</span>
-                                        </h1>
-                                        <div class="page-header-subtitle"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
+<!-- Main page content-->
+<main style="width:960px; margin:0 auto;">
+	<header class="page-header page-header-light bg-withcolor pb-10">
+		<div class="container-xl px-4">
+			<div class="page-header-content pt-4">
+				<img src="/image/header/header_dog_9.png" class="headerdog">
+					<div class="row align-items-center justify-content-between">
+						<div class="col-auto mt-4">
+							<h1 class="page-header-title">
+								<div class="page-header-icon"><i data-feather="search"></i></div>
+										반려동물 대리 돌보미 신청 상세정보
+									</h1>
+						<div class="page-header-subtitle">상세정보를 확인하시고 신청해주세요. </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
                     <!-- 상세 돌봄신청 정보 -->
                     <div class="container-xl px-4 mt-n10">
 						

@@ -61,7 +61,7 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                                                                                대리돌봄서비스
+                                                                                                돌봄 현황
                                         </h1>
                                         <div class="page-header-subtitle">간편하고 편리한 대리돌봄서비스를 이용해보세요.</div>
                                     </div>

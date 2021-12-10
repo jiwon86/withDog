@@ -107,9 +107,9 @@
                  <form action="/notice/search" method="GET">
                  <!-- <form id="keyfilter" name="keyfilter"> -->
                  		<!-- <input type="text" id="keyword" name="keyword" placeholder="검색어 입력"><br> -->
-                 		<button class="btn btn-primary" style="float:right" id="searchBtn">검색하기</button>
+                 		<button class="btn btn-withcolor" style="float:right" id="searchBtn">검색하기</button>
 				    <div style="float:right">
-				        <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">
+				        <input name="keyword" type="text" placeholder="검색할 제목을 입력해주세요" style="border-radius: 15px; height:40px;">&nbsp;&nbsp;&nbsp;
 				    </div>
 				   
 				    <br><br>
@@ -149,7 +149,8 @@ for(int i=0; i<nCnt; i++){
                                <td><%= nvo.getNsubject() %></td>
                                <td><%= nvo.getNwriter() %></td>
                                <td>
-                               	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-primary text-white rounded-pill">상세조회</div></a>
+                               
+                               	<a href="noticeSelect.wd?nnum=<%= nvo.getNnum()%>"><div class="badge bg-withcolor text-white rounded-pill">상세조회</div></a>
                                </td>
                                <sec:authorize access="hasRole('ROLE_ADMIN')">
                                <td>
@@ -182,7 +183,7 @@ for(int i=0; i<nCnt; i++){
                     </div>
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
 	                    <a href="noticeInsertForm.wd">
-	                    	<button class="btn btn-primary me-2 my-1 float-end" type="button">작성하기</button>
+	                    	<button class="btn btn-withcolor me-2 my-1 float-end" type="button">작성하기</button>
 	                    </a>
                     </sec:authorize>
                    </div>
@@ -190,7 +191,7 @@ for(int i=0; i<nCnt; i++){
            </div>
            <div class="card card-icon mb-4">
                <div class="row g-0">
-                   <div class="col-auto card-icon-aside bg-primary">
+                   <div class="col-auto card-icon-aside bg-withcolor">
                   
                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                    <line x1="12" y1="9" x2="12" y2="13"></line>

@@ -51,6 +51,9 @@
 		<div class="container-xl px-4">
 			<div class="page-header-content pt-4">
 				<img src="/image/header/header_dog_8.png" class="headerdog">
+					 <a class="btn btn-sm btn-light text-primary" href="noticeSelectPaging.wd">
+                        <i class="me-1" data-feather="arrow-left"></i>공지사항 전체목록 </a>
+                                  
 					<div class="row align-items-center justify-content-between">
 						<div class="col-auto mt-4">
 							<h1 class="page-header-title">
@@ -75,7 +78,6 @@ for(int i=0; i<nCnt; i++){
                  
                     
                     <!-- Main page content-->
-                    <div class="container-fluid px-4">
                         <div class="row gx-4">
                             <div class="col-lg-8">
                                <div class="card mb-4" style="width:900px;">
@@ -100,20 +102,22 @@ for(int i=0; i<nCnt; i++){
                                     	</sec:authorize>
                                     </div>
                                 </div>
-                            </div>
+                                
+                          
 <%
 						}
 %>
                             <div class="col-lg-4">
                                     <div class="card-body"></div>
                             </div>
-                        </div>
-                 
+                       
+                  
                 </main>
+                 </div>
 				<!-- ** 주요 내용 **  -->
-				</div>
-				<!-- ** /주요 내용 ** -->
 				
+				<!-- ** /주요 내용 ** -->
+				</div>
 				<!-- 바닥글 -->
 				<jsp:include page="/footer.wd" />
                 <!-- /바닥글 -->

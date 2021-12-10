@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.istack.internal.logging.Logger;
@@ -255,5 +256,18 @@ public class ConditionController {
 		System.out.println("json문자열 >>> :  \n " + result);
 		
 		return result;
+	}
+	
+	@PostMapping("/conditionDelete")
+	@ResponseBody
+	public String deleteCondition(ConditionVO cvo) {
+		
+		int deleteResult = conditionService.conditionDelete(cvo);
+		
+		if(deleteResult > 0) {		
+			return "success";
+		}
+		
+		return "fail";
 	}
 }

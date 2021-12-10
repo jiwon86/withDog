@@ -61,9 +61,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                                                                  돌봄서비스
+                                                                                                대리돌봄서비스
                                         </h1>
-                                        <div class="page-header-subtitle">간편하고 편리한 돌봄서비스를 이용해보세요.</div>
+                                        <div class="page-header-subtitle">간편하고 편리한 대리돌봄서비스를 이용해보세요.</div>
                                     </div>
                                 </div>
                             </div>
@@ -80,8 +80,8 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="me-3">
                                                 <i class="feather-xl text-primary mb-3" data-feather="package"></i>
-                                                <h5 class="hahmlet">돌봄신청 현황</h5>
-                                                <div class="text-muted small">반려동물 돌봄신청 현황을 확인</div>
+                                                <h5 class="hahmlet">반려동물 대리돌봄 서비스 신청</h5>
+                                                <div class="text-muted small">가까운 이웃들에게 반려동물을 맡겨보세요!</div>
                                             </div>
                                             <img src="/template/assets/img/illustrations/browser-stats.svg" alt="..." style="width: 8rem" />
                                         </div>
@@ -95,8 +95,8 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="me-3">
                                                 <i class="feather-xl text-secondary mb-3" data-feather="book"></i>
-                                                <h5 class="hahmlet">조건제시 현황</h5>
-                                                <div class="text-muted small">조건제시를 통해 반려동물을 맡아주세요.</div>
+                                                <h5 class="hahmlet">반려동물 대리돌보미 신청</h5>
+                                                <div class="text-muted small">가까운 이웃들에게 반려동물을 맡아주세요!</div>
                                             </div>
                                             <img src="/template/assets/img/illustrations/processing.svg" alt="..." style="width: 8rem" />
                                         </div>
@@ -107,7 +107,7 @@
                         <!-- /탭메뉴 -->
                         
                         <!-- 돌봄신청 리스트 -->
-                        <h4 class="mb-0 mt-5">내 돌봄신청 정보</h4>
+                        <h4 class="mb-0 mt-5" style="color:gray; font-size:20px;">나의 반려동물 대리돌봄 서비스 신청정보</h4>
                         <hr class="mt-2 mb-4" />
 
 						<%
@@ -159,7 +159,7 @@
 			                                <div class="col">
 			                                    <div class="card-body py-4">
 			                                        <span class="card-title hahmlet" style="font-size:20px; color:#7f7f7f; font-weight:bold;">
-			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%=ovo.getMid()%> 돌봄신청</span> <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
+			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%=ovo.getMid()%> 대리돌봄 서비스 신청</span> <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-cyan"></i>
@@ -205,7 +205,7 @@
 			                                <div class="col">
 			                                    <div class="card-body py-4">
 			                                        <span class="card-title mb-2 hahmlet" style="font-size:20px; color:#7f7f7f; font-weight:bold;">
-			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
+			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%= ovo.getMid() %> 대리돌봄 서비스 신청</span>	 <span style="color:gray; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-teal"></i>
@@ -251,7 +251,7 @@
 			                                <div class="col">
 			                                    <div class="card-body py-4">
 			                                        <span class="card-title mb-2 hahmlet" style="font-size:20px; font-weight:bold;">
-			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%= ovo.getMid() %> 돌봄신청</span>	 <span style="color:gray; color:#7f7f7f; font-size:12px;">(<%= ovo.getTno() %>)</span>
+			                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)"><%= ovo.getMid() %> 대리돌봄 서비스 신청</span>	 <span style="color:gray; color:#7f7f7f; font-size:12px;">(<%= ovo.getTno() %>)</span>
 			                                        </span>
 			                                        <span class="me-3">
 			                                           	<i class="fas fa-circle fa-sm ms-3 text-red"></i>

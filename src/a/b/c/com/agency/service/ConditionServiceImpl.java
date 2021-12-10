@@ -82,6 +82,13 @@ public class ConditionServiceImpl implements ConditionService {
 		return conditionDAO.conditionInsert(conditionVO);
 	}
 
+	@Override
+	public int conditionDelete(ConditionVO conditionVO) {
+		logger.info("ConditionServiceImpl.conditionDelete() 함수 진입");
+		
+		return conditionDAO.conditionDelete(conditionVO);
+	}
+
 
 
 }

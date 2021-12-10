@@ -268,9 +268,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>조건제시 상세정보</span>
+                                            <span>반려동물 대리돌보미 상세정보</span>
                                         </h1>
-                                        <div class="page-header-subtitle">The default page header layout with main content that overlaps the background of the page header</div>
+                                        <div class="page-header-subtitle"></div>
                                     </div>
                                 </div>
                             </div>
@@ -291,11 +291,15 @@
             			String matchyn = agencyListMatchyn.get(0);
             			int payCount = payListCount.get(0);
             			
+            			
     					// 오늘 날짜 구하기
     					String startdate = (String)request.getAttribute("startdate");
     					String enddate = (String)request.getAttribute("enddate");
     					
-    					Date today = new Date();
+            			System.out.println("startdate >>> : " + startdate);
+            			System.out.println("enddate >>> : " + enddate);
+
+            			Date today = new Date();
     					SimpleDateFormat todayFormat = new SimpleDateFormat("yyyy-MM-dd H:m");
     					
     					String todayString = todayFormat.format(today);
@@ -312,7 +316,7 @@
                                 	<div class="my-3">
                                 		<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
                                 			<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-                                				<%=cvo.getMid()%> 조건제시
+                                				<%=cvo.getMid()%> 반려동물 대리돌보미 신청
                                 			</span>
                                 		</span> &nbsp;
                                 		<span style="color:gray; font-size:14px;">(<%=cvo.getCno()%>)</span> &nbsp;

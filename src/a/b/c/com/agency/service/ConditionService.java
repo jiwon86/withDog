@@ -16,4 +16,5 @@ public interface ConditionService {
 	public List<PetVO> petSelect(Map<String, Object> offerMap);
 	public List<ConditionVO> conditionMapSelect(ConditionVO conditionVO);
 	public int conditionInsert(ConditionVO conditionVO);
+	public int conditionDelete(ConditionVO conditionVO);
 }

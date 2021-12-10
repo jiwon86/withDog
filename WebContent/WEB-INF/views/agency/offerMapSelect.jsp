@@ -32,6 +32,53 @@
 				
 				location.href=`/conditionInsertForm.wd?tno=${"${tno}"}&mno=${"${mno}"}`;
 			}
+			
+			function deleteConditionBtn(cno) {
+				
+				Swal.fire({
+					title: "대리돌보미 신청을 삭제하시겠습니까?",
+					text: "대리돌보미 신청을 다시 확인해주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '삭제',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
+						
+						let urlVal = "/conditionDelete.wd";
+						let typeVal = "POST";
+						let cnoVal = cno;
+	
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+							},
+							success: whenSuccess1,
+							error: whenError1
+						});
+				
+					}
+				})
+			}
+			
+			// 거절버튼
+			function whenSuccess1(resData) {
+				if(resData == 'success') {
+					alert("대리돌봄 신청을 삭제하였습니다.");
+					location.reload();
+				} else {
+					alert("대리돌봄 신청 삭제를 실패하였습니다.");
+					return;
+				}
+			}
+			
+			function whenError1() {
+				console.log("실패");
+			}		
 		</script>
 	</head>
 	<!-- /헤드 -->
@@ -104,9 +151,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="layout"></i></div>
-                                            <span>돌봄신청 상세정보</span>
+                                            <span>반려동물 대리돌봄 서비스 상세정보</span>
                                         </h1>
-                                        <div class="page-header-subtitle">The default page header layout with main content that overlaps the background of the page header</div>
+                                        <div class="page-header-subtitle"></div>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +172,7 @@
 	                                		<!-- 준비중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 돌봄돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;	                                		
@@ -139,7 +186,7 @@
 	                                        <!-- 진행중 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 돌봄돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;	                                        
@@ -153,7 +200,7 @@
 	                                        <!-- 종료 -->
 	                                        <span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 	                                        	<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                        		<%=ovo.getMid()%> 돌봄신청
+	                                        		<%=ovo.getMid()%> 돌봄돌봄 서비스 신청
 	                                        	</span> &nbsp;
 	                                        	<span style="color:gray; font-size:14px;">(<%=ovo.getTno()%>)</span>
 	                                        </span> &nbsp;
@@ -296,20 +343,21 @@
                                	 if(conditionList.size() > 0) {
                                %>
 									<div class="alert alert-danger" role="alert">
-									  <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;조건제시는 1개이상 신청하실 수 없습니다.
+									  <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp;반려동물 대리돌보미 신청은 1개이상 신청하실 수 없습니다.
 									</div>
                                <%
                                	 } else {
                                		if(todayDate.before(startDate)) { 
                                %>
 		                               	<div>
-		                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">돌보미 신청</div>
+		                               	    <div class="btn btn-primary" onclick="conditionInsertForm('<%=ovo.getTno()%>', '<%=ovo.getMno()%>')">반려동물 대리돌보미 신청</div>
+
 		                               	</div>
                                <%
                                		} else {
                                %>
 										<div class="alert alert-danger" role="alert">
-										  <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp; 시간이 지나 조건제시를 신청할 수 없습니다.
+										  <i class="fas fa-exclamation-triangle"></i>&nbsp;&nbsp; 시간이 지나 반려동물 대리돌보미 신청을 신청할 수 없습니다.
 										</div>
                                <%			
                                		}
@@ -319,7 +367,7 @@
                         </div>
                         <!-- /신청정보 카드 -->
 
-						<h4 class="mb-0 mt-5">나의 조건제시 정보</h4>
+						<h4 class="mb-0 mt-5">반려동물 대리돌보미 신청정보</h4>
                         <hr class="mt-2 mb-4" />
                         <!-- 조건제시 정보 -->
                         <div class="row">
@@ -345,16 +393,17 @@
 			                        	<!-- 조건제시 정보 -->
 			                            <div class="col-lg-6 mb-4">
 			                                <div class="card lift lift-sm h-100">
-			                                    <div class="card-body" onclick="javascript:location.href='/conditionSelect.wd?cno=<%=cvo.getCno() %>'">
+			                                    <div class="card-body" 
+			                                        onclick="javascript:location.href='/conditionSelect.wd?cno=<%=cvo.getCno()%>&startdate=<%=ovo.getStartdate()%>&enddate=<%=ovo.getEnddate()%>'">
 			                                        <input type="hidden" class="cno" value="<%=cvo.getCno() %>" />
 			                                        <input type="hidden" class="tno" value="<%=ovo.getTno() %>" />
 			                                        <input type="hidden" class="paycount" value="<%=payCount%>" />
 			                                        
 			                                        <h5 class="card-title mb-2 hahmlet" style="font-weight:bold; font-size:20px; color:#7f7f7f;">
 			                                            <span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-			                                            	<%=cvo.getMid()%> 조건제시
+			                                            	<%=cvo.getMid()%> 반려동물 대리돌보미 신청
 			                                            </span> &nbsp;
-			                                            <span style="color:gray; font-size:14px;">(<%= cvo.getTno() %>)</span>
+			                                            <span style="color:gray; font-size:14px;">(<%= cvo.getCno() %>)</span>
 			                                        </h5>
 			                                        <hr>
 			                                        <p class="card-text mb-1 hahmlet">
@@ -408,7 +457,11 @@
 					                                    	<button class="btn btn-primary" type="button" disabled>
 															  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 															  &nbsp;&nbsp;조건수락 대기중..
-															</button>                                    	
+															</button>   
+															<div class="btn btn-danger" onclick="deleteConditionBtn('<%=cvo.getCno()%>')">
+															  <i class="fas fa-trash-alt"></i>
+															  &nbsp;&nbsp;삭제
+															</div>		                                 	
 			                                    	<%
 			                                    		}
 			                                    	%>
@@ -420,7 +473,7 @@
                         			}
                     			} else {
                     		%>
-                    				<h2>현재 조건제시가 없습니다.</h2>
+                    				<h2>현재 반려동물 대리돌보미 신청이 없습니다.</h2>
                     		<%
                     			}
                             %>

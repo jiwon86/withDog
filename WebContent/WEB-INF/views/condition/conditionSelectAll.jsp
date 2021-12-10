@@ -157,7 +157,7 @@
 					$stateTag = `
 						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-								${"${result.mid}"} 돌봄신청
+								${"${result.mid}"} 반려동물 대리돌봄 서비스 신청
 							</span> &nbsp;
 							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
 						</span> &nbsp;
@@ -173,7 +173,7 @@
 					$stateTag = `
 						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-								${"${result.mid}"} 돌봄신청
+								${"${result.mid}"} 반려동물 대리돌봄 서비스 신청
 							</span> &nbsp;
 							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
 						</span> &nbsp;					
@@ -189,7 +189,7 @@
 					$stateTag = `
 						<span style="font-size:25px; font-weight:bold; color:#7f7f7f;">
 							<span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-								${"${result.mid}"} 돌봄신청
+								${"${result.mid}"} 반려동물 대리돌봄 서비스 신청
 							</span> &nbsp;
 							<span style="color:gray; font-size:14px;">(${"${result.tno}"})</span>
 						</span> &nbsp;					
@@ -269,6 +269,53 @@
 				location.href=`/chatPaymentResult2.wd?cno=${"${cno}"}&tno=${"${tno}"}`;
 			}
 			
+			function deleteConditionBtn(cno) {
+				
+				Swal.fire({
+					title: "대리돌보미 신청을 삭제하시겠습니까?",
+					text: "대리돌보미 신청을 다시 확인해주세요.",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+				    cancelButtonColor: '#d33',
+				    confirmButtonText: '삭제',
+				    cancelButtonText: '취소'					
+				}).then((result) => {
+					if(result.value) {
+						
+						let urlVal = "/conditionDelete.wd";
+						let typeVal = "POST";
+						let cnoVal = cno;
+	
+						$.ajax({
+							url: urlVal,
+							type: typeVal,
+							data: {
+								"cno": cnoVal,
+							},
+							success: whenSuccess1,
+							error: whenError1
+						});
+				
+					}
+				})
+			}
+			
+			// 거절버튼
+			function whenSuccess1(resData) {
+				if(resData == 'success') {
+					alert("대리돌봄 신청을 삭제하였습니다.");
+					location.reload();
+				} else {
+					alert("대리돌봄 신청 삭제를 실패하였습니다.");
+					return;
+				}
+			}
+			
+			function whenError1() {
+				console.log("실패");
+			}
+			
 		</script>
 	</head>
 	<!-- /헤드 -->
@@ -304,9 +351,9 @@
                                     <div class="col-auto mt-4">
                                         <h1 class="page-header-title">
                                             <div class="page-header-icon"><i data-feather="activity"></i></div>
-                                                                                  돌봄서비스
+                                                                                                대리돌봄서비스
                                         </h1>
-                                        <div class="page-header-subtitle">간편하고 편리한 돌봄서비스를 이용해보세요.</div>
+                                        <div class="page-header-subtitle">간편하고 편리한 대리돌봄서비스를 이용해보세요.</div>
                                     </div>
                                 </div>
                             </div>
@@ -323,8 +370,8 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="me-3">
                                                 <i class="feather-xl text-primary mb-3" data-feather="package"></i>
-                                                <h5 class="hahmlet">돌봄신청 현황</h5>
-                                                <div class="text-muted small">To create informative visual elements on your pages</div>
+                                                <h5 class="hahmlet">반려동물 대리돌봄 서비스 신청</h5>
+                                                <div class="text-muted small">가까운 이웃들에게 반려동물을 맡겨보세요!</div>
                                             </div>
                                             <img src="/template/assets/img/illustrations/browser-stats.svg" alt="..." style="width: 8rem" />
                                         </div>
@@ -338,8 +385,8 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="me-3">
                                                 <i class="feather-xl text-secondary mb-3" data-feather="book"></i>
-                                                <h5 class="hahmlet">조건제시 현황</h5>
-                                                <div class="text-muted small">To keep you on track when working with our toolkit</div>
+                                                <h5 class="hahmlet">반려동물 대리돌보미 신청</h5>
+                                                <div class="text-muted small">가까운 이웃들에게 반려동물을 맡아주세요!</div>
                                             </div>
                                             <img src="/template/assets/img/illustrations/processing.svg" alt="..." style="width: 8rem" />
                                         </div>
@@ -350,7 +397,7 @@
                         <!-- /탭메뉴 -->
                         
                         <!-- 돌봄신청 리스트 -->
-                        <h4 class="mb-0 mt-5">내 조건제시 정보</h4>
+                        <h4 class="mb-0 mt-5" style="color:gray; font-size:20px;">나의 반려동물 대리돌보미 신청정보</h4>
                         <hr class="mt-2 mb-4" />
 
 						<div class="row">
@@ -392,7 +439,7 @@
 	                                    <div class="card-body" onclick="javascript:location.href='/myConditionSelect.wd?cno=<%=cvo.getCno()%>'">
 	                                        <h5 class="card-title mb-2 hahmlet" style="font-weight:bold; font-size:20px; color:#7f7f7f;">
 	                                            <span style="background:linear-gradient(to top, #FFE400 50%, transparent 50%)">
-	                                            	<%=cvo.getMid()%> 조건제시
+	                                            	<%=cvo.getMid()%> 반려동물 대리돌보미 신청
 	                                            </span> &nbsp;
 	                                            <span style="color:gray; font-size:14px;">(<%= cvo.getTno() %>)</span>
 	                                        </h5>
@@ -441,6 +488,7 @@
 															  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 															  &nbsp;&nbsp;조건수락 대기중..
 															</button>
+															
 		                                    	<%
 	                                    				}
 	                                    			} else {
@@ -449,13 +497,17 @@
 														  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 														  &nbsp;&nbsp;조건수락 대기중..
 														</button>
+														<div class="btn btn-danger" onclick="deleteConditionBtn('<%=cvo.getCno()%>')">
+														  <i class="fas fa-trash-alt"></i>
+														  &nbsp;&nbsp;삭제
+														</div>
 												<%
 	                                    			}
 												%>
 											</span>
 											
 											<div class="btn btn-info hahmlet offerInfoBtn" data-bs-toggle="modal" data-bs-target="#offerModel">
-	                                    		<i class="far fa-file-alt"></i> &nbsp; 신청정보
+	                                    		<i class="far fa-file-alt"></i> &nbsp; 돌봄신청정보
 		                            			<input type="hidden" class="mnoVal" value="<%=cvo.getMno()%>"/>
 		                            			<input type="hidden" class="tnoVal" value="<%=cvo.getTno()%>"/>
 	                                    	</div>

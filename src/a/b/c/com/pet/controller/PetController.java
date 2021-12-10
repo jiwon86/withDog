@@ -324,5 +324,11 @@ public class PetController {
       return "pet/myPetList";
       
    }
+   
+   @GetMapping("/dash.wd")
+   public String dash() {
+	   
+	   return "pet/dash";
+   }
 }
 

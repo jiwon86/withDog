@@ -17,6 +17,7 @@
 <script src="js/motion.js"></script>
 <script>
 
+
    $( document ).ready( function() {
       AOS.init();
    } );
